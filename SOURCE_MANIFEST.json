@@ -1,5 +1,17 @@
 [
   {
+    "path": "docs/PULIDO_LANZADOR_073.md",
+    "sha256": "e2e04e1431fe7a24d03f90f846e920a259f8ce2604ca64d523ad197bd496ad09"
+  },
+  {
+    "path": "Branding/logo/sfa-aire.ico",
+    "sha256": "0029c99f8cf90b00894ebb2eac1fed44f2917d2f5102ab75b3ad7da5f86bcbd2"
+  },
+  {
+    "path": "Branding/logo/sfa-aire-verde-transparente.png",
+    "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75"
+  },
+  {
     "path": "interfaz_web/src/AdminLab.tsx",
     "sha256": "d632fe4dac76a52ab2a2a0af360f952063e469d9296bb5c5556397b4296c24ab"
   },
@@ -357,7 +369,7 @@
   },
   {
     "path": "tests/test_launcher.py",
-    "sha256": "5c6d9a3e48b4b9b8492f412a5dbda8d6250b0228e40768b9e4362c01a53864e0"
+    "sha256": "26a30015ff215feb8789093ea25576c8a100bbc706c450482c07d06fffa9be26"
   },
   {
     "path": "tests/test_local_notification_context.py",
@@ -629,7 +641,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "98651f6c4e62ecd73d99546d1f99d4d8f4ca047d854453cbf4a171b5e976dc42"
+    "sha256": "040b78c68a39872d7989977fb61bac95e8b21d792fba69a2b34812f0395f1a37"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
@@ -637,7 +649,7 @@
   },
   {
     "path": "docs/README_PUBLICO.md",
-    "sha256": "2ef86117da75f68ff1512c2c671d4acd1ce78ed5e61393fa5719f3441e121d16"
+    "sha256": "aefcfad46ed6b6c75fb43d87141b87b342527fdfca497399fe90ff473bafbf9c"
   },
   {
     "path": "docs/capturas/panel-ejemplo.png",
@@ -645,7 +657,7 @@
   },
   {
     "path": "docs/GUIA_PUBLICA.md",
-    "sha256": "4b289ca1d548a3016494d17893d7843fef9e6e0f2aa4b5f840bdac21d87949b1"
+    "sha256": "d56bd6af1449a67e5a2c3c98a0f910fa7518c75e60356c4614addeeeaecda399"
   },
   {
     "path": "docs/ANDROID_PILOTO_072.json",
@@ -653,7 +665,7 @@
   },
   {
     "path": "docs/GUIA_USO.html",
-    "sha256": "71af4aacb74340ec2a2be99eb254068b6a3ed5e885d6ff73e520b40e91ef123a"
+    "sha256": "55c1e197d507857711e8942f1c08f67665398c4d03e4599f601e8e76574ff1b9"
   },
   {
     "path": "docs/licenses/Tcl.txt",
@@ -673,7 +685,7 @@
   },
   {
     "path": "panel_inicio.py",
-    "sha256": "59f094db00fb3f06808a7adbf92650e9085d036b371e1ab883403f3fec50fc99"
+    "sha256": "0776030a5f8c4e88fb25792139fed4466e2f65af794e979eb8a9ecf75ffc0f28"
   },
   {
     "path": "herramientas/portable_worker.py",
@@ -681,15 +693,15 @@
   },
   {
     "path": "herramientas/compilar_portable.ps1",
-    "sha256": "2c677ff4c300b2c04ceecbeac98c0fd934a535e254c72b6242d221b03e198f15"
+    "sha256": "6d88c9fb4575b389a275724b8364aa14b8f74db260586731a8d7a06240b3af91"
   },
   {
     "path": "herramientas/empaquetar_portable.py",
-    "sha256": "3945c0c583c8314db3554ff848f33a4d6cba8366e19737532db54f36eda600c0"
+    "sha256": "fc0e34ec7c215cdd62a901178283219240077f1cb255786ddb0f4d90df31e952"
   },
   {
     "path": "herramientas/verificar_portable.py",
-    "sha256": "9e94ab4d166ac77253d312f5950f62551cd47e0d613ccf5a85488de86d382503"
+    "sha256": "6b52491ebdcd13fe06287f77a2727b011be209cd67ed1e4939320a3fdfaeb88c"
   },
   {
     "path": "herramientas/requirements-panel.txt",

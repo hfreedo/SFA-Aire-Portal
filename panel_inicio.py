@@ -22,7 +22,7 @@ def project_root():
 
 
 class Controller:
-    def __init__(self,root):self.root=root;self.children=[]
+    def __init__(self,root):self.root=root;self.children=[];self.wifi_children=[]
 
     def port_candidates(self,demo):
         default=8872 if demo else 8766
@@ -150,6 +150,23 @@ class Controller:
         token=(self.root/'data/clave_conexion.txt').read_text(encoding='utf-8').strip()
         return base+'/#token='+token
 
+    def stop_monitoring(self):
+        """Detiene sólo servicios cuya identidad corresponde a esta carpeta."""
+        for mode in ('cloud','demo'):
+            self.stop(mode)
+            if self.runtime_status(mode)['running']:
+                raise RuntimeError('El monitoreo todavía está terminando. Espere y vuelva a intentar antes de salir.')
+        for proc in self.wifi_children:
+            if proc.poll() is None:
+                if os.name=='nt':
+                    # El ejecutable onefile tiene un proceso hijo: cerrar sólo el
+                    # bootloader dejaría la descarga temporal funcionando.
+                    result=subprocess.run(['taskkill','/PID',str(proc.pid),'/T','/F'],capture_output=True,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+                    if result.returncode and proc.poll() is None:
+                        raise RuntimeError('No se pudo cerrar la descarga temporal iniciada desde este panel.')
+                else:proc.terminate()
+                proc.wait(timeout=5)
+
     @staticmethod
     def lan_ip():
         with socket.socket(socket.AF_INET,socket.SOCK_DGRAM) as sock:
@@ -174,6 +191,7 @@ class Controller:
             if data:return data,max(1,int((1800-(time.time()-meta.stat().st_mtime))/60))
         except (OSError,urllib.error.URLError,ValueError,TimeoutError):pass
         proc=self.child('herramientas/compartir_apk_wifi.py',['--host',host],os.environ.copy(),'apk-wifi.log')
+        self.wifi_children.append(proc)
         for _ in range(40):
             try:
                 data=ready()
@@ -186,93 +204,156 @@ class Controller:
 
 def gui(root):
     import tkinter as tk
-    from tkinter import ttk,messagebox
+    from tkinter import ttk, messagebox
     from herramientas.qr_wifi import png_qr
-    c=Controller(root);window=tk.Tk();window.title('SFA Aire · Panel de inicio');window.geometry(f'{min(940,window.winfo_screenwidth()-60)}x{min(740,window.winfo_screenheight()-80)}');window.minsize(min(820,window.winfo_screenwidth()-60),min(650,window.winfo_screenheight()-80))
-    bg='#F4F6F2';ink='#244D43';muted='#62796E';window.configure(bg=bg)
-    style=ttk.Style();style.theme_use('clam')
-    style.configure('Go.TButton',font=('Segoe UI',11,'bold'),foreground='white',background=ink,padding=(16,12),borderwidth=0)
-    style.map('Go.TButton',background=[('active','#326756'),('disabled','#97A99E')])
-    outer=tk.Frame(window,bg=bg);outer.pack(fill='both',expand=True,padx=24,pady=18)
-    header=tk.Frame(outer,bg=bg);header.pack(fill='x')
+    if sys.platform=='win32' and getattr(sys,'frozen',False):
+        import ctypes
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID('SFA.Aire.Panel')
+    c=Controller(root)
+    window=tk.Tk();window.title('SFA Aire · Inicio')
+    height=min(630,window.winfo_screenheight()-100)
+    window.geometry(f'900x{max(580,height)}');window.minsize(820,min(610,max(580,height)))
+    bg='#F2F5EF';ink='#244D43';muted='#52665C';line='#D8E2D6'
+    window.configure(bg=bg)
+    style=ttk.Style(window);style.theme_use('clam')
+    style.configure('TButton',font=('Segoe UI',11),padding=(14,9),background='#EBF0E7',foreground=ink,borderwidth=0)
+    style.map('TButton',background=[('active','#DCE7D7'),('pressed','#CFDDC9')],foreground=[('disabled','#7E8C82')])
+    style.configure('Primary.TButton',font=('Segoe UI',12,'bold'),background=ink,foreground='white',padding=(22,13))
+    style.map('Primary.TButton',background=[('disabled','#A1B2A5'),('pressed','#183B31'),('active','#326756')],foreground=[('disabled','#F7F9F5')])
+    style.configure('Exit.TButton',foreground='#824A3C')
     logo=root/'Branding/logo/sfa-aire-verde-transparente.png'
     if logo.exists():
-        image=tk.PhotoImage(file=str(logo));image=image.subsample(max(1,image.width()//54));window.brand_image=image
-        tk.Label(header,image=image,bg=bg).pack(side='left',padx=(0,16))
+        image=tk.PhotoImage(file=str(logo));window.brand_image=image
+        window.iconphoto(True,image)
+        window.small_logo=image.subsample(max(1,image.width()//42))
+    ico=root/'Branding/logo/sfa-aire.ico'
+    if ico.exists():window.iconbitmap(str(ico))
+    outer=tk.Frame(window,bg=bg);outer.pack(fill='both',expand=True,padx=24,pady=14)
+    header=tk.Frame(outer,bg=bg);header.pack(fill='x',pady=(0,6))
+    if hasattr(window,'small_logo'):tk.Label(header,image=window.small_logo,bg=bg).pack(side='left',padx=(0,14))
     title=tk.Frame(header,bg=bg);title.pack(side='left')
-    tk.Label(title,text='SFA Aire',font=('Segoe UI',23,'bold'),fg=ink,bg=bg).pack(anchor='w')
-    tk.Label(title,text='Panel de control de esta instalación',font=('Segoe UI',11),fg=muted,bg=bg).pack(anchor='w')
-    ttk.Button(header,text='Guía de uso',command=lambda:webbrowser.open((root/'docs/GUIA_USO.html').as_uri())).pack(side='right')
-    tk.Label(outer,text='Un solo entorno para tu aula',font=('Segoe UI',18,'bold'),fg=ink,bg=bg).pack(anchor='w',pady=(16,5))
-    tk.Label(outer,text='Configura aulas, personas y Arduino desde el sistema. Usa los controles para gestionar este servidor.',font=('Segoe UI',11),fg=muted,bg=bg).pack(anchor='w',pady=(0,18))
-    controls=tk.Frame(outer,bg='white',highlightbackground='#DCE5DC',highlightthickness=1,padx=12,pady=10);controls.pack(fill='x',pady=(0,14))
-    grid=tk.Frame(outer,bg=bg);grid.pack(fill='both',expand=True);buttons=[]
-    server_state=tk.StringVar(value='Servidor: comprobando…')
-    tk.Label(controls,textvariable=server_state,bg='white',fg=ink,font=('Segoe UI',10,'bold')).pack(side='left')
-    closed=threading.Event()
-    def close_panel():closed.set();window.destroy()
-    window.protocol('WM_DELETE_WINDOW',close_panel)
-    status=tk.StringVar(value='Listo para iniciar. La demostración no envía notificaciones.')
-
-    def done(result,error,callback):
-        for b in buttons:b.state(['!disabled'])
-        if error:status.set('No se completó la acción.');messagebox.showerror('SFA Aire',str(error),parent=window)
-        else:callback(result)
-
+    tk.Label(title,text='SFA Aire',font=('Segoe UI',21,'bold'),fg=ink,bg=bg).pack(anchor='w')
+    tk.Label(title,text='Monitoreo ambiental de aulas',font=('Segoe UI',11),fg=muted,bg=bg).pack(anchor='w')
+    tk.Label(header,text='WINDOWS · 0.7.3',font=('Segoe UI',9,'bold'),fg=muted,bg=bg).pack(side='right')
+    status=tk.StringVar(value='Preparado. Abrir SFA Aire inicia el servidor automáticamente.')
+    server=tk.StringVar(value='Comprobando el monitoreo de esta PC…')
+    demo=tk.StringVar(value='')
+    buttons=[];busy=False;closed=threading.Event();exit_dialog=None
+    def center(dialog):
+        dialog.update_idletasks()
+        x=max(0,min(window.winfo_rootx()+(window.winfo_width()-dialog.winfo_reqwidth())//2,window.winfo_screenwidth()-dialog.winfo_reqwidth()-20))
+        y=max(0,min(window.winfo_rooty()+(window.winfo_height()-dialog.winfo_reqheight())//2,window.winfo_screenheight()-dialog.winfo_reqheight()-70))
+        dialog.geometry(f'+{x}+{y}')
+    def label(parent,text,size=11,bold=False,color=muted,wrap=0):
+        item=tk.Label(parent,text=text,font=('Segoe UI',size,'bold' if bold else 'normal'),fg=color,bg=parent['bg'],justify='left',anchor='w',wraplength=wrap)
+        item.pack(anchor='w',fill='x');return item
+    def button(parent,text,command,primary=False,**pack):
+        item=ttk.Button(parent,text=text,command=command,style='Primary.TButton' if primary else 'TButton')
+        item.pack(**pack);buttons.append(item);return item
     def work(action,callback):
-        for b in buttons:b.state(['disabled'])
-        status.set('Preparando el modo seleccionado…')
+        nonlocal busy
+        if busy:return
+        busy=True
+        for item in buttons:item.state(['disabled'])
+        status.set('Un momento, preparando la acción…')
+        def finish(result,error):
+            nonlocal busy
+            busy=False
+            for item in buttons:
+                if item.winfo_exists():item.state(['!disabled'])
+            if error:
+                status.set('No se pudo completar. Revise el mensaje para continuar.')
+                messagebox.showerror('SFA Aire',str(error),parent=exit_dialog or window)
+            else:callback(result)
         def worker():
             try:result=action();error=None
             except Exception as exc:result=None;error=exc
             if not closed.is_set():
-                try:window.after(0,lambda:done(result,error,callback))
+                try:window.after(0,lambda:finish(result,error))
                 except (RuntimeError,tk.TclError):pass
         threading.Thread(target=worker,daemon=True).start()
-
-    def open_mode(mode):
-        def opened(url):webbrowser.open(url);status.set('Modo abierto en el navegador. El panel puede permanecer aquí.')
-        work(lambda:c.mode_url(mode),opened)
-
-    def show_qr(result):
-        data,minutes=result;status.set('Descarga Wi-Fi preparada. Solo se comparte la APK.')
+    def show_state(states):
+        real,example=states
+        server.set('● Monitoreo activo en esta PC' if real['running'] else '○ Monitoreo detenido')
+        demo.set('Demostración abierta · datos ficticios' if example['running'] else 'Demostración detenida')
+    def states():return c.runtime_status(),c.runtime_status('demo')
+    def refresh():work(states,lambda value:(show_state(value),status.set('Estado actualizado.')))
+    def open_system(mode='cloud',arduino=False):
+        def prepare():
+            url=c.mode_url(mode)
+            if arduino:url+='?view=arduino'
+            return url,states()
+        def opened(value):
+            webbrowser.open(value[0]);show_state(value[1])
+            status.set('SFA Aire abierto en el navegador. El monitoreo continúa mientras el servidor esté activo.' if mode=='cloud' else 'Demostración abierta: datos ficticios y sin notificaciones reales.')
+        work(prepare,opened)
+    def stop():
+        def stopped(value):show_state(value);status.set('Monitoreo y demostración detenidos. Su configuración e historial se conservan.')
+        work(lambda:(c.stop_monitoring(),states())[1],stopped)
+    def destroy():closed.set();window.destroy()
+    def request_close():
+        nonlocal exit_dialog
+        if busy:
+            status.set('Espere a que termine la acción antes de cerrar.');return
+        if exit_dialog is not None:exit_dialog.lift();return
+        dialog=tk.Toplevel(window);exit_dialog=dialog;dialog.title('Salir de SFA Aire');dialog.configure(bg=bg);dialog.resizable(False,False);dialog.transient(window)
+        if ico.exists():dialog.iconbitmap(str(ico))
+        body=tk.Frame(dialog,bg=bg,padx=24,pady=24);body.pack(fill='both',expand=True)
+        label(body,'¿Cómo desea salir?',17,True,ink)
+        label(body,'Puede dejar el monitoreo funcionando o detenerlo antes de salir.',11,wrap=460).pack_configure(pady=(10,16))
+        def cancel():
+            nonlocal exit_dialog
+            if busy:return
+            dialog.grab_release();dialog.destroy();exit_dialog=None
+        button(body,'Detener monitoreo y salir',lambda:work(c.stop_monitoring,lambda _:destroy()),primary=True,fill='x',pady=(0,10))
+        button(body,'Cerrar panel y mantener monitoreo',destroy,fill='x',pady=(0,10))
+        button(body,'Volver',cancel,fill='x')
+        dialog.protocol('WM_DELETE_WINDOW',cancel);dialog.bind('<Escape>',lambda _:cancel());dialog.grab_set()
+        center(dialog)
+    window.protocol('WM_DELETE_WINDOW',request_close)
+    hero=tk.Frame(outer,bg='white',highlightbackground=line,highlightthickness=1,padx=20,pady=10);hero.pack(fill='x')
+    label(hero,'SU AULA, EN UN SOLO LUGAR',9,True)
+    label(hero,'Medir, revisar y recibir avisos',19,True,ink).pack_configure(pady=(7,7))
+    label(hero,'Aulas, personas, sensores y pruebas desde el mismo sistema.',11)
+    actions=tk.Frame(hero,bg='white');actions.pack(fill='x',pady=(9,0))
+    button(actions,'Abrir SFA Aire',open_system,primary=True,side='left')
+    button(actions,'Conectar Arduino',lambda:open_system(arduino=True),side='left',padx=(12,0))
+    label(hero,'El servidor se inicia al abrir. Para Arduino: seleccione el aula y el puerto USB.',10,wrap=700).pack_configure(pady=(8,0))
+    services=tk.Frame(outer,bg=bg);services.pack(fill='x',pady=(8,8))
+    description=tk.Frame(services,bg=bg);description.pack(side='left',fill='x',expand=True)
+    tk.Label(description,textvariable=server,font=('Segoe UI',11,'bold'),fg=ink,bg=bg,anchor='w').pack(fill='x')
+    tk.Label(description,textvariable=demo,font=('Segoe UI',10),fg=muted,bg=bg,anchor='w').pack(fill='x',pady=(4,0))
+    button(services,'Actualizar estado',refresh,side='left',padx=(0,8))
+    button(services,'Detener monitoreo',stop,side='left')
+    label(outer,'HERRAMIENTAS',9,True).pack_configure(pady=(0,9))
+    tools=tk.Frame(outer,bg=bg);tools.pack(fill='both',expand=True)
+    def show_qr(value):
+        data,minutes=value;status.set('Descarga temporal preparada. Sólo se comparte la aplicación Android.')
         folder=root/'artifacts';folder.mkdir(exist_ok=True);qr=folder/'QR_instalar_SFA_Aire_wifi.png';qr.write_bytes(png_qr(data['url']))
-        dialog=tk.Toplevel(window);dialog.title('Instalar SFA Aire por Wi-Fi');dialog.configure(bg=bg);dialog.resizable(False,False)
-        tk.Label(dialog,text='Instalar app Android v'+data.get('version','0.6.2'),font=('Segoe UI',17,'bold'),bg=bg,fg=ink).pack(padx=25,pady=(20,10))
-        photo=tk.PhotoImage(file=str(qr));dialog.qr=photo;tk.Label(dialog,image=photo,bg='white').pack(padx=25,pady=8)
-        tk.Label(dialog,text='Celular y PC en la misma red. Escanee el QR.',font=('Segoe UI',11),bg=bg,fg=ink).pack(padx=20,pady=5)
-        tk.Label(dialog,text=f'Disponible aproximadamente {minutes} min. No requiere USB.',font=('Segoe UI',10),bg=bg,fg=muted).pack(pady=5)
-        entry=ttk.Entry(dialog,width=65);entry.insert(0,data['url']);entry.state(['readonly']);entry.pack(padx=20,pady=12)
+        dialog=tk.Toplevel(window);dialog.title('SFA Aire · Instalar Android');dialog.configure(bg=bg);dialog.transient(window);dialog.resizable(False,False)
+        if ico.exists():dialog.iconbitmap(str(ico))
+        body=tk.Frame(dialog,bg=bg,padx=24,pady=20);body.pack()
+        label(body,'Instalar en Android',18,True,ink)
+        label(body,'App '+data['version']+' · PC y celular en la misma Wi-Fi',11).pack_configure(pady=(5,12))
+        photo=tk.PhotoImage(file=str(qr));dialog.qr=photo;tk.Label(body,image=photo,bg='white').pack(pady=8)
+        label(body,f'Enlace temporal · aproximadamente {minutes} minutos',10).pack_configure(pady=8)
+        entry=ttk.Entry(body,width=55,font=('Segoe UI',10));entry.insert(0,data['url']);entry.state(['readonly']);entry.pack(fill='x',pady=8)
         def copy():window.clipboard_clear();window.clipboard_append(data['url'])
-        ttk.Button(dialog,text='Copiar enlace',style='Go.TButton',command=copy).pack(pady=(0,20))
-
-    def show_server(value):
-        server_state.set('Servidor en ejecución · puerto '+str(value['port']) if value['running'] else 'Servidor detenido')
-        status.set('Estado del servidor actualizado.')
-    def check_server():work(c.runtime_status,show_server)
-    def start_server():
-        def started(value):show_server(value);status.set('Servidor iniciado. Puede abrir SFA Aire.')
-        def prepare():c.ensure('cloud');return c.runtime_status()
-        work(prepare,started)
-    def stop_server():
-        def stopped(result):show_server(result[1]);status.set(result[0])
-        work(lambda:(c.stop(),c.runtime_status()),stopped)
-    for text,command in [('Comprobar',check_server),('Iniciar',start_server),('Detener servidor',stop_server)]:
-        control=ttk.Button(controls,text=text,command=command);control.pack(side='right',padx=4);buttons.append(control)
-    window.after(200,check_server)
-
-    modes=[('SISTEMA SFA AIRE','Monitoreo y configuración','Aulas, personas, Arduino USB, simulaciones y notificaciones en el mismo portal.','Abrir SFA Aire',lambda:open_mode('cloud')),
-        ('ARDUINO EN EL PORTAL','Conexión de la maqueta','Abre el sistema y entra a Conexión Arduino: buscar COM, conectar y detener la lectura.','Configurar Arduino',lambda:work(lambda:c.mode_url('cloud')+'?view=arduino',lambda url:webbrowser.open(url))),
-        ('DEMOSTRACIÓN','Explorar sin nube','Recorrer pantallas con datos ficticios. Entorno separado, sin mensajes reales.','Abrir demostración',lambda:open_mode('demo')),
-        ('APP ANDROID','Instalar por Wi-Fi','Descargar la APK en el celular con un QR temporal, usando la misma red.','Mostrar descarga',lambda:work(c.share,show_qr))]
-    for index,(eyebrow,heading,description,label,command) in enumerate(modes):
-        row,col=divmod(index,2);grid.columnconfigure(col,weight=1);grid.rowconfigure(row,weight=1)
-        card=tk.Frame(grid,bg='white',highlightbackground='#DCE5DC',highlightthickness=1,padx=17,pady=13);card.grid(row=row,column=col,sticky='nsew',padx=(0,12) if col==0 else (0,0),pady=(0,12))
-        tk.Label(card,text=eyebrow,font=('Segoe UI',9,'bold'),fg=muted,bg='white').pack(anchor='w')
-        tk.Label(card,text=heading,font=('Segoe UI',15,'bold'),fg=ink,bg='white').pack(anchor='w',pady=(6,3))
-        tk.Label(card,text=description,font=('Segoe UI',10),fg=muted,bg='white',wraplength=340,justify='left').pack(anchor='w',pady=(0,9))
-        button=ttk.Button(card,text=label,style='Go.TButton',command=command);button.pack(fill='x',side='bottom');buttons.append(button)
-    tk.Label(outer,textvariable=status,font=('Segoe UI',10),fg=ink,bg='#E7EFE5',anchor='w',padx=12,pady=10).pack(fill='x',pady=(5,8))
+        ttk.Button(body,text='Copiar enlace',command=copy).pack(fill='x',pady=5)
+        center(dialog)
+    for col,(heading,description,text,command) in enumerate([
+        ('Explorar una demostración','Datos ficticios, sin avisos reales.','Abrir demostración',lambda:open_system('demo')),
+        ('App para Android','Descarga por QR en la misma Wi-Fi.','Instalar por Wi-Fi',lambda:work(c.share,show_qr))]):
+        tools.columnconfigure(col,weight=1,uniform='cards');tools.rowconfigure(0,weight=1)
+        card=tk.Frame(tools,bg='white',highlightbackground=line,highlightthickness=1,padx=19,pady=10);card.grid(row=0,column=col,sticky='nsew',padx=(0,12) if col==0 else (0,0))
+        label(card,heading,14,True,ink)
+        label(card,description,11,wrap=330).pack_configure(pady=(5,6))
+        button(card,text,command,side='bottom',fill='x')
+    footer=tk.Frame(outer,bg=bg);footer.pack(side='bottom',before=header,fill='x',pady=(10,0))
+    button(footer,'Guía de uso',lambda:webbrowser.open((root/'docs/GUIA_USO.html').as_uri()),side='left')
+    button(footer,'Salir…',request_close,side='right')
+    tk.Label(outer,textvariable=status,font=('Segoe UI',10),fg=ink,bg=bg,anchor='w',justify='left',wraplength=800).pack(side='bottom',before=header,fill='x',pady=(5,0))
+    window.after(200,refresh)
     window.mainloop()
 
 

@@ -6,7 +6,7 @@ Los archivos oficiales están en [Releases](https://github.com/hfreedo/SFA-Aire-
 
 | Archivo | Propósito |
 | --- | --- |
-| `SFA_Aire_Windows_0.7.2_portable_x64.zip` | Panel y receptor autónomos para Windows 10/11 x64. Extraer toda la carpeta. |
+| `SFA_Aire_Windows_0.7.3_portable_x64.zip` | Panel y receptor autónomos para Windows 10/11 x64. Extraer toda la carpeta. |
 | `SFA_Aire_0.7.2.apk` | App Android piloto, con Firebase configurado públicamente. |
 | `SHA256SUMS.txt` | Verificar la integridad de las descargas. |
 
@@ -22,8 +22,11 @@ los archivos originales.
 
 1. Extrae el ZIP en una carpeta de tu usuario con permiso de escritura. No ejecutes
    el panel dentro del ZIP ni mezcles archivos con una instalación anterior.
-2. Abre `Panel SFA Aire.exe`. Permite iniciar/detener el servidor, abrir el portal,
-   explorar una demostración e instalar la APK por Wi-Fi.
+2. Abre `Panel SFA Aire.exe` y pulsa **Abrir SFA Aire**: inicia el servidor automáticamente.
+   **Conectar Arduino** es un acceso al mismo portal. Las herramientas inferiores
+   ofrecen demostración sin nube e instalación Android por Wi-Fi.
+   **Detener monitoreo** detiene el servidor y la demostración de esta carpeta.
+   Al salir, elige conservar el monitoreo o detenerlo antes de cerrar el panel.
 3. Para monitoreo real, abre el sistema e inicia sesión con tu cuenta autorizada.
 4. Selecciona el aula, entra a **Conexión Arduino** y pulsa **Usar esta PC para esta aula**.
    La cuenta debe ser administradora; el servidor crea un vínculo exclusivo de esa PC.
@@ -38,6 +41,9 @@ No se abren puertos del router ni se cambian reglas de firewall automáticamente
 La primera vinculación necesita internet. El detalle local se conserva en SQLite;
 la sincronización utiliza una cola durable y guardas de consumo. Estar sin red no
 equivale a que el teléfono haya recibido un aviso.
+
+Windows y Android tienen versiones independientes: este portable 0.7.3 incluye
+la APK piloto 0.7.2. El nuevo panel utiliza el ícono oficial en el ejecutable y la ventana.
 
 ## Maqueta
 

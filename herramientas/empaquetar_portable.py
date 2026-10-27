@@ -1,7 +1,7 @@
 """Portable por lista permitida; no recorre ni copia datos de la instalación."""
 import base64,hashlib,importlib.metadata,io,json,re,shutil,sys,zipfile
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1];VERSION='0.7.2'
+ROOT=Path(__file__).resolve().parents[1];VERSION='0.7.3'
 sys.path.insert(0,str(ROOT))
 STAGE=ROOT/'artifacts/portable-stage/SFA_Aire';OUT=ROOT/'Entregas';ARCHIVE=OUT/f'SFA_Aire_Windows_{VERSION}_portable_x64.zip'
 
@@ -45,9 +45,10 @@ def main():
     for p in (ROOT/'interfaz_web/dist').rglob('*'):
         if p.is_file():copy(p.relative_to(ROOT))
     copy('Branding/logo/sfa-aire-verde-transparente.png')
+    copy('Branding/logo/sfa-aire.ico')
     metadata=OUT/'ANDROID_ACTUAL.json'
     if not metadata.is_file():metadata=ROOT/'docs/ANDROID_PILOTO_072.json'
-    release=json.loads(metadata.read_text());assert release['version']==VERSION
+    release=json.loads(metadata.read_text());assert release['version']=='0.7.2'
     assert hashlib.sha256((OUT/release['file']).read_bytes()).hexdigest()==release['sha256']
     copy('Entregas/'+release['file']);copy(metadata.relative_to(ROOT),'Entregas/ANDROID_ACTUAL.json')
     public_path=ROOT/'secrets/supabase-public.json'

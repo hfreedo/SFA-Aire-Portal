@@ -1,6 +1,7 @@
 import unittest
 import hashlib
 import json
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import Mock, patch
@@ -23,6 +24,23 @@ class Launcher(unittest.TestCase):
 
 
 class PanelPorts(unittest.TestCase):
+    def test_stop_monitoring_preserves_untracked_processes(self):
+        own_wifi=Mock();own_wifi.poll.return_value=None
+        unrelated=Mock()
+        self.controller.wifi_children=[own_wifi]
+        self.controller.children=[own_wifi,unrelated]
+        with patch.object(self.controller,'stop') as stop,patch.object(self.controller,'runtime_status',return_value={'running':False}),patch('panel_inicio.subprocess.run',return_value=Mock(returncode=0)) as terminate_tree:
+            self.controller.stop_monitoring()
+        self.assertEqual([call.args[0] for call in stop.call_args_list],['cloud','demo'])
+        if os.name=='nt':self.assertEqual(terminate_tree.call_args.args[0],['taskkill','/PID',str(own_wifi.pid),'/T','/F'])
+        else:own_wifi.terminate.assert_called_once()
+        unrelated.terminate.assert_not_called()
+
+    def test_stop_monitoring_reports_pending_shutdown_instead_of_exiting(self):
+        with patch.object(self.controller,'stop'),patch.object(self.controller,'runtime_status',return_value={'running':True}):
+            with self.assertRaisesRegex(RuntimeError,'todavía'):
+                self.controller.stop_monitoring()
+
     def setUp(self):
         self.directory=TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)

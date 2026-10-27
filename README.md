@@ -53,7 +53,8 @@ conserva los límites preventivos de Supabase Free y Firebase Spark.
 
 **Windows 10/11 x64:** descarga el ZIP portable de [Releases](https://github.com/hfreedo/SFA-Aire-Portal/releases/latest),
 extrae la carpeta completa y abre **Panel SFA Aire.exe**. No requiere instalar
-Python ni Node.js. Para medir: inicia sesión, selecciona el aula y abre
+Python ni Node.js. **Abrir SFA Aire** inicia el servidor; al salir se puede
+conservar el monitoreo o detenerlo. Windows 0.7.3 incluye Android piloto 0.7.2. Para medir: inicia sesión, selecciona el aula y abre
 **Conexión Arduino**; la primera vinculación genera una credencial propia de esa PC.
 La demostración sin cuenta utiliza datos ficticios y no envía notificaciones.
 
