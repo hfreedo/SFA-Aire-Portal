@@ -689,7 +689,7 @@
   },
   {
     "path": "herramientas/verificar_portable.py",
-    "sha256": "302b47a9810f0f9a6f0dd4f5e441f5b75ee7e9f334585db0e0ba0ffc868286c3"
+    "sha256": "9e94ab4d166ac77253d312f5950f62551cd47e0d613ccf5a85488de86d382503"
   },
   {
     "path": "herramientas/requirements-panel.txt",

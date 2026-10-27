@@ -21,7 +21,7 @@ def stop(base,root,data='data'):
         if h.get('workspace')!=identity:return
         key=(root/data/'clave_conexion.txt').read_text().strip()
         r=httpx.post(base+'/api/maintenance/shutdown',json={'instance_id':h['instance_id']},headers={'Authorization':'Bearer '+key},timeout=3);r.raise_for_status()
-    except (httpx.ConnectError,httpx.ReadError,OSError):pass
+    except (httpx.HTTPError,OSError,ValueError,KeyError):pass
 def kill_owned(proc):
     if proc.poll() is None:subprocess.run(['taskkill','/PID',str(proc.pid),'/T','/F'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 def main():
