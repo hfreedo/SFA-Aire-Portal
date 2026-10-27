@@ -37,7 +37,7 @@
   },
   {
     "path": "interfaz_web/src/portal-theme.css",
-    "sha256": "77b51a295bd0ffc3d661236efd82f36f2c35519768e89c9fb46d93eb0fb3e72e"
+    "sha256": "93db4cf433ca3f87cf9af745154e6064233ee65fcb1af6c82d6fbb97b86f93dd"
   },
   {
     "path": "interfaz_web/src/QuickNotificationTest.tsx",
@@ -45,7 +45,7 @@
   },
   {
     "path": "interfaz_web/src/RemoteWorkspace.tsx",
-    "sha256": "7fb7ad36b0e01500f81f252d098df28526b0984d1cb98eee82c221169b8d8d58"
+    "sha256": "9de74d47e8d1308b0a26a84eb209f9e99ce146e19aa2ae01d8837b37b59c5d45"
   },
   {
     "path": "interfaz_web/src/scroll-surfaces.css",

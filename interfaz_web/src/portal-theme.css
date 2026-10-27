@@ -54,5 +54,6 @@
 .portal-theme .workspace-status h1{margin-top:12px;line-height:1.2}
 .portal-theme .workspace-status>p{max-width:58ch;line-height:1.65}
 .portal-theme .workspace-status-detail{padding:12px 15px;border-radius:10px;background:#f5eee3;color:#725437}
+.portal-theme .connection-detail{display:block;margin-top:7px;line-height:1.6}
 .portal-theme .workspace-status .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
 @media(max-width:650px){.access-layout.portal-theme{margin:0;min-height:100dvh}.access-layout.portal-theme .access-form{padding:26px 24px}.access-layout.portal-theme .access-story{padding:24px}.portal-theme .workspace-status{padding:22px}.portal-theme .workspace-status .actions>button{width:100%}}
