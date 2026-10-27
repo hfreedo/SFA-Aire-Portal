@@ -20,9 +20,9 @@ class WorkspaceLayout(activity:Activity,isDemo:()->Boolean,private val isBusy:()
     init {with(ui){
         activity.window.statusBarColor=Color.WHITE;activity.window.navigationBarColor=Color.WHITE
         activity.window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-        root.setPadding(dp(16),dp(10),dp(16),dp(16))
+        root.setPadding(dp(16),dp(16),dp(16),dp(16))
         val outer=column().apply{setBackgroundColor(page)}
-        val brand=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;gravity=android.view.Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(6),dp(16),dp(4));setBackgroundColor(page)}
+        val brand=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;gravity=android.view.Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(10),dp(16),dp(4));setBackgroundColor(page)}
         brand.addView(ImageView(activity).apply{setImageResource(org.sfa.aire.R.drawable.sfa_aire);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(28),dp(28)))
         val brandText=column().apply{setPadding(dp(12),0,0,0)}
         text(brandText,"SFA Aire",18f,true)
@@ -39,10 +39,10 @@ class WorkspaceLayout(activity:Activity,isDemo:()->Boolean,private val isBusy:()
     fun transition(direction:Int,change:()->Unit,finished:()->Unit){
         cancelTransition()
         if(!android.animation.ValueAnimator.areAnimatorsEnabled()){change();finished();return}
-        scroll.animate().alpha(0f).translationX(-direction*ui.dp(12).toFloat()).setDuration(90).withEndAction{
+        scroll.animate().alpha(0f).translationX(-direction*ui.dp(6).toFloat()).setDuration(60).withEndAction{
             change()
-            scroll.alpha=0f;scroll.translationX=direction*ui.dp(22).toFloat()
-            scroll.animate().alpha(1f).translationX(0f).setDuration(270).setInterpolator(android.view.animation.DecelerateInterpolator()).withEndAction{finished()}.start()
+            scroll.alpha=0f;scroll.translationX=direction*ui.dp(10).toFloat()
+            scroll.animate().alpha(1f).translationX(0f).setDuration(180).setInterpolator(android.view.animation.DecelerateInterpolator()).withEndAction{finished()}.start()
         }.start()
     }
     private fun positionIndicator(animate:Boolean){with(ui){
@@ -52,7 +52,7 @@ class WorkspaceLayout(activity:Activity,isDemo:()->Boolean,private val isBusy:()
         val x=index*available/3f+(available/3f-dp(56))/2f
         indicator.translationY=tabViews[selectedTab]?.first?.getChildAt(0)?.top?.toFloat()?:0f
         indicator.animate().cancel()
-        if(animate&&indicatorPositioned&&android.animation.ValueAnimator.areAnimatorsEnabled())indicator.animate().translationX(x).setDuration(300).setInterpolator(android.view.animation.AccelerateDecelerateInterpolator()).start()
+        if(animate&&indicatorPositioned&&android.animation.ValueAnimator.areAnimatorsEnabled())indicator.animate().translationX(x).setDuration(220).setInterpolator(android.view.animation.AccelerateDecelerateInterpolator()).start()
         else indicator.translationX=x
         indicatorPositioned=true
     }}

@@ -43,7 +43,7 @@ class CareUiChecks(private val instrumentation:Instrumentation){
         capture("v071-aula")
         stage="sensor information"
         repeat(8){
-            if(all().none{node->node.text?.toString()=="Información de sensores"}){
+            if(all().none{node->node.text?.toString()=="Información de sensores"||node.contentDescription?.toString()=="Información de sensores"}){
                 all().firstOrNull{node->node.className=="android.widget.ScrollView"}?.performAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
                 instrumentation.waitForIdleSync();SystemClock.sleep(100)
             }
@@ -93,6 +93,19 @@ class CareUiChecks(private val instrumentation:Instrumentation){
             java.io.FileOutputStream(java.io.File(current.cacheDir,"notification-settings.png")).use{bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,it)}
             bitmap.recycle()
         }
+        stage="direct attendance without compulsory dialog"
+        var attended=0;var commented=0
+        instrumentation.runOnMainSync{
+            val root=LinearLayout(current).apply{orientation=LinearLayout.VERTICAL;setPadding(24,24,24,24)}
+            current.setContentView(android.widget.ScrollView(current).apply{addView(root)})
+            val data=DemoWorkspace.load(current)
+            val item=data.getJSONArray("incidents").getJSONObject(0).put("capabilities",JSONObject().put("can_resolve",true))
+            IncidentsScreen(AireUi(current,root,{false},{false}),{attended++},true,{}, {commented++}).render(data,listOf(item))
+        }
+        instrumentation.waitForIdleSync();click("Marcar atendido")
+        check(attended==1&&commented==0)
+        check(all().none{it.className=="android.widget.EditText"}){"Attendance required a note"}
+        click("Atender con nota");check(commented==1&&attended==1)
         stage="administrative archive label"
         instrumentation.runOnMainSync{
             val root=LinearLayout(current).apply{orientation=LinearLayout.VERTICAL;setPadding(24,24,24,24)}

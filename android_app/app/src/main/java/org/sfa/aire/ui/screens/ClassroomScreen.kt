@@ -20,12 +20,13 @@ class ClassroomScreen(private val ui:AireUi){
  }
  private data class SensorViews(val box:LinearLayout,val value:android.widget.TextView,val detail:android.widget.TextView)
  private fun sensorTile(parent:LinearLayout,title:String,kind:String):SensorViews=with(ui){
-  val tile=column().apply{background=shape(sage);setPadding(dp(14),dp(12),dp(14),dp(12))}
-  parent.addView(tile,if(parent.orientation==LinearLayout.HORIZONTAL)LinearLayout.LayoutParams(0,-2,1f).apply{if(kind=="temperature")marginEnd=dp(10)} else LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(10)})
+  val tile=column().apply{background=shape(Color.WHITE,sageStrong);setPadding(dp(16),dp(16),dp(16),dp(16))}
+  parent.addView(tile,if(parent.orientation==LinearLayout.HORIZONTAL)LinearLayout.LayoutParams(0,-1,1f).apply{if(kind=="temperature")marginEnd=dp(12)} else LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(10)})
   val label=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};tile.addView(label)
   label.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,green,21));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(21),dp(21)).apply{marginEnd=dp(7)})
-  text(label,title,15f,true)
-  SensorViews(tile,text(tile,"—",28f,true),text(tile,"",14f))
+  text(label,title,14f)
+  space(tile,12)
+  SensorViews(tile,text(tile,"—",32f,true),text(tile,"",14f))
  }
  private fun value(view:android.widget.TextView,number:String,unit:String){
   val formatted=android.text.SpannableString("$number $unit")
@@ -54,16 +55,27 @@ class ClassroomScreen(private val ui:AireUi){
    val initial=snapshots.getJSONObject(n);if(initial.optString("classroom_id")!=roomId)continue;count++
    var snapshot=initial
    val header=card()
-   val tags=LinearLayout(activity);header.addView(tags)
+   val statusRow=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};header.addView(statusRow)
+   val content=column();statusRow.addView(content,LinearLayout.LayoutParams(0,-2,1f))
+   val tags=LinearLayout(activity).apply{orientation=LinearLayout.VERTICAL};content.addView(tags)
    val source=badge(tags,"")
    val stale=badge(tags,"LECTURA VENCIDA",Color.rgb(255,237,199))
-   val stateText=text(header,"",21f,true)
-   val historical=text(header,"Última lectura · No describe el ambiente actual",14f)
-   val ageText=text(header,"",14f)
-   val exact=text(header,"",14f).apply{visibility=android.view.View.GONE}
-   ageText.minimumHeight=dp(40);ageText.isClickable=true;ageText.isFocusable=true
+   val stateText=text(content,"",18f,true)
+   val historical=text(content,"Última lectura · No describe el ambiente actual",14f)
+   val ageText=text(content,"",14f)
+   val exact=text(content,"",14f).apply{visibility=android.view.View.GONE}
+   ageText.minimumHeight=dp(48);ageText.gravity=Gravity.CENTER_VERTICAL;ageText.isClickable=true;ageText.isFocusable=true
+   ageText.setCompoundDrawablesWithIntrinsicBounds(null,null,AireIcon(activity,"info",green,18),null)
+   ageText.compoundDrawablePadding=dp(8)
    ageText.setOnClickListener{exact.visibility=if(exact.visibility==android.view.View.VISIBLE)android.view.View.GONE else android.view.View.VISIBLE}
-   if(pending>0)secondary(header,"Revisar avisos ($pending)",onIncidents).apply{isEnabled=true;alpha=1f}
+   if(pending>0)tertiary(statusRow,if(pending==1)"Ver aviso" else "Ver avisos",onIncidents).apply{
+       contentDescription="$pending avisos pendientes. Revisar avisos";isEnabled=true;alpha=1f;gravity=Gravity.CENTER;setPadding(dp(4),dp(8),dp(4),dp(8))
+       layoutParams=LinearLayout.LayoutParams(dp(88),-2).apply{marginStart=dp(8)}
+   }
+   val metricHeading=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL}
+   root.addView(metricHeading,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(8)})
+   text(metricHeading,"Mediciones",18f,true).layoutParams=LinearLayout.LayoutParams(0,-2,1f)
+   iconAction(metricHeading,"Información de sensores","info"){information()}
    val metrics=LinearLayout(activity).apply{orientation=if(activity.resources.configuration.fontScale>1.2f||activity.resources.configuration.screenWidthDp<340)LinearLayout.VERTICAL else LinearLayout.HORIZONTAL}
    root.addView(metrics,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})
    val temperature=sensorTile(metrics,"Temperatura","temperature")
@@ -79,12 +91,12 @@ class ClassroomScreen(private val ui:AireUi){
     stale.visibility=if(current.fresh)android.view.View.GONE else android.view.View.VISIBLE
     stateText.text=current.label
     historical.visibility=if(current.fresh)android.view.View.GONE else android.view.View.VISIBLE
-    ageText.text=current.ageLabel+"  ⓘ"
+    ageText.text=current.ageLabel
     exact.text=try{java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM,java.text.DateFormat.SHORT).format(java.util.Date(java.time.Instant.parse(snapshot.getString("sample_at")).toEpochMilli()))}catch(_:Exception){"Fecha no verificable"}
     ageText.contentDescription=current.ageLabel+". Mostrar fecha exacta de la lectura."
     header.background=shape(if(!current.fresh)Color.rgb(255,246,226) else if(current.state=="alerta")Color.rgb(255,238,226) else Color.WHITE)
-    temperature.box.background=shape(if(current.fresh)sage else Color.rgb(233,236,229))
-    mq.box.background=shape(if(current.fresh)sageStrong else Color.rgb(233,236,229))
+    temperature.box.background=shape(if(current.fresh)Color.WHITE else Color.rgb(240,242,236),sageStrong)
+    mq.box.background=shape(if(current.fresh)Color.WHITE else Color.rgb(240,242,236),sageStrong)
     value(temperature.value,if(dht)number(sample,"temperature") else "—","°C")
     temperature.detail.text=if(!dht)"DHT sin lectura" else if(current.fresh)"Sensor DHT" else "Última lectura · DHT"
     value(mq.value,number(sample,"mq_raw",0),"ADC")
@@ -97,7 +109,8 @@ class ClassroomScreen(private val ui:AireUi){
   }
   if(count==0){val box=card();text(box,"Esperando mediciones",21f,true);text(box,"La PC del aula todavía no sincronizó una lectura. Revisa la conexión Arduino en el portal.")}
   if(pending==0){val notice=card();text(notice,"Sin avisos pendientes",16f,true)}
-  val info=secondary(root,"Información de sensores"){information()};info.isEnabled=true;info.alpha=1f;info.setCompoundDrawablesWithIntrinsicBounds(AireIcon(activity,"info",green,20),null,null,null)
-  secondary(root,"Actualizar aula",onRefresh)
+  if(count==0)tertiary(root,"Información de sensores"){information()}.apply{isEnabled=true;alpha=1f}
+  tertiary(root,"Actualizar aula",onRefresh)
+
  }}
 }

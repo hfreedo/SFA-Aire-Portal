@@ -234,7 +234,7 @@ def gui(root):
     title=tk.Frame(header,bg=bg);title.pack(side='left')
     tk.Label(title,text='SFA Aire',font=('Segoe UI',21,'bold'),fg=ink,bg=bg).pack(anchor='w')
     tk.Label(title,text='Monitoreo ambiental de aulas',font=('Segoe UI',11),fg=muted,bg=bg).pack(anchor='w')
-    tk.Label(header,text='WINDOWS · 0.7.3',font=('Segoe UI',9,'bold'),fg=muted,bg=bg).pack(side='right')
+    tk.Label(header,text='WINDOWS · 0.8.0',font=('Segoe UI',9,'bold'),fg=muted,bg=bg).pack(side='right')
     status=tk.StringVar(value='Preparado. Abrir SFA Aire inicia el servidor automáticamente.')
     server=tk.StringVar(value='Comprobando el monitoreo de esta PC…')
     demo=tk.StringVar(value='')

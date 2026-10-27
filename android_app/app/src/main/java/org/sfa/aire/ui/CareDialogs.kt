@@ -21,10 +21,11 @@ class CareDialogs(private val ui:AireUi,private val canAct:()->Boolean,private v
     fun note(title:String,hint:String,optional:Boolean=false,onSubmit:(String)->Unit){with(ui){
         if(blocked())return
         val form=column().apply{setPadding(dp(22),dp(8),dp(22),dp(12))}
-        text(form,"La acción quedará registrada en la atención del aula.",13f);text(form,hint,14f,true)
-        val note=EditText(activity).apply{this.hint="Describa lo observado y el resultado…";minLines=3;maxLines=6;gravity=Gravity.TOP;inputType=InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE;filters=arrayOf(InputFilter.LengthFilter(500));styleField(this);setPadding(dp(12),dp(10),dp(12),dp(10));textSize=16f}
+        text(form,hint,14f);space(form,12)
+        val note=EditText(activity).apply{this.hint=if(optional)"Nota opcional" else "Describa lo observado y el resultado…";minLines=3;maxLines=6;gravity=Gravity.TOP;inputType=InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE;filters=arrayOf(InputFilter.LengthFilter(500));styleField(this);setPadding(dp(12),dp(10),dp(12),dp(10));textSize=16f}
         form.addView(note,LinearLayout.LayoutParams(-1,-2))
-        val message=text(form,if(optional)"Nota opcional. Puede guardar sin escribir." else "Entre 3 y 500 caracteres. Si hay un error, su nota se conserva.",12f)
+        space(form,8)
+        val message=text(form,if(optional)"Puede guardar sin escribir." else "Entre 3 y 500 caracteres. Si hay un error, su nota se conserva.",12f)
         val value=dialogBuilder(title).setView(form).setNegativeButton("Cancelar",null).setPositiveButton("Guardar",null).create()
         attach(value,message)
         value.setOnShowListener{

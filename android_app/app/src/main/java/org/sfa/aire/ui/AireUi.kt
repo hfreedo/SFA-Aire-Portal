@@ -25,16 +25,16 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
     val page=Color.rgb(245,247,239)
     val disclosures=mutableMapOf<String,Boolean>()
     fun dp(n:Int)=(n*activity.resources.displayMetrics.density).toInt()
-    fun shape(color:Int,border:Int=Color.TRANSPARENT)=GradientDrawable().apply{setColor(color);cornerRadius=dp(18).toFloat();setStroke(dp(1),border)}
+    fun shape(color:Int,border:Int=Color.TRANSPARENT,radius:Int=16)=GradientDrawable().apply{setColor(color);cornerRadius=dp(radius).toFloat();setStroke(dp(1),border)}
     fun surface(button:Button,color:Int,foreground:Int=green){
         button.setTextColor(foreground)
-        button.background=RippleDrawable(ColorStateList.valueOf(Color.argb(35,51,82,58)),shape(color),shape(Color.WHITE))
+        button.background=RippleDrawable(ColorStateList.valueOf(Color.argb(35,51,82,58)),shape(color,if(color==Color.WHITE)sageStrong else Color.TRANSPARENT,10),shape(Color.WHITE,radius=10))
     }
     fun enter(view:View){
         view.animate().cancel()
         if(!ValueAnimator.areAnimatorsEnabled()){view.alpha=1f;view.translationY=0f;return}
         view.alpha=0f;view.translationY=dp(14).toFloat()
-        view.animate().alpha(1f).translationY(0f).setDuration(280).setInterpolator(DecelerateInterpolator()).start()
+        view.animate().alpha(1f).translationY(0f).setDuration(200).setInterpolator(DecelerateInterpolator()).start()
     }
     fun pressFeedback(view:View){
         view.setOnTouchListener{v,event->
@@ -52,14 +52,14 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
     }
     fun styleDialog(dialog:AlertDialog){
         dialog.window?.apply{
-            setBackgroundDrawable(shape(Color.WHITE));setDimAmount(.22f)
+            setBackgroundDrawable(shape(Color.WHITE,radius=20));setDimAmount(.22f)
             setWindowAnimations(org.sfa.aire.R.style.AireDialogMotion)
             setLayout(minOf(activity.resources.displayMetrics.widthPixels-dp(32),dp(520)),-2)
         }
         for(id in listOf(AlertDialog.BUTTON_POSITIVE,AlertDialog.BUTTON_NEGATIVE,AlertDialog.BUTTON_NEUTRAL)){
             dialog.getButton(id)?.apply{
                 isAllCaps=false;textSize=15f;minimumHeight=dp(48);stateListAnimator=null;elevation=0f
-                surface(this,if(id==AlertDialog.BUTTON_POSITIVE)green else page,if(id==AlertDialog.BUTTON_POSITIVE)Color.WHITE else green)
+                surface(this,if(id==AlertDialog.BUTTON_POSITIVE)green else Color.TRANSPARENT,if(id==AlertDialog.BUTTON_POSITIVE)Color.WHITE else green)
                 setPadding(dp(16),dp(8),dp(16),dp(8));pressFeedback(this)
             }
         }
@@ -71,7 +71,8 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
             val row=button(body,name){dialog.dismiss();onChoose(index)}
             row.apply{
                 isEnabled=true;alpha=1f;textSize=16f;gravity=Gravity.START or Gravity.CENTER_VERTICAL
-                surface(this,if(index==selected)sage else page)
+                surface(this,if(index==selected)sage else Color.TRANSPARENT)
+                layoutParams=LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(4)}
                 contentDescription=name+if(index==selected)", seleccionada" else ""
                 setCompoundDrawablesWithIntrinsicBounds(null,null,if(index==selected)AireIcon(activity,"check",green,22)else null,null)
                 compoundDrawablePadding=dp(10);isSelected=index==selected
@@ -84,8 +85,8 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
     }
     fun column()=LinearLayout(activity).apply{orientation=LinearLayout.VERTICAL}
     fun text(parent:LinearLayout,value:String,size:Float=16f,bold:Boolean=false):TextView=TextView(activity).apply{
-        text=value;textSize=maxOf(14f,size);setTextColor(if(size<=14f)muted else ink);setPadding(0,dp(3),0,dp(3));setLineSpacing(dp(2).toFloat(),1f)
-        typeface=Typeface.create("sans-serif",if(bold)Typeface.BOLD else Typeface.NORMAL);parent.addView(this)
+        text=value;textSize=maxOf(14f,size);setTextColor(if(size<=14f)muted else ink);includeFontPadding=false;setPadding(0,0,0,0);setLineSpacing(dp(2).toFloat(),1f)
+        typeface=Typeface.create("sans-serif",if(bold)Typeface.BOLD else Typeface.NORMAL);parent.addView(this,LinearLayout.LayoutParams(if(parent.orientation==LinearLayout.HORIZONTAL)-2 else -1,-2).apply{bottomMargin=dp(4)})
     }
     fun meta(parent:LinearLayout,label:String,value:String){
         val row=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL}
@@ -103,16 +104,15 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
     fun styleField(field:EditText){
         field.setTextColor(ink);field.setHintTextColor(muted)
         field.background=android.graphics.drawable.StateListDrawable().apply{
-            addState(intArrayOf(android.R.attr.state_focused),shape(Color.WHITE,green))
-            addState(intArrayOf(),shape(page,sageStrong))
+            addState(intArrayOf(android.R.attr.state_focused),shape(Color.WHITE,green,10))
+            addState(intArrayOf(),shape(Color.WHITE,sageStrong,10))
         }
     }
     fun styleSwitch(control:Switch){
-        control.showText=false;control.splitTrack=false;control.switchMinWidth=dp(48);control.switchPadding=dp(12)
-        control.thumbDrawable=GradientDrawable().apply{shape=GradientDrawable.OVAL;setColor(Color.WHITE);setSize(dp(24),dp(24));setStroke(dp(1),Color.rgb(214,222,210))}
-        control.trackDrawable=GradientDrawable().apply{cornerRadius=dp(15).toFloat();setColor(green);setSize(dp(48),dp(28))}
-        control.trackTintList=ColorStateList(arrayOf(intArrayOf(android.R.attr.state_enabled,android.R.attr.state_checked),intArrayOf(android.R.attr.state_enabled),intArrayOf()),intArrayOf(green,Color.rgb(211,220,205),Color.rgb(225,231,220)))
-        control.thumbTintList=ColorStateList.valueOf(Color.WHITE)
+        // Conservar la geometría del control Android; sólo tematizar sus estados.
+        control.showText=false;control.switchPadding=dp(16)
+        control.trackTintList=ColorStateList(arrayOf(intArrayOf(android.R.attr.state_enabled,android.R.attr.state_checked),intArrayOf(android.R.attr.state_enabled),intArrayOf()),intArrayOf(green,Color.rgb(153,170,151),Color.rgb(207,215,203)))
+        control.thumbTintList=ColorStateList(arrayOf(intArrayOf(android.R.attr.state_checked),intArrayOf()),intArrayOf(Color.WHITE,Color.rgb(89,108,86)))
     }
     fun button(parent:LinearLayout,title:String,action:()->Unit):Button=Button(activity).apply{
         text=title;isAllCaps=false;textSize=15f;typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL);surface(this,green,Color.WHITE);stateListAnimator=null;elevation=0f;minimumHeight=dp(48);setPadding(dp(14),dp(8),dp(14),dp(8))
@@ -122,10 +122,20 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
     }
     fun actionButton(parent:LinearLayout,title:String,allowed:Boolean,action:()->Unit):Button=button(parent,title,action).apply{isEnabled=isEnabled&&allowed;alpha=if(isEnabled)1f else .45f}
     fun secondary(parent:LinearLayout,title:String,action:()->Unit):Button=button(parent,title,action).apply{surface(this,sage)}
+    fun space(parent:LinearLayout=root,height:Int=8){parent.addView(View(activity),LinearLayout.LayoutParams(1,dp(height)))}
+    fun divider(parent:LinearLayout){parent.addView(View(activity).apply{setBackgroundColor(sage)},LinearLayout.LayoutParams(-1,dp(1)).apply{topMargin=dp(12);bottomMargin=dp(12)})}
+    fun tertiary(parent:LinearLayout,title:String,action:()->Unit):Button=button(parent,title,action).apply{
+        surface(this,Color.TRANSPARENT);gravity=Gravity.START or Gravity.CENTER_VERTICAL
+        layoutParams=LinearLayout.LayoutParams(-1,-2);setPadding(0,dp(8),0,dp(8))
+    }
+    fun iconAction(parent:LinearLayout,title:String,kind:String,action:()->Unit):ImageButton=ImageButton(activity).apply{
+        contentDescription=title;setImageDrawable(AireIcon(activity,kind,green,22));background=RippleDrawable(ColorStateList.valueOf(sage),null,shape(Color.WHITE,radius=10));setPadding(dp(12),dp(12),dp(12),dp(12))
+        parent.addView(this,LinearLayout.LayoutParams(dp(48),dp(48)));setOnClickListener{if(!isBusy())action()}
+    }
     fun card(parent:LinearLayout=root,color:Int=Color.WHITE):LinearLayout=column().apply{
-        background=shape(color,if(color==Color.WHITE)Color.rgb(227,233,223)else Color.TRANSPARENT);setPadding(dp(16),dp(13),dp(16),dp(13));parent.addView(this,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})}
+        background=shape(color,if(color==Color.WHITE)Color.rgb(227,233,223)else Color.TRANSPARENT);setPadding(dp(16),dp(16),dp(16),dp(16));parent.addView(this,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})}
     fun badge(parent:LinearLayout,value:String,color:Int=sage):TextView=TextView(activity).apply{
-        text=value;textSize=12f;typeface=Typeface.create("sans-serif-medium",0);setTextColor(ink);background=shape(color)
+        text=value;textSize=12f;typeface=Typeface.create("sans-serif-medium",0);setTextColor(ink);background=shape(color,radius=6)
         setPadding(dp(9),dp(4),dp(9),dp(4));parent.addView(this,LinearLayout.LayoutParams(-2,-2).apply{marginEnd=dp(6);bottomMargin=dp(6)})
     }
     fun disclosure(parent:LinearLayout,title:String,key:String,content:(LinearLayout)->Unit){
@@ -135,7 +145,7 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
         val toggle=Button(activity).apply{
             text=title;isAllCaps=false;textSize=15f;typeface=Typeface.create("sans-serif-medium",0)
             minimumHeight=dp(48);stateListAnimator=null;elevation=0f;gravity=Gravity.START or Gravity.CENTER_VERTICAL
-            setPadding(dp(12),dp(8),dp(44),dp(8));surface(this,page);pressFeedback(this)
+            setPadding(dp(12),dp(8),dp(44),dp(8));surface(this,Color.TRANSPARENT);pressFeedback(this)
         }
         header.addView(toggle,FrameLayout.LayoutParams(-1,-2))
         val arrow=ImageView(activity).apply{setImageDrawable(AireIcon(activity,"chevron",green,20));importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO;isClickable=false}
@@ -150,14 +160,14 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
             if(moving)return@setOnClickListener
             expanded=!expanded;disclosures[key]=expanded;label()
             if(!ValueAnimator.areAnimatorsEnabled()){body.alpha=1f;body.visibility=if(expanded)View.VISIBLE else View.GONE;arrow.rotation=if(expanded)180f else 0f;return@setOnClickListener}
-            arrow.animate().rotation(if(expanded)180f else 0f).setDuration(260).start()
-            body.alpha=if(expanded)0f else 1f;body.animate().alpha(if(expanded)1f else 0f).setDuration(240).start()
+            arrow.animate().rotation(if(expanded)180f else 0f).setDuration(200).start()
+            body.alpha=if(expanded)0f else 1f;body.animate().alpha(if(expanded)1f else 0f).setDuration(180).start()
             val width=(wrapper.width.takeIf{it>0}?:activity.resources.displayMetrics.widthPixels-dp(64))
             body.measure(View.MeasureSpec.makeMeasureSpec(width,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED))
             val height=body.measuredHeight
             moving=true;body.visibility=View.VISIBLE
             ValueAnimator.ofInt(if(expanded)0 else height,if(expanded)height else 0).apply{
-                duration=260;interpolator=DecelerateInterpolator()
+                duration=200;interpolator=DecelerateInterpolator()
                 addUpdateListener{body.layoutParams=body.layoutParams.apply{this.height=it.animatedValue as Int}}
                 addListener(object:android.animation.AnimatorListenerAdapter(){override fun onAnimationEnd(animation:android.animation.Animator){
                     body.layoutParams=body.layoutParams.apply{this.height=-2};body.visibility=if(expanded)View.VISIBLE else View.GONE;body.alpha=1f;moving=false

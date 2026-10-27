@@ -295,7 +295,7 @@ class SessionVaultInstrumentation:Instrumentation() {
 
             finish(Activity.RESULT_OK,results)
 
-        }catch(error:Throwable){results.putString("shortMsg","Session verification failed: "+error.javaClass.simpleName+" / "+error.message?.take(240));finish(Activity.RESULT_CANCELED,results)}
+        }catch(error:Throwable){results.putString("stream",error.stackTraceToString());results.putString("shortMsg","Session verification failed: "+error.javaClass.simpleName+" / "+error.message?.take(240));finish(Activity.RESULT_CANCELED,results)}
 
         finally {targetContext.getSharedPreferences("audit-receipt-fixture",0).edit().clear().commit();prefs.edit().clear().commit();KeyStore.getInstance("AndroidKeyStore").apply{load(null);deleteEntry(alias)}}
 

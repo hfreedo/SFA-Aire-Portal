@@ -12,8 +12,8 @@ android {
         minSdk = 26
         targetSdk = 35
         testInstrumentationRunner = "org.sfa.aire.SessionVaultInstrumentation"
-        versionCode = 13
-        versionName = "0.7.4"
+        versionCode = 14
+        versionName = "0.8.0"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

@@ -96,7 +96,7 @@ class CloudActivity:Activity() {
         if(busy||demoMode)return;busy=true;status.text="Actualizando…"
         val ticket=requestScope.capture()
         io.execute{
-            try{val result=work();Api.flushReceipts(this);runOnUiThread{if(!isDestroyed&&requestScope.accepts(ticket)){if(result.generation!=SessionRepository(this).generation()){busy=false;verified=false;verifiedGeneration=null;showLogin();status.text="La sesión cambió. Verifique su acceso.";return@runOnUiThread};overview=result.data;verified=true;verifiedGeneration=result.generation;busy=false;applyOverview(result.data);status.text="App actualizada · "+java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date())}}}
+            try{val result=work();Api.flushReceipts(this);runOnUiThread{if(!isDestroyed&&requestScope.accepts(ticket)){if(result.generation!=SessionRepository(this).generation()){busy=false;verified=false;verifiedGeneration=null;showLogin();status.text="La sesión cambió. Verifique su acceso.";return@runOnUiThread};overview=result.data;verified=true;verifiedGeneration=result.generation;busy=false;applyOverview(result.data);status.text="Consulta actualizada · "+java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(java.util.Date())}}}
             catch(e:Exception){runOnUiThread{if(!isDestroyed&&requestScope.accepts(ticket)){verified=false;busy=false;status.text="Sin estado remoto verificable: ${e.message}";root.removeAllViews();freshnessUpdates.clear();dataUpdates.clear();renderedKey=null;val box=card();text(box,"No se pudo actualizar",23f,true);text(box,"Revise su conexión. Las acciones de atención permanecen bloqueadas hasta recuperar un estado verificable.");button(box,"Reintentar"){refresh()};secondary(box,"Volver al acceso"){showLogin()}}}}
         }
     }
@@ -128,7 +128,10 @@ class CloudActivity:Activity() {
         val roomId=p.getString("cloud_room","").orEmpty()
         val rooms=overview?.optJSONArray("classrooms")
         val roomName=if(demoMode)"Aula de ejemplo" else (0 until (rooms?.length()?:0)).map{rooms!!.getJSONObject(it)}.firstOrNull{it.optString("id")==roomId}?.optString("name")?:"Sin aula seleccionada"
-        SettingsScreen(ui).render(SettingsState(demoMode,p.getString("cloud_email","")!!,permitted,p.getBoolean("cloud_simulations",false),p.getBoolean("receipts_overflow",false),actions.notificationRegistered(roomId),roomName),
+        SettingsScreen(ui).render(SettingsState(demoMode,p.getString("cloud_email","")!!,permitted,p.getBoolean("cloud_simulations",false),p.getBoolean("receipts_overflow",false),actions.notificationRegistered(roomId),roomName,
+            p.getString("cloud_push_room",null)?.takeIf{actions.notificationRegistered(it)}?.let{bound->
+                (0 until (rooms?.length()?:0)).map{rooms!!.getJSONObject(it)}.firstOrNull{it.optString("id")==bound}?.optString("name")?:"otra aula"
+            }),
             {registerPush(it)},
             {startActivity(Intent(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(android.provider.Settings.EXTRA_APP_PACKAGE,packageName))},
             {refresh()},
@@ -152,6 +155,7 @@ class CloudActivity:Activity() {
         renderedKey=presentationKey(data)
         if(firstWorkspace)scroll.post{scroll.scrollTo(0,0)}
         if(page=="ajustes"){settings();return}
+        if(page=="incidentes"){text(root,"Avisos",22f,true);ui.space(height=8)}
         val rooms=data.getJSONArray("classrooms")
         if(rooms.length()==0){val box=card();text(box,"Todavía no hay aulas",23f,true);text(box,"Pida al responsable que vincule su cuenta. Puede revisar su sesión en Ajustes.");return}
         val p=Api.prefs(this);val list=(0 until rooms.length()).map{rooms.getJSONObject(it)}
@@ -159,19 +163,19 @@ class CloudActivity:Activity() {
         val roomId=selected.getString("id");if(!demoMode)p.edit().putString("cloud_room",roomId).apply()
         renderedKey=presentationKey(data)
         if(list.size>1&&!demoMode){
-            secondary(root,selected.getString("name")+"  ⌄"){
+            secondary(root,selected.getString("name")){
                 ui.choose("Selecciona un aula",list.map{it.getString("name")},list.indexOf(selected)){index->
                     if(!busy){p.edit().putString("cloud_room",list[index].getString("id")).apply();render(data);scroll.post{scroll.scrollTo(0,0)};ui.enter(root)}
                 }
             }.apply{textSize=18f;gravity=android.view.Gravity.START or android.view.Gravity.CENTER_VERTICAL;contentDescription="Seleccionar aula. "+selected.getString("name");ui.surface(this,Color.WHITE);background=android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(ui.sage),ui.shape(Color.WHITE,ui.sageStrong),ui.shape(Color.WHITE));setCompoundDrawablesWithIntrinsicBounds(null,null,org.sfa.aire.ui.AireIcon(this@CloudActivity,"chevron",ui.green,22),null);compoundDrawablePadding=ui.dp(10)}
-        } else text(root,selected.getString("name"),22f,true)
+        } else text(root,selected.getString("name"),if(page=="incidentes")16f else 22f,true)
         selected.optString("school").takeIf{it.isNotBlank()}?.let{text(root,it,14f).setPadding(0,0,0,ui.dp(10))}
         val all=data.getJSONArray("incidents");val incidents=(0 until all.length()).map{all.getJSONObject(it)}.filter{it.getString("classroom_id")==roomId}
         if(page=="aula"){
             ClassroomScreen(ui).render(data,roomId,incidents,freshnessUpdates,{goToPage("incidentes")},{refresh()},dataUpdates)
             return
         }
-        IncidentsScreen(ui,::closeNotice,verified&&verifiedGeneration==SessionRepository(this).generation(),::shareNotice).render(data,incidents)
+        IncidentsScreen(ui,::closeNotice,verified&&verifiedGeneration==SessionRepository(this).generation(),::shareNotice,::commentNotice).render(data,incidents)
     }
 
     private fun change(command:CareCommand) {
@@ -188,7 +192,8 @@ class CloudActivity:Activity() {
             }catch(e:Exception){runOnUiThread{if(!isDestroyed&&requestScope.accepts(ticket)){busy=false;dialogs.failure(e.message?:"Error de conexión")}}}
         }
     }
-    private fun closeNotice(item:JSONObject){
+    private fun closeNotice(item:JSONObject){change(CareCommands.attention(item,"resolver",""))}
+    private fun commentNotice(item:JSONObject){
         dialogs.note("Marcar aviso como atendido","Esto cierra el aviso, sin modificar la medición del sensor.",optional=true){change(CareCommands.attention(item,"resolver",it))}
     }
     private fun shareNotice(item:JSONObject){

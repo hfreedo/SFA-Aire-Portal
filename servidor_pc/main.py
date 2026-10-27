@@ -734,7 +734,7 @@ def create_app(data_dir=None, background=True):
 
             raise HTTPException(503, 'Construya la interfaz con npm run build en interfaz_web')
 
-        return FileResponse(dist / 'index.html')
+        return FileResponse(dist / 'index.html', headers={'Cache-Control': 'no-store'})
 
 
 
@@ -749,7 +749,7 @@ def create_app(data_dir=None, background=True):
 
             raise HTTPException(503, 'Reconstruya la interfaz para habilitar el portal remoto')
 
-        return FileResponse(dist / 'remoto.html')
+        return FileResponse(dist / 'remoto.html', headers={'Cache-Control': 'no-store'})
 
 
 

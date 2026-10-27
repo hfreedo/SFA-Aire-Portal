@@ -59,3 +59,31 @@
 @media(min-width:651px) and (max-width:1100px){.portal-theme .brand{font-size:22px;gap:8px;margin:0 4px 30px}.portal-theme .brand img{width:36px;height:40px}.portal-theme .brand small{font-size:9px;letter-spacing:1.2px}}
 .portal-theme .workspace-status .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
 @media(max-width:650px){.access-layout.portal-theme{margin:0;min-height:100dvh}.access-layout.portal-theme .access-form{padding:26px 24px}.access-layout.portal-theme .access-story{padding:24px}.portal-theme .workspace-status{padding:22px}.portal-theme .workspace-status .actions>button{width:100%}}
+
+/* Refinamiento de tareas: menos cabecera, estados separados y superficies estables. */
+.portal-theme .demo-banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;background:#edf2e8;border-color:#d9e3d1;color:#354e3a;font-size:14px;margin-bottom:16px}
+.portal-theme .demo-banner>b{font-size:12px;letter-spacing:.025em}
+.portal-theme .demo-banner>span{line-height:1.4}
+.portal-theme .attention-strip{border-left-width:1px;padding:16px;gap:14px}
+.portal-theme .sensor-tile{transition:border-color 160ms ease}
+.portal-theme .sensor-tile:hover{box-shadow:none;border-color:var(--border)}
+.portal-theme .incident-summary{margin-bottom:12px;color:var(--text-secondary);font-size:14px}
+.portal-theme .section-recovery{margin:16px 0;max-width:720px}
+.portal-theme .section-recovery h2{margin-top:0}
+.portal-theme .section-recovery p{max-width:65ch}
+.portal-theme .section-recovery .actions{margin:20px 0 12px}
+.portal-theme .section-recovery .muted{font-size:14px}
+@media(max-width:650px){
+ .portal-theme>aside{padding:12px 16px 8px}
+ .portal-theme .brand{margin-bottom:10px;font-size:21px}
+ .portal-theme .brand small{display:none}
+ .portal-theme>main{padding-top:18px}
+ .portal-theme header{gap:10px;padding-bottom:14px;margin-bottom:16px}
+ .portal-theme h1,.portal-theme .admin-toolbar h1{font-size:24px;letter-spacing:-.4px}
+ .portal-theme .demo-banner{gap:4px 10px;font-size:14px;padding:10px 12px}
+ .portal-theme .attention-strip{padding:12px;gap:10px}
+ .portal-theme .attention-strip p{font-size:14px}
+ .portal-theme .sensor-tile>small{font-size:14px}
+ .portal-theme .section-recovery .actions{display:grid;gap:8px}
+}
+@media(prefers-reduced-motion:reduce){.portal-theme .sensor-tile{transition:none}}

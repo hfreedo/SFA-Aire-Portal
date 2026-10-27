@@ -14,7 +14,7 @@ export default function IncidentsScreen({incidents,deliveries,online,busy,demo,i
   finally{setSharing(null)}
  }
  const visible=incidents.filter(i=>incidentInFilter(i,incidentFilter));
- return <section className="card"><div className="section-title"><h3>Avisos del aula</h3><span>{incidents.filter(i=>i.status!=='resuelto').length} pendientes</span></div>
+ return <section className="card"><div className="section-title incident-summary"><span>{incidents.filter(i=>i.status!=='resuelto').length} pendientes</span></div>
  <div className="filter-tabs" role="group" aria-label="Filtrar avisos">{[['abiertos','Pendientes'],['resueltos','Atendidos'],['todos','Todos']].map(([id,label])=><button key={id} aria-pressed={incidentFilter===id} className={incidentFilter===id?'selected':'secondary'} onClick={()=>onFilter(id)}>{label}</button>)}</div>
  <p className="note">Revise el aviso y márquelo como atendido. Compartir o comentar es opcional.</p>
  {feedback&&<p role="status">{feedback}</p>}

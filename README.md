@@ -11,7 +11,7 @@ panel de aulas y avisos push en Android.
 [![Uso educativo restringido](https://img.shields.io/badge/Uso-Educativo%20restringido-475569)](LICENCIA_DE_USO_RESTRINGIDO.md)
 
 [Windows portable](https://github.com/hfreedo/SFA-Aire-Portal/releases/latest) ·
-[Android 0.7.4](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.7.4) ·
+[Android 0.8.0](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/v0.8.0) ·
 [Abrir el portal](https://sfa-aire-aulas.web.app/remoto) ·
 [Guía de uso](docs/GUIA_PUBLICA.md)
 
@@ -55,13 +55,13 @@ conserva los límites preventivos de Supabase Free y Firebase Spark.
 **Windows 10/11 x64:** descarga el ZIP portable de [Releases](https://github.com/hfreedo/SFA-Aire-Portal/releases/latest),
 extrae la carpeta completa y abre **Panel SFA Aire.exe**. No requiere instalar
 Python ni Node.js. **Abrir SFA Aire** inicia el servidor; al salir se puede
-conservar el monitoreo o detenerlo. Windows 0.7.3 incluye Android piloto 0.7.2. Para medir: inicia sesión, selecciona el aula y abre
+conservar el monitoreo o detenerlo. Windows 0.8.0 incluye Android piloto 0.8.0. Para medir: inicia sesión, selecciona el aula y abre
 **Conexión Arduino**; la primera vinculación genera una credencial propia de esa PC.
 La demostración sin cuenta utiliza datos ficticios y no envía notificaciones.
 
-**Android 8 o posterior con Google Play Services:** instala la [APK piloto 0.7.4](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.7.4),
+**Android 8 o posterior con Google Play Services:** instala la [APK piloto 0.8.0](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/v0.8.0),
 entra con una cuenta invitada y registra las notificaciones desde **Ajustes**.
-La versión 0.7.4 unifica selectores, campos y diálogos, con un indicador de navegación animado.
+La versión 0.8.0 ordena las mediciones, simplifica los ajustes y permite marcar un aviso como atendido directamente; la nota es opcional.
 El alta de la cuenta no registra automáticamente el teléfono. Las invitaciones
 actuales se comparten mediante enlace privado o QR; no se envían correos automáticos.
 
@@ -74,7 +74,7 @@ Los datos nuevos se guardan en la carpeta de esa instalación. Consulta
 Prototipo escolar integrado. Los builds y las pruebas de lógica, permisos y
 empaquetado se documentan en [la guía](docs/GUIA_PUBLICA.md#validación).
 La comprobación física con sensores, el alta de otra persona y la prueba de
-la APK piloto 0.7.2 en el Samsung se mantienen como verificaciones separadas.
+la APK piloto 0.8.0 en el Samsung se mantienen como verificaciones separadas.
 
 ## Autoría y condiciones
 

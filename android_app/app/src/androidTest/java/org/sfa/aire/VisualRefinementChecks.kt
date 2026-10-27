@@ -22,6 +22,10 @@ class VisualRefinementChecks(private val instrumentation:Instrumentation){
   fun visit(n:AccessibilityNodeInfo){result.add(n);for(i in 0 until n.childCount)n.getChild(i)?.let{visit(it)}}
   instrumentation.uiAutomation.rootInActiveWindow?.let{visit(it)};return result
  }
+ private fun awaitText(description:String,predicate:(String)->Boolean){
+  repeat(30){if(nodes().any{predicate(it.text?.toString().orEmpty())})return;SystemClock.sleep(50)}
+  error("Visible text missing: $description")
+ }
  fun verify(){
   val monitor=instrumentation.addMonitor("org.sfa.aire.CloudActivity",null,false)
   instrumentation.targetContext.startActivity(Intent(instrumentation.targetContext,CloudActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK).putExtra("demo",true))
@@ -43,15 +47,15 @@ class VisualRefinementChecks(private val instrumentation:Instrumentation){
     check(layout.root.getChildAt(0)===first){"Telemetry rebuilt the screen"}
    }
    instrumentation.waitForIdleSync()
-   check(nodes().any{it.text?.toString()?.startsWith("29")==true})
+   awaitText("updated temperature 29"){it.startsWith("29")}
    instrumentation.runOnMainSync{
     overview.getJSONArray("snapshots").getJSONObject(0).put("sample_at",Instant.now().minusSeconds(57399).toString())
     update.invoke(activity,overview)
     check(layout.root.getChildAt(0)===first)
    }
    instrumentation.waitForIdleSync()
-   check(nodes().any{it.text?.toString()=="LECTURA VENCIDA"})
-   check(nodes().any{it.text?.toString()?.contains("15 horas")==true||it.text?.toString()?.contains("16 horas")==true})
+   awaitText("expired reading"){it=="LECTURA VENCIDA"}
+   awaitText("historical age"){it.contains("15 horas")||it.contains("16 horas")}
    capture("v073-vencida")
    var settingsRoot:LinearLayout?=null;var ui:AireUi?=null;var calls=0;var consent=false
    instrumentation.runOnMainSync{
@@ -75,6 +79,16 @@ class VisualRefinementChecks(private val instrumentation:Instrumentation){
    check(details.performAction(AccessibilityNodeInfo.ACTION_CLICK));SystemClock.sleep(250)
    instrumentation.waitForIdleSync();check(ui!!.disclosures["notification-details"]==true)
    capture("v073-detalles-registro-fixture")
+   instrumentation.runOnMainSync{
+    settingsRoot!!.removeAllViews()
+    SettingsScreen(ui!!).render(SettingsState(false,"docente@example.test",true,false,false,false,"Aula Norte","Aula Sur"),{calls++},{},{},{},{},{})
+   }
+   instrumentation.waitForIdleSync()
+   check(nodes().none{it.text?.toString()=="AVISOS ACTIVOS"}){"Another classroom was presented as registered"}
+   check(nodes().any{it.text?.toString()?.contains("registrado para Aula Sur")==true})
+   check(nodes().any{it.text?.toString()=="REGISTRO PENDIENTE"})
+   capture("v080-otra-aula-fixture")
+
   }finally{instrumentation.runOnMainSync{activity.finish()}}
  }
 }
