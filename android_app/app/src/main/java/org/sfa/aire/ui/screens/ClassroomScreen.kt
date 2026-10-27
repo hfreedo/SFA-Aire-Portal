@@ -18,12 +18,20 @@ class ClassroomScreen(private val ui:AireUi){
   val value=sample.optDouble(key,Double.NaN)
   return if(!value.isFinite())"—" else String.format(Locale.getDefault(),"%.$decimals"+"f",value)
  }
- private fun sensorTile(parent:LinearLayout,title:String,value:String,unit:String,kind:String,color:Int,detail:String){with(ui){
-  val tile=column().apply{background=shape(color);setPadding(dp(17),dp(18),dp(13),dp(18))}
-  parent.addView(tile,if(parent.orientation==LinearLayout.HORIZONTAL)LinearLayout.LayoutParams(0,-1,1f).apply{if(kind=="temperature")marginEnd=dp(12)} else LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})
-  tile.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,green,32));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(32),dp(32)).apply{bottomMargin=dp(12)})
-  text(tile,title,16f,true);text(tile,value,34f,true);text(tile,unit,15f,true);text(tile,detail,14f)
- }}
+ private data class SensorViews(val box:LinearLayout,val value:android.widget.TextView,val detail:android.widget.TextView)
+ private fun sensorTile(parent:LinearLayout,title:String,kind:String):SensorViews=with(ui){
+  val tile=column().apply{background=shape(sage);setPadding(dp(14),dp(12),dp(14),dp(12))}
+  parent.addView(tile,if(parent.orientation==LinearLayout.HORIZONTAL)LinearLayout.LayoutParams(0,-2,1f).apply{if(kind=="temperature")marginEnd=dp(10)} else LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(10)})
+  val label=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};tile.addView(label)
+  label.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,green,21));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(21),dp(21)).apply{marginEnd=dp(7)})
+  text(label,title,15f,true)
+  SensorViews(tile,text(tile,"—",28f,true),text(tile,"",14f))
+ }
+ private fun value(view:android.widget.TextView,number:String,unit:String){
+  val formatted=android.text.SpannableString("$number $unit")
+  formatted.setSpan(android.text.style.RelativeSizeSpan(.55f),number.length+1,formatted.length,0)
+  view.text=formatted
+ }
  private fun information(){with(ui){
   val content=column().apply{setPadding(dp(22),dp(12),dp(22),dp(20))}
   text(content,"Temperatura · DHT",20f,true)
@@ -38,36 +46,55 @@ class ClassroomScreen(private val ui:AireUi){
   text(content,"SIMULACIÓN identifica un ensayo. Una lectura vencida se conserva como histórica y no describe el ambiente actual. La atención de un aviso no modifica la medición.",14f)
   AlertDialog.Builder(activity).setTitle("Información de sensores").setView(ScrollView(activity).apply{addView(content)}).setPositiveButton("Entendido",null).show()
  }}
- fun render(data:JSONObject,roomId:String,incidents:List<JSONObject>,freshnessUpdates:MutableList<()->Unit>,onIncidents:()->Unit,onRefresh:()->Unit){with(ui){
+ fun render(data:JSONObject,roomId:String,incidents:List<JSONObject>,freshnessUpdates:MutableList<()->Unit>,onIncidents:()->Unit,onRefresh:()->Unit,dataUpdates:MutableList<(JSONObject)->Unit> = mutableListOf()){with(ui){
   val pending=incidents.count{it.optString("status")!="resuelto"}
   val snapshots=data.getJSONArray("snapshots");var count=0
   for(n in 0 until snapshots.length()){
-   val s=snapshots.getJSONObject(n);if(s.optString("classroom_id")!=roomId)continue;count++
-   val observation=ObservationState.from(s.optString("sample_at"),s.optString("state"));val sample=s.getJSONObject("observation")
+   val initial=snapshots.getJSONObject(n);if(initial.optString("classroom_id")!=roomId)continue;count++
+   var snapshot=initial
    val header=card()
-   val source=text(header,if(s.optString("source")=="simulacion")"SIMULACIÓN" else "ARDUINO · LECTURA REAL",14f,true)
-   source.setTextColor(if(s.optString("source")=="simulacion")Color.rgb(123,76,34) else green)
-   val stateText=text(header,observation.label,23f,true)
-   val historical=text(header,if(observation.fresh)"El ambiente de tu aula, a la vista." else "Valores históricos · Sin lectura actual",14f)
-   val ageText=text(header,observation.ageLabel,14f)
-   fun update(){
-    val current=ObservationState.from(s.optString("sample_at"),s.optString("state"));stateText.text=current.label;ageText.text=current.ageLabel
-    historical.text="Valores históricos · Sin lectura actual";historical.visibility=if(current.fresh)android.view.View.GONE else android.view.View.VISIBLE
-    header.background=shape(if(!current.fresh)Color.rgb(255,245,224) else if(current.state=="alerta")Color.rgb(255,238,226) else Color.WHITE)
-   }
-   update();freshnessUpdates.add{update()}
+   val tags=LinearLayout(activity);header.addView(tags)
+   val source=badge(tags,"")
+   val stale=badge(tags,"LECTURA VENCIDA",Color.rgb(255,237,199))
+   val stateText=text(header,"",21f,true)
+   val historical=text(header,"Última lectura · No describe el ambiente actual",14f)
+   val ageText=text(header,"",14f)
+   val exact=text(header,"",14f).apply{visibility=android.view.View.GONE}
+   ageText.minimumHeight=dp(40);ageText.isClickable=true;ageText.isFocusable=true
+   ageText.setOnClickListener{exact.visibility=if(exact.visibility==android.view.View.VISIBLE)android.view.View.GONE else android.view.View.VISIBLE}
    if(pending>0)secondary(header,"Revisar avisos ($pending)",onIncidents).apply{isEnabled=true;alpha=1f}
    val metrics=LinearLayout(activity).apply{orientation=if(activity.resources.configuration.fontScale>1.2f||activity.resources.configuration.screenWidthDp<340)LinearLayout.VERTICAL else LinearLayout.HORIZONTAL}
-   root.addView(metrics,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(14)})
-   val dht=sample.optBoolean("dht_ok")
-   sensorTile(metrics,"Temperatura",if(dht)number(sample,"temperature") else "—","°C","temperature",sage,if(dht)"Sensor DHT" else "DHT sin lectura")
-   sensorTile(metrics,"MQ135",number(sample,"mq_raw",0),"ADC","air",sageStrong,if(sample.isNull("ratio"))"Sin referencia" else number(sample,"ratio",2)+" × referencia")
+   root.addView(metrics,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})
+   val temperature=sensorTile(metrics,"Temperatura","temperature")
+   val mq=sensorTile(metrics,"MQ135","air")
    val humidity=card();val row=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};humidity.addView(row,LinearLayout.LayoutParams(-1,-2))
-   row.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,"humidity",green));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(28),dp(28)).apply{marginEnd=dp(12)})
-   val caption=column();row.addView(caption,LinearLayout.LayoutParams(0,-2,1f));text(caption,"Humedad",16f,true);text(caption,"Lectura del DHT",14f)
-   text(row,(if(dht)number(sample,"humidity",0) else "—")+" %",23f,true)
+   row.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,"humidity",green,22));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(24),dp(24)).apply{marginEnd=dp(10)})
+   text(row,"Humedad",16f,true).layoutParams=LinearLayout.LayoutParams(0,-2,1f)
+   val humidityValue=text(row,"—",21f,true)
+   fun update(){
+    val current=ObservationState.from(snapshot.optString("sample_at"),snapshot.optString("state"))
+    val sample=snapshot.getJSONObject("observation");val dht=sample.optBoolean("dht_ok")
+    source.text=if(snapshot.optString("source")=="simulacion")"SIMULACIÓN" else "ARDUINO · REAL"
+    stale.visibility=if(current.fresh)android.view.View.GONE else android.view.View.VISIBLE
+    stateText.text=current.label
+    historical.visibility=if(current.fresh)android.view.View.GONE else android.view.View.VISIBLE
+    ageText.text=current.ageLabel+"  ⓘ"
+    exact.text=try{java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM,java.text.DateFormat.SHORT).format(java.util.Date(java.time.Instant.parse(snapshot.getString("sample_at")).toEpochMilli()))}catch(_:Exception){"Fecha no verificable"}
+    ageText.contentDescription=current.ageLabel+". Mostrar fecha exacta de la lectura."
+    header.background=shape(if(!current.fresh)Color.rgb(255,246,226) else if(current.state=="alerta")Color.rgb(255,238,226) else Color.WHITE)
+    temperature.box.background=shape(if(current.fresh)sage else Color.rgb(233,236,229))
+    mq.box.background=shape(if(current.fresh)sageStrong else Color.rgb(233,236,229))
+    value(temperature.value,if(dht)number(sample,"temperature") else "—","°C")
+    temperature.detail.text=if(!dht)"DHT sin lectura" else if(current.fresh)"Sensor DHT" else "Última lectura · DHT"
+    value(mq.value,number(sample,"mq_raw",0),"ADC")
+    mq.detail.text=(if(current.fresh)"" else "Última lectura · ")+(if(sample.isNull("ratio"))"Sin referencia" else number(sample,"ratio",2)+" × referencia")
+    humidityValue.text=(if(dht)number(sample,"humidity",0) else "—")+" %"
+    temperature.value.setTextColor(if(current.fresh)ink else muted);mq.value.setTextColor(if(current.fresh)ink else muted);humidityValue.setTextColor(if(current.fresh)ink else muted)
+   }
+   update();freshnessUpdates.add{update()}
+   dataUpdates.add{newData->newData.optJSONArray("snapshots")?.optJSONObject(n)?.takeIf{it.optString("classroom_id")==roomId}?.let{snapshot=it;update()}}
   }
-  if(count==0){val box=card();text(box,"Esperando mediciones",22f,true);text(box,"La PC del aula todavía no sincronizó una lectura. Revisa la conexión Arduino en el portal.")}
+  if(count==0){val box=card();text(box,"Esperando mediciones",21f,true);text(box,"La PC del aula todavía no sincronizó una lectura. Revisa la conexión Arduino en el portal.")}
   if(pending==0){val notice=card();text(notice,"Sin avisos pendientes",16f,true)}
   val info=secondary(root,"Información de sensores"){information()};info.isEnabled=true;info.alpha=1f;info.setCompoundDrawablesWithIntrinsicBounds(AireIcon(activity,"info",green,20),null,null,null)
   secondary(root,"Actualizar aula",onRefresh)

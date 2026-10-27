@@ -15,26 +15,31 @@ class WorkspaceLayout(activity:Activity,isDemo:()->Boolean,private val isBusy:()
     init {with(ui){
         activity.window.statusBarColor=Color.WHITE;activity.window.navigationBarColor=Color.WHITE
         activity.window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-        root.setPadding(dp(16),dp(14),dp(16),dp(20))
+        root.setPadding(dp(16),dp(10),dp(16),dp(16))
         val outer=column().apply{setBackgroundColor(page)}
-        val brand=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;gravity=android.view.Gravity.CENTER_VERTICAL;setPadding(dp(20),dp(9),dp(20),dp(9));setBackgroundColor(page)}
-        brand.addView(ImageView(activity).apply{setImageResource(org.sfa.aire.R.drawable.sfa_aire);contentDescription="SFA Aire"},LinearLayout.LayoutParams(dp(36),dp(36)))
+        val brand=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;gravity=android.view.Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(6),dp(16),dp(4));setBackgroundColor(page)}
+        brand.addView(ImageView(activity).apply{setImageResource(org.sfa.aire.R.drawable.sfa_aire);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(28),dp(28)))
         val brandText=column().apply{setPadding(dp(12),0,0,0)}
-        text(brandText,"SFA Aire",20f,true)
+        text(brandText,"SFA Aire",18f,true)
         brand.addView(brandText);outer.addView(brand)
-        status=text(outer,if(isDemo())"DEMOSTRACIÓN · Sin envíos reales" else "Acceso por cuenta y aula",14f)
-        status.setPadding(dp(20),dp(7),dp(20),dp(7));status.setBackgroundColor(sage);status.accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE
-        scroll=ScrollView(activity).apply{addView(root);isFillViewport=true}
+        status=text(outer,if(isDemo())"Demostración · Sin envíos reales" else "Acceso por cuenta y aula",14f)
+        status.setPadding(dp(16),0,dp(16),dp(5));status.setBackgroundColor(page);status.accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE
+        scroll=ScrollView(activity).apply{addView(root);isFillViewport=true;isSmoothScrollingEnabled=true;clipToPadding=false}
         outer.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
-        nav=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;setPadding(dp(8),dp(8),dp(8),dp(8));setBackgroundColor(Color.WHITE)}
+        nav=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;setPadding(dp(8),dp(5),dp(8),dp(5));setBackgroundColor(Color.WHITE)}
         outer.addView(nav);activity.setContentView(outer)
         outer.setOnApplyWindowInsetsListener{v,insets->if(Build.VERSION.SDK_INT>=30){val bars=insets.getInsets(android.view.WindowInsets.Type.systemBars());v.setPadding(0,bars.top,0,bars.bottom)};insets}
     }}
     fun navigation(page:String,onNavigate:(String)->Unit){with(ui){
         nav.removeAllViews();nav.visibility=View.VISIBLE
         for((id,title) in listOf("aula" to "Mi aula","incidentes" to "Avisos","ajustes" to "Ajustes")){
-            val button=Button(activity).apply{text=title;isAllCaps=false;textSize=14f;typeface=android.graphics.Typeface.create("sans-serif-medium",0);setTextColor(green);background=shape(if(page==id)sage else Color.WHITE);stateListAnimator=null;elevation=0f;minHeight=dp(62);setPadding(dp(4),dp(7),dp(4),dp(7));compoundDrawablePadding=dp(3);setCompoundDrawablesWithIntrinsicBounds(null,AireIcon(activity,when(id){"aula"->"home";"incidentes"->"bell";else->"settings"},green,22),null,null);setOnClickListener{if(!isBusy())onNavigate(id)}}
-            nav.addView(button,LinearLayout.LayoutParams(0,-2,1f).apply{marginStart=dp(3);marginEnd=dp(3)})
+            val selected=page==id
+            val item=column().apply{gravity=android.view.Gravity.CENTER;minimumHeight=dp(58);isClickable=true;isFocusable=true;isSelected=selected;contentDescription=title;importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_YES}
+            val icon=ImageView(activity).apply{setImageDrawable(AireIcon(activity,when(id){"aula"->"home";"incidentes"->"bell";else->"settings"},green,21));setPadding(dp(16),dp(3),dp(16),dp(3));background=shape(if(selected)sage else Color.WHITE);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO}
+            item.addView(icon,LinearLayout.LayoutParams(dp(56),dp(29)))
+            item.addView(TextView(activity).apply{text=title;textSize=12f;setTextColor(green);typeface=android.graphics.Typeface.create(if(selected)"sans-serif-medium" else "sans-serif",0);gravity=android.view.Gravity.CENTER;importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(-1,-2))
+            item.setOnClickListener{if(!isBusy()&&!selected)onNavigate(id)}
+            nav.addView(item,LinearLayout.LayoutParams(0,-2,1f))
         }
     }}
 }

@@ -46,8 +46,9 @@ def main():
         if p.is_file():copy(p.relative_to(ROOT))
     copy('Branding/logo/sfa-aire-verde-transparente.png')
     copy('Branding/logo/sfa-aire.ico')
-    metadata=OUT/'ANDROID_ACTUAL.json'
-    if not metadata.is_file():metadata=ROOT/'docs/ANDROID_PILOTO_072.json'
+    # Este ZIP Windows está fijado a su entrega original. La APK vigente puede
+    # avanzar por separado sin cambiar silenciosamente el contenido de 0.7.3.
+    metadata=ROOT/'docs/ANDROID_PILOTO_072.json'
     release=json.loads(metadata.read_text());assert release['version']=='0.7.2'
     assert hashlib.sha256((OUT/release['file']).read_bytes()).hexdigest()==release['sha256']
     copy('Entregas/'+release['file']);copy(metadata.relative_to(ROOT),'Entregas/ANDROID_ACTUAL.json')

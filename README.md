@@ -10,7 +10,8 @@ panel de aulas y avisos push en Android.
 ![Cloud](https://img.shields.io/badge/Cloud-Supabase%20%2B%20FCM-167D5B)
 [![Uso educativo restringido](https://img.shields.io/badge/Uso-Educativo%20restringido-475569)](LICENCIA_DE_USO_RESTRINGIDO.md)
 
-[Descargar Windows y Android](https://github.com/hfreedo/SFA-Aire-Portal/releases/latest) ·
+[Windows portable](https://github.com/hfreedo/SFA-Aire-Portal/releases/latest) ·
+[Android 0.7.3](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.7.3) ·
 [Abrir el portal](https://sfa-aire-aulas.web.app/remoto) ·
 [Guía de uso](docs/GUIA_PUBLICA.md)
 
@@ -58,8 +59,9 @@ conservar el monitoreo o detenerlo. Windows 0.7.3 incluye Android piloto 0.7.2. 
 **Conexión Arduino**; la primera vinculación genera una credencial propia de esa PC.
 La demostración sin cuenta utiliza datos ficticios y no envía notificaciones.
 
-**Android 8 o posterior con Google Play Services:** instala la APK piloto publicada,
+**Android 8 o posterior con Google Play Services:** instala la [APK piloto 0.7.3](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.7.3),
 entra con una cuenta invitada y registra las notificaciones desde **Ajustes**.
+La versión 0.7.3 compacta el monitoreo, aclara las lecturas históricas y añade transiciones suaves.
 El alta de la cuenta no registra automáticamente el teléfono. Las invitaciones
 actuales se comparten mediante enlace privado o QR; no se envían correos automáticos.
 

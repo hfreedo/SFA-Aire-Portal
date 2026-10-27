@@ -30,7 +30,7 @@ class CareUiChecks(private val instrumentation:Instrumentation){
     error("Input not visible")
  }
  private fun write(index:Int,text:String){check(fields()[index].performAction(AccessibilityNodeInfo.ACTION_SET_TEXT,Bundle().apply{putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE,text)}));instrumentation.waitForIdleSync()}
- private fun click(label:String){val node=all().firstOrNull{it.text?.toString()?.equals(label,ignoreCase=true)==true&&it.isClickable}?:error("Button not visible: $label");check(node.performAction(AccessibilityNodeInfo.ACTION_CLICK));instrumentation.waitForIdleSync();SystemClock.sleep(150)}
+ private fun click(label:String){val node=all().firstOrNull{(it.text?.toString()?.equals(label,ignoreCase=true)==true||it.contentDescription?.toString()?.equals(label,ignoreCase=true)==true)&&it.isClickable}?:error("Button not visible: $label");check(node.performAction(AccessibilityNodeInfo.ACTION_CLICK));instrumentation.waitForIdleSync();SystemClock.sleep(150)}
  fun verify(){
     var activity:Activity?=null;var dialogs:CareDialogs?=null;var stage="launch"
     try{

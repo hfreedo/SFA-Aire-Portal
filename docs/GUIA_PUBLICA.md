@@ -7,7 +7,7 @@ Los archivos oficiales están en [Releases](https://github.com/hfreedo/SFA-Aire-
 | Archivo | Propósito |
 | --- | --- |
 | `SFA_Aire_Windows_0.7.3_portable_x64.zip` | Panel y receptor autónomos para Windows 10/11 x64. Extraer toda la carpeta. |
-| `SFA_Aire_0.7.2.apk` | App Android piloto, con Firebase configurado públicamente. |
+| [SFA_Aire_0.7.3.apk](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.7.3) | App Android piloto, actualización visual distribuida por separado. |
 | `SHA256SUMS.txt` | Verificar la integridad de las descargas. |
 
 No se necesita instalar Python o Node.js para usar el portable. La compilación
@@ -43,7 +43,8 @@ la sincronización utiliza una cola durable y guardas de consumo. Estar sin red 
 equivale a que el teléfono haya recibido un aviso.
 
 Windows y Android tienen versiones independientes: este portable 0.7.3 incluye
-la APK piloto 0.7.2. El nuevo panel utiliza el ícono oficial en el ejecutable y la ventana.
+la APK piloto 0.7.2. La actualización Android 0.7.3 se descarga por separado desde
+su release; el ZIP Windows ya publicado conserva su contenido original. El nuevo panel utiliza el ícono oficial en el ejecutable y la ventana.
 
 ## Maqueta
 
@@ -130,7 +131,7 @@ Para reproducir el portable desde estas fuentes:
 1. Crea `.venv` con Python 3.13 x64 e instala `servidor_pc/requirements.txt`
    y `herramientas/requirements-panel.txt` dentro de ese entorno.
 2. Construye `interfaz_web` con `npm ci` y `npm run build`.
-3. Descarga la APK del release en `Entregas/`. Su versión y hash se verifican
+3. Descarga la APK 0.7.2 del release Windows 0.7.3 en `Entregas/`. Su versión y hash se verifican
    con `docs/ANDROID_PILOTO_072.json`.
 4. Guarda la configuración **pública** del cliente en `config/public-config.json`
    con `url` y `publishable_key`. Se puede obtener de la configuración pública del

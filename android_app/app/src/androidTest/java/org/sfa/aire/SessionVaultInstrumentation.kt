@@ -281,8 +281,9 @@ class SessionVaultInstrumentation:Instrumentation() {
 
             EntryBoundaryChecks(this).verify()
             CareUiChecks(this).verify()
+            VisualRefinementChecks(this).verify()
 
-            results.putString("stream","PASS: Keystore roundtrip; no plaintext; tamper rejected; logout clears; stale refresh rejected; legacy migration removes plaintext; stale receipt and request rejected; logout preserves LAN receipts; native note validation/preservation/cancel and instruction validation passed. LAN encrypted roundtrip/migration/tamper/isolation/validation passed. Notification binding and stale publication/open/receipt rejected after account change. LAN generation keeps identical config, rejects stale requests/register/open/receipts after PC or key change, and discards unbound legacy receipts. Local v2 loopback handshake/register/receipt, rotated receiver rejection and HTTP409 queue continuation passed. Public launcher sanitized; internal component exports, internal PendingIntent and inactive LAN route checked. No cloud RPC.")
+            results.putString("stream","PASS: Keystore roundtrip; no plaintext; tamper rejected; logout clears; stale refresh rejected; legacy migration removes plaintext; stale receipt and request rejected; logout preserves LAN receipts; native note validation/preservation/cancel and instruction validation passed. LAN encrypted roundtrip/migration/tamper/isolation/validation passed. Notification binding and stale publication/open/receipt rejected after account change. LAN generation keeps identical config, rejects stale requests/register/open/receipts after PC or key change, and discards unbound legacy receipts. Local v2 loopback handshake/register/receipt, rotated receiver rejection and HTTP409 queue continuation passed. Public launcher sanitized; internal component exports, internal PendingIntent and inactive LAN route checked. Native telemetry updated without rebuilding views; stale label and historical values verified; registration preference requires explicit save; disclosures verified. No cloud RPC.")
 
             finish(Activity.RESULT_OK,results)
 
