@@ -19,7 +19,7 @@ Firebase Hosting sirve archivos estáticos y conexión pública Supabase. No con
 
 La adquisición USB/COM necesita el panel instalado en la PC del Arduino. El portal público muestra instrucciones y un enlace al panel local; nunca hace solicitudes `/api/workspace/local` al dominio público. El laboratorio mantiene autorización admin en RPC y sus límites vigentes.
 
-GitHub conserva una copia privada del código del portal y del backend cloud. No se usa GitHub Pages para el formulario de acceso. La APK y la instalación de la PC se mantienen en la carpeta de trabajo; no se publican claves, bases, registros ni capturas de personas.
+GitHub conserva una copia pública del código del portal y del backend cloud. No se usa GitHub Pages para el formulario de acceso. La APK y la instalación de la PC se mantienen en la carpeta de trabajo; no se publican claves, bases, registros ni capturas de personas.
 
 ## Seguridad y consumo
 
@@ -54,3 +54,9 @@ Comprobados: 96 pruebas Python; SQL de invitaciones y administración en Postgre
 Estas pruebas de aceptación usan Auth controlado; no equivalen a que una nueva persona haya completado el alta real. Pendiente un ensayo humano del enlace con una cuenta nueva y de Android 0.7.2 en el Samsung. No se generaron alertas ni envíos FCM reales para validar esta mejora.
 
 Referencias: https://firebase.google.com/docs/hosting/api-deploy · https://firebase.google.com/docs/hosting/usage-quotas-pricing · https://supabase.com/docs/reference/javascript/auth-admin-generatelink · https://supabase.com/docs/guides/auth/auth-smtp
+
+## Refinamiento del portal online
+
+Ayuda Arduino: enlace y aclaración separados en bloques con espacio vertical. Acceso con altura ajustada al contenido, sin mínimo de pantalla completa más márgenes en escritorio. Fallos de carga inicial: una tarjeta de recuperación sustituye los indicadores sin verificar; no se afirman cero aulas ni ausencia de avisos. Se conservan los datos previos cuando sí existía una consulta verificada. Revisión y capturas a 1440, 1280, 750, 390 y 320 píxeles.
+
+Repositorio cambiado a público por solicitud expresa. Se revisó todo su historial de archivos antes de cambiar visibilidad; la publicación del código no concede acceso a aulas ni a cuentas.

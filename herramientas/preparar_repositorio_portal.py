@@ -43,4 +43,4 @@ Las Edge Functions requieren secretos gestionados por Supabase; no están en Git
 Alcance, seguridad, correo y pruebas: [documentación](docs/PORTAL_PUBLICO_E_INVITACIONES.md).
 ''',encoding='utf-8')
 (out/'SOURCE_MANIFEST.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
-print('Exportación privada preparada:',len(files),'archivos fuente; sin datos ni credenciales.')
+print('Exportación de código preparada:',len(files),'archivos fuente; sin datos ni credenciales.')

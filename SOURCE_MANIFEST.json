@@ -37,7 +37,7 @@
   },
   {
     "path": "interfaz_web/src/portal-theme.css",
-    "sha256": "1104344ba4dcc53d04f3fdc9384dbd0f17cf90ea7497a3a5988877819bb8036f"
+    "sha256": "77b51a295bd0ffc3d661236efd82f36f2c35519768e89c9fb46d93eb0fb3e72e"
   },
   {
     "path": "interfaz_web/src/QuickNotificationTest.tsx",
@@ -45,7 +45,7 @@
   },
   {
     "path": "interfaz_web/src/RemoteWorkspace.tsx",
-    "sha256": "59019fc7b62da9b9d0bd3f9dee518ff5630d8845cba1ec16f4f6d7a97e923790"
+    "sha256": "7fb7ad36b0e01500f81f252d098df28526b0984d1cb98eee82c221169b8d8d58"
   },
   {
     "path": "interfaz_web/src/scroll-surfaces.css",
@@ -333,11 +333,11 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "0bd198a08a58cc61dc4cee802f669538b50251cdd704a07299bccc1e30379a50"
+    "sha256": "0658348392f2ce51b3f35453b50acb05f000710e2346d72bad5ca5c2f07e12a2"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
-    "sha256": "eb4974ea5f001e4b5d09243ed70d1fd92bc48e6893490d38850588e3eba20cb8"
+    "sha256": "78d36edf469635a7b7f270bce178398399a3d7966535daad1bbe57ea4e06dd0e"
   },
   {
     "path": "herramientas/sql-check/package.json",
