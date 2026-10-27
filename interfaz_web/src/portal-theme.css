@@ -55,5 +55,7 @@
 .portal-theme .workspace-status>p{max-width:58ch;line-height:1.65}
 .portal-theme .workspace-status-detail{padding:12px 15px;border-radius:10px;background:#f5eee3;color:#725437}
 .portal-theme .connection-detail{display:block;margin-top:7px;line-height:1.6}
+.portal-theme .brand>span{white-space:nowrap;min-width:0}.portal-theme .brand small{white-space:normal}
+@media(min-width:651px) and (max-width:1100px){.portal-theme .brand{font-size:22px;gap:8px;margin:0 4px 30px}.portal-theme .brand img{width:36px;height:40px}.portal-theme .brand small{font-size:9px;letter-spacing:1.2px}}
 .portal-theme .workspace-status .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
 @media(max-width:650px){.access-layout.portal-theme{margin:0;min-height:100dvh}.access-layout.portal-theme .access-form{padding:26px 24px}.access-layout.portal-theme .access-story{padding:24px}.portal-theme .workspace-status{padding:22px}.portal-theme .workspace-status .actions>button{width:100%}}
