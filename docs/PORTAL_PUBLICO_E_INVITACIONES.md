@@ -45,7 +45,7 @@ Este paso lee únicamente `secrets/supabase-public.json` y valida que la clave s
 
 `firebase deploy --only hosting --project sfa-aire-aulas` con una identidad autorizada. Como alternativa para la cuenta de servicio existente, `herramientas/publicar_firebase_hosting.py` sigue la API REST oficial. El CLI de esta PC fue rechazado por su comprobación de Service Usage; la API de Hosting sí autorizó el despliegue. No se ampliaron permisos IAM ni se habilitaron APIs adicionales.
 
-Supabase: migración `20261027015219_classroom_invitations.sql` y función `aire-invitations`; JWT obligatorio más verificación de usuario Auth y autorización RPC.
+Supabase: migración `20261027015219_classroom_invitations.sql` y función `aire-invitations`; JWT obligatorio en el cliente, validado explícitamente con Auth getUser y autorización admin en RPC. La comprobación JWT legada del gateway se deshabilita, como en aire-members, por las sesiones ES256 del proyecto; no se admiten solicitudes anónimas. Configuración reproducible en supabase/config.toml.
 
 ## Evidencia y límites
 

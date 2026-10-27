@@ -1,0 +1,12 @@
+project_id = "sfa-aire-aulas"
+
+# La validación JWT legada del gateway no admite las sesiones ES256 de este proyecto.
+# Cada función autentica explícitamente: Auth getUser + RPC admin, o secreto del emisor.
+[functions.aire-invitations]
+verify_jwt = false
+
+[functions.aire-members]
+verify_jwt = false
+
+[functions.aire-push]
+verify_jwt = false

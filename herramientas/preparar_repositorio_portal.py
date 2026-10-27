@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];out=ROOT/'publication/repository';out.m
 files=[]
 for directory in ['interfaz_web/src','supabase/migrations','supabase/functions']:
     files.extend(p for p in (ROOT/directory).rglob('*') if p.is_file() and p.suffix in {'.ts','.tsx','.css','.png','.sql','.json'})
-for name in ['interfaz_web/package.json','interfaz_web/package-lock.json','interfaz_web/tsconfig.json','interfaz_web/vite.config.ts','interfaz_web/index.html','interfaz_web/remoto.html','interfaz_web/portal.html','interfaz_web/.env.hosting','firebase.json','.firebaserc','herramientas/preparar_portal_publico.py','herramientas/publicar_firebase_hosting.py','herramientas/preparar_repositorio_portal.py','docs/PORTAL_PUBLICO_E_INVITACIONES.md','herramientas/sql-check/package.json','herramientas/sql-check/package-lock.json','herramientas/sql-check/cloud-fixture.mjs','herramientas/sql-check/invitations.test.mjs','herramientas/sql-check/invitations-edge.test.mjs']:
+for name in ['interfaz_web/package.json','interfaz_web/package-lock.json','interfaz_web/tsconfig.json','interfaz_web/vite.config.ts','interfaz_web/index.html','interfaz_web/remoto.html','interfaz_web/portal.html','interfaz_web/.env.hosting','firebase.json','.firebaserc','supabase/config.toml','herramientas/preparar_portal_publico.py','herramientas/publicar_firebase_hosting.py','herramientas/preparar_repositorio_portal.py','docs/PORTAL_PUBLICO_E_INVITACIONES.md','herramientas/sql-check/package.json','herramientas/sql-check/package-lock.json','herramientas/sql-check/cloud-fixture.mjs','herramientas/sql-check/invitations.test.mjs','herramientas/sql-check/invitations-edge.test.mjs']:
     files.append(ROOT/name)
 manifest=[]
 for file in files:

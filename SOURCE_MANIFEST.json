@@ -320,6 +320,10 @@
     "sha256": "233b3c88d3f05b0dc3593334d088bb400200de4099b488cfebcb4c01ce852e1e"
   },
   {
+    "path": "supabase/config.toml",
+    "sha256": "e8f1d911b90c931d3599fb309f4f0edffe4e011af20360f0ebe948c89f0c592d"
+  },
+  {
     "path": "herramientas/preparar_portal_publico.py",
     "sha256": "fee2d7389dafd1115b04e6ef59823a3862131578e1875400d69e7d1c0ef24fbd"
   },
@@ -329,11 +333,11 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "2297768b33b67679be2725d9f6146ee4f873d1e3f0aa34bd36b91e55b6783c56"
+    "sha256": "0bd198a08a58cc61dc4cee802f669538b50251cdd704a07299bccc1e30379a50"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
-    "sha256": "9fc72e6f0077db0d5475f86922f44f51072537a9772eb6e0a530c3847a048c57"
+    "sha256": "eb4974ea5f001e4b5d09243ed70d1fd92bc48e6893490d38850588e3eba20cb8"
   },
   {
     "path": "herramientas/sql-check/package.json",
