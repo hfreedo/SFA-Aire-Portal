@@ -7,7 +7,7 @@ Los archivos oficiales están en [Releases](https://github.com/hfreedo/SFA-Aire-
 | Archivo | Propósito |
 | --- | --- |
 | `SFA_Aire_Windows_0.7.3_portable_x64.zip` | Panel y receptor autónomos para Windows 10/11 x64. Extraer toda la carpeta. |
-| [SFA_Aire_0.7.3.apk](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.7.3) | App Android piloto, actualización visual distribuida por separado. |
+| [SFA_Aire_0.7.4.apk](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.7.4) | App Android piloto, actualización visual distribuida por separado. |
 | `SHA256SUMS.txt` | Verificar la integridad de las descargas. |
 
 No se necesita instalar Python o Node.js para usar el portable. La compilación
@@ -43,7 +43,7 @@ la sincronización utiliza una cola durable y guardas de consumo. Estar sin red 
 equivale a que el teléfono haya recibido un aviso.
 
 Windows y Android tienen versiones independientes: este portable 0.7.3 incluye
-la APK piloto 0.7.2. La actualización Android 0.7.3 se descarga por separado desde
+la APK piloto 0.7.2. La actualización Android 0.7.4 se descarga por separado desde
 su release; el ZIP Windows ya publicado conserva su contenido original. El nuevo panel utiliza el ícono oficial en el ejecutable y la ventana.
 
 ## Maqueta

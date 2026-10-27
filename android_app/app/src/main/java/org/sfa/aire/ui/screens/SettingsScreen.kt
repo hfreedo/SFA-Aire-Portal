@@ -11,7 +11,7 @@ class SettingsScreen(private val ui:AireUi){
   badge(box,when{state.demo->"EJEMPLO · SIN REGISTRO REAL";state.registered&&state.permitted->"AVISOS ACTIVOS";!state.permitted->"PERMISO ANDROID PENDIENTE";else->"REGISTRO PENDIENTE"},if(state.registered&&state.permitted)sage else Color.rgb(255,244,220))
   text(box,if(state.demo)"Aula de ejemplo" else state.room,16f,true)
   if(!state.demo)text(box,when{state.registered&&state.permitted->"Este teléfono tiene permiso y registro confirmado para el aula.";state.registered->"El registro está confirmado. Habilita el permiso de Android para recibir avisos.";else->"Registro pendiente para esta sesión y aula. Activa los avisos para completar la configuración."},14f)
-  val simulations=Switch(activity).apply{text="Incluir avisos de simulación";isChecked=state.simulations;textSize=16f;setTextColor(ink);isEnabled=!state.demo;minimumHeight=dp(48);setPadding(0,dp(7),0,dp(7));thumbTintList=android.content.res.ColorStateList.valueOf(green)};box.addView(simulations)
+  val simulations=Switch(activity).apply{text="Incluir avisos de simulación";isChecked=state.simulations;textSize=16f;setTextColor(ink);isEnabled=!state.demo;minimumHeight=dp(48);setPadding(0,dp(7),0,dp(7));styleSwitch(this)};box.addView(simulations)
   val explanation=text(box,"Las pruebas se identifican como SIMULACIÓN.",14f)
   val registration=if(state.registered)secondary(box,"Actualizar registro"){onRegister(simulations.isChecked)} else button(box,"Activar avisos en este teléfono"){onRegister(simulations.isChecked)}
   simulations.setOnCheckedChangeListener{_,checked->

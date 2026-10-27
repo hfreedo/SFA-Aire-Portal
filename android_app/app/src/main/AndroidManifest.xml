@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-  <application android:label="SFA Aire" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false" android:usesCleartextTraffic="false">
+  <application android:label="SFA Aire" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:theme="@style/AireTheme" android:allowBackup="false" android:usesCleartextTraffic="false">
     <activity android:name=".CloudActivity" android:exported="false" android:launchMode="singleTop"/>
     <activity android:name=".MainActivity" android:exported="false" android:launchMode="singleTop"/>
     <activity android:name=".LauncherActivity" android:exported="true" android:noHistory="true">

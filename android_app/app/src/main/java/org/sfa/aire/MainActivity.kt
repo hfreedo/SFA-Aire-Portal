@@ -80,11 +80,12 @@ class MainActivity : Activity() {
         displayedGeneration=LanConnectionRepository(this).generation()
         server = input("URL de la PC, ej. http://192.168.1.20:8766", savedServer)
         key = input("Clave de conexión de la PC", connection?.key.orEmpty()).apply { inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD }
-        simulations = CheckBox(this).apply { text = "Recibir push de SIMULACIÓN"; isChecked = Api.prefs(this@MainActivity).getBoolean("simulations", false) }; content.addView(simulations)
+        simulations = CheckBox(this).apply { text = "Recibir push de SIMULACIÓN";textSize=16f;setTextColor(ui.ink);minimumHeight=ui.dp(48); isChecked = Api.prefs(this@MainActivity).getBoolean("simulations", false) }; content.addView(simulations)
         button("Guardar y conectar") {
             val old = savedServer
             if (old != server.text.toString().trim().trimEnd('/') && Api.prefs(this).getString("fcm_token", null) != null) {
-                AlertDialog.Builder(this).setMessage("Antes de cambiar de PC, desvincule este teléfono en el panel anterior para que deje de recibir sus alertas.").setPositiveButton("Continuar") { _, _ -> if(save())refresh() }.setNegativeButton("Cancelar", null).show()
+                val dialog=ui.dialogBuilder("Cambiar conexión local").setMessage("Antes de cambiar de PC, desvincule este teléfono en el panel anterior para que deje de recibir sus alertas.").setPositiveButton("Continuar") { _, _ -> if(save())refresh() }.setNegativeButton("Cancelar", null).show()
+                ui.styleDialog(dialog)
             } else { if(save())refresh() }
         }
         text("Notificaciones push", 23f, true)

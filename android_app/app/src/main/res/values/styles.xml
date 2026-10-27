@@ -1,0 +1,19 @@
+<resources>
+    <style name="AireTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:colorAccent">#33523A</item>
+        <item name="android:colorControlActivated">#33523A</item>
+        <item name="android:colorControlNormal">#52665C</item>
+        <item name="android:colorButtonNormal">#DAE5D1</item>
+        <item name="android:textColorPrimary">#25372B</item>
+        <item name="android:textColorSecondary">#52665C</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#F5F7EF</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+    <style name="AireDialogMotion">
+        <item name="android:windowEnterAnimation">@anim/aire_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/aire_dialog_exit</item>
+    </style>
+</resources>

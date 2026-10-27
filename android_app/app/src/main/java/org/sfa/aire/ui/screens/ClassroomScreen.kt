@@ -44,7 +44,8 @@ class ClassroomScreen(private val ui:AireUi){
   text(content,"Sin un modelo y validación específicos, esta maqueta no convierte el MQ135 a esas unidades. Si falta referencia o acondicionamiento, la app lo señala.",14f)
   text(content,"Lecturas reales y simuladas",20f,true)
   text(content,"SIMULACIÓN identifica un ensayo. Una lectura vencida se conserva como histórica y no describe el ambiente actual. La atención de un aviso no modifica la medición.",14f)
-  AlertDialog.Builder(activity).setTitle("Información de sensores").setView(ScrollView(activity).apply{addView(content)}).setPositiveButton("Entendido",null).show()
+  val dialog=dialogBuilder("Información de sensores").setView(ScrollView(activity).apply{addView(content)}).setPositiveButton("Entendido",null).show()
+  styleDialog(dialog)
  }}
  fun render(data:JSONObject,roomId:String,incidents:List<JSONObject>,freshnessUpdates:MutableList<()->Unit>,onIncidents:()->Unit,onRefresh:()->Unit,dataUpdates:MutableList<(JSONObject)->Unit> = mutableListOf()){with(ui){
   val pending=incidents.count{it.optString("status")!="resuelto"}

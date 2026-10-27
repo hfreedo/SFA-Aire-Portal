@@ -56,6 +56,7 @@ class CloudActivity:Activity() {
     private val scrollPositions=mutableMapOf<String,Int>()
     private var renderedKey:String?=null
     private var animateAfterSave=false
+    private var navigating=false
     private val freshnessClock=object:Runnable{override fun run(){if(active){freshnessUpdates.toList().forEach{it()};handler.postDelayed(this,10000)}}}
     private val poll=object:Runnable{override fun run(){if(active&&!demoMode){refresh();handler.postDelayed(this,60000)}}}
     override fun onCreate(savedInstanceState:Bundle?) {
@@ -72,10 +73,14 @@ class CloudActivity:Activity() {
     private fun secondary(parent:LinearLayout,title:String,action:()->Unit)=ui.secondary(parent,title,action)
     private fun card(parent:LinearLayout=root,color:Int=Color.WHITE)=ui.card(parent,color)
     private fun goToPage(id:String){
-        if(id==page)return
-        scrollPositions[page]=scroll.scrollY;page=id
-        overview?.let{render(it)}
-        scroll.post{scroll.scrollTo(0,scrollPositions[id]?:0);ui.enter(root)}
+        if(id==page||navigating||busy)return
+        val tabs=listOf("aula","incidentes","ajustes")
+        val direction=if(tabs.indexOf(id)>tabs.indexOf(page))1 else -1
+        scrollPositions[page]=scroll.scrollY;navigating=true
+        layout.transition(direction,{
+            page=id;overview?.let{render(it)}
+            scroll.post{scroll.scrollTo(0,scrollPositions[id]?:0)}
+        },{navigating=false})
     }
     private fun navigation()=layout.navigation(page,{goToPage(it)})
     private fun invalidateUi(){requestScope.invalidate();verifiedGeneration=null;busy=false;dialogs.dismiss()}
@@ -155,11 +160,10 @@ class CloudActivity:Activity() {
         renderedKey=presentationKey(data)
         if(list.size>1&&!demoMode){
             secondary(root,selected.getString("name")+"  ⌄"){
-                android.app.AlertDialog.Builder(this).setTitle("Selecciona un aula").setSingleChoiceItems(list.map{it.getString("name")}.toTypedArray(),list.indexOf(selected)){dialog,index->
+                ui.choose("Selecciona un aula",list.map{it.getString("name")},list.indexOf(selected)){index->
                     if(!busy){p.edit().putString("cloud_room",list[index].getString("id")).apply();render(data);scroll.post{scroll.scrollTo(0,0)};ui.enter(root)}
-                    dialog.dismiss()
-                }.setNegativeButton("Cancelar",null).show()
-            }.apply{textSize=18f;gravity=android.view.Gravity.START or android.view.Gravity.CENTER_VERTICAL;contentDescription="Seleccionar aula. "+selected.getString("name");ui.surface(this,Color.WHITE)}
+                }
+            }.apply{textSize=18f;gravity=android.view.Gravity.START or android.view.Gravity.CENTER_VERTICAL;contentDescription="Seleccionar aula. "+selected.getString("name");ui.surface(this,Color.WHITE);background=android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(ui.sage),ui.shape(Color.WHITE,ui.sageStrong),ui.shape(Color.WHITE));setCompoundDrawablesWithIntrinsicBounds(null,null,org.sfa.aire.ui.AireIcon(this@CloudActivity,"chevron",ui.green,22),null);compoundDrawablePadding=ui.dp(10)}
         } else text(root,selected.getString("name"),22f,true)
         selected.optString("school").takeIf{it.isNotBlank()}?.let{text(root,it,14f).setPadding(0,0,0,ui.dp(10))}
         val all=data.getJSONArray("incidents");val incidents=(0 until all.length()).map{all.getJSONObject(it)}.filter{it.getString("classroom_id")==roomId}
@@ -230,6 +234,6 @@ class CloudActivity:Activity() {
     override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<out String>,results:IntArray){super.onRequestPermissionsResult(requestCode,permissions,results);if(requestCode==2){if(results.firstOrNull()==android.content.pm.PackageManager.PERMISSION_GRANTED)registerPush() else status.text="Permiso de notificaciones pendiente. Puede revisar las mediciones sin push."}}
     override fun onNewIntent(intent:Intent){super.onNewIntent(intent);handleOpen(intent);refresh()}
     override fun onResume(){super.onResume();active=true;handler.post(poll);handler.post(freshnessClock)}
-    override fun onPause(){active=false;handler.removeCallbacks(poll);handler.removeCallbacks(freshnessClock);super.onPause()}
+    override fun onPause(){active=false;handler.removeCallbacks(poll);handler.removeCallbacks(freshnessClock);layout.cancelTransition();navigating=false;super.onPause()}
     override fun onDestroy(){requestScope.invalidate();dialogs.dismiss();io.shutdown();super.onDestroy()}
 }

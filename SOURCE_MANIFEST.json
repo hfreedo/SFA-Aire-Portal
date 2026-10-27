@@ -1,5 +1,21 @@
 [
   {
+    "path": "herramientas/grabar_android_074.py",
+    "sha256": "5b575bad51da84eb19e83e332302543703667980c2753394289e3ae758a8b85b"
+  },
+  {
+    "path": "docs/ANDROID_074_CONTROLES_Y_MOVIMIENTO.md",
+    "sha256": "8ee5ab327653e43d5f04a98fea2c42380ced462f575e027a56c072521b3c6a4a"
+  },
+  {
+    "path": "docs/ANDROID_PILOTO_074.json",
+    "sha256": "51ceb8674c1ae50a4fe8e149ec1cf284a3a285201742d803728b4c1d6c1b9323"
+  },
+  {
+    "path": "herramientas/revisar_android_074.py",
+    "sha256": "6b1f8d240a51cdc86d995fc5d5e9438eec7c28b04686df87bc9c3fcf4f9bf1d3"
+  },
+  {
     "path": "docs/ANDROID_073_REFINAMIENTO.md",
     "sha256": "7768806c55890576a776451ab096da766eda05275150337a53f93456d0b18206"
   },
@@ -409,7 +425,7 @@
   },
   {
     "path": "android_app/app/src/main/AndroidManifest.xml",
-    "sha256": "3c40af4fc483763e6e34410cca3183c9b3d8cb2b211f2a3a99dd2ea5863e735e"
+    "sha256": "8ff3682e687cc161ec5e49bfd63f038008aa7524b85aeeab00216504d827ee1c"
   },
   {
     "path": "android_app/app/src/test/java/org/sfa/aire/CareCommandsTest.kt",
@@ -456,12 +472,24 @@
     "sha256": "cda82874d44ea5c03f37a9cd288d424585a0c621bbd5cc0c6b48336f5aa3d326"
   },
   {
+    "path": "android_app/app/src/main/res/anim/aire_dialog_enter.xml",
+    "sha256": "357a67d3581279b03bd9240ba93455d8648eee1d1fafb228859ae29bb8b15c4b"
+  },
+  {
+    "path": "android_app/app/src/main/res/anim/aire_dialog_exit.xml",
+    "sha256": "6a62516c7dd7bdc1a6d17381d7053319698b9510f254471d09eb7ba48bc7c416"
+  },
+  {
     "path": "android_app/app/src/main/res/drawable-nodpi/sfa_aire.png",
     "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75"
   },
   {
     "path": "android_app/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
     "sha256": "f200d0bca6b9c3dc62d428431a37b532df7ae507797e5d58e38bc91c79052cd2"
+  },
+  {
+    "path": "android_app/app/src/main/res/values/styles.xml",
+    "sha256": "5fd4707c1cdb68602ed602ebfe0c19f36ce7407f981ee40183948bf9cfe11d80"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/AireMessagingService.kt",
@@ -473,7 +501,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/CloudActivity.kt",
-    "sha256": "6e9008411d9e22d7bc2909ae2e7a58d7b6ab1cbb42e3edf300bb7980b5d707b0"
+    "sha256": "24c21f4c98b227659730b8931f27d0ec359b1ed09d2f628a385809cb080b7a63"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/CloudApi.kt",
@@ -485,7 +513,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/MainActivity.kt",
-    "sha256": "0d0c862bdc3722a4f7505508fa9cc5c6afa5d5c3e15222c6ea16706f43c9af0b"
+    "sha256": "0828a573bdab6924d75f72e4bcfb3326dbddf1f2a05a89a829e508a3664ba9f5"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/application/CareCommands.kt",
@@ -509,19 +537,19 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/AireIcon.kt",
-    "sha256": "eab45872c9bb1e4d49a70daf0e30f85db777ad946513dd15dc9251853aa1e151"
+    "sha256": "45edf9f4e46c0edefa31f5156cd20f992f60685f2fd07a002748cf48c2826bdf"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/AireUi.kt",
-    "sha256": "af84ee58657ea23d7073e68afc401fb1cfc5591fcbc6fa32c98b18126074d8bc"
+    "sha256": "17f0913c3ecd3dd1c42b7e35415a0f32a0536eef8a111e6c4852a42ed2649d22"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/CareDialogs.kt",
-    "sha256": "eade54cc1d8419f8021c5b08c94374beb24c4713096919bf41d8a06a872594fa"
+    "sha256": "3d4339f9d713e7334d04a82f6a5551c51dffa20fd901ca59e5111f66176f9994"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/WorkspaceLayout.kt",
-    "sha256": "2b5d6ab3dee1a60426081b542ef2100851915c6da150af6300f830b45846482e"
+    "sha256": "4fc8f0889bfed09cc11b3d1eb2d8e4f2219c3c9fb8957241c4d8783fee44860f"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/AccessScreen.kt",
@@ -529,7 +557,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/ClassroomScreen.kt",
-    "sha256": "c6b107317da1ca99b1c00874d3635f002d597127c153537625df7c9ba094bdae"
+    "sha256": "2336e85fcb7e15e73f518f58a839c1a4011887e051f7b4aafb48fa1895d2fa05"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/CoordinationScreen.kt",
@@ -541,7 +569,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/SettingsScreen.kt",
-    "sha256": "40b23de26fdd27ac60a8a3aa0f8b766320d4d17e2565043ab42ac3f135099ac8"
+    "sha256": "e9dd46709705550e3de0c60c8d4ec69138afa2cb72440230fc64ed58d4ba9b41"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/data/demo/DemoWorkspace.kt",
@@ -597,7 +625,11 @@
   },
   {
     "path": "android_app/app/src/androidTest/java/org/sfa/aire/SessionVaultInstrumentation.kt",
-    "sha256": "eb47f3981dbb9ca66ccde09ff690fb8c6c528930d9acab6c92b3e51c2c3e49f8"
+    "sha256": "1ad3b4dc57817d55b05582114251159aaf493bdb16f9cc278de7eea0dcd55c76"
+  },
+  {
+    "path": "android_app/app/src/androidTest/java/org/sfa/aire/StyleMotionChecks.kt",
+    "sha256": "a613aea21ce358ac46050fb14c381a416793b9530558f2b747760c391b25168b"
   },
   {
     "path": "android_app/app/src/androidTest/java/org/sfa/aire/VisualRefinementChecks.kt",
@@ -657,7 +689,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "2dbc43902f5bb09fcab7edc113644e8be5a2b2ae7f0aaf2594ee0f3aad8d9bac"
+    "sha256": "611425787e7a87e9dd57071d2cb0c263c4e11bfbeb6d48d737fd5f12478314e5"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
@@ -665,7 +697,7 @@
   },
   {
     "path": "docs/README_PUBLICO.md",
-    "sha256": "9db898c1212d9f28d7f2693b8c3028289a93985ad936769dd9f184883aad008f"
+    "sha256": "bc749e05ea756f2f5ff573001f00d4ac434d52fbdcc6640ae7ba024530432eb0"
   },
   {
     "path": "docs/capturas/panel-ejemplo.png",
@@ -673,7 +705,7 @@
   },
   {
     "path": "docs/GUIA_PUBLICA.md",
-    "sha256": "e293404484527341bceb87dcb621349f09478bf8e3ee207ffbcda4da8dedfce2"
+    "sha256": "61cbf54baa14c1c1142e5582b867f88540a2de69fa2b9e622c83fadb63476e8d"
   },
   {
     "path": "docs/ANDROID_PILOTO_072.json",
@@ -681,7 +713,7 @@
   },
   {
     "path": "docs/GUIA_USO.html",
-    "sha256": "2f6475784b986b4b317f14145daece1dc879d2cda90496fc16b08c5ee4430c09"
+    "sha256": "de52d8a5ae747248839e1210f9a38d2e8617472a9d5843e62e6b8a123a358656"
   },
   {
     "path": "docs/licenses/Tcl.txt",
@@ -737,7 +769,7 @@
   },
   {
     "path": "android_app/app/build.gradle.kts",
-    "sha256": "10a425047b4cd1b266dcc2ff85aa40ec8deea8bdfdf2255a4940dc6546d4b5f2"
+    "sha256": "b0f7cee57f411aebf6b7e3c50b73a4231b1bcb931ca65e08f86b9922772cfb36"
   },
   {
     "path": "android_app/settings.gradle.kts",

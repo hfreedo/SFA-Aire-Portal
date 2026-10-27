@@ -172,9 +172,16 @@ class SessionVaultInstrumentation:Instrumentation() {
 
     }
 
-    override fun onCreate(arguments:Bundle?){super.onCreate(arguments);start()}
+    private var styleOnly=false
+    override fun onCreate(arguments:Bundle?){styleOnly=arguments?.getString("suite")=="style";super.onCreate(arguments);start()}
 
     override fun onStart(){
+        if(styleOnly){
+            val result=Bundle()
+            try{StyleMotionChecks(this).verify();result.putString("stream","PASS: native selector and measured transition frames; no cloud calls");finish(Activity.RESULT_OK,result)}
+            catch(error:Throwable){result.putString("shortMsg","Style/motion check failed: "+error.message);finish(Activity.RESULT_CANCELED,result)}
+            return
+        }
 
         val name="audit-session-fixture"
 
@@ -282,6 +289,7 @@ class SessionVaultInstrumentation:Instrumentation() {
             EntryBoundaryChecks(this).verify()
             CareUiChecks(this).verify()
             VisualRefinementChecks(this).verify()
+            StyleMotionChecks(this).verify()
 
             results.putString("stream","PASS: Keystore roundtrip; no plaintext; tamper rejected; logout clears; stale refresh rejected; legacy migration removes plaintext; stale receipt and request rejected; logout preserves LAN receipts; native note validation/preservation/cancel and instruction validation passed. LAN encrypted roundtrip/migration/tamper/isolation/validation passed. Notification binding and stale publication/open/receipt rejected after account change. LAN generation keeps identical config, rejects stale requests/register/open/receipts after PC or key change, and discards unbound legacy receipts. Local v2 loopback handshake/register/receipt, rotated receiver rejection and HTTP409 queue continuation passed. Public launcher sanitized; internal component exports, internal PendingIntent and inactive LAN route checked. Native telemetry updated without rebuilding views; stale label and historical values verified; registration preference requires explicit save; disclosures verified. No cloud RPC.")
 

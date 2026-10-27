@@ -17,6 +17,8 @@ class AireIcon(context:Context,private val kind:String,color:Int,size:Int=26):Dr
   canvas.save();canvas.translate(bounds.left.toFloat(),bounds.top.toFloat());canvas.scale(bounds.width()/24f,bounds.height()/24f)
   fun path(vararg points:Float){val p=Path();p.moveTo(points[0],points[1]);for(i in 2 until points.size step 2)p.lineTo(points[i],points[i+1]);canvas.drawPath(p,pen)}
   when(kind){
+   "chevron"->path(7f,9f,12f,14f,17f,9f)
+   "check"->path(6f,12f,10f,16f,18f,8f)
    "temperature"->{val p=Path();p.moveTo(9f,14f);p.lineTo(9f,5f);p.cubicTo(9f,1f,15f,1f,15f,5f);p.lineTo(15f,14f);p.cubicTo(21f,20f,8f,25f,7f,18f);p.cubicTo(6.8f,16f,8f,14.5f,9f,14f);canvas.drawPath(p,pen);path(12f,8f,12f,17f);canvas.drawCircle(12f,18f,1.4f,pen);path(18f,6f,21f,6f);path(18f,10f,20f,10f)}
    "humidity"->{val p=Path();p.moveTo(12f,2.5f);p.cubicTo(9f,7f,5f,11f,5f,15f);p.cubicTo(5f,24f,19f,24f,19f,15f);p.cubicTo(19f,11f,15f,7f,12f,2.5f);canvas.drawPath(p,pen);canvas.drawArc(8f,12f,16f,20f,75f,90f,false,pen)}
    "air"->{path(3f,8f,15f,8f);canvas.drawArc(13f,3f,19f,9f,-150f,250f,false,pen);path(3f,12f,20f,12f);path(3f,16f,13f,16f);canvas.drawArc(11f,15f,17f,21f,-100f,260f,false,pen)}
