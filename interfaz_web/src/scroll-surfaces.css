@@ -1,0 +1,29 @@
+/* El marco conserva sus esquinas; el contenido es el que se desplaza. */
+html:has(.portal-theme){scrollbar-gutter:stable;background:#f6f7f1}
+html:has(.portal-theme dialog[open]){overflow:hidden}
+.portal-theme :is(.history-table,.select-options-scroll,.attention-dialog>form,textarea){overscroll-behavior:contain}
+.portal-theme .history-table{border:1px solid var(--border);border-radius:10px;padding-bottom:5px;background:#fff;isolation:isolate}
+.portal-theme .attention-dialog{padding:8px;overflow:hidden;max-height:calc(100dvh - 36px)}
+.portal-theme .attention-dialog>form{box-sizing:border-box;max-height:calc(100dvh - 54px);overflow:auto;margin:0;padding:18px;scrollbar-gutter:stable;border-radius:10px;scroll-padding-block:18px}
+.portal-theme .attention-dialog .dialog-actions{padding-bottom:2px}
+.select-root .select-native{visibility:hidden!important}
+.select-options{overflow:hidden;padding:6px;isolation:isolate}
+.select-options-scroll{display:block;position:relative;overflow:auto;overscroll-behavior:contain;border-radius:7px;scroll-padding-block:5px}
+.portal-theme>aside{overflow-y:auto;overscroll-behavior:contain}
+/* Firefox y motores que usan la API estándar. */
+@supports not selector(::-webkit-scrollbar){
+ html:has(.portal-theme),.portal-theme *,.select-options-scroll{scrollbar-width:thin;scrollbar-color:#92a385 transparent}
+}
+/* El margen de pista evita que el pulgar toque el arco de las esquinas. */
+@supports selector(::-webkit-scrollbar){
+ html:has(.portal-theme),.portal-theme *,.select-options-scroll{scrollbar-width:auto;scrollbar-color:auto}
+ html:has(.portal-theme)::-webkit-scrollbar,.portal-theme ::-webkit-scrollbar,.select-options-scroll::-webkit-scrollbar{width:10px;height:10px}
+ html:has(.portal-theme)::-webkit-scrollbar-track,.portal-theme ::-webkit-scrollbar-track,.select-options-scroll::-webkit-scrollbar-track{background:transparent;border-radius:999px;margin-block:8px}
+ html:has(.portal-theme)::-webkit-scrollbar-thumb,.portal-theme ::-webkit-scrollbar-thumb,.select-options-scroll::-webkit-scrollbar-thumb{background:#92a385;border:3px solid transparent;background-clip:padding-box;border-radius:999px;min-height:28px}
+ html:has(.portal-theme)::-webkit-scrollbar-thumb:hover,.portal-theme ::-webkit-scrollbar-thumb:hover,.select-options-scroll::-webkit-scrollbar-thumb:hover{background-color:#687f59}
+ html:has(.portal-theme)::-webkit-scrollbar-button,.portal-theme ::-webkit-scrollbar-button,.select-options-scroll::-webkit-scrollbar-button{display:none;width:0;height:0}
+ html:has(.portal-theme)::-webkit-scrollbar-corner,.portal-theme ::-webkit-scrollbar-corner,.select-options-scroll::-webkit-scrollbar-corner{background:transparent}
+ .portal-theme ::-webkit-scrollbar-track:horizontal{margin-inline:8px}
+}
+@media(max-width:650px){.portal-theme .attention-dialog{max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:6px}.portal-theme .attention-dialog>form{max-height:calc(100dvh - 38px);padding:15px;scroll-padding-block:15px}}
+@media(forced-colors:active){html:has(.portal-theme),.portal-theme *,.select-options-scroll{scrollbar-color:auto;forced-color-adjust:auto}}

@@ -1,0 +1,358 @@
+[
+  {
+    "path": "interfaz_web/src/AdminLab.tsx",
+    "sha256": "d632fe4dac76a52ab2a2a0af360f952063e469d9296bb5c5556397b4296c24ab"
+  },
+  {
+    "path": "interfaz_web/src/AttentionDialog.tsx",
+    "sha256": "a6c6bcc2b3585f4cdc6e0f7e9cfb6b969747b1f65a6521cc872aa9e840738f7a"
+  },
+  {
+    "path": "interfaz_web/src/cloud.css",
+    "sha256": "529fe369c6146d21eda908560d62ae2dca67efe90541abba1cd99e60e8c83c17"
+  },
+  {
+    "path": "interfaz_web/src/coordination.css",
+    "sha256": "afbc5813a9f5bc646a634270db9754c8d21c0420803acda1097f4674f8ee8855"
+  },
+  {
+    "path": "interfaz_web/src/Coordination.tsx",
+    "sha256": "1c7479dfb4878c3ab2ca782f19b06457ef635ebf32f30c79b38fc9957bfdc231"
+  },
+  {
+    "path": "interfaz_web/src/lab.css",
+    "sha256": "1546eb512db226972e87bf2ca7e011bdfdc46565f92c265758b0732d0f94ad07"
+  },
+  {
+    "path": "interfaz_web/src/main.tsx",
+    "sha256": "76adb1f4bf19b416d0f5eafd5aa638f8c396c2751bb6904bd5e8332ff1258171"
+  },
+  {
+    "path": "interfaz_web/src/NotificationBudget.tsx",
+    "sha256": "980a74362f92fa8636aa74838055da229169b7787808e0558e6643775b6a6945"
+  },
+  {
+    "path": "interfaz_web/src/portal-entry.tsx",
+    "sha256": "3bbb6ff7301a750e2abfe7a244af512c7e610bdc10dcb7f16626154802724d35"
+  },
+  {
+    "path": "interfaz_web/src/portal-theme.css",
+    "sha256": "1104344ba4dcc53d04f3fdc9384dbd0f17cf90ea7497a3a5988877819bb8036f"
+  },
+  {
+    "path": "interfaz_web/src/QuickNotificationTest.tsx",
+    "sha256": "eb4b70e0c18804b5b0267e4dec95f7cdba769cd165a167e0e1778d5db963fee7"
+  },
+  {
+    "path": "interfaz_web/src/RemoteWorkspace.tsx",
+    "sha256": "59019fc7b62da9b9d0bd3f9dee518ff5630d8845cba1ec16f4f6d7a97e923790"
+  },
+  {
+    "path": "interfaz_web/src/scroll-surfaces.css",
+    "sha256": "5908a47207555db56eb338bc82fde07e1783809dfc5a9c7983e6b9731507d517"
+  },
+  {
+    "path": "interfaz_web/src/style.css",
+    "sha256": "d036268766a1ab4a4fee66dc328d8db2a8133e3035b0816e39ffa21de7d70bf6"
+  },
+  {
+    "path": "interfaz_web/src/tokens.css",
+    "sha256": "cdfea1276c58b759862de146d7d8b116d0a1670f9b86e68b515c3e8932cbe2a3"
+  },
+  {
+    "path": "interfaz_web/src/vite-env.d.ts",
+    "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+  },
+  {
+    "path": "interfaz_web/src/assets/sfa-aire.png",
+    "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75"
+  },
+  {
+    "path": "interfaz_web/src/domain/administration.ts",
+    "sha256": "ddc3c9fa586f0f9516ab67221c762a942855b4ce3eeac4ecf8ac7d0e50b47e21"
+  },
+  {
+    "path": "interfaz_web/src/domain/models.ts",
+    "sha256": "888fd677a6404ce725f13ddcd9b5446ab04dae495ccee3f3ebe3c7a54803d415"
+  },
+  {
+    "path": "interfaz_web/src/domain/monitoring.ts",
+    "sha256": "b0b9b6c552e6fba6a5de3e19f0152fac5ee80bcfb202a5525946112e6fbe28d8"
+  },
+  {
+    "path": "interfaz_web/src/shared/MeasurementChart.tsx",
+    "sha256": "033a4febb01824979335e9231a2dfd43ca7677a37ac6d0d8d096596b2fbe22f7"
+  },
+  {
+    "path": "interfaz_web/src/shared/StyledSelect.tsx",
+    "sha256": "0afef629d4e7666dc2dc3a15c8a821e2f33ed5c696cc228526f75fb532c086b0"
+  },
+  {
+    "path": "interfaz_web/src/shared/dialogs/ReasonDialog.tsx",
+    "sha256": "9328ef719dbed02620330f6271f2b5c04b6c62f39b04672a54172513c2fdf8d7"
+  },
+  {
+    "path": "interfaz_web/src/shared/layout/WorkspaceSidebar.tsx",
+    "sha256": "9cb076753218617c0b4c9dbb7a8c87363b620cff275f9e08c7f61133c1461b8d"
+  },
+  {
+    "path": "interfaz_web/src/features/access/InvitationScreen.tsx",
+    "sha256": "ce7bf9d2ebb5eb33f3e16e14d0945d337474a43d226dd3a3b07db125b9c80921"
+  },
+  {
+    "path": "interfaz_web/src/features/access/LoginScreen.tsx",
+    "sha256": "e2977565a597369e151a032f003e5d45b86bf81fa655ba90d562badfa67d26ae"
+  },
+  {
+    "path": "interfaz_web/src/features/access/useInstitutionSession.ts",
+    "sha256": "94ff6c3c869ed4c77950480aa77ad9d35d1a1ca7a2f247920db5ef560d155b30"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/administration.css",
+    "sha256": "6bef4ad9e9d4bb1e1ddf9c01b06eed8ae10aa926ab6bcbba9049b0b704bf7621"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/AdministrationScreen.tsx",
+    "sha256": "3bed1e1cfd7f434dc61401e86657471071d80421ea5f5881a685f60971137089"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/ClassroomEditor.tsx",
+    "sha256": "55c4f1cb6577d599509c33bb8b38dd82c46f709db8841801b9577651cfefaa8c"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/ConfirmAccessRemoval.tsx",
+    "sha256": "57609b1040e79d31bbd8742933f06de1adcc260ec6fbb1953bf2678d642f967e"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/InvitationQr.tsx",
+    "sha256": "7fc08b8e209a5d12cb33fefdc1526ee3be229fa05dc7de9c75304c27b03a644d"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/InvitationsList.tsx",
+    "sha256": "4e9c061f0d02efc38286d6fc45d9e9c47760abeaf171588eaa74c880ceeb44d1"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/PersonEditor.tsx",
+    "sha256": "ef9ebb4b531f54edb0253e22dc8fc4ffbc024f093c6e513d88c20931a8683377"
+  },
+  {
+    "path": "interfaz_web/src/features/administration/useAdministrationCapabilities.ts",
+    "sha256": "bc0aea8d90803a606408f5f92ee9f4ab87dfa8f276ad6ebff6be3d0ab329f4b9"
+  },
+  {
+    "path": "interfaz_web/src/features/arduino/arduino.css",
+    "sha256": "2b99ce561e3f3a878f0fcc16ab0955cb78a716427e1a88a216ada38f4c7bf359"
+  },
+  {
+    "path": "interfaz_web/src/features/arduino/ArduinoScreen.tsx",
+    "sha256": "ca6b7fb203a1be2d798cc5b4fdc57f41c50841d8d28f4a6394f0af2873117e2b"
+  },
+  {
+    "path": "interfaz_web/src/features/history/HistoryScreen.tsx",
+    "sha256": "d6613447ebbcc8ec472c05f6d8bb0fd28bc9345448f1260199eb9de93602b38e"
+  },
+  {
+    "path": "interfaz_web/src/features/incidents/ArchiveIncidentDialog.tsx",
+    "sha256": "dbc281be6c7df56a1c0069ad1d31d2e785afd86368a5a3bcc3c980c28389a70e"
+  },
+  {
+    "path": "interfaz_web/src/features/incidents/IncidentsScreen.tsx",
+    "sha256": "049ccc121e98faada209afd3d5de0981fddc40bf72d419eb7b5abb549291855f"
+  },
+  {
+    "path": "interfaz_web/src/features/monitoring/ClassroomScreen.tsx",
+    "sha256": "5cc031032d6ca7cefede73fe5caa3ede180c59660874f68be3b6d9e93fb8ac08"
+  },
+  {
+    "path": "interfaz_web/src/data/cloud/client.ts",
+    "sha256": "5eae554bfbdca11ced4c174e87c6f9a4a68572aff79d748d26143f80d6125c42"
+  },
+  {
+    "path": "interfaz_web/src/data/cloud/publicConnection.ts",
+    "sha256": "7ea44c775c3d6a1b41afce91ad78d199ebc2245b97917e921c029e39aa2b6558"
+  },
+  {
+    "path": "interfaz_web/src/data/cloud/sessionPort.ts",
+    "sha256": "4a029280e772691ee42fa07ab43ac6094168d7d0be144d3d1c46aaf58f6c7f63"
+  },
+  {
+    "path": "interfaz_web/src/data/demo/overview.ts",
+    "sha256": "e6ecf978b3adbe156fef24c6fd84918e767d33faac69865cf203c1f939dc3266"
+  },
+  {
+    "path": "interfaz_web/src/application/session/CloudSession.ts",
+    "sha256": "62eeae721eb782139d9ee662a588cff69de693582ce36c64697d9be3e4a2ae03"
+  },
+  {
+    "path": "interfaz_web/src/application/workspace/ClassroomAdministration.ts",
+    "sha256": "f54c1bfd72e37a8acdf6e0dcf14421b69bd255b34297e44f55231da1bf0f9ffb"
+  },
+  {
+    "path": "interfaz_web/src/application/workspace/ResultScope.ts",
+    "sha256": "44daeb5b380281e7307a92fe13c960bdcd6231074516e93894c41a27a352ab8a"
+  },
+  {
+    "path": "supabase/migrations/202610240001_aire_cloud.sql",
+    "sha256": "75a47ea66d515e13400abb227e406acbad32aeb54970a9abbb2ef12e44f345f8"
+  },
+  {
+    "path": "supabase/migrations/202610240002_admin_lab_free.sql",
+    "sha256": "1b5a5e6fa87dd9bdcafef97ab0ea36228c7ce0166d5b68000ad34f5ff5c31614"
+  },
+  {
+    "path": "supabase/migrations/202610240003_coordination.sql",
+    "sha256": "31b2cd4fa60d6dc6b1a8ab7170d8cff6173621840ab48d6ab442e17d885bb8d3"
+  },
+  {
+    "path": "supabase/migrations/202610240004_notification_reserve.sql",
+    "sha256": "0bc2171f12fb3b3735283857721d757d8ab81545824c60c34e485761dde6fcfd"
+  },
+  {
+    "path": "supabase/migrations/20261025021517_cloud_push_worker.sql",
+    "sha256": "d96c3f8e00714c272610b34005c14d763fa4e2b768793bd0dd1e8c5ba884274f"
+  },
+  {
+    "path": "supabase/migrations/20261025021637_cloud_push_scheduler.sql",
+    "sha256": "63afb1cf20e442fd7c26afbf444aa7c27e7d87dd93bb3c4942f64451314ec877"
+  },
+  {
+    "path": "supabase/migrations/20261025195629_bind_push_to_session.sql",
+    "sha256": "27fe2c94d63106599c8b054949d4505c51607a04087492088cd4425a09928308"
+  },
+  {
+    "path": "supabase/migrations/20261025200720_harden_phone_lifecycle.sql",
+    "sha256": "97c9d2398016baf6976b7b987854cdea43633be42ce0fd8ef4b84e67867cf94f"
+  },
+  {
+    "path": "supabase/migrations/20261026000132_gateway_lifecycle_capabilities.sql",
+    "sha256": "d510f71e96896d70e0fb34603c8a042c82055739b12681a702ee33c9b843e9dd"
+  },
+  {
+    "path": "supabase/migrations/20261026091353_simplify_alert_attention.sql",
+    "sha256": "119070abf3472215fab0d878fbcdb5c18548ad2b44701b0aebcba84e73f6ec05"
+  },
+  {
+    "path": "supabase/migrations/20261026105915_classroom_administration.sql",
+    "sha256": "8ea354d98387a0ed0b770921111a95619f2394f82927498001da6ace4b9f2f0b"
+  },
+  {
+    "path": "supabase/migrations/20261026190925_preserve_alert_delivery.sql",
+    "sha256": "8da8464eab90f7e83dca03917ddfecf4a99376f47d0197716c03dbe5201e2316"
+  },
+  {
+    "path": "supabase/migrations/20261026205804_simple_cloud_notification_test.sql",
+    "sha256": "f4a4c40b2dd7ddf8a802640a944dd79793b7e0671d7ebc521d708e8d3d4e4a56"
+  },
+  {
+    "path": "supabase/migrations/20261026215456_automatic_pc_assignment.sql",
+    "sha256": "542a7e0fd7c0520f3f720111894a9a8b98dc15ce95522848d0540d7e2df9c3dd"
+  },
+  {
+    "path": "supabase/migrations/20261026220615_protect_active_pc_assignment.sql",
+    "sha256": "681f5f7c1321a64b46c1c41d5fa2ce0854a7b035b1769aa304d73a5df5f7051f"
+  },
+  {
+    "path": "supabase/migrations/20261027015219_classroom_invitations.sql",
+    "sha256": "da67f654b956b37c2405efd1fb108d8ac0b58e429e9397c4ca07065933970d67"
+  },
+  {
+    "path": "supabase/functions/aire-invitations/core.ts",
+    "sha256": "e385f4310008c21f971524b6aaaa764aada8955882e101db88044dfc3a882fc6"
+  },
+  {
+    "path": "supabase/functions/aire-invitations/index.ts",
+    "sha256": "71b6143569b8751f41c04d1937468a36999dae43bd1c328d1a4ace72af4c3a90"
+  },
+  {
+    "path": "supabase/functions/aire-members/core.ts",
+    "sha256": "815aeb2134a0a6d96d4b52e3fbf2c4f83db44511368caccf3da6b333d5daf9c8"
+  },
+  {
+    "path": "supabase/functions/aire-members/index.ts",
+    "sha256": "49a5aeea35bf887e32cb2f91500bbd71a54b9a916a9e84c982648392335afdec"
+  },
+  {
+    "path": "supabase/functions/aire-push/core.ts",
+    "sha256": "eff31ed535b805db28d9d2938bd897f6ff057145d6a36dedf68f04bebad21d77"
+  },
+  {
+    "path": "supabase/functions/aire-push/index.ts",
+    "sha256": "a97e3caefb432d3cf6c7799771e402198c4b8f352ce76f13c86086a398c60a75"
+  },
+  {
+    "path": "interfaz_web/package.json",
+    "sha256": "de74559ac9317d40b8eed705762dadd024d9b0003b1bd2a28484d24f6ec1aad7"
+  },
+  {
+    "path": "interfaz_web/package-lock.json",
+    "sha256": "47e10387d22efb733fd0cff89c800e83ed1ab0bf165d63f42718b7e51203ba89"
+  },
+  {
+    "path": "interfaz_web/tsconfig.json",
+    "sha256": "06066295fb67f2f67ce7bee93eaa98998d0e79890cec8291ca22770dbcf29799"
+  },
+  {
+    "path": "interfaz_web/vite.config.ts",
+    "sha256": "2d6a625e6e71fc579772f3623a4e88148f72e739d168eabf6c9d8ffa8442bf5f"
+  },
+  {
+    "path": "interfaz_web/index.html",
+    "sha256": "b6b91d19d71726cb0a192764d023fec0baf9de09e089597e06faaa1c8de7745f"
+  },
+  {
+    "path": "interfaz_web/remoto.html",
+    "sha256": "a44b7ed4f429d5e59c9d52a225d3711c935f9a10776d37985d750a134d88b0df"
+  },
+  {
+    "path": "interfaz_web/portal.html",
+    "sha256": "1991fc44df2a546f92599c5cf6e2161904040441839a804b6288881ba1df90b8"
+  },
+  {
+    "path": "interfaz_web/.env.hosting",
+    "sha256": "a5dbf0e453fbaf01d82cc985cbc865e0d633a4bfe07eacc68f93f120a366d65d"
+  },
+  {
+    "path": "firebase.json",
+    "sha256": "8c5888609ae999d21b55a1ed1750a7ceadafc7f0caf1c598cfba039c7e39baac"
+  },
+  {
+    "path": ".firebaserc",
+    "sha256": "233b3c88d3f05b0dc3593334d088bb400200de4099b488cfebcb4c01ce852e1e"
+  },
+  {
+    "path": "herramientas/preparar_portal_publico.py",
+    "sha256": "fee2d7389dafd1115b04e6ef59823a3862131578e1875400d69e7d1c0ef24fbd"
+  },
+  {
+    "path": "herramientas/publicar_firebase_hosting.py",
+    "sha256": "c6318788ad312f67088dd30fa2d642d6291bf08f7cb6a73f6025f87ad179a1b7"
+  },
+  {
+    "path": "herramientas/preparar_repositorio_portal.py",
+    "sha256": "aa288d393d7551be6ef7969bdf8429728fd788dbb2fc2d2c7926d8a9297086fd"
+  },
+  {
+    "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
+    "sha256": "9fc72e6f0077db0d5475f86922f44f51072537a9772eb6e0a530c3847a048c57"
+  },
+  {
+    "path": "herramientas/sql-check/package.json",
+    "sha256": "f6e301ebb427e0d618cce7ca135ca46827d578670b2853e8368b79759f9aab29"
+  },
+  {
+    "path": "herramientas/sql-check/package-lock.json",
+    "sha256": "6018597037b5c9bb0f7186b67952fd27507f1aa80df961cbcd08417b0d4b64a3"
+  },
+  {
+    "path": "herramientas/sql-check/cloud-fixture.mjs",
+    "sha256": "06bedd67cdd958bdaebdb337c6617952dece4b2f7ec3223c463922ad1f80920a"
+  },
+  {
+    "path": "herramientas/sql-check/invitations.test.mjs",
+    "sha256": "d7185facc46844d1e2aa180609d303ed83326bbb1c3b4589f1417ebddf88f0f8"
+  },
+  {
+    "path": "herramientas/sql-check/invitations-edge.test.mjs",
+    "sha256": "f013543b333098237825ca70c248178d15d45458b0be0ccb16c287817f4164cc"
+  }
+]

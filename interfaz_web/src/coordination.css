@@ -1,0 +1,173 @@
+.coord-intro {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coord-intro p {
+  max-width: 720px;
+}
+
+.coord-roles {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+}
+
+.coord-roles small,.coord-roles b {
+  display: block;
+  margin: 5px 0;
+}
+
+.coord-roles small {
+  color: #647367;
+}
+
+.coord-layout {
+  display: grid;
+  grid-template-columns: minmax(210px,1fr) minmax(0,2.5fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.coord-choice {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  margin: 12px 0;
+  white-space: normal;
+}
+
+.coord-choice.current {
+  border: 2px solid #42785e;
+  background: #eaf2e6;
+}
+
+.coord-choice span {
+  font-size: var(--font-caption);
+}
+
+.coord-instruction {
+  background: #edf3e8;
+  border-left: 4px solid #478063;
+  padding: 20px;
+  margin: 22px 0;
+  border-radius: var(--radius-control);
+}
+
+.coord-instruction.needs-help {
+  background: #fff1db;
+  border-color: #a76617;
+}
+
+.coord-instruction h3 {
+  font-size: 23px;
+  line-height: 1.35;
+}
+
+.coordination textarea {
+  font: inherit;
+  resize: vertical;
+  min-height: 85px;
+  padding: 12px;
+  border: 1px solid #bccdbf;
+  border-radius: var(--radius-control);
+  background: var(--surface-panel);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.coordination summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 14px 0;
+}
+
+.coordination form {
+  display: grid;
+  gap: 12px;
+}
+
+.coordination .actions {
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+.coord-compose,.coord-timeline {
+  margin: 18px 0;
+}
+
+.coord-timeline p {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.coord-task h2 {
+  font-size: 27px;
+}
+
+.coord-task .eyebrow {
+  font-size: var(--font-caption);
+}
+
+.notification-pools {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.notification-pools p {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notification-pools meter {
+  width: 100%;
+  height: 16px;
+}
+
+.notification-budget small {
+  color: #58675d;
+}
+
+.notification-budget {
+  margin: 18px 0;
+}
+
+@media (max-width:850px) {
+  .coord-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .coord-roles {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .coord-intro {
+    display: block;
+  }
+
+  .coord-intro button {
+    margin-bottom: 20px;
+  }
+
+  .coord-instruction h3 {
+    font-size: 21px;
+  }
+}
+
+@media (max-width:720px) {
+  .notification-pools {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .notification-pools p {
+    flex-wrap: wrap;
+  }
+}

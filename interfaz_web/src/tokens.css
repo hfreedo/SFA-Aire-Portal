@@ -1,0 +1,18 @@
+/* Valores compartidos por el receptor local y el portal remoto. */
+:root {
+  --font-ui: Arial, "Segoe UI", sans-serif;
+  --font-caption: 14px;
+  --surface-page: #f1f4f2;
+  --surface-panel: #fff;
+  --surface-selected: #e8f0e9;
+  --text-primary: #213e36;
+  --text-secondary: #455d53;
+  --accent: #215f50;
+  --border: #dce5dc;
+  --focus: #215f50;
+  --icon-muted: #718d7c;
+  --radius-control: 9px;
+  --radius-panel: 12px;
+  --control-size: 44px;
+  --sidebar-width: 224px;
+}

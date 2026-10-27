@@ -1,0 +1,10 @@
+export type Gateway={id:string;name:string;enabled:boolean;revision:number;last_seen_at:string|null;paired:boolean;revoked_at:string|null;revoked_by:string|null;revoked_reason:string|null};
+export type AdministrationCapabilities={classroom_id:string|null;can_create_classroom:boolean;can_manage_members:boolean;can_manage_gateways:boolean;create_reason:string|null;members_reason:string|null;gateway_limit:number;active_gateways:number;gateway_total:number;gateways:Gateway[]};
+export function administrationCapabilities(data:any,room:string|null):AdministrationCapabilities {
+ if(!data||data.classroom_id!==room||!['can_create_classroom','can_manage_members','can_manage_gateways'].every(key=>typeof data[key]==='boolean')||!['gateway_limit','active_gateways','gateway_total'].every(key=>Number.isInteger(data[key])&&data[key]>=0)||!Array.isArray(data.gateways)||data.gateways.length>50)throw Error('No se recibieron capacidades administrativas verificables. Actualice el portal y el servidor.');
+ const gateways=data.gateways.map((g:any)=>{
+  if(typeof g.id!=='string'||typeof g.name!=='string'||typeof g.enabled!=='boolean'||!Number.isInteger(g.revision)||g.revision<1||typeof g.paired!=='boolean')throw Error('El registro de receptores está incompleto. Actualice el estado.');
+  return {id:g.id,name:g.name,enabled:g.enabled,revision:g.revision,last_seen_at:typeof g.last_seen_at==='string'?g.last_seen_at:null,paired:g.paired,revoked_at:typeof g.revoked_at==='string'?g.revoked_at:null,revoked_by:typeof g.revoked_by==='string'?g.revoked_by:null,revoked_reason:typeof g.revoked_reason==='string'?g.revoked_reason:null};
+ });
+ return {classroom_id:room,can_create_classroom:data.can_create_classroom,can_manage_members:data.can_manage_members,can_manage_gateways:data.can_manage_gateways,create_reason:typeof data.create_reason==='string'?data.create_reason:null,members_reason:typeof data.members_reason==='string'?data.members_reason:null,gateway_limit:data.gateway_limit,active_gateways:data.active_gateways,gateway_total:data.gateway_total,gateways};
+}

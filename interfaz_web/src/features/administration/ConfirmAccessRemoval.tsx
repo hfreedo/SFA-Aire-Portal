@@ -1,0 +1,6 @@
+import {useEffect,useRef,useState} from 'react';
+export default function ConfirmAccessRemoval({email,onClose,onSave}:{email:string;onClose:()=>void;onSave:()=>Promise<void>}){
+ const ref=useRef<HTMLDialogElement>(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),alive=useRef(true);
+ useEffect(()=>{ref.current?.showModal();return()=>{alive.current=false;ref.current?.close()}},[]);
+ return <dialog ref={ref} className="attention-dialog" aria-labelledby="remove-access-title" onCancel={e=>{e.preventDefault();if(!busy)onClose()}}><h2 id="remove-access-title">Retirar acceso al aula</h2><p>{email}</p><p>Dejará de consultar esta aula y de recibir sus avisos. La cuenta y el historial se conservan.</p>{error&&<p role="alert" className="banner error">{error}</p>}<div className="dialog-actions"><button className="secondary" disabled={busy} onClick={onClose}>Cancelar</button><button disabled={busy} onClick={async()=>{if(busy)return;setBusy(true);try{await onSave();if(alive.current)onClose()}catch(e){if(alive.current)setError(e instanceof Error?e.message:String(e))}finally{if(alive.current)setBusy(false)}}}>{busy?'Guardando…':'Retirar acceso'}</button></div></dialog>
+}

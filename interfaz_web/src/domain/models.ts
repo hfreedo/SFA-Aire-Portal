@@ -1,0 +1,5 @@
+export type Classroom={id:string;name:string;school:string};
+export type CloudSnapshot={classroom_id:string;gateway_id:string;source:string;sample_at:string;state:string;observation:{mq_raw:number;temperature:number|null;humidity:number|null;ratio:number|null;dht_ok:boolean}};
+export type IncidentCapabilities={can_attend:boolean;can_resolve:boolean;can_archive:boolean;attend_reason:string|null;resolve_reason:string|null;archive_reason:string|null};
+export type CloudIncident={id:string;classroom_id:string;source:string;severity:string;status:string;opened_at:string;revision:number;note:string;historical:boolean;causes?:string[];coordinator_id?:string|null;push_omitted_operational?:number;push_omitted_laboratory?:number;capabilities?:IncidentCapabilities;closure_kind?:'administrativo'|'normalizacion'|'atendido'|null;closed_by?:string|null;closed_at?:string|null;closure_reason?:string|null};
+export type Overview={classrooms:Classroom[];memberships:{classroom_id:string;role:string}[];snapshots:CloudSnapshot[];incidents:CloudIncident[];deliveries:{id:string;incident_id:string;status:string}[]};
