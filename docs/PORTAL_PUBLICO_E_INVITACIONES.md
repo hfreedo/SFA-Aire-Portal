@@ -19,7 +19,7 @@ Firebase Hosting sirve archivos estáticos y conexión pública Supabase. No con
 
 La adquisición USB/COM necesita el panel instalado en la PC del Arduino. El portal público muestra instrucciones y un enlace al panel local; nunca hace solicitudes `/api/workspace/local` al dominio público. El laboratorio mantiene autorización admin en RPC y sus límites vigentes.
 
-GitHub conserva una copia pública del código del portal y del backend cloud. No se usa GitHub Pages para el formulario de acceso. La APK y la instalación de la PC se mantienen en la carpeta de trabajo; no se publican claves, bases, registros ni capturas de personas.
+GitHub conserva una copia pública del código del portal y del backend cloud. No se usa GitHub Pages para el formulario de acceso. Las fuentes del receptor PC y del firmware acompañan al portal. La APK y el portable Windows se distribuyen como archivos de Releases; no se publican claves, bases, registros ni capturas de personas.
 
 ## Seguridad y consumo
 

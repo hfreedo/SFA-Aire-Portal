@@ -1,0 +1,92 @@
+{
+  "classrooms": [
+    {
+      "id": "demo-aula-01",
+      "name": "Aula 01 · Robótica",
+      "school": "Escuela de ejemplo"
+    }
+  ],
+  "memberships": [
+    {
+      "classroom_id": "demo-aula-01",
+      "role": "admin"
+    }
+  ],
+  "snapshots": [
+    {
+      "classroom_id": "demo-aula-01",
+      "gateway_id": "demo-pc",
+      "source": "simulacion",
+      "sample_at": "2026-10-25T00:00:00Z",
+      "state": "alerta",
+      "observation": {
+        "mq_raw": 560,
+        "ratio": 1.87,
+        "temperature": 38,
+        "humidity": 55,
+        "dht_ok": true
+      }
+    }
+  ],
+  "incidents": [
+    {
+      "id": "demo-incidente",
+      "classroom_id": "demo-aula-01",
+      "source": "simulacion",
+      "severity": "alerta",
+      "status": "pendiente",
+      "revision": 1,
+      "note": "Ensayo ilustrativo. Sin mediciones físicas ni envíos.",
+      "causes": [
+        "temperatura",
+        "mq135"
+      ],
+      "coordinator_id": "demo-direccion",
+      "lab_run_id": "demo-prueba"
+    }
+  ],
+  "deliveries": [],
+  "coordination": {
+    "user_id": "demo-direccion",
+    "duty": {
+      "coordinator": "demo-direccion",
+      "teacher": "demo-docente",
+      "deputy": null
+    },
+    "people": [
+      {
+        "id": "demo-direccion",
+        "label": "Dirección · Ejemplo",
+        "role": "admin"
+      },
+      {
+        "id": "demo-docente",
+        "label": "Docente · Ejemplo",
+        "role": "docente"
+      }
+    ],
+    "instructions": [
+      {
+        "id": "demo-indicacion",
+        "incident_id": "demo-incidente",
+        "recipient": "demo-docente",
+        "status": "confirmada",
+        "action": "Verificar ventilación del aula y comunicar el resultado.",
+        "reason": "Variación sostenida durante una prueba de demostración.",
+        "version": 1,
+        "revision": 1,
+        "expires_at": "2026-10-25T12:00:00Z",
+        "response": "Entendido. Revisaré el aula."
+      }
+    ],
+    "events": [
+      {
+        "id": "demo-evento",
+        "incident_id": "demo-incidente",
+        "kind": "confirmada",
+        "notification_state": "ejemplo_sin_envio",
+        "note": "Comprensión ilustrativa; no corresponde a una persona real."
+      }
+    ]
+  }
+}
