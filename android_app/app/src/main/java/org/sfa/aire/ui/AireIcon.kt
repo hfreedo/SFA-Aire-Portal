@@ -24,6 +24,11 @@ class AireIcon(context:Context,private val kind:String,color:Int,size:Int=26):Dr
    "air"->{path(3f,8f,15f,8f);canvas.drawArc(13f,3f,19f,9f,-150f,250f,false,pen);path(3f,12f,20f,12f);path(3f,16f,13f,16f);canvas.drawArc(11f,15f,17f,21f,-100f,260f,false,pen)}
    "home"->{path(3f,11f,12f,3f,21f,11f);path(5f,10f,5f,21f,19f,21f,19f,10f);path(10f,21f,10f,15f,14f,15f,14f,21f)}
    "bell"->{val p=Path();p.moveTo(5f,17f);p.lineTo(7f,14f);p.lineTo(7f,9f);p.cubicTo(7f,2f,17f,2f,17f,9f);p.lineTo(17f,14f);p.lineTo(19f,17f);p.close();canvas.drawPath(p,pen);canvas.drawArc(9f,17f,15f,23f,20f,140f,false,pen)}
+   "account"->{canvas.drawCircle(12f,7f,3.5f,pen);canvas.drawArc(4f,12f,20f,25f,185f,170f,false,pen)}
+   "share"->{canvas.drawCircle(6f,12f,2.5f,pen);canvas.drawCircle(18f,5f,2.5f,pen);canvas.drawCircle(18f,19f,2.5f,pen);path(8f,11f,16f,6f);path(8f,13f,16f,18f)}
+   "note"->{path(14f,3f,4f,3f,4f,21f,20f,21f,20f,11f);path(10f,14f,11f,10f,18f,3f,21f,6f,14f,13f,10f,14f)}
+   "refresh"->{canvas.drawArc(4f,4f,20f,20f,45f,290f,false,pen);path(20f,4f,20f,10f,14f,10f)}
+   "logout"->{path(10f,3f,4f,3f,4f,21f,10f,21f);path(10f,12f,21f,12f);path(17f,8f,21f,12f,17f,16f)}
    "settings"->{for((y,x) in listOf(6f to 9f,12f to 16f,18f to 7f)){path(3f,y,x-3f,y);path(x+3f,y,21f,y);canvas.drawCircle(x,y,2.4f,pen)}}
    else->{canvas.drawCircle(12f,12f,9f,pen);path(12f,11f,12f,17f);canvas.drawPoint(12f,7f,pen)}
   }

@@ -22,13 +22,13 @@ class WorkspaceLayout(activity:Activity,isDemo:()->Boolean,private val isBusy:()
         activity.window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         root.setPadding(dp(16),dp(16),dp(16),dp(16))
         val outer=column().apply{setBackgroundColor(page)}
-        val brand=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;gravity=android.view.Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(10),dp(16),dp(4));setBackgroundColor(page)}
+        val brand=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;gravity=android.view.Gravity.CENTER_VERTICAL;setPadding(dp(16),dp(10),dp(16),dp(4));setBackgroundColor(Color.WHITE)}
         brand.addView(ImageView(activity).apply{setImageResource(org.sfa.aire.R.drawable.sfa_aire);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(28),dp(28)))
         val brandText=column().apply{setPadding(dp(12),0,0,0)}
         text(brandText,"SFA Aire",18f,true)
         brand.addView(brandText);outer.addView(brand)
         status=text(outer,if(isDemo())"Demostración · Sin envíos reales" else "Acceso por cuenta y aula",14f)
-        status.setPadding(dp(16),0,dp(16),dp(5));status.setBackgroundColor(page);status.accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE
+        status.setPadding(dp(16),0,dp(16),dp(5));status.setBackgroundColor(Color.WHITE);status.accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE
         scroll=ScrollView(activity).apply{addView(root);isFillViewport=true;isSmoothScrollingEnabled=true;clipToPadding=false}
         outer.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
         nav=FrameLayout(activity).apply{setPadding(dp(8),dp(5),dp(8),dp(5));setBackgroundColor(Color.WHITE)}
@@ -75,7 +75,12 @@ class WorkspaceLayout(activity:Activity,isDemo:()->Boolean,private val isBusy:()
             nav.addOnLayoutChangeListener{_,left,_,right,_,oldLeft,_,oldRight,_->if(right-left!=oldRight-oldLeft||!indicatorPositioned)positionIndicator(false)}
         }
         val changed=selectedTab!=page;selectedTab=page
-        for((id,pair) in tabViews){pair.first.isSelected=id==page;pair.second.typeface=android.graphics.Typeface.create(if(id==page)"sans-serif-medium" else "sans-serif",0)}
+        for((id,pair) in tabViews){
+            val color=if(id==page)green else muted
+            pair.first.isSelected=id==page;pair.second.setTextColor(color)
+            pair.second.typeface=android.graphics.Typeface.create(if(id==page)"sans-serif-medium" else "sans-serif",0)
+            (pair.first.getChildAt(0) as ImageView).setImageDrawable(AireIcon(activity,when(id){"aula"->"home";"incidentes"->"bell";else->"settings"},color,21))
+        }
         if(changed){
             nav.viewTreeObserver.addOnPreDrawListener(object:android.view.ViewTreeObserver.OnPreDrawListener{
                 override fun onPreDraw():Boolean {

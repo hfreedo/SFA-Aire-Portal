@@ -96,13 +96,16 @@ class CareUiChecks(private val instrumentation:Instrumentation){
         stage="direct attendance without compulsory dialog"
         var attended=0;var commented=0
         instrumentation.runOnMainSync{
-            val root=LinearLayout(current).apply{orientation=LinearLayout.VERTICAL;setPadding(24,24,24,24)}
-            current.setContentView(android.widget.ScrollView(current).apply{addView(root)})
+            val shell=org.sfa.aire.ui.WorkspaceLayout(current,{false},{false})
+            shell.status.text="PRUEBA VISUAL · Sin conexión cloud"
+            shell.navigation("incidentes"){}
+            val root=shell.root
+            shell.ui.text(root,"Avisos",22f,true);shell.ui.text(root,"Aula de ejemplo",16f,true);shell.ui.space(root,12)
             val data=DemoWorkspace.load(current)
             val item=data.getJSONArray("incidents").getJSONObject(0).put("capabilities",JSONObject().put("can_resolve",true))
             IncidentsScreen(AireUi(current,root,{false},{false}),{attended++},true,{}, {commented++}).render(data,listOf(item))
         }
-        instrumentation.waitForIdleSync();click("Marcar atendido")
+        instrumentation.waitForIdleSync();capture("v081-avisos-habilitados-fixture");click("Marcar atendido")
         check(attended==1&&commented==0)
         check(all().none{it.className=="android.widget.EditText"}){"Attendance required a note"}
         click("Atender con nota");check(commented==1&&attended==1)

@@ -6,20 +6,20 @@ import org.sfa.aire.ui.AireUi
 
 /** Atención directa; compartir y consultar entregas son acciones independientes. */
 class IncidentsScreen(private val ui:AireUi,private val close:(JSONObject)->Unit,private val allowed:Boolean,private val share:(JSONObject)->Unit,private val comment:((JSONObject)->Unit)?=null){
-    private fun date(raw:String):String=try{java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.SHORT,java.text.DateFormat.SHORT).format(java.util.Date(java.time.Instant.parse(raw).toEpochMilli()))}catch(_:Exception){"Sin fecha verificable"}
+    private fun date(raw:String):String=try{java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.SHORT,java.text.DateFormat.SHORT,ui.locale).format(java.util.Date(java.time.Instant.parse(raw).toEpochMilli()))}catch(_:Exception){"Sin fecha verificable"}
     fun render(data:JSONObject,incidents:List<JSONObject>){with(ui){
                 val pending=incidents.count{it.optString("status")!="resuelto"}
         text(root,if(pending==0)"Sin avisos pendientes" else "$pending ${if(pending==1)"aviso pendiente" else "avisos pendientes"}",14f)
         if(incidents.isEmpty()){val box=card();text(box,"Todo al día",20f,true);text(box,"Los nuevos avisos de esta aula aparecerán aquí.",16f)}
         for(item in incidents.sortedBy{it.optString("status")=="resuelto"}){
             val closed=item.optString("status")=="resuelto"
-            val box=card(color=if(closed)Color.WHITE else Color.rgb(255,242,221))
+            val box=card()
             val tags=LinearLayout(activity);box.addView(tags)
-            badge(tags,if(item.optString("source")=="simulacion")"SIMULACIÓN" else "ARDUINO",if(closed)sage else Color.rgb(255,228,181))
-            badge(tags,if(closed)"ATENDIDO" else "PENDIENTE",if(closed)Color.rgb(233,237,230) else Color.rgb(255,228,181))
+            val simulated=item.optString("source")=="simulacion"
+            val alert=item.optString("severity")=="alerta"
+            badge(tags,if(simulated)"SIMULACIÓN" else "ARDUINO",if(simulated)simulationSurface else sage,if(simulated)simulationInk else green)
+            badge(tags,if(closed)"ATENDIDO" else if(alert)"ALERTA · PENDIENTE" else "AVISO · PENDIENTE",if(closed)neutralSurface else if(alert)alertSurface else warningSurface,if(closed)muted else if(alert)alertInk else warningInk)
             text(box,if(closed)"Aviso atendido" else if(item.optString("severity")=="alerta")"Revisar ambiente" else "Variación sostenida",20f,true)
-            val rooms=data.optJSONArray("classrooms")
-            val room=(0 until (rooms?.length()?:0)).map{rooms!!.getJSONObject(it)}.firstOrNull{it.optString("id")==item.optString("classroom_id")}?.optString("name").orEmpty()
             // La lista ya está filtrada y el contexto del aula permanece en la cabecera.
             text(box,"Inicio · "+date(item.optString("opened_at")),14f)
             if(closed&&!item.isNull("resolved_at")&&item.optString("resolved_at").isNotBlank())text(box,"Atendido · "+date(item.optString("resolved_at")),14f)
@@ -36,10 +36,10 @@ class IncidentsScreen(private val ui:AireUi,private val close:(JSONObject)->Unit
                 val capabilities=item.optJSONObject("capabilities")
                 val canClose=capabilities?.opt("can_resolve")==true
                 actionButton(box,"Marcar atendido",allowed&&canClose){close(item)}
-                if(comment!=null)tertiary(box,"Atender con nota"){comment.invoke(item)}.apply{isEnabled=isEnabled&&allowed&&canClose;alpha=if(isEnabled)1f else .45f}
+                if(comment!=null)rowAction(box,"Atender con nota","note"){comment.invoke(item)}.apply{isEnabled=isEnabled&&allowed&&canClose;alpha=1f}
                 if(!canClose)text(box,capabilities?.optString("resolve_reason")?.takeIf{it.isNotBlank()&&it!="null"}?:"Actualiza el estado para verificar permisos de atención.",14f)
             }
-            tertiary(box,"Compartir aviso"){share(item)}.apply{isEnabled=true;alpha=1f}
+            rowAction(box,"Compartir aviso","share"){share(item)}.apply{isEnabled=true;alpha=1f}
             disclosure(box,"Detalles de entrega","delivery-"+item.optString("id")){body->
                 text(body,if(own.isEmpty())"Sin entregas registradas" else "Recibidas por la app: "+own.count{!it.isNull("received_at")}+" / "+own.size+" entregas visibles",14f)
                 if(failed>0)text(body,"$failed entregas sin recepción confirmada por error o vencimiento.",14f)

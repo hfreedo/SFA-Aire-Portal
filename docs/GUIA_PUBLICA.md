@@ -7,7 +7,7 @@ Los archivos oficiales están en [Releases](https://github.com/hfreedo/SFA-Aire-
 | Archivo | Propósito |
 | --- | --- |
 | `SFA_Aire_Windows_0.8.0_portable_x64.zip` | Panel y receptor autónomos para Windows 10/11 x64. Extraer toda la carpeta. |
-| [SFA_Aire_0.8.0.apk](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/v0.8.0) | App Android piloto, actualización visual distribuida por separado. |
+| [SFA_Aire_0.8.1.apk](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.8.1) | App Android piloto, actualización visual distribuida por separado. |
 | `SHA256SUMS.txt` | Verificar la integridad de las descargas. |
 
 No se necesita instalar Python o Node.js para usar el portable. La compilación
@@ -106,7 +106,7 @@ La entrega distingue pruebas de software y prueba física:
 
 El informe público del release identifica el resultado de la validación del ZIP.
 La prueba física del montaje, la aceptación de una invitación por otra persona y
-la ejecución de la APK 0.8.0 en el Samsung permanecen pendientes. Las pruebas de
+la ejecución de la APK 0.8.1 en el Samsung permanecen pendientes. Las pruebas de
 transporte simulado no se presentan como envíos FCM reales.
 
 Se conservan Supabase Free y Firebase Spark. No se vincula Billing ni se activan

@@ -37,12 +37,13 @@ lista no debe presentarse como confirmación de un registro nuevo.
 
 ## Brand Commitments
 
-Nombre/logo y salvia existentes, legibilidad y peso suficiente, composición
+Nombre/logo y verde/salvia como acento, superficies neutras, legibilidad y peso suficiente, composición
 limpia, controles Android familiares y movimiento suave que comunique estado.
 No sustituirlo por estética de controles iOS ni añadir burocracia.
 
 ## Evidence on Hand
 
+../docs/ANDROID_081_IOT_CALMADO.md recoge el refinamiento actual.
 ../docs/PLAN_MEJORA_UX_SKILLS.md y ../docs/CRITERIOS_DISENO_UI.md contienen la
 línea de base revisada y el plan pendiente. Las capturas en emulador no son
 prueba física en A02 ni recepción real FCM. Verificar la APK ejecutada.

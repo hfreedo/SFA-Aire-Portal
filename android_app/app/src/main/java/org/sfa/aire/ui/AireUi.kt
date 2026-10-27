@@ -17,18 +17,34 @@ import android.widget.*
 
 /** Componentes visuales compartidos; sin sesión, transporte ni reglas de negocio. */
 class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->Boolean,private val isBusy:()->Boolean){
-    val ink=Color.rgb(37,55,43)
-    val green=Color.rgb(51,82,58)
-    val muted=Color.rgb(64,83,66)
-    val sage=Color.rgb(218,229,209)
-    val sageStrong=Color.rgb(191,210,180)
-    val page=Color.rgb(245,247,239)
+    val ink=Color.rgb(36,48,57)
+    val green=Color.rgb(37,109,91)
+    val muted=Color.rgb(82,98,111)
+    val sage=Color.rgb(229,240,235)
+    val sageStrong=Color.rgb(216,224,228)
+    val outline=sageStrong
+    val controlOutline=Color.rgb(130,146,157)
+    val page=Color.rgb(244,246,248)
+    val simulationSurface=Color.rgb(240,236,247)
+    val simulationInk=Color.rgb(105,83,133)
+    val warningSurface=Color.rgb(255,244,223)
+    val warningInk=Color.rgb(128,83,22)
+    val alertSurface=Color.rgb(250,235,229)
+    val alertInk=Color.rgb(151,67,48)
+    val neutralSurface=Color.rgb(237,241,244)
+    val locale=java.util.Locale.forLanguageTag("es-PY")
+    fun sensorColor(kind:String)=when(kind){"temperature"->Color.rgb(151,83,38);"humidity"->Color.rgb(48,103,145);else->Color.rgb(38,109,103)}
+    fun sensorSurface(kind:String)=when(kind){"temperature"->Color.rgb(255,241,230);"humidity"->Color.rgb(232,241,249);else->Color.rgb(230,243,239)}
     val disclosures=mutableMapOf<String,Boolean>()
     fun dp(n:Int)=(n*activity.resources.displayMetrics.density).toInt()
     fun shape(color:Int,border:Int=Color.TRANSPARENT,radius:Int=16)=GradientDrawable().apply{setColor(color);cornerRadius=dp(radius).toFloat();setStroke(dp(1),border)}
     fun surface(button:Button,color:Int,foreground:Int=green){
-        button.setTextColor(foreground)
-        button.background=RippleDrawable(ColorStateList.valueOf(Color.argb(35,51,82,58)),shape(color,if(color==Color.WHITE)sageStrong else Color.TRANSPARENT,10),shape(Color.WHITE,radius=10))
+        val disabled=Color.rgb(112,125,135)
+        button.setTextColor(ColorStateList(arrayOf(intArrayOf(-android.R.attr.state_enabled),intArrayOf()),intArrayOf(disabled,foreground)))
+        button.background=android.graphics.drawable.StateListDrawable().apply{
+            addState(intArrayOf(-android.R.attr.state_enabled),shape(if(color==Color.TRANSPARENT)Color.TRANSPARENT else neutralSurface,if(color==Color.TRANSPARENT)Color.TRANSPARENT else outline,10))
+            addState(intArrayOf(),RippleDrawable(ColorStateList.valueOf(Color.argb(30,37,109,91)),shape(color,if(color==Color.WHITE)controlOutline else Color.TRANSPARENT,10),shape(Color.WHITE,radius=10)))
+        }
     }
     fun enter(view:View){
         view.animate().cancel()
@@ -105,37 +121,45 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
         field.setTextColor(ink);field.setHintTextColor(muted)
         field.background=android.graphics.drawable.StateListDrawable().apply{
             addState(intArrayOf(android.R.attr.state_focused),shape(Color.WHITE,green,10))
-            addState(intArrayOf(),shape(Color.WHITE,sageStrong,10))
+            addState(intArrayOf(),shape(Color.WHITE,controlOutline,10))
         }
     }
     fun styleSwitch(control:Switch){
         // Conservar la geometría del control Android; sólo tematizar sus estados.
         control.showText=false;control.switchPadding=dp(16)
-        control.trackTintList=ColorStateList(arrayOf(intArrayOf(android.R.attr.state_enabled,android.R.attr.state_checked),intArrayOf(android.R.attr.state_enabled),intArrayOf()),intArrayOf(green,Color.rgb(153,170,151),Color.rgb(207,215,203)))
-        control.thumbTintList=ColorStateList(arrayOf(intArrayOf(android.R.attr.state_checked),intArrayOf()),intArrayOf(Color.WHITE,Color.rgb(89,108,86)))
+        control.trackTintList=ColorStateList(arrayOf(intArrayOf(android.R.attr.state_enabled,android.R.attr.state_checked),intArrayOf(android.R.attr.state_enabled),intArrayOf()),intArrayOf(green,Color.rgb(179,188,195),Color.rgb(218,224,228)))
+        control.thumbTintList=ColorStateList(arrayOf(intArrayOf(android.R.attr.state_checked),intArrayOf()),intArrayOf(Color.WHITE,Color.rgb(91,109,121)))
     }
     fun button(parent:LinearLayout,title:String,action:()->Unit):Button=Button(activity).apply{
         text=title;isAllCaps=false;textSize=15f;typeface=Typeface.create("sans-serif-medium",Typeface.NORMAL);surface(this,green,Color.WHITE);stateListAnimator=null;elevation=0f;minimumHeight=dp(48);setPadding(dp(14),dp(8),dp(14),dp(8))
         parent.addView(this,LinearLayout.LayoutParams(-1,-2).apply{topMargin=dp(8);bottomMargin=dp(3)})
-        isEnabled=!isDemo();alpha=if(isDemo())0.45f else 1f;setOnClickListener{if(!isBusy())action()}
+        isEnabled=!isDemo();alpha=1f;setOnClickListener{if(!isBusy())action()}
         pressFeedback(this)
     }
-    fun actionButton(parent:LinearLayout,title:String,allowed:Boolean,action:()->Unit):Button=button(parent,title,action).apply{isEnabled=isEnabled&&allowed;alpha=if(isEnabled)1f else .45f}
-    fun secondary(parent:LinearLayout,title:String,action:()->Unit):Button=button(parent,title,action).apply{surface(this,sage)}
+    fun actionButton(parent:LinearLayout,title:String,allowed:Boolean,action:()->Unit):Button=button(parent,title,action).apply{isEnabled=isEnabled&&allowed;alpha=1f}
+    fun secondary(parent:LinearLayout,title:String,action:()->Unit):Button=button(parent,title,action).apply{surface(this,Color.WHITE,ink)}
     fun space(parent:LinearLayout=root,height:Int=8){parent.addView(View(activity),LinearLayout.LayoutParams(1,dp(height)))}
-    fun divider(parent:LinearLayout){parent.addView(View(activity).apply{setBackgroundColor(sage)},LinearLayout.LayoutParams(-1,dp(1)).apply{topMargin=dp(12);bottomMargin=dp(12)})}
+    fun divider(parent:LinearLayout){parent.addView(View(activity).apply{setBackgroundColor(outline)},LinearLayout.LayoutParams(-1,dp(1)).apply{topMargin=dp(12);bottomMargin=dp(12)})}
     fun tertiary(parent:LinearLayout,title:String,action:()->Unit):Button=button(parent,title,action).apply{
-        surface(this,Color.TRANSPARENT);gravity=Gravity.START or Gravity.CENTER_VERTICAL
+        surface(this,Color.TRANSPARENT,ink);gravity=Gravity.START or Gravity.CENTER_VERTICAL
         layoutParams=LinearLayout.LayoutParams(-1,-2);setPadding(0,dp(8),0,dp(8))
+    }
+    fun rowAction(parent:LinearLayout,title:String,kind:String,action:()->Unit):Button=tertiary(parent,title,action).apply{
+        setCompoundDrawablesWithIntrinsicBounds(AireIcon(activity,kind,muted,20),null,null,null);compoundDrawablePadding=dp(12)
+    }
+    fun sectionTitle(parent:LinearLayout,title:String,kind:String){
+        val row=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};parent.addView(row)
+        row.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,muted,21));importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(21),dp(21)).apply{marginEnd=dp(10)})
+        text(row,title,18f,true)
     }
     fun iconAction(parent:LinearLayout,title:String,kind:String,action:()->Unit):ImageButton=ImageButton(activity).apply{
         contentDescription=title;setImageDrawable(AireIcon(activity,kind,green,22));background=RippleDrawable(ColorStateList.valueOf(sage),null,shape(Color.WHITE,radius=10));setPadding(dp(12),dp(12),dp(12),dp(12))
         parent.addView(this,LinearLayout.LayoutParams(dp(48),dp(48)));setOnClickListener{if(!isBusy())action()}
     }
     fun card(parent:LinearLayout=root,color:Int=Color.WHITE):LinearLayout=column().apply{
-        background=shape(color,if(color==Color.WHITE)Color.rgb(227,233,223)else Color.TRANSPARENT);setPadding(dp(16),dp(16),dp(16),dp(16));parent.addView(this,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})}
-    fun badge(parent:LinearLayout,value:String,color:Int=sage):TextView=TextView(activity).apply{
-        text=value;textSize=12f;typeface=Typeface.create("sans-serif-medium",0);setTextColor(ink);background=shape(color,radius=6)
+        background=shape(color,if(color==Color.WHITE)outline else Color.TRANSPARENT);setPadding(dp(16),dp(16),dp(16),dp(16));parent.addView(this,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})}
+    fun badge(parent:LinearLayout,value:String,color:Int=neutralSurface,foreground:Int=muted):TextView=TextView(activity).apply{
+        text=value;textSize=12f;typeface=Typeface.create("sans-serif-medium",0);setTextColor(foreground);background=shape(color,radius=6)
         setPadding(dp(9),dp(4),dp(9),dp(4));parent.addView(this,LinearLayout.LayoutParams(-2,-2).apply{marginEnd=dp(6);bottomMargin=dp(6)})
     }
     fun disclosure(parent:LinearLayout,title:String,key:String,content:(LinearLayout)->Unit){
@@ -145,10 +169,10 @@ class AireUi(val activity:Activity,val root:LinearLayout,private val isDemo:()->
         val toggle=Button(activity).apply{
             text=title;isAllCaps=false;textSize=15f;typeface=Typeface.create("sans-serif-medium",0)
             minimumHeight=dp(48);stateListAnimator=null;elevation=0f;gravity=Gravity.START or Gravity.CENTER_VERTICAL
-            setPadding(dp(12),dp(8),dp(44),dp(8));surface(this,Color.TRANSPARENT);pressFeedback(this)
+            setPadding(dp(12),dp(8),dp(44),dp(8));surface(this,Color.TRANSPARENT,ink);pressFeedback(this)
         }
         header.addView(toggle,FrameLayout.LayoutParams(-1,-2))
-        val arrow=ImageView(activity).apply{setImageDrawable(AireIcon(activity,"chevron",green,20));importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO;isClickable=false}
+        val arrow=ImageView(activity).apply{setImageDrawable(AireIcon(activity,"chevron",muted,20));importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO;isClickable=false}
         header.addView(arrow,FrameLayout.LayoutParams(dp(20),dp(20),Gravity.END or Gravity.CENTER_VERTICAL).apply{marginEnd=dp(13)})
         toggle.isEnabled=true;toggle.alpha=1f
         wrapper.addView(body,LinearLayout.LayoutParams(-1,-2))

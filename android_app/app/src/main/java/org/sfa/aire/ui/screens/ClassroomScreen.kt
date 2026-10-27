@@ -16,14 +16,14 @@ import java.util.Locale
 class ClassroomScreen(private val ui:AireUi){
  private fun number(sample:JSONObject,key:String,decimals:Int=1):String {
   val value=sample.optDouble(key,Double.NaN)
-  return if(!value.isFinite())"—" else String.format(Locale.getDefault(),"%.$decimals"+"f",value)
+  return if(!value.isFinite())"—" else String.format(ui.locale,"%.$decimals"+"f",value)
  }
  private data class SensorViews(val box:LinearLayout,val value:android.widget.TextView,val detail:android.widget.TextView)
  private fun sensorTile(parent:LinearLayout,title:String,kind:String):SensorViews=with(ui){
   val tile=column().apply{background=shape(Color.WHITE,sageStrong);setPadding(dp(16),dp(16),dp(16),dp(16))}
   parent.addView(tile,if(parent.orientation==LinearLayout.HORIZONTAL)LinearLayout.LayoutParams(0,-1,1f).apply{if(kind=="temperature")marginEnd=dp(12)} else LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(10)})
   val label=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};tile.addView(label)
-  label.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,green,21));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(21),dp(21)).apply{marginEnd=dp(7)})
+  label.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,sensorColor(kind),21));background=shape(sensorSurface(kind),radius=8);setPadding(dp(5),dp(5),dp(5),dp(5));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(30),dp(30)).apply{marginEnd=dp(8)})
   text(label,title,14f)
   space(tile,12)
   SensorViews(tile,text(tile,"—",32f,true),text(tile,"",14f))
@@ -59,7 +59,7 @@ class ClassroomScreen(private val ui:AireUi){
    val content=column();statusRow.addView(content,LinearLayout.LayoutParams(0,-2,1f))
    val tags=LinearLayout(activity).apply{orientation=LinearLayout.VERTICAL};content.addView(tags)
    val source=badge(tags,"")
-   val stale=badge(tags,"LECTURA VENCIDA",Color.rgb(255,237,199))
+   val stale=badge(tags,"LECTURA VENCIDA",warningSurface,warningInk)
    val stateText=text(content,"",18f,true)
    val historical=text(content,"Última lectura · No describe el ambiente actual",14f)
    val ageText=text(content,"",14f)
@@ -69,7 +69,7 @@ class ClassroomScreen(private val ui:AireUi){
    ageText.compoundDrawablePadding=dp(8)
    ageText.setOnClickListener{exact.visibility=if(exact.visibility==android.view.View.VISIBLE)android.view.View.GONE else android.view.View.VISIBLE}
    if(pending>0)tertiary(statusRow,if(pending==1)"Ver aviso" else "Ver avisos",onIncidents).apply{
-       contentDescription="$pending avisos pendientes. Revisar avisos";isEnabled=true;alpha=1f;gravity=Gravity.CENTER;setPadding(dp(4),dp(8),dp(4),dp(8))
+       surface(this,Color.WHITE,green);contentDescription="$pending avisos pendientes. Revisar avisos";isEnabled=true;alpha=1f;gravity=Gravity.CENTER;setPadding(dp(4),dp(8),dp(4),dp(8))
        layoutParams=LinearLayout.LayoutParams(dp(88),-2).apply{marginStart=dp(8)}
    }
    val metricHeading=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL}
@@ -81,22 +81,26 @@ class ClassroomScreen(private val ui:AireUi){
    val temperature=sensorTile(metrics,"Temperatura","temperature")
    val mq=sensorTile(metrics,"MQ135","air")
    val humidity=card();val row=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};humidity.addView(row,LinearLayout.LayoutParams(-1,-2))
-   row.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,"humidity",green,22));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(24),dp(24)).apply{marginEnd=dp(10)})
+   row.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,"humidity",sensorColor("humidity"),22));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(24),dp(24)).apply{marginEnd=dp(10)})
    text(row,"Humedad",16f,true).layoutParams=LinearLayout.LayoutParams(0,-2,1f)
    val humidityValue=text(row,"—",21f,true)
    fun update(){
     val current=ObservationState.from(snapshot.optString("sample_at"),snapshot.optString("state"))
     val sample=snapshot.getJSONObject("observation");val dht=sample.optBoolean("dht_ok")
-    source.text=if(snapshot.optString("source")=="simulacion")"SIMULACIÓN" else "ARDUINO · REAL"
+    val simulated=snapshot.optString("source")=="simulacion"
+    source.text=if(simulated)"SIMULACIÓN" else "ARDUINO · REAL"
+    source.background=shape(if(simulated)simulationSurface else sage,radius=6)
+    source.setTextColor(if(simulated)simulationInk else green)
     stale.visibility=if(current.fresh)android.view.View.GONE else android.view.View.VISIBLE
     stateText.text=current.label
     historical.visibility=if(current.fresh)android.view.View.GONE else android.view.View.VISIBLE
     ageText.text=current.ageLabel
-    exact.text=try{java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM,java.text.DateFormat.SHORT).format(java.util.Date(java.time.Instant.parse(snapshot.getString("sample_at")).toEpochMilli()))}catch(_:Exception){"Fecha no verificable"}
+    exact.text=try{java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM,java.text.DateFormat.SHORT,locale).format(java.util.Date(java.time.Instant.parse(snapshot.getString("sample_at")).toEpochMilli()))}catch(_:Exception){"Fecha no verificable"}
     ageText.contentDescription=current.ageLabel+". Mostrar fecha exacta de la lectura."
-    header.background=shape(if(!current.fresh)Color.rgb(255,246,226) else if(current.state=="alerta")Color.rgb(255,238,226) else Color.WHITE)
-    temperature.box.background=shape(if(current.fresh)Color.WHITE else Color.rgb(240,242,236),sageStrong)
-    mq.box.background=shape(if(current.fresh)Color.WHITE else Color.rgb(240,242,236),sageStrong)
+    header.background=shape(Color.WHITE,outline)
+    stateText.setTextColor(if(!current.fresh)muted else if(current.state=="alerta")alertInk else if(current.state=="aviso")warningInk else ink)
+    temperature.box.background=shape(if(current.fresh)Color.WHITE else neutralSurface,sageStrong)
+    mq.box.background=shape(if(current.fresh)Color.WHITE else neutralSurface,sageStrong)
     value(temperature.value,if(dht)number(sample,"temperature") else "—","°C")
     temperature.detail.text=if(!dht)"DHT sin lectura" else if(current.fresh)"Sensor DHT" else "Última lectura · DHT"
     value(mq.value,number(sample,"mq_raw",0),"ADC")
@@ -110,7 +114,7 @@ class ClassroomScreen(private val ui:AireUi){
   if(count==0){val box=card();text(box,"Esperando mediciones",21f,true);text(box,"La PC del aula todavía no sincronizó una lectura. Revisa la conexión Arduino en el portal.")}
   if(pending==0){val notice=card();text(notice,"Sin avisos pendientes",16f,true)}
   if(count==0)tertiary(root,"Información de sensores"){information()}.apply{isEnabled=true;alpha=1f}
-  tertiary(root,"Actualizar aula",onRefresh)
+  rowAction(root,"Actualizar aula","refresh",onRefresh)
 
  }}
 }
