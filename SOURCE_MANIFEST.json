@@ -313,7 +313,7 @@
   },
   {
     "path": "firebase.json",
-    "sha256": "8c5888609ae999d21b55a1ed1750a7ceadafc7f0caf1c598cfba039c7e39baac"
+    "sha256": "9b2671041779953f737367802bafd2be26131c524b2241065cbaf7a19a6e8116"
   },
   {
     "path": ".firebaserc",
@@ -329,7 +329,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "aa288d393d7551be6ef7969bdf8429728fd788dbb2fc2d2c7926d8a9297086fd"
+    "sha256": "2297768b33b67679be2725d9f6146ee4f873d1e3f0aa34bd36b91e55b6783c56"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",

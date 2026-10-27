@@ -15,7 +15,7 @@ for file in files:
     assert relative.parts[0] not in {'secrets','data','Entregas','artifacts'} and not any(part in {'node_modules','.git'} for part in relative.parts)
     target=out/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(raw)
     manifest.append({'path':relative.as_posix(),'sha256':hashlib.sha256(raw).hexdigest()})
-(out/'.gitignore').write_text('node_modules/\n.venv/\nsecrets/\ndata/\nartifacts/\n.firebase/\ninterfaz_web/dist/\ninterfaz_web/dist-hosting/\npublication/\n.env\n*.log\n',encoding='utf-8')
+(out/'.gitignore').write_text('node_modules/\n.venv/\n/secrets/\n/data/\n/artifacts/\n.firebase/\ninterfaz_web/dist/\ninterfaz_web/dist-hosting/\n/publication/\n.env\n*.log\n',encoding='utf-8')
 (out/'README.md').write_text('''# SFA Aire · Portal de aulas
 
 Portal: https://sfa-aire-aulas.web.app/remoto

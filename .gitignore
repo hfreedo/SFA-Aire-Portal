@@ -1,11 +1,11 @@
 node_modules/
 .venv/
-secrets/
-data/
-artifacts/
+/secrets/
+/data/
+/artifacts/
 .firebase/
 interfaz_web/dist/
 interfaz_web/dist-hosting/
-publication/
+/publication/
 .env
 *.log
