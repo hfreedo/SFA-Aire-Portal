@@ -1,0 +1,232 @@
+{
+  "date": "28 de octubre de 2026",
+  "repository": "https://github.com/hfreedo/SFA-Aire-Portal",
+  "pages": 14,
+  "pdf": "Manual_de_navegacion_SFA_Aire.pdf",
+  "sha256": "123b067928ba68d7ab54a711a2c5f0679b32ebb5388512aa666812b08f55f1c9",
+  "screenshots": [
+    {
+      "page": 2,
+      "file": "18-portada-amplia.png",
+      "crop": [
+        16,
+        102,
+        1235,
+        640
+      ],
+      "caption": "Portada real del repositorio. En una ventana ancha, About y Releases aparecen a la derecha."
+    },
+    {
+      "page": 3,
+      "file": "19-readme-guias.png",
+      "crop": [
+        32,
+        10,
+        910,
+        680
+      ],
+      "caption": "El README aparece al bajar por la portada, debajo de la lista de archivos."
+    },
+    {
+      "page": 4,
+      "file": "07-docs-guias.png",
+      "crop": [
+        340,
+        269,
+        717,
+        590
+      ],
+      "caption": "Detalle real de docs: los documentos se abren pulsando su nombre."
+    },
+    {
+      "page": 5,
+      "file": "09-markdown.png",
+      "crop": [
+        335,
+        222,
+        1232,
+        540
+      ],
+      "caption": "En Preview se ve el documento con su formato, en lugar de las marcas del texto."
+    },
+    {
+      "page": 5,
+      "file": "10-indice-markdown.png",
+      "crop": [
+        920,
+        222,
+        1235,
+        710
+      ],
+      "caption": "Outline abre un índice de títulos. Pulsa uno para saltar a esa sección."
+    },
+    {
+      "page": 6,
+      "file": "14-manual-usuario.png",
+      "crop": [
+        333,
+        220,
+        1232,
+        635
+      ],
+      "caption": "La página del manual ofrece accesos al PDF, Word y paquete completo."
+    },
+    {
+      "page": 7,
+      "file": "03-windows-release.png",
+      "crop": [
+        16,
+        192,
+        535,
+        495
+      ],
+      "caption": "Cabecera de la entrega Windows 0.8.0. La etiqueta Latest significa que fue marcada como entrega principal."
+    },
+    {
+      "page": 8,
+      "file": "04-windows-assets.png",
+      "crop": [
+        20,
+        72,
+        535,
+        552
+      ],
+      "caption": "Assets de la entrega Windows. El recuadro señala el portable."
+    },
+    {
+      "page": 9,
+      "file": "08-android-assets.png",
+      "crop": [
+        20,
+        214,
+        535,
+        550
+      ],
+      "caption": "En la entrega Android 0.8.2, selecciona el archivo .apk."
+    },
+    {
+      "page": 10,
+      "file": "11-arduino-carpeta.png",
+      "crop": [
+        334,
+        104,
+        1232,
+        350
+      ],
+      "caption": "Carpeta del sketch: pulsa SFA_Aire_Aulas.ino."
+    },
+    {
+      "page": 10,
+      "file": "12-arduino-codigo.png",
+      "crop": [
+        333,
+        222,
+        1232,
+        520
+      ],
+      "caption": "Arriba del código aparecen Raw, copiar y la flecha de descarga."
+    },
+    {
+      "page": 11,
+      "file": "15-code-zip.png",
+      "crop": [
+        138,
+        130,
+        535,
+        454
+      ],
+      "caption": "El botón verde Code ofrece Download ZIP para descargar las fuentes."
+    },
+    {
+      "page": 12,
+      "file": "13-lenguajes.png",
+      "crop": [
+        940,
+        326,
+        1225,
+        478
+      ],
+      "caption": "Detalle real de Languages. Los porcentajes pueden cambiar con nuevas publicaciones."
+    },
+    {
+      "page": 13,
+      "file": "18-portada-amplia.png",
+      "crop": [
+        938,
+        186,
+        1225,
+        347
+      ],
+      "caption": "Enlace del portal en About."
+    },
+    {
+      "page": 13,
+      "file": "16-portal.png",
+      "crop": [
+        180,
+        24,
+        1107,
+        651
+      ],
+      "caption": "Pantalla real de acceso al portal. No se ingresaron cuentas durante las capturas."
+    }
+  ],
+  "originals": [
+    {
+      "file": "03-windows-release.png",
+      "sha256": "4d29a170b9a2542ca8e50f442c5ff0afb9f51fdcab840f8837d9bccaa938e6f8"
+    },
+    {
+      "file": "04-windows-assets.png",
+      "sha256": "181eb4121396eca1caa431083696056191605f5fecdf7a3b4203b9097bd01103"
+    },
+    {
+      "file": "07-docs-guias.png",
+      "sha256": "21a27330cbecc0adfe05adafa1033a40696e01a3cb5f1aecb45f077e4b1d5329"
+    },
+    {
+      "file": "08-android-assets.png",
+      "sha256": "77173dedd1a0015f988c750eacd31d8f76e8bd624911dc762a2a6e85fdc0735f"
+    },
+    {
+      "file": "09-markdown.png",
+      "sha256": "a12d8ecdd4677e77a712cd2e399b7b5a6249b0cdae6fe0962995e4ab76085230"
+    },
+    {
+      "file": "10-indice-markdown.png",
+      "sha256": "fdbcfbd9494b5c510bf4bba3e2e2db1c409f7d452b5c91402535285481db5cfa"
+    },
+    {
+      "file": "11-arduino-carpeta.png",
+      "sha256": "c409ac52a4a3c819252d9e5328c8182ab2ac3c29f91fd599071eff184e483dd9"
+    },
+    {
+      "file": "12-arduino-codigo.png",
+      "sha256": "ab0d0d4364593ab5dd38a77e91601ab85bfcb82a2b72e34637746754e98dc711"
+    },
+    {
+      "file": "13-lenguajes.png",
+      "sha256": "6b3f8fda0a9fd602483767a5b39587860cba56325c6199a90f2a583653c1eec5"
+    },
+    {
+      "file": "14-manual-usuario.png",
+      "sha256": "8268c1c721178f072246556f770d6a4e34b81be6385ae094d7184c70c9420014"
+    },
+    {
+      "file": "15-code-zip.png",
+      "sha256": "8765ac4dd0e90a9e1ac02cf0dc262576f530111f53f4511bc34ff211370f9f6e"
+    },
+    {
+      "file": "16-portal.png",
+      "sha256": "395b9eabf64194f2cec56d099f0c154df4d6cbc9e6255b71ca6b0f393e7f9270"
+    },
+    {
+      "file": "18-portada-amplia.png",
+      "sha256": "f96daf57025927888c35bedfff961bc458884e2602e8d1541e2b9e688579f5e8"
+    },
+    {
+      "file": "19-readme-guias.png",
+      "sha256": "c46d7ed94d750934213cdb620cccef073af3b7da77f7ca7ff9bcd74801effeee"
+    }
+  ]
+}

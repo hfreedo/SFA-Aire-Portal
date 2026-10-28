@@ -3,6 +3,14 @@
 Proyecto escolar de monitoreo ambiental que conecta una maqueta Arduino con un
 panel de aulas y avisos push en Android.
 
+## ¿Primera vez en GitHub?
+
+**[Descargar el manual de navegación en PDF](docs/navegacion-repositorio/Manual_de_navegacion_SFA_Aire.pdf?raw=1)** ·
+[Ver el contenido y los accesos rápidos](docs/GUIA_NAVEGACION_REPOSITORIO.md)
+
+Guía para estudiantes, con capturas reales: dónde están los manuales, qué descargar
+en Releases, cómo encontrar el sketch Arduino y cómo abrir el portal desde About.
+
 ## Guía del stack tecnológico
 
 **[Estudiar las tecnologías y cómo se conectan](docs/GUIA_STACK_TECNOLOGICO.md)**

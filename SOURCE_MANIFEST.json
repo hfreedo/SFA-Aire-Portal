@@ -805,7 +805,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "167cca55fa13ebb18309a542facd2676ec91af1d5f6aa9ebc862deaab2185c90"
+    "sha256": "44d9da5047547c8cc9957cb0ffdc61ed3b6ace2bdf4df38e212c651e1228cf51"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
@@ -813,7 +813,7 @@
   },
   {
     "path": "docs/README_PUBLICO.md",
-    "sha256": "ff4ac9d0435c869c89a4c52490f3e8c71f14c2b16a254e2b33ccef41c83a9910"
+    "sha256": "300fc379293bc0bd1c3340d5dee0e98b3be71cb92c057c3c7920ba295a6dea6c"
   },
   {
     "path": "docs/capturas/panel-ejemplo.png",
@@ -1098,5 +1098,81 @@
   {
     "path": "docs/AUDITORIA_RPC.md",
     "sha256": "1ac47e4362da1bc2a1e5e786a7efcc79b506ec325ab29c80f69e03da5c8c0269"
+  },
+  {
+    "path": "docs/GUIA_NAVEGACION_REPOSITORIO.md",
+    "sha256": "9bbca6f4276408b580bcda57c543f6e3338640cd8a021b2382389734c4337594"
+  },
+  {
+    "path": "herramientas/generar_manual_navegacion.py",
+    "sha256": "e4234837ff3d27ae41d1a910a62cc5635723944aff9f4893f1c0af66e0449c08"
+  },
+  {
+    "path": "docs/navegacion-repositorio/FUENTES_Y_CAPTURAS.json",
+    "sha256": "0d03598d5319bf9a61fc4a0e261631831ba4939c18b87e6973d8b03743d1996f"
+  },
+  {
+    "path": "docs/navegacion-repositorio/Manual_de_navegacion_SFA_Aire.pdf",
+    "sha256": "123b067928ba68d7ab54a711a2c5f0679b32ebb5388512aa666812b08f55f1c9"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/03-windows-release.png",
+    "sha256": "4d29a170b9a2542ca8e50f442c5ff0afb9f51fdcab840f8837d9bccaa938e6f8"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/04-windows-assets.png",
+    "sha256": "181eb4121396eca1caa431083696056191605f5fecdf7a3b4203b9097bd01103"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/07-docs-guias.png",
+    "sha256": "21a27330cbecc0adfe05adafa1033a40696e01a3cb5f1aecb45f077e4b1d5329"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/08-android-assets.png",
+    "sha256": "77173dedd1a0015f988c750eacd31d8f76e8bd624911dc762a2a6e85fdc0735f"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/09-markdown.png",
+    "sha256": "a12d8ecdd4677e77a712cd2e399b7b5a6249b0cdae6fe0962995e4ab76085230"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/10-indice-markdown.png",
+    "sha256": "fdbcfbd9494b5c510bf4bba3e2e2db1c409f7d452b5c91402535285481db5cfa"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/11-arduino-carpeta.png",
+    "sha256": "c409ac52a4a3c819252d9e5328c8182ab2ac3c29f91fd599071eff184e483dd9"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/12-arduino-codigo.png",
+    "sha256": "ab0d0d4364593ab5dd38a77e91601ab85bfcb82a2b72e34637746754e98dc711"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/13-lenguajes.png",
+    "sha256": "6b3f8fda0a9fd602483767a5b39587860cba56325c6199a90f2a583653c1eec5"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/14-manual-usuario.png",
+    "sha256": "8268c1c721178f072246556f770d6a4e34b81be6385ae094d7184c70c9420014"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/15-code-zip.png",
+    "sha256": "8765ac4dd0e90a9e1ac02cf0dc262576f530111f53f4511bc34ff211370f9f6e"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/16-portal.png",
+    "sha256": "395b9eabf64194f2cec56d099f0c154df4d6cbc9e6255b71ca6b0f393e7f9270"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/18-portada-amplia.png",
+    "sha256": "f96daf57025927888c35bedfff961bc458884e2602e8d1541e2b9e688579f5e8"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/19-readme-guias.png",
+    "sha256": "c46d7ed94d750934213cdb620cccef073af3b7da77f7ca7ff9bcd74801effeee"
+  },
+  {
+    "path": ".gitattributes",
+    "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
   }
 ]

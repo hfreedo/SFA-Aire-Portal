@@ -7,6 +7,11 @@ files.extend(ROOT/p for p in ['PRODUCT.md','android_app/PRODUCT.md','docs/IMPLEM
 files.extend(ROOT/p for p in ['android_app/DESIGN.md','docs/ANDROID_081_IOT_CALMADO.md','docs/ANDROID_PILOTO_081.json','herramientas/revisar_android_081.py','herramientas/grabar_android_081.py'])
 files.extend(ROOT/p for p in ['docs/ANDROID_082_AVISOS_Y_BANDEJA.md','docs/ANDROID_PILOTO_082.json','herramientas/revisar_android_082.py','herramientas/sql-check/notice-evidence.test.mjs','herramientas/sql-check/quick-notification.test.mjs','herramientas/sql-check/worker.test.mjs'])
 files.append(ROOT/'docs/MANUAL_DE_USUARIO.md')
+files.extend(ROOT/p for p in ['.gitattributes', 'docs/GUIA_NAVEGACION_REPOSITORIO.md', 'herramientas/generar_manual_navegacion.py'])
+navigation=ROOT/'docs/navegacion-repositorio'
+navigation_sources=json.loads((navigation/'FUENTES_Y_CAPTURAS.json').read_text(encoding='utf-8'))
+files.extend([navigation/'FUENTES_Y_CAPTURAS.json', navigation/navigation_sources['pdf']])
+files.extend(navigation/'capturas'/item['file'] for item in navigation_sources['originals'])
 files.extend(ROOT/'docs'/name for name in [
     'GUIA_STACK_TECNOLOGICO.md', 'ARQUITECTURA.md', 'PROTOCOLO.md',
     'HARDWARE.md', 'GUIA_RAPIDA.md', 'CONEXION_ARDUINO.md',
