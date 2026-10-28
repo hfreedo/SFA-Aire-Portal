@@ -1,0 +1,17 @@
+MANUAL DE USUARIO DE SFA AIRE
+Edición 27 de octubre de 2026
+
+Para consulta e impresión: Manual_de_usuario_SFA_Aire.pdf
+Para editar: Manual_de_usuario_SFA_Aire.docx
+Para lectura sin conexión y ampliar capturas: Manual_de_usuario_SFA_Aire.html
+Abra el HTML directamente con su navegador. No necesita instalar un servidor.
+
+Son 29 páginas y 27 capítulos. El índice del PDF y HTML permite saltar a cada capítulo.
+El diagrama Mermaid está en recorrido_del_sistema.mmd.
+TRAZABILIDAD.json identifica las capturas y sus contextos de demostración o emulación.
+
+Este paquete incluye solo el manual, no el programa ni cuentas o credenciales.
+Describe Windows/portal 0.8.0 y la APK local Android 0.8.2.
+El portable Windows publicado conserva su APK original 0.8.0.
+Android 0.8.2 estaba disponible localmente pero sin release público al verificar esta edición.
+Solicite la APK correspondiente al responsable del sistema.

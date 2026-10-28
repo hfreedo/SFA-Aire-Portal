@@ -1,0 +1,7 @@
+flowchart LR
+  A[Arduino con DHT y MQ135] -->|USB| P[PC receptora]
+  P -->|Sincronización por internet| C[Nube SFA Aire]
+  C -->|FCM| M[Android con registro de avisos]
+  C --> W[Portal web]
+  M -->|Atención por cuenta y aula| C
+  W -->|Consulta y atención| C

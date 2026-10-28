@@ -3,6 +3,19 @@
 Proyecto escolar de monitoreo ambiental que conecta una maqueta Arduino con un
 panel de aulas y avisos push en Android.
 
+## Manual de usuario
+
+**[Leer el manual completo e ilustrado](docs/MANUAL_DE_USUARIO.md)**
+
+[Descargar PDF](docs/manual-usuario/Manual_de_usuario_SFA_Aire.pdf?raw=1) ·
+[Word editable](docs/manual-usuario/Manual_de_usuario_SFA_Aire.docx?raw=1) ·
+[Paquete con HTML sin conexión](docs/manual-usuario/Manual_de_usuario_SFA_Aire_2026-10-27.zip?raw=1)
+
+Incluye instalación, alta por invitación, acceso, uso de cada pantalla, avisos,
+Android, administración, conexión Arduino y solución de problemas. Tiene 29 páginas,
+capturas de referencia y un esquema del sistema. Los archivos no crean una cuenta:
+el acceso al aula lo autoriza su administrador.
+
 ![Arduino](https://img.shields.io/badge/Firmware-Arduino-00878F)
 ![Python](https://img.shields.io/badge/PC-Python%20%2F%20FastAPI-3776AB)
 ![React](https://img.shields.io/badge/Web-React%20%2F%20TypeScript-149ECA)

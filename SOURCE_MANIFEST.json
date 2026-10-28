@@ -805,7 +805,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "0df69977e77151ecd4cbddb5a29518774c937bb54ede4a0830a7229e9e0354b7"
+    "sha256": "99c63605900a0849218ee80cf1c8d31eb7d734107de8783517a6fbafd4c985f4"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
@@ -813,7 +813,7 @@
   },
   {
     "path": "docs/README_PUBLICO.md",
-    "sha256": "e3f4d22b35d5cbee7010fbf2d242d5767e8b7aceea55a2790a34643524ea543a"
+    "sha256": "ee853c65171c7c66152c055afda56acc25c79fbdd793ec778469d94419ad564d"
   },
   {
     "path": "docs/capturas/panel-ejemplo.png",
@@ -946,5 +946,113 @@
   {
     "path": "herramientas/sql-check/invitations-edge.test.mjs",
     "sha256": "f013543b333098237825ca70c248178d15d45458b0be0ccb16c287817f4164cc"
+  },
+  {
+    "path": "docs/MANUAL_DE_USUARIO.md",
+    "sha256": "4644f314bc956ff55744263a97828558340bc390993c361c1d48624d98d7deef"
+  },
+  {
+    "path": "docs/manual-usuario/CAPTURAS_PUBLICADAS.json",
+    "sha256": "fcf49516af36562b085a10ca7d88d0c81a283a4f07307325df7722cf971c1fea"
+  },
+  {
+    "path": "docs/manual-usuario/LEER_PRIMERO.txt",
+    "sha256": "4114df6dc876f9f3a02625d87c33fcac3492cc66155f2533a1a97a736cb23c9e"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.docx",
+    "sha256": "82c30b253054d8c0e39c22187609192dc7ffa6498fa88eb52ec5211396bc014c"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.html",
+    "sha256": "e18b44d172177ae0e4c0c492e5b190029bbe95dd50fac3cd7deb3c3c6391a4ad"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.pdf",
+    "sha256": "6c33ee05b8e8ac2e05c31c22edaa906e5f71020697c0ec96aa14055e9c363454"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire_2026-10-27.zip",
+    "sha256": "3e704ff8d36a6e2eb2a4dd6c0387ef09af9153042dc58486f5a4ad85e3f9867f"
+  },
+  {
+    "path": "docs/manual-usuario/README.md",
+    "sha256": "ab61816048fdf693e29392c9109ee7768654790b614ffef308c00f332562a704"
+  },
+  {
+    "path": "docs/manual-usuario/recorrido_del_sistema.mmd",
+    "sha256": "febf6ef20d5e4e68ae4973c15011c195227cab52fb9090b40b560a6fa200549d"
+  },
+  {
+    "path": "docs/manual-usuario/SHA256SUMS.txt",
+    "sha256": "b25a7d70b49761fb32399e6347bad5e29ca0c77cdc98907aeb3b68c9c8ba111a"
+  },
+  {
+    "path": "docs/manual-usuario/TRAZABILIDAD.json",
+    "sha256": "06aef2d434e72e3764e2dadc37cb27356db1ea780a67dc2d395624305d89d087"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/01-sfa-aire-verde-transparente.png",
+    "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/02-recorrido.png",
+    "sha256": "8f97bb0e12a040b758d59bc66c478366bfbe5db4c660c59d1c15846d6fd71bb2"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/03-1440-alta.png",
+    "sha256": "140cea55e2b51dcff92e173df79706e8d360344b54440525a2a598f3254c3cfa"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/04-normal-acceso.png",
+    "sha256": "f36c09f4da0292febdab7b474e1bb7a4b5b9a88118b089257e09d2c924db3c77"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/05-portal-aulas.png",
+    "sha256": "ca2b133a4342abf4a211915557f67b744ef1f826311356dda88bb5fcbd1e4da3"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/06-1440-avisos.png",
+    "sha256": "65f78bf0b3a47f1ad47b2627214afb81b0639015fde92903fbfc8f0832830e80"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/07-1440-historial.png",
+    "sha256": "6d61b0c8855e21534f3e200458cc46143fffbde2c9aada4b74c9260e52dd71db"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/08-normal-aula.png",
+    "sha256": "f5d3a40284dcaddeebecfa439f1fb7fc5f8181fbaafbc7f1d15afb4643c1ebb1"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/09-normal-aviso-expandido.png",
+    "sha256": "68824bc5b76a759490b635f8cc3e8253feb3c37b3c214aa3417f6049b39c0d7e"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/10-normal-archivo-personal.png",
+    "sha256": "0059e0c4a0a8674fde015b23073a4476680f4dca0fb67dfe8fba23afb8fe8f35"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/11-normal-registro-expandido.png",
+    "sha256": "ca5c857caf12e6871889516696416356d95efc3033058b2740b82f71b2fa8449"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/12-1440-resumen.png",
+    "sha256": "ef1172f40e7209529f44a7e0dd8213039a0b17899879d53cc4bfe514cc64e650"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/13-1440-personas.png",
+    "sha256": "a18da9a66986ee3a9d2b7abdb4a1ac94a15a5a753bd9ec2415f7d4b8274b4919"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/14-1440-pc.png",
+    "sha256": "b3b6bb588ab3fe9cc84bbf5755ed1a6760c54cb5e52c2952c943a701d01f2b88"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/15-1440-primera-asignacion.png",
+    "sha256": "17404fdf87deb099b88053997088b3a43d048bdc5b915169b462d1a1d63bcdaf"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/16-portal-laboratorio.png",
+    "sha256": "c45d1c958f14be521e3ac6503817ce99fcd5ab161f35d7307143c231f7e22822"
   }
 ]

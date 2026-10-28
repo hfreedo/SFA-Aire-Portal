@@ -1,0 +1,105 @@
+{
+  "edition": "2026-10-27",
+  "windows_web": "0.8.0",
+  "android": "0.8.2",
+  "chapters": 27,
+  "illustrations": [
+    {
+      "source": "Branding\\logo\\sfa-aire-verde-transparente.png",
+      "caption": "",
+      "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75",
+      "page_title": "Manual de usuario de SFA Aire"
+    },
+    {
+      "source": "artifacts\\manual-usuario-20261027\\recorrido.png",
+      "caption": "Recorrido de uso del sistema. Esquema explicativo, no evidencia de sensores o recepción física.",
+      "sha256": "8f97bb0e12a040b758d59bc66c478366bfbe5db4c660c59d1c15846d6fd71bb2",
+      "page_title": "01 Qué hace el sistema y qué necesita cada persona"
+    },
+    {
+      "source": "artifacts\\invitaciones\\1440-alta.png",
+      "caption": "Alta por invitación en una prueba controlada. El correo example.test es ficticio; no se muestra un enlace ni QR utilizables.",
+      "sha256": "140cea55e2b51dcff92e173df79706e8d360344b54440525a2a598f3254c3cfa",
+      "page_title": "05 Activar su cuenta mediante una invitación"
+    },
+    {
+      "source": "artifacts\\android-082\\normal-acceso.png",
+      "caption": "Acceso Android 0.8.2 ejecutado en emulador. Los campos de cuenta son equivalentes al acceso web.",
+      "sha256": "dadf1295f117189df118a18fcc5d19c83826c557f18bd59a7721d55d1b4515eb",
+      "page_title": "06 Ingresar seleccionar aula y cerrar sesión"
+    },
+    {
+      "source": "Branding\\UX\\implementacion-080\\portal-aulas.png",
+      "caption": "Portal 0.8.0 en demostración. Menú lateral, selector de aula, aviso pendiente y tarjetas de sensores.",
+      "sha256": "ca2b133a4342abf4a211915557f67b744ef1f826311356dda88bb5fcbd1e4da3",
+      "page_title": "07 Recorrer el portal y consultar Mis aulas"
+    },
+    {
+      "source": "artifacts\\portal-integrado\\1440-avisos.png",
+      "caption": "Vista web de avisos con datos de ejemplo. El aviso atendido sigue conservando su origen y su fecha.",
+      "sha256": "65f78bf0b3a47f1ad47b2627214afb81b0639015fde92903fbfc8f0832830e80",
+      "page_title": "09 Consultar y atender avisos en la web"
+    },
+    {
+      "source": "artifacts\\portal-integrado\\1440-historial.png",
+      "caption": "Historial del portal en una prueba de interfaz. La gráfica representa una consulta de ejemplo.",
+      "sha256": "6d61b0c8855e21534f3e200458cc46143fffbde2c9aada4b74c9260e52dd71db",
+      "page_title": "10 Consultar el historial"
+    },
+    {
+      "source": "artifacts\\android-082\\normal-aula.png",
+      "caption": "Mi aula en Android 0.8.2. Captura nativa de demostración en emulador, con lectura sintética.",
+      "sha256": "27959c64992ddc01bcff89e135af58033a9ff6d3793e0a2708a835bcf5e36606",
+      "page_title": "12 Leer Mi aula en Android"
+    },
+    {
+      "source": "artifacts\\android-082\\normal-aviso-expandido.png",
+      "caption": "Aviso desplegado en Android 0.8.2, emulador y datos de demostración. La lectura conserva su fecha.",
+      "sha256": "121565cd63cf1d6637f8e3124ee8e6714848a1dd81ec31180b75811b1928a0e3",
+      "page_title": "13 Abrir y atender un aviso en Android"
+    },
+    {
+      "source": "artifacts\\android-082\\normal-archivo-personal.png",
+      "caption": "Archivo personal Android con un aviso aún pendiente. Ejemplo en emulador, sin cambios cloud.",
+      "sha256": "86cd0631a430620700cb685927d0806697f70df7263be97d3a6543bd55358c4a",
+      "page_title": "14 Organizar el archivo personal de Android"
+    },
+    {
+      "source": "artifacts\\android-082\\normal-registro-expandido.png",
+      "caption": "Ajustes y detalles del registro en Android 0.8.2. Esta captura de DEMO no muestra un registro FCM real.",
+      "sha256": "ca5c857caf12e6871889516696416356d95efc3033058b2740b82f71b2fa8449",
+      "page_title": "15 Activar avisos y preferencias del teléfono"
+    },
+    {
+      "source": "artifacts\\administracion-etapa1\\1440-resumen.png",
+      "caption": "Resumen administrativo en un ensayo de interfaz con aulas de ejemplo.",
+      "sha256": "ef1172f40e7209529f44a7e0dd8213039a0b17899879d53cc4bfe514cc64e650",
+      "page_title": "16 Administrar aulas y sus datos"
+    },
+    {
+      "source": "artifacts\\administracion-etapa1\\1440-personas.png",
+      "caption": "Personas e invitaciones en una prueba controlada. Los correos de ejemplo no son credenciales para ingresar.",
+      "sha256": "a18da9a66986ee3a9d2b7abdb4a1ac94a15a5a753bd9ec2415f7d4b8274b4919",
+      "page_title": "17 Invitar personas y gestionar accesos"
+    },
+    {
+      "source": "artifacts\\administracion-etapa1\\1440-pc.png",
+      "caption": "Gestión de PC en una prueba controlada. El vínculo de receptor es diferente al registro de un teléfono.",
+      "sha256": "b3b6bb588ab3fe9cc84bbf5755ed1a6760c54cb5e52c2952c943a701d01f2b88",
+      "page_title": "18 Administrar las PC del aula"
+    },
+    {
+      "source": "artifacts\\asignacion-pc\\1440-primera-asignacion.png",
+      "caption": "Primera asignación en prueba de interfaz. No acredita una placa física conectada.",
+      "sha256": "17404fdf87deb099b88053997088b3a43d048bdc5b915169b462d1a1d63bcdaf",
+      "page_title": "19 Asignar esta PC y conectar Arduino"
+    },
+    {
+      "source": "Branding\\UX\\implementacion-080\\portal-laboratorio.png",
+      "caption": "Laboratorio 0.8.0 en DEMO. La misma vista informa que el ejemplo no envía notificaciones.",
+      "sha256": "c45d1c958f14be521e3ac6503817ce99fcd5ab161f35d7307143c231f7e22822",
+      "page_title": "22 Probar una notificación desde la nube"
+    }
+  ],
+  "source_scope": "Capturas existentes de demostración/emulador/pruebas controladas; sin credenciales ni acciones cloud nuevas."
+}

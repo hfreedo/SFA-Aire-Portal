@@ -1,0 +1,98 @@
+[
+  {
+    "source": "Branding/logo/sfa-aire-verde-transparente.png",
+    "published": "docs/manual-usuario/capturas/01-sfa-aire-verde-transparente.png",
+    "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75",
+    "caption": "Logotipo de SFA Aire"
+  },
+  {
+    "source": "artifacts/manual-usuario-20261027/recorrido.png",
+    "published": "docs/manual-usuario/capturas/02-recorrido.png",
+    "sha256": "8f97bb0e12a040b758d59bc66c478366bfbe5db4c660c59d1c15846d6fd71bb2",
+    "caption": "Recorrido de uso del sistema. Esquema explicativo, no evidencia de sensores o recepción física."
+  },
+  {
+    "source": "artifacts/invitaciones/1440-alta.png",
+    "published": "docs/manual-usuario/capturas/03-1440-alta.png",
+    "sha256": "140cea55e2b51dcff92e173df79706e8d360344b54440525a2a598f3254c3cfa",
+    "caption": "Alta por invitación en una prueba controlada. El correo example.test es ficticio; no se muestra un enlace ni QR utilizables."
+  },
+  {
+    "source": "artifacts/android-082/normal-acceso.png",
+    "published": "docs/manual-usuario/capturas/04-normal-acceso.png",
+    "sha256": "f36c09f4da0292febdab7b474e1bb7a4b5b9a88118b089257e09d2c924db3c77",
+    "caption": "Acceso Android 0.8.2 ejecutado en emulador. Los campos de cuenta son equivalentes al acceso web."
+  },
+  {
+    "source": "Branding/UX/implementacion-080/portal-aulas.png",
+    "published": "docs/manual-usuario/capturas/05-portal-aulas.png",
+    "sha256": "ca2b133a4342abf4a211915557f67b744ef1f826311356dda88bb5fcbd1e4da3",
+    "caption": "Portal 0.8.0 en demostración. Menú lateral, selector de aula, aviso pendiente y tarjetas de sensores."
+  },
+  {
+    "source": "artifacts/portal-integrado/1440-avisos.png",
+    "published": "docs/manual-usuario/capturas/06-1440-avisos.png",
+    "sha256": "65f78bf0b3a47f1ad47b2627214afb81b0639015fde92903fbfc8f0832830e80",
+    "caption": "Vista web de avisos con datos de ejemplo. El aviso atendido sigue conservando su origen y su fecha."
+  },
+  {
+    "source": "artifacts/portal-integrado/1440-historial.png",
+    "published": "docs/manual-usuario/capturas/07-1440-historial.png",
+    "sha256": "6d61b0c8855e21534f3e200458cc46143fffbde2c9aada4b74c9260e52dd71db",
+    "caption": "Historial del portal en una prueba de interfaz. La gráfica representa una consulta de ejemplo."
+  },
+  {
+    "source": "artifacts/android-082/normal-aula.png",
+    "published": "docs/manual-usuario/capturas/08-normal-aula.png",
+    "sha256": "f5d3a40284dcaddeebecfa439f1fb7fc5f8181fbaafbc7f1d15afb4643c1ebb1",
+    "caption": "Mi aula en Android 0.8.2. Captura nativa de demostración en emulador, con lectura sintética."
+  },
+  {
+    "source": "artifacts/android-082/normal-aviso-expandido.png",
+    "published": "docs/manual-usuario/capturas/09-normal-aviso-expandido.png",
+    "sha256": "68824bc5b76a759490b635f8cc3e8253feb3c37b3c214aa3417f6049b39c0d7e",
+    "caption": "Aviso desplegado en Android 0.8.2, emulador y datos de demostración. La lectura conserva su fecha."
+  },
+  {
+    "source": "artifacts/android-082/normal-archivo-personal.png",
+    "published": "docs/manual-usuario/capturas/10-normal-archivo-personal.png",
+    "sha256": "0059e0c4a0a8674fde015b23073a4476680f4dca0fb67dfe8fba23afb8fe8f35",
+    "caption": "Archivo personal Android con un aviso aún pendiente. Ejemplo en emulador, sin cambios cloud."
+  },
+  {
+    "source": "artifacts/android-082/normal-registro-expandido.png",
+    "published": "docs/manual-usuario/capturas/11-normal-registro-expandido.png",
+    "sha256": "ca5c857caf12e6871889516696416356d95efc3033058b2740b82f71b2fa8449",
+    "caption": "Ajustes y detalles del registro en Android 0.8.2. Esta captura de DEMO no muestra un registro FCM real."
+  },
+  {
+    "source": "artifacts/administracion-etapa1/1440-resumen.png",
+    "published": "docs/manual-usuario/capturas/12-1440-resumen.png",
+    "sha256": "ef1172f40e7209529f44a7e0dd8213039a0b17899879d53cc4bfe514cc64e650",
+    "caption": "Resumen administrativo en un ensayo de interfaz con aulas de ejemplo."
+  },
+  {
+    "source": "artifacts/administracion-etapa1/1440-personas.png",
+    "published": "docs/manual-usuario/capturas/13-1440-personas.png",
+    "sha256": "a18da9a66986ee3a9d2b7abdb4a1ac94a15a5a753bd9ec2415f7d4b8274b4919",
+    "caption": "Personas e invitaciones en una prueba controlada. Los correos de ejemplo no son credenciales para ingresar."
+  },
+  {
+    "source": "artifacts/administracion-etapa1/1440-pc.png",
+    "published": "docs/manual-usuario/capturas/14-1440-pc.png",
+    "sha256": "b3b6bb588ab3fe9cc84bbf5755ed1a6760c54cb5e52c2952c943a701d01f2b88",
+    "caption": "Gestión de PC en una prueba controlada. El vínculo de receptor es diferente al registro de un teléfono."
+  },
+  {
+    "source": "artifacts/asignacion-pc/1440-primera-asignacion.png",
+    "published": "docs/manual-usuario/capturas/15-1440-primera-asignacion.png",
+    "sha256": "17404fdf87deb099b88053997088b3a43d048bdc5b915169b462d1a1d63bcdaf",
+    "caption": "Primera asignación en prueba de interfaz. No acredita una placa física conectada."
+  },
+  {
+    "source": "Branding/UX/implementacion-080/portal-laboratorio.png",
+    "published": "docs/manual-usuario/capturas/16-portal-laboratorio.png",
+    "sha256": "c45d1c958f14be521e3ac6503817ce99fcd5ab161f35d7307143c231f7e22822",
+    "caption": "Laboratorio 0.8.0 en DEMO. La misma vista informa que el ejemplo no envía notificaciones."
+  }
+]
