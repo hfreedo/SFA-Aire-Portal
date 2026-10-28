@@ -19,6 +19,8 @@ if __name__=='__main__':
    if(scale=='1.3'):
     tree=r.observe(profile+'-categorias');node=next(n for n in tree.iter('node') if n.get('class')=='android.widget.HorizontalScrollView');x1,y1,x2,y2=map(int,re.findall(r'\d+',node.get('bounds')));r.adb('shell','input','swipe',str(x2-12),str((y1+y2)//2),str(x1+12),str((y1+y2)//2),'250')
    r.click('Archivo, 1 avisos',prefix=True);r.observe(profile+'-archivo-personal')
+   r.click('Mi aula');r.click('Ver aviso');tree=r.observe(profile+'-aviso-archivado-desde-aula')
+   assert any(n.get('text')=='Datos simulados del aviso' for n in tree.iter('node'))
    r.click('Restaurar en la bandeja');r.observe(profile+'-archivo-restaurado')
    if(scale=='1.3'):
     tree=r.observe(profile+'-categorias-retorno');node=next(n for n in tree.iter('node') if n.get('class')=='android.widget.HorizontalScrollView');x1,y1,x2,y2=map(int,re.findall(r'\d+',node.get('bounds')));r.adb('shell','input','swipe',str(x1+12),str((y1+y2)//2),str(x2-12),str((y1+y2)//2),'250')

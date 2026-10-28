@@ -105,11 +105,11 @@
   },
   {
     "path": "docs/ANDROID_PILOTO_082.json",
-    "sha256": "3483029ace778076a68ef68e90cb48c48f1d9b741648aca6d3abedf329b5b512"
+    "sha256": "cdc73e46f04aeb001b2e95cbf9358583dc398cff094139e6f390d2647a93f94e"
   },
   {
     "path": "herramientas/revisar_android_082.py",
-    "sha256": "5571e270a5bc9c55daea4ea783d5d1acfad82ca2e2f45911a9423488dbcda2bb"
+    "sha256": "494c7674544647bc20b03531e4749593f1d505abfc0c617f69a5667bb4f3ce97"
   },
   {
     "path": "herramientas/sql-check/notice-evidence.test.mjs",
@@ -605,7 +605,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/CloudActivity.kt",
-    "sha256": "29a275de42bfadb0b0d083abfcd6aa8e27a4e63baab4e8c645790b107da62c44"
+    "sha256": "92eb24aabdc52b08d5265082262ef65af870d50714cc7ce6b3a1a26094d15250"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/CloudApi.kt",

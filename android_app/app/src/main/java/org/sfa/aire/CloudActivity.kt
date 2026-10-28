@@ -170,14 +170,17 @@ class CloudActivity:Activity() {
         if(list.size>1&&!demoMode){
             secondary(root,selected.getString("name")){
                 ui.choose("Selecciona un aula",list.map{it.getString("name")},list.indexOf(selected)){index->
-                    if(!busy){p.edit().putString("cloud_room",list[index].getString("id")).apply();render(data);scroll.post{scroll.scrollTo(0,0)};ui.enter(root)}
+                    if(!busy){p.edit().putString("cloud_room",list[index].getString("id")).apply();focusedIncident=null;appliedFocus=null;inboxFilter=org.sfa.aire.domain.InboxFilter.PENDING;render(data);scroll.post{scroll.scrollTo(0,0)};ui.enter(root)}
                 }
             }.apply{textSize=18f;gravity=android.view.Gravity.START or android.view.Gravity.CENTER_VERTICAL;contentDescription="Seleccionar aula. "+selected.getString("name");ui.surface(this,Color.WHITE);background=android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(ui.sage),ui.shape(Color.WHITE,ui.sageStrong),ui.shape(Color.WHITE));setCompoundDrawablesWithIntrinsicBounds(null,null,org.sfa.aire.ui.AireIcon(this@CloudActivity,"chevron",ui.green,22),null);compoundDrawablePadding=ui.dp(10)}
         } else text(root,selected.getString("name"),if(page=="incidentes")16f else 22f,true)
         selected.optString("school").takeIf{it.isNotBlank()}?.let{text(root,it,14f).setPadding(0,0,0,ui.dp(10))}
         val all=data.getJSONArray("incidents");val incidents=(0 until all.length()).map{all.getJSONObject(it)}.filter{it.getString("classroom_id")==roomId}
         if(page=="aula"){
-            ClassroomScreen(ui).render(data,roomId,incidents,freshnessUpdates,{goToPage("incidentes")},{refresh()},dataUpdates)
+            ClassroomScreen(ui).render(data,roomId,incidents,freshnessUpdates,{
+                focusedIncident=incidents.filter{it.optString("status")!="resuelto"}.maxByOrNull{it.optString("opened_at")}?.optString("id")
+                appliedFocus=null;goToPage("incidentes")
+            },{refresh()},dataUpdates)
             return
         }
         val owner=data.optJSONArray("memberships")?.optJSONObject(0)?.optString("user_id")?.takeIf{it.isNotBlank()}
