@@ -8,8 +8,8 @@
   {
     "source": "artifacts/manual-usuario-20261027/recorrido.png",
     "published": "docs/manual-usuario/capturas/02-recorrido.png",
-    "sha256": "8f97bb0e12a040b758d59bc66c478366bfbe5db4c660c59d1c15846d6fd71bb2",
-    "caption": "Recorrido de uso del sistema. Esquema explicativo, no evidencia de sensores o recepción física."
+    "sha256": "1815d016d534888580cf5c0736a26894edea5730318ab4594062445173e8a5f7",
+    "caption": "Cómo llegan las mediciones desde Arduino hasta el portal y el teléfono."
   },
   {
     "source": "artifacts/invitaciones/1440-alta.png",
@@ -45,7 +45,7 @@
     "source": "artifacts/android-082/normal-aula.png",
     "published": "docs/manual-usuario/capturas/08-normal-aula.png",
     "sha256": "f5d3a40284dcaddeebecfa439f1fb7fc5f8181fbaafbc7f1d15afb4643c1ebb1",
-    "caption": "Mi aula en Android 0.8.2. Captura nativa de demostración en emulador, con lectura sintética."
+    "caption": "Mi aula en Android 0.8.2, con datos de ejemplo. Captura de emulador."
   },
   {
     "source": "artifacts/android-082/normal-aviso-expandido.png",
@@ -57,7 +57,7 @@
     "source": "artifacts/android-082/normal-archivo-personal.png",
     "published": "docs/manual-usuario/capturas/10-normal-archivo-personal.png",
     "sha256": "0059e0c4a0a8674fde015b23073a4476680f4dca0fb67dfe8fba23afb8fe8f35",
-    "caption": "Archivo personal Android con un aviso aún pendiente. Ejemplo en emulador, sin cambios cloud."
+    "caption": "Archivo personal con un aviso que sigue pendiente. Ejemplo en emulador."
   },
   {
     "source": "artifacts/android-082/normal-registro-expandido.png",
@@ -87,7 +87,7 @@
     "source": "artifacts/asignacion-pc/1440-primera-asignacion.png",
     "published": "docs/manual-usuario/capturas/15-1440-primera-asignacion.png",
     "sha256": "17404fdf87deb099b88053997088b3a43d048bdc5b915169b462d1a1d63bcdaf",
-    "caption": "Primera asignación en prueba de interfaz. No acredita una placa física conectada."
+    "caption": "Pantalla de asignación de una PC a un aula. Ejemplo sin Arduino conectado."
   },
   {
     "source": "Branding/UX/implementacion-080/portal-laboratorio.png",

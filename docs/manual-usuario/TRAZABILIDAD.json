@@ -12,8 +12,8 @@
     },
     {
       "source": "artifacts\\manual-usuario-20261027\\recorrido.png",
-      "caption": "Recorrido de uso del sistema. Esquema explicativo, no evidencia de sensores o recepción física.",
-      "sha256": "8f97bb0e12a040b758d59bc66c478366bfbe5db4c660c59d1c15846d6fd71bb2",
+      "caption": "Cómo llegan las mediciones desde Arduino hasta el portal y el teléfono.",
+      "sha256": "1815d016d534888580cf5c0736a26894edea5730318ab4594062445173e8a5f7",
       "page_title": "01 Qué hace el sistema y qué necesita cada persona"
     },
     {
@@ -25,14 +25,14 @@
     {
       "source": "artifacts\\android-082\\normal-acceso.png",
       "caption": "Acceso Android 0.8.2 ejecutado en emulador. Los campos de cuenta son equivalentes al acceso web.",
-      "sha256": "dadf1295f117189df118a18fcc5d19c83826c557f18bd59a7721d55d1b4515eb",
-      "page_title": "06 Ingresar seleccionar aula y cerrar sesión"
+      "sha256": "f36c09f4da0292febdab7b474e1bb7a4b5b9a88118b089257e09d2c924db3c77",
+      "page_title": "06 Iniciar sesión y elegir un aula"
     },
     {
       "source": "Branding\\UX\\implementacion-080\\portal-aulas.png",
       "caption": "Portal 0.8.0 en demostración. Menú lateral, selector de aula, aviso pendiente y tarjetas de sensores.",
       "sha256": "ca2b133a4342abf4a211915557f67b744ef1f826311356dda88bb5fcbd1e4da3",
-      "page_title": "07 Recorrer el portal y consultar Mis aulas"
+      "page_title": "07 Consultar las mediciones en el portal"
     },
     {
       "source": "artifacts\\portal-integrado\\1440-avisos.png",
@@ -48,20 +48,20 @@
     },
     {
       "source": "artifacts\\android-082\\normal-aula.png",
-      "caption": "Mi aula en Android 0.8.2. Captura nativa de demostración en emulador, con lectura sintética.",
-      "sha256": "27959c64992ddc01bcff89e135af58033a9ff6d3793e0a2708a835bcf5e36606",
+      "caption": "Mi aula en Android 0.8.2, con datos de ejemplo. Captura de emulador.",
+      "sha256": "f5d3a40284dcaddeebecfa439f1fb7fc5f8181fbaafbc7f1d15afb4643c1ebb1",
       "page_title": "12 Leer Mi aula en Android"
     },
     {
       "source": "artifacts\\android-082\\normal-aviso-expandido.png",
       "caption": "Aviso desplegado en Android 0.8.2, emulador y datos de demostración. La lectura conserva su fecha.",
-      "sha256": "121565cd63cf1d6637f8e3124ee8e6714848a1dd81ec31180b75811b1928a0e3",
+      "sha256": "68824bc5b76a759490b635f8cc3e8253feb3c37b3c214aa3417f6049b39c0d7e",
       "page_title": "13 Abrir y atender un aviso en Android"
     },
     {
       "source": "artifacts\\android-082\\normal-archivo-personal.png",
-      "caption": "Archivo personal Android con un aviso aún pendiente. Ejemplo en emulador, sin cambios cloud.",
-      "sha256": "86cd0631a430620700cb685927d0806697f70df7263be97d3a6543bd55358c4a",
+      "caption": "Archivo personal con un aviso que sigue pendiente. Ejemplo en emulador.",
+      "sha256": "0059e0c4a0a8674fde015b23073a4476680f4dca0fb67dfe8fba23afb8fe8f35",
       "page_title": "14 Organizar el archivo personal de Android"
     },
     {
@@ -74,7 +74,7 @@
       "source": "artifacts\\administracion-etapa1\\1440-resumen.png",
       "caption": "Resumen administrativo en un ensayo de interfaz con aulas de ejemplo.",
       "sha256": "ef1172f40e7209529f44a7e0dd8213039a0b17899879d53cc4bfe514cc64e650",
-      "page_title": "16 Administrar aulas y sus datos"
+      "page_title": "16 Crear y editar aulas"
     },
     {
       "source": "artifacts\\administracion-etapa1\\1440-personas.png",
@@ -90,9 +90,9 @@
     },
     {
       "source": "artifacts\\asignacion-pc\\1440-primera-asignacion.png",
-      "caption": "Primera asignación en prueba de interfaz. No acredita una placa física conectada.",
+      "caption": "Pantalla de asignación de una PC a un aula. Ejemplo sin Arduino conectado.",
       "sha256": "17404fdf87deb099b88053997088b3a43d048bdc5b915169b462d1a1d63bcdaf",
-      "page_title": "19 Asignar esta PC y conectar Arduino"
+      "page_title": "19 Vincular la PC y conectar Arduino"
     },
     {
       "source": "Branding\\UX\\implementacion-080\\portal-laboratorio.png",

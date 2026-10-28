@@ -14,19 +14,19 @@ El paquete contiene documentación, no el programa ni cuentas o credenciales.
 
 Instalación y puesta en funcionamiento del monitoreo ambiental de aulas
 
-Edición del 27 de octubre de 2026. Windows y portal 0.8.0. Android 0.8.2 disponible en la entrega local del responsable.
+Edición revisada del 27 de octubre de 2026. Para Windows y portal 0.8.0 y app Android 0.8.2.
 
-Esta guía permite que una persona con los archivos oficiales y un acceso autorizado pueda instalar el sistema, activar su cuenta, consultar las mediciones y recibir o atender avisos. También explica las tareas del administrador y cómo conectar la maqueta a una PC.
+Esta guía explica cómo instalar SFA Aire, activar su cuenta, consultar las mediciones y recibir avisos en el teléfono. También incluye las tareas del administrador y la conexión de la maqueta Arduino a una PC.
 
-Los archivos por sí solos no crean una cuenta ni conceden permisos. Para ingresar necesita una invitación del administrador o una cuenta ya asignada a un aula. La infraestructura de esta instalación está preparada; crear una institución o un proyecto cloud nuevo requiere intervención técnica independiente.
+Para ingresar necesita una invitación del administrador o una cuenta que ya tenga acceso a un aula. Descargar el programa no crea esa cuenta. El manual supone que la institución ya tiene configurados los servicios de internet que utiliza SFA Aire; si comienza desde cero, solicite primero esa preparación al responsable técnico.
 
 <img src="manual-usuario/capturas/01-sfa-aire-verde-transparente.png" alt="SFA Aire" width="180">
 
-Qué encontrará: recorridos numerados, resultados esperados, explicación de cada apartado, capturas de referencia y soluciones a problemas frecuentes. Los nombres en negrita corresponden a controles o mensajes del sistema.
+Los capítulos presentan los pasos de cada tarea y explican qué debería aparecer en pantalla. Los nombres en negrita corresponden a botones, campos o mensajes del sistema.
 
-Alcance de las imágenes: se utilizan capturas de la aplicación y del portal en demostración, emulador o pruebas controladas. Las cuentas y mediciones de ejemplo no son datos de un aula real. Las fechas de ejemplo no deben interpretarse como la fecha de su instalación.
+Las capturas muestran pantallas de demostración o pruebas. Sus cuentas, valores y fechas son ejemplos. Las imágenes de Android se obtuvieron en un emulador, es decir, un teléfono virtual ejecutado en la PC.
 
-SFA Aire es un prototipo educativo de observación ambiental relativa. El MQ135 no mide CO₂, AQI ni ppm certificadas. Las lecturas y avisos apoyan la revisión humana; no certifican salubridad ni deciden automáticamente una evacuación.
+SFA Aire es un prototipo educativo para observar temperatura, humedad y cambios en la señal del MQ135. Esta versión no calcula concentraciones de CO₂, valores en ppm ni índices de calidad del aire como AQI. Sus avisos indican que conviene revisar la situación; no certifican que el aula sea saludable ni ordenan una evacuación.
 
 <a id="cap_1"></a>
 
@@ -35,34 +35,34 @@ SFA Aire es un prototipo educativo de observación ambiental relativa. El MQ135 
 Si va a consultar desde el navegador, empiece por los capítulos 03, 05, 06 y 07. Si usará Android, continúe con 11 a 15. Si conectará una maqueta, necesita además 04 y 19 a 21. Las tareas de administración se encuentran en 16 a 18; las pruebas, en 22 y 23.
 
 - [01 Qué hace el sistema y qué necesita cada persona](#cap_2)
-- [02 Archivos requisitos y versiones](#cap_3)
-- [03 Elegir entre portal app y demostración](#cap_4)
-- [04 Instalar Windows y abrir el panel](#cap_5)
+- [02 Requisitos y archivos de instalación](#cap_3)
+- [03 Elegir cómo acceder al sistema](#cap_4)
+- [04 Instalar SFA Aire en Windows](#cap_5)
 - [05 Activar su cuenta mediante una invitación](#cap_6)
-- [06 Ingresar seleccionar aula y cerrar sesión](#cap_7)
-- [07 Recorrer el portal y consultar Mis aulas](#cap_8)
-- [08 Entender estados antigüedad y mediciones](#cap_9)
+- [06 Iniciar sesión y elegir un aula](#cap_7)
+- [07 Consultar las mediciones en el portal](#cap_8)
+- [08 Interpretar las mediciones y sus estados](#cap_9)
 - [09 Consultar y atender avisos en la web](#cap_10)
 - [10 Consultar el historial](#cap_11)
-- [11 Instalar o actualizar Android](#cap_12)
+- [11 Instalar o actualizar la app Android](#cap_12)
 - [12 Leer Mi aula en Android](#cap_13)
 - [13 Abrir y atender un aviso en Android](#cap_14)
 - [14 Organizar el archivo personal de Android](#cap_15)
 - [15 Activar avisos y preferencias del teléfono](#cap_16)
-- [16 Administrar aulas y sus datos](#cap_17)
+- [16 Crear y editar aulas](#cap_17)
 - [17 Invitar personas y gestionar accesos](#cap_18)
 - [18 Administrar las PC del aula](#cap_19)
-- [19 Asignar esta PC y conectar Arduino](#cap_20)
+- [19 Vincular la PC y conectar Arduino](#cap_20)
 - [20 Preparar la maqueta y verificar sus conexiones](#cap_21)
 - [21 Configurar las reglas de la maqueta](#cap_22)
 - [22 Probar una notificación desde la nube](#cap_23)
 - [23 Ensayar el recorrido completo con la PC](#cap_24)
-- [24 Resolver problemas de acceso lecturas y avisos](#cap_25)
-- [25 Cerrar actualizar y proteger la instalación](#cap_26)
-- [26 Comprobación de primera puesta en funcionamiento](#cap_27)
-- [27 Glosario alcance y referencias de la guía](#cap_28)
+- [24 Solucionar problemas frecuentes](#cap_25)
+- [25 Cerrar el sistema y cuidar sus datos](#cap_26)
+- [26 Comprobar el primer uso](#cap_27)
+- [27 Glosario y referencias](#cap_28)
 
-Cómo leer los pasos: realice las acciones en el orden indicado y compruebe el resultado esperado antes de seguir. Si falta una opción, revise primero el aula y el permiso de su cuenta. Un control deshabilitado en demostración no indica necesariamente una avería.
+Siga los pasos en orden y compruebe lo que aparece en pantalla antes de continuar. Si falta una opción, revise el aula seleccionada y su permiso. En demostración, algunas acciones están deshabilitadas porque no se guardan cambios.
 
 Las capturas se incluyen como referencia visual. En GitHub puede abrir las imágenes; en el manual HTML descargado puede pulsarlas para ampliarlas. Los ejemplos no proporcionan contraseñas ni enlaces válidos de invitación.
 
@@ -70,13 +70,13 @@ Las capturas se incluyen como referencia visual. En GitHub puede abrir las imág
 
 ## 01 Qué hace el sistema y qué necesita cada persona
 
-SFA Aire reúne temperatura, humedad y señal relativa MQ135 de una maqueta Arduino. Una PC recibe los datos por USB y los sincroniza. El portal y Android permiten consultar las aulas autorizadas; el servicio cloud envía avisos a los teléfonos registrados.
+La maqueta Arduino envía temperatura, humedad y señal MQ135 a una PC mediante USB. La PC guarda esos datos y envía una copia a los servicios de internet del proyecto, llamados nube en este manual. Desde allí se consultan en el portal y en Android, y se envían notificaciones al teléfono, también llamadas push.
 
-![Recorrido de uso del sistema. Esquema explicativo, no evidencia de sensores o recepción física.](manual-usuario/capturas/02-recorrido.png)
+![Cómo llegan las mediciones desde Arduino hasta el portal y el teléfono.](manual-usuario/capturas/02-recorrido.png)
 
-*Recorrido de uso del sistema. Esquema explicativo, no evidencia de sensores o recepción física.*
+*Cómo llegan las mediciones desde Arduino hasta el portal y el teléfono.*
 
-La PC y el Arduino deben permanecer encendidos para obtener nuevas mediciones físicas. Una vez guardado un evento en la nube, su envío remoto no depende del receptor PC. Poder abrir el portal con la PC apagada no significa que se estén obteniendo muestras nuevas.
+La PC y el Arduino deben permanecer encendidos para obtener nuevas mediciones. El programa de la PC que recibe los datos se llama receptor. Una vez guardado un aviso en la nube, puede enviarse al teléfono aunque ese receptor se detenga. Con la PC apagada podrá consultar los datos guardados, pero no recibirá nuevas mediciones de esa maqueta.
 
 | Persona | Puede hacer en su aula |
 | --- | --- |
@@ -84,15 +84,15 @@ La PC y el Arduino deben permanecer encendidos para obtener nuevas mediciones f�
 | Docente | Consultar mediciones e historial y marcar avisos como atendidos. |
 | Observador | Consultar los apartados disponibles; no atender ni administrar. |
 
-Los permisos son por aula. La misma cuenta puede tener funciones diferentes al cambiar de aula. Crear aulas nuevas requiere una capacidad institucional específica: administrar un aula no garantiza ese permiso.
+Los permisos se asignan por aula. Por eso, al cambiar de aula puede encontrar opciones diferentes. Crear aulas nuevas requiere una autorización adicional; no todas las cuentas administradoras la tienen.
 
-Resultado esperado: cada persona identifica si necesita solo navegador, app Android o una PC con Arduino. Los teléfonos no se registran como PC receptoras.
+Para consultar basta un navegador o la app Android. Para recibir mediciones nuevas del Arduino, además necesita la PC receptora. Un teléfono no reemplaza a esa PC.
 
 <a id="cap_3"></a>
 
-## 02 Archivos requisitos y versiones
+## 02 Requisitos y archivos de instalación
 
-Use los archivos oficiales de https://github.com/hfreedo/SFA-Aire-Portal/releases. Identifique el nombre exacto antes de descargar: la página puede mostrar varias entregas históricas.
+Los archivos publicados se encuentran en https://github.com/hfreedo/SFA-Aire-Portal/releases. Esa página reúne versiones anteriores y actuales: compruebe el nombre del archivo antes de descargarlo.
 
 | Elemento | Archivo o requisito |
 | --- | --- |
@@ -100,21 +100,21 @@ Use los archivos oficiales de https://github.com/hfreedo/SFA-Aire-Portal/release
 | Android de este manual | SFA_Aire_0.8.2.apk, disponible en Entregas de esta instalación. Solicítela al responsable. Android 8 o posterior. |
 | Consulta web | Navegador actualizado e internet; no necesita instalar el receptor para consultar la nube. |
 | Avisos Android | Internet, servicios de Google Play, permiso de notificaciones y registro del teléfono en el aula. |
-| Maqueta | Placa y firmware compatibles, sensores preparados, cable USB de datos y controlador USB si corresponde. |
+| Maqueta | Placa con el programa de Arduino correspondiente, sensores preparados, cable USB de datos y controlador USB si corresponde. |
 
-El ZIP Windows 0.8.0 conserva la APK 0.8.0 de su entrega original. Para las funciones Android que describe este manual, utilice la APK 0.8.2 separada. Una descarga Wi-Fi desde un portable antiguo puede entregar una APK anterior; compruebe la versión en Ajustes. Al verificar los releases el 27 de octubre, Android 0.8.1 estaba publicado por separado y 0.8.2 todavía no aparecía: no busque un release 0.8.2 si aún no está disponible.
+Un portable es un programa que se utiliza después de extraer su carpeta, sin un instalador adicional. El ZIP Windows 0.8.0 incluye la app Android 0.8.0. Este manual describe Android 0.8.2: solicite ese APK por separado al responsable. APK es el archivo de instalación de Android. Al revisar las descargas el 27 de octubre, la actualización pública era 0.8.1 y la 0.8.2 solo estaba disponible en la carpeta del proyecto.
 
-El portable incluye sus componentes de ejecución: no necesita instalar Python ni Node.js para usarlo. La placa Arduino requiere su firmware y, según el modelo, un controlador USB preparado por el responsable técnico.
+El portable ya contiene lo necesario para ejecutar SFA Aire: no necesita instalar Python ni Node.js. La placa Arduino sí debe tener cargado su programa. Según el modelo, el responsable técnico también debe instalar un controlador para que Windows reconozca el USB.
 
-Los ejecutables Windows no tienen firma Authenticode. La APK utiliza firma piloto debug; no es una publicación de producción en Play Store. Compruebe la procedencia y los hashes del release. No desactive globalmente las protecciones de Windows o Android para instalar.
+Windows puede mostrar una advertencia porque los ejecutables no tienen firma digital de editor. La app Android es una versión piloto, no una publicación en Play Store. Use los archivos entregados por el responsable o por el repositorio oficial. Si duda de un archivo, solicite que se compare su código de comprobación SHA256. No desactive las protecciones generales del equipo.
 
-Si recibió únicamente fuentes y archivos de desarrollo, solicite el portable al responsable. Los scripts de compilación y las migraciones de base de datos no forman parte del primer uso de una persona usuaria.
+Si recibió solamente código fuente, solicite el portable al responsable. Para usar el sistema no necesita compilar programas ni modificar la base de datos.
 
 <a id="cap_4"></a>
 
-## 03 Elegir entre portal app y demostración
+## 03 Elegir cómo acceder al sistema
 
-El acceso web público es https://sfa-aire-aulas.web.app/remoto. Permite consultar aulas, avisos e historial y usar las funciones administrativas autorizadas. No abre el USB del teléfono ni convierte cualquier navegador en receptor Arduino.
+El portal en internet es https://sfa-aire-aulas.web.app/remoto. Puede abrirlo desde una PC o un teléfono para consultar sus aulas, avisos e historial. También permite administrar el sistema si su cuenta tiene ese permiso. Para conectar el Arduino por USB debe usar el panel de Windows.
 
 En Windows, el panel abre el portal local de esa instalación. Es el recorrido apropiado para asignar la PC y controlar el puerto USB. Abra siempre desde el panel: el puerto local puede variar si otra instalación está usando el habitual.
 
@@ -125,13 +125,13 @@ Android está pensado para consultar el aula y recibir avisos. Iniciar sesión e
 3. Recorra las pantallas. Los datos son ejemplos y las acciones reales permanecen restringidas.
 4. Salga de la demostración para iniciar sesión con su cuenta.
 
-Es importante distinguir dos situaciones: la demostración de interfaz no envía notificaciones ni cambia la nube; un ensayo administrativo real del Laboratorio sí puede guardar datos sintéticos y enviar un push real rotulado SIMULACIÓN.
+**Explorar demostración** sirve para conocer las pantallas sin guardar ni enviar nada. En cambio, las pruebas del **Laboratorio**, iniciadas por un administrador con su cuenta, pueden guardar mediciones de ejemplo y enviar notificaciones reales con el rótulo SIMULACIÓN.
 
-Resultado esperado: sabe si está observando una maqueta real, explorando ejemplos o ejecutando una prueba autorizada. No use una demostración como evidencia de que el teléfono quedó registrado.
+Para comprobar que un teléfono recibe avisos, registre la app y siga la prueba del capítulo 22. Recorrer la demostración no realiza ese registro.
 
 <a id="cap_5"></a>
 
-## 04 Instalar Windows y abrir el panel
+## 04 Instalar SFA Aire en Windows
 
 1. Descargue el ZIP portable indicado en el capítulo 02.
 2. En el Explorador de Windows, haga clic derecho sobre el ZIP y seleccione **Extraer todo**. Elija una carpeta propia con permiso de escritura, por ejemplo Documentos\SFA_Aire.
@@ -144,25 +144,25 @@ No ejecute el programa desde la vista del ZIP ni copie únicamente el EXE. No me
 | Control del panel | Para qué sirve |
 | --- | --- |
 | Abrir SFA Aire | Abre el sistema y pone en marcha el servidor de esta instalación. |
-| Conectar Arduino | Lleva al recorrido del portal local para vincular y conectar la placa. |
+| Conectar Arduino | Abre el portal de esta PC para asignarle un aula y conectar la placa. |
 | Abrir demostración | Abre ejemplos aislados para conocer la interfaz sin nube. |
 | Instalar por Wi-Fi | Ofrece temporalmente la APK incluida; necesita PC y teléfono en la misma red. |
 | Actualizar estado | Comprueba el estado de los componentes del panel. |
 | Detener monitoreo | Detiene el receptor y la demostración de esta carpeta. |
 
-Al cerrar el panel, elija **Cerrar panel y mantener monitoreo** si la PC seguirá adquiriendo datos, o **Detener monitoreo y salir** para terminar. Cerrar una pestaña del navegador no detiene por sí solo el receptor.
+Al cerrar el panel, elija **Cerrar panel y mantener monitoreo** si la PC debe seguir recibiendo mediciones, o **Detener monitoreo y salir** para terminar. Cerrar una pestaña del navegador no detiene el receptor.
 
-Resultado esperado: aparece la pantalla de acceso o la demostración. El receptor escucha en localhost por defecto; no necesita abrir puertos del router. Si no abre, revise el diagnóstico del panel antes de intentar otra instalación.
+Debería abrirse la pantalla de acceso o la demostración. El receptor se comunica con el navegador dentro de la misma PC; no necesita cambiar el router. Si no se abre, consulte el estado que muestra el panel antes de intentar otra instalación.
 
 <a id="cap_6"></a>
 
 ## 05 Activar su cuenta mediante una invitación
 
-El alta no es libre. Solicite al administrador una invitación para su correo y su aula. El administrador comparte un enlace privado o QR; el sistema no envía correo automáticamente. El enlace vence en una hora y puede revocarse.
+Para crear su cuenta, pida al administrador una invitación para su correo y su aula. Recibirá un enlace privado o un código QR que deberá abrir o escanear. El sistema no envía ese enlace por correo automáticamente: el administrador debe compartirlo con usted. La invitación vence en una hora.
 
 1. Abra el enlace privado que recibió. Si tiene el enlace copiado, use **Tengo una invitación**, péguelo completo y pulse **Continuar**.
 2. Si es una cuenta nueva, verá **Activa tu cuenta**. Compruebe el **Correo de la invitación**; no se modifica desde ese formulario.
-3. Escriba una contraseña propia en **Crea tu contraseña** y repítala en **Confirma tu contraseña**. Debe tener entre 12 y 128 caracteres. No utilice la contraseña ilustrada ni se la envíe al administrador.
+3. Escriba una contraseña propia en **Crea tu contraseña** y repítala en **Confirma tu contraseña**. Debe tener entre 12 y 128 caracteres. Guárdela en un lugar seguro y no se la envíe al administrador.
 4. Pulse **Crear contraseña y entrar** y espere la confirmación. El acceso al aula se asigna al aceptar.
 5. Si ya tiene cuenta, verá **Acepta tu invitación**: use su contraseña actual y pulse **Aceptar y entrar**. La invitación no cambia esa contraseña.
 
@@ -172,19 +172,19 @@ El alta no es libre. Solicite al administrador una invitación para su correo y 
 
 En Android, **Tengo una invitación** abre el navegador. Complete allí la activación, vuelva a SFA Aire e ingrese con su correo y contraseña. La sesión del navegador no se transfiere a la app.
 
-Si el enlace venció, fue revocado o no corresponde a su correo, solicite uno nuevo. Si olvidó una contraseña existente, contacte al administrador: la pantalla actual no ofrece recuperación autoservicio. Aceptar una invitación no activa los avisos del teléfono; complete el capítulo 15.
+Si el enlace venció, fue revocado o no corresponde a su correo, solicite uno nuevo. Si olvidó su contraseña, contacte al administrador: esta versión no tiene un botón para recuperarla desde el acceso. Después de ingresar, active los avisos del teléfono como se explica en el capítulo 15.
 
 <a id="cap_7"></a>
 
-## 06 Ingresar seleccionar aula y cerrar sesión
+## 06 Iniciar sesión y elegir un aula
 
 1. Abra el portal público o el portal que inicia el panel Windows.
 2. En **Ingresar al monitoreo**, complete **Correo electrónico** y **Contraseña** y pulse **Ingresar**.
-3. Espere a que se verifiquen la cuenta y las aulas. Una pantalla de carga o error no significa que tenga cero aulas.
+3. Espere a que termine de cargar la lista de aulas. Si aparece un error, use la opción de reintento; todavía no se pudo consultar la lista.
 4. Elija el aula en **Aula seleccionada**. Compruebe su nombre antes de leer, atender o configurar algo.
-5. Use **Actualizar** para solicitar el estado verificado cuando lo necesite.
+5. Use **Actualizar** para volver a consultar los datos.
 
-Si la cuenta no tiene aulas, solicite al responsable que revise la invitación y la membresía. Tener cuenta no implica acceso a todas las aulas. Si ingresa con otra cuenta, cierre primero la sesión actual.
+Si la lista se cargó pero no tiene aulas, pida al responsable que revise su invitación y su acceso al aula. Tener cuenta no le da acceso a todas las aulas. Para usar otra cuenta, cierre primero la sesión actual.
 
 ![Acceso Android 0.8.2 ejecutado en emulador. Los campos de cuenta son equivalentes al acceso web.](manual-usuario/capturas/04-normal-acceso.png)
 
@@ -194,11 +194,11 @@ Ante un error de correo o contraseña, revise los datos antes de reintentar. Si 
 
 En una PC compartida, pulse **Cerrar sesión** al terminar. En Android utilice **Cerrar sesión y desvincular teléfono**, explicado en el capítulo 25. Cerrar la ventana no garantiza el cierre de la sesión.
 
-Resultado esperado: el nombre del aula y las opciones disponibles corresponden a su cuenta. No deben aparecer campos para introducir claves administrativas de Supabase o Firebase.
+Al ingresar debería ver el nombre de su aula y las opciones permitidas para su cuenta. El acceso habitual pide correo y contraseña; no necesita claves administrativas de Supabase o Firebase.
 
 <a id="cap_8"></a>
 
-## 07 Recorrer el portal y consultar Mis aulas
+## 07 Consultar las mediciones en el portal
 
 El menú reúne **Mis aulas**, **Avisos** e **Historial**. Según sus permisos también verá **Conexión Arduino**, **Administración** y **Laboratorio**. En pantalla pequeña, utilice la navegación disponible y mantenga visible el aula seleccionada.
 
@@ -207,37 +207,37 @@ El menú reúne **Mis aulas**, **Avisos** e **Historial**. Según sus permisos t
 *Portal 0.8.0 en demostración. Menú lateral, selector de aula, aviso pendiente y tarjetas de sensores.*
 
 1. En **Mis aulas**, verifique el nombre del aula y la conexión.
-2. Distinga **ARDUINO REAL** de **Pruebas y simulaciones**. Las muestras físicas y sintéticas no representan el mismo origen.
-3. Lea temperatura en °C, humedad en % y señal MQ135 en ADC o veces su referencia. Revise también el estado y la antigüedad de la muestra.
+2. Distinga **ARDUINO REAL**, que corresponde a la maqueta, de **Pruebas y simulaciones**, que contiene valores generados para ensayar el sistema.
+3. Lea temperatura en °C, humedad en % y señal MQ135 en ADC. ADC es el número de la lectura analógica, no una concentración de gas. El valor **× referencia** compara esa señal con la referencia guardada. Revise también cuándo se recibió la muestra.
 4. Si hay un aviso pendiente, use **Revisar avisos** o **Ver aviso**.
 5. Para explorar cambios anteriores, pulse **Ver historial**.
 
 **Esperando mediciones reales** significa que no hay muestras físicas sincronizadas para esa aula. Los guiones en las tarjetas no equivalen a un valor cero. Si hay muestras simuladas, pueden aparecer en una sección separada aunque todavía no exista Arduino conectado.
 
-**Sin atención pendiente** significa que no hay avisos abiertos dentro del estado consultado. No demuestra que haya lectura actual ni que el ambiente sea saludable. Revise siempre fuente, vigencia y sensores.
+**Sin atención pendiente** significa que la consulta no muestra avisos por atender. Compruebe también el origen y la fecha de la última lectura: puede no haber avisos aunque la maqueta esté desconectada.
 
 <a id="cap_9"></a>
 
-## 08 Entender estados antigüedad y mediciones
+## 08 Interpretar las mediciones y sus estados
 
 | Mensaje | Cómo interpretarlo y qué revisar |
 | --- | --- |
-| Sin variación sostenida | La regla no confirma una variación en las muestras válidas. No es una certificación sanitaria. |
+| Sin variación sostenida | No se confirmó una variación que cumpla los umbrales y tiempos configurados. No es una certificación sanitaria. |
 | Variación sostenida | Se alcanzó el nivel de aviso durante el tiempo configurado. Revise ambiente y lectura. |
 | Revisar ambiente | Se confirmó una alerta. Consulte el aviso y actúe según el procedimiento de la institución. |
 | Revisar sensores | Alguna medición es inválida o se detectó un fallo. Revise alimentación, conexiones y diagnóstico. |
 | Estabilizando sensor | Está en la espera inicial. No sustituye el acondicionamiento del módulo. |
-| Falta referencia | El MQ135 necesita una referencia experimental válida y su confirmación. |
-| Sin datos recientes | No hay una medición vigente verificable. Los valores anteriores son históricos. |
-| Monitoreo detenido | La adquisición está detenida. No habrá nuevas muestras hasta reanudarla. |
+| Falta referencia | Falta medir y guardar la referencia del MQ135, o confirmar que el sensor fue acondicionado. |
+| Sin datos recientes | La última lectura ya es antigua o no hay datos. No permite conocer el estado actual. |
+| Monitoreo detenido | El receptor no está recibiendo mediciones. Debe iniciarse de nuevo para obtenerlas. |
 
-El receptor USB considera vencida una lectura tras más de 10 segundos sin muestra válida. La consulta cloud permite hasta 95 segundos de antigüedad porque la sincronización normal es aproximadamente cada minuto. Son criterios de vigencia distintos; no espere que ambas pantallas actualicen al mismo segundo.
+Una **lectura vencida** es un dato guardado que ya es demasiado antiguo para mostrarlo como actual. En el receptor USB ocurre después de más de 10 segundos sin muestra válida. En la nube se permiten hasta 95 segundos porque las mediciones se envían normalmente cada minuto. Por eso las pantallas local y remota pueden actualizarse en momentos diferentes.
 
-La fecha del aviso y la fecha de la lectura actual también son distintas. En Android puede tocar la antigüedad para ver la fecha exacta. Una entrega atrasada conserva su fecha; no debe interpretarse como una alerta recién medida.
+La fecha de un aviso puede ser diferente a la de la lectura actual. En Android puede tocar la antigüedad para ver la fecha exacta. Si una notificación llega con retraso, revise cuándo ocurrió el aviso antes de interpretarlo como una situación nueva.
 
-El DHT mide temperatura y humedad. El MQ135 es multisensible y depende de alimentación, acondicionamiento y referencia. Un valor como 560 ADC no equivale a 560 ppm. El cociente × referencia tampoco identifica un gas.
+El DHT mide temperatura y humedad. El MQ135 responde a distintas sustancias y su lectura depende de la alimentación y preparación del sensor. Un valor como 560 ADC no equivale a 560 ppm. La comparación **× referencia** tampoco identifica un gas.
 
-Si se pierde la red o el sensor, no interprete el último color verde como normalidad actual. Verifique vigencia y use el canal institucional previsto si necesita comunicar una situación.
+Si se pierde la conexión o falla el sensor, revise la fecha de los últimos datos. El color que tenía una lectura anterior no describe el estado actual. Para comunicar una situación, use el medio acordado por su institución.
 
 <a id="cap_10"></a>
 
@@ -255,9 +255,9 @@ Si se pierde la red o el sensor, no interprete el último color verde como norma
 
 Si falla el guardado, el formulario conserva la nota. Lea el error antes de reintentar. Si otra persona modificó el aviso, actualice y revise su estado; no suponga que el intento anterior se guardó.
 
-**Marcar atendido** registra una decisión humana y la comparte con las personas autorizadas del aula. No modifica una lectura, no normaliza el ambiente y no acredita una acción que usted no haya realizado. La recuperación de los sensores tampoco atiende automáticamente el aviso. Abrir un push no lo atiende.
+**Marcar atendido** indica que usted dio por atendido el aviso. Las demás personas del aula verán ese estado cuando actualicen la pantalla. La medición sigue siendo independiente: atender no significa que los valores hayan vuelto a la normalidad. Tampoco se atiende un aviso automáticamente al abrir su notificación o al recuperarse los valores del sensor.
 
-**Compartir aviso** abre el selector del dispositivo o copia el texto si esa función no existe. Usted elige el canal y completa el envío. No hay envío automático ni confirmación de comprensión de la otra persona. Los observadores no pueden atender avisos.
+**Compartir aviso** permite elegir una aplicación de mensajería u otro medio disponible. Si el navegador no ofrece ese selector, se copia el texto para que usted lo pegue donde corresponda. Debe completar el envío en la aplicación elegida. Compartir no cambia la atención del aviso. Los observadores pueden consultar, pero no atender.
 
 <a id="cap_11"></a>
 
@@ -273,20 +273,20 @@ Si falla el guardado, el formulario conserva la nota. Lea el error antes de rein
 
 *Historial del portal en una prueba de interfaz. La gráfica representa una consulta de ejemplo.*
 
-La gráfica ayuda a reconocer variaciones. No es una vista de todas las mediciones desde la instalación ni una predicción. El botón obtiene hasta 60 muestras del origen elegido. En una pantalla pequeña puede desplazar la tabla horizontalmente.
+La gráfica muestra hasta 60 muestras del origen elegido, no todas las mediciones desde que comenzó a usarse el sistema. En una pantalla pequeña puede desplazar la tabla horizontalmente.
 
-Si cambia aula u origen, vuelva a consultar: el resultado anterior no debe atribuirse al nuevo contexto. Si no hay muestras, revise la selección y si ese origen llegó a registrar datos. La falta de filas no significa que un sensor midiera cero.
+Si cambia de aula u origen, vuelva a consultar. Si no aparecen filas, revise la selección y compruebe si se registraron datos de ese origen. Una tabla vacía no equivale a una medición de cero.
 
 Las lecturas que se sincronizan después de un corte de red conservan su hora original. Una fecha antigua sigue siendo histórica aunque aparezca ahora en la nube. La versión descrita no ofrece un botón general de exportación del historial.
 
-Resultado esperado: puede identificar qué variable y origen está consultando y a qué fecha corresponden los valores. Para conocer el estado actual, vuelva a Mis aulas y compruebe su vigencia.
+Compruebe la variable, el origen y las fechas antes de interpretar la gráfica. Para conocer la última lectura disponible, vuelva a **Mis aulas**.
 
 <a id="cap_12"></a>
 
-## 11 Instalar o actualizar Android
+## 11 Instalar o actualizar la app Android
 
-1. Solicite al responsable **SFA_Aire_0.8.2.apk**, disponible en la carpeta Entregas de esta instalación. Al verificar esta edición todavía no había un release público 0.8.2. Si se publica después, compruebe nombre, procedencia y versión antes de descargarlo.
-2. Abra el APK en el teléfono. Si Android lo solicita, permita a esa aplicación de origen instalar el archivo. El nombre y la ruta del permiso dependen del fabricante.
+1. Solicite al responsable **SFA_Aire_0.8.2.apk**, disponible en la carpeta Entregas del proyecto. Al preparar esta edición, ese archivo aún no estaba publicado en la página de descargas. Si se publica después, compruebe su nombre y versión.
+2. Abra el APK en el teléfono. Si Android lo solicita, autorice al navegador o gestor de archivos que está usando a instalar esa app. La ubicación de este permiso depende del modelo de teléfono.
 3. Complete la instalación. Si tiene una versión piloto con la misma firma, instale la actualización sobre ella para conservar los datos locales.
 4. Abra **SFA Aire**. Active primero su cuenta si recibió una invitación y luego pulse **Ingresar** con correo y contraseña.
 5. Revise **Ajustes** y confirme que la versión es 0.8.2. Continúe con el registro de avisos del capítulo 15.
@@ -295,9 +295,9 @@ Para una descarga Wi-Fi desde Windows, coloque PC y teléfono en la misma red, p
 
 El portable Windows 0.8.0 incluye una APK 0.8.0. Su herramienta Wi-Fi no garantiza la versión 0.8.2. Para obtenerla, use el archivo separado proporcionado por el responsable; no cambie archivos del portable al azar.
 
-La conexión USB del teléfono no es necesaria para instalar por Wi-Fi. Para consultar y recibir avisos cloud, no es necesario que el teléfono permanezca en la red de la PC: necesita internet y acceso al servicio.
+No necesita conectar el teléfono por USB para instalar por Wi-Fi. Una vez instalada y registrada la app, el teléfono puede recibir avisos fuera de esa red siempre que tenga internet.
 
-Si Android indica incompatibilidad de firma, no desinstale de inmediato. Solicite revisión del archivo y de la instalación anterior: borrar datos o desinstalar elimina el archivo personal de avisos. Android 0.8.2 sigue siendo una APK piloto; su aceptación física en el Samsung A02 está pendiente en las evidencias de esta edición.
+Si Android indica que no puede actualizar por una firma incompatible, solicite al responsable que revise el archivo. Evite desinstalar como primera solución, porque perdería el archivo personal de avisos. La versión 0.8.2 fue revisada en un emulador; todavía falta comprobar esta versión en el Samsung A02 usado por el proyecto.
 
 <a id="cap_13"></a>
 
@@ -305,33 +305,33 @@ Si Android indica incompatibilidad de firma, no desinstale de inmediato. Solicit
 
 La navegación inferior contiene **Mi aula**, **Avisos** y **Ajustes**. Si su cuenta dispone de varias aulas, seleccione primero la que desea consultar. La selección de aula no registra automáticamente el teléfono para todas ellas.
 
-![Mi aula en Android 0.8.2. Captura nativa de demostración en emulador, con lectura sintética.](manual-usuario/capturas/08-normal-aula.png)
+![Mi aula en Android 0.8.2, con datos de ejemplo. Captura de emulador.](manual-usuario/capturas/08-normal-aula.png)
 
-*Mi aula en Android 0.8.2. Captura nativa de demostración en emulador, con lectura sintética.*
+*Mi aula en Android 0.8.2, con datos de ejemplo. Captura de emulador.*
 
 1. En **Mi aula**, lea el nombre de la institución y del aula.
 2. Compruebe el rótulo de origen y el estado. **SIMULACIÓN** identifica un ejemplo o un ensayo, no un sensor real.
 3. Revise las tarjetas de temperatura y MQ135 y el valor de humedad. Los valores no disponibles no se sustituyen por cero.
 4. Toque la antigüedad de la lectura si necesita su fecha exacta. Abra **Información de sensores** para consultar su interpretación.
-5. Use **Actualizar aula** para solicitar una comprobación y **Ver aviso** para ir a la atención pendiente.
+5. Use **Actualizar aula** para consultar los datos de nuevo y **Ver aviso** para abrir el aviso pendiente.
 
-Si la lectura vence, consulte los datos históricos solo como diagnóstico. Actualizar la pantalla no vuelve a medir el ambiente: la nueva muestra debe llegar desde la maqueta y la PC. Si el teléfono está sin red, no puede acreditar una actualización cloud.
+Si la lectura está vencida, los valores que ve corresponden a otro momento. Pulsar Actualizar no hace que el sensor mida otra vez: la nueva muestra debe llegar desde la maqueta y la PC. El teléfono necesita internet para consultar esos datos.
 
 <a id="cap_14"></a>
 
 ## 13 Abrir y atender un aviso en Android
 
-1. Toque la notificación de SFA Aire o abra la pestaña **Avisos**. Una notificación legítima dirige al aviso correspondiente cuando su sesión conserva acceso.
+1. Toque la notificación de SFA Aire o abra la pestaña **Avisos**. Si sigue conectado con una cuenta autorizada, la notificación abre el aviso correspondiente.
 2. Elija **Pendientes** o **Atendidos** y pulse **Detalles y acciones** para desplegar la información.
-3. Compruebe fecha, aula, origen y lectura asociada. Es la lectura histórica que originó o elevó el aviso, no el valor actual del ambiente.
+3. Compruebe fecha, aula, origen y lectura asociada. Esa lectura se guardó cuando se creó el aviso o cuando pasó a un nivel de mayor alerta. Para conocer la lectura más reciente, consulte Mi aula.
 4. Si puede atenderlo, pulse **Marcar atendido**. Para dejar explicación, use **Atender con nota** y confirme el formulario.
-5. Espere la confirmación. La atención compartida se refleja en los clientes que actualicen ese aviso.
+5. Espere la confirmación. Las demás personas del aula verán el aviso atendido cuando actualicen la pantalla.
 
 ![Aviso desplegado en Android 0.8.2, emulador y datos de demostración. La lectura conserva su fecha.](manual-usuario/capturas/09-normal-aviso-expandido.png)
 
 *Aviso desplegado en Android 0.8.2, emulador y datos de demostración. La lectura conserva su fecha.*
 
-Los avisos antiguos pueden indicar **Sin lectura asociada conservada**. No se rellenan con la lectura de otro momento. **Detalles de entrega** permite diferenciar lo que se sabe del envío y del teléfono.
+Los avisos antiguos pueden indicar **Sin lectura asociada conservada**: no se guardó la medición que los originó. En **Detalles de entrega** puede revisar si se aceptó el envío, si llegó a la app y si se abrió.
 
 **Compartir aviso** es opcional y usa el canal que usted elija. Abrir, compartir o atender no confirma que el ambiente se haya normalizado. Para revisar el estado actual, vuelva a **Mi aula**. Si faltan permisos, se perdió la sesión o cambió el aviso, actualice y revise el mensaje antes de repetir una acción.
 
@@ -339,22 +339,22 @@ Los avisos antiguos pueden indicar **Sin lectura asociada conservada**. No se re
 
 ## 14 Organizar el archivo personal de Android
 
-**Pendientes** y **Atendidos** representan el estado compartido del incidente. **Archivo** es una organización personal de esa cuenta en ese teléfono. Son funciones diferentes.
+**Pendientes** y **Atendidos** muestran el estado del aviso que comparten las personas del aula. **Archivo** solo organiza su propia bandeja en ese teléfono.
 
 1. En Avisos, despliegue **Detalles y acciones** del aviso que quiere apartar de su bandeja.
 2. Pulse **Archivar en este teléfono**.
 3. Abra **Archivo** para volver a encontrarlo. Puede haber un aviso pendiente allí: archivarlo no lo atiende.
-4. Para recuperarlo, pulse **Restaurar en la bandeja**. Volverá a Pendientes o Atendidos según el estado compartido vigente.
+4. Para recuperarlo, pulse **Restaurar en la bandeja**. Volverá a Pendientes si aún no se atendió, o a Atendidos si alguien ya lo atendió.
 
-![Archivo personal Android con un aviso aún pendiente. Ejemplo en emulador, sin cambios cloud.](manual-usuario/capturas/10-normal-archivo-personal.png)
+![Archivo personal con un aviso que sigue pendiente. Ejemplo en emulador.](manual-usuario/capturas/10-normal-archivo-personal.png)
 
-*Archivo personal Android con un aviso aún pendiente. Ejemplo en emulador, sin cambios cloud.*
+*Archivo personal con un aviso que sigue pendiente. Ejemplo en emulador.*
 
-Archivar no elimina el incidente, no detiene notificaciones, no modifica lo que ve otra persona y no acredita atención. Antes de archivar una situación pendiente, compruebe que no está confundiendo orden de bandeja con respuesta al aviso.
+Archivar aparta el aviso de su bandeja, pero no lo marca como atendido, no lo elimina para otras personas ni cancela otros envíos. Si el aviso requiere una respuesta, atiéndalo antes de archivarlo.
 
-El archivo no se sincroniza entre teléfonos. Se conserva al actualizar sobre una APK compatible y al volver a entrar con la misma cuenta en ese dispositivo. Borrar datos o desinstalar la aplicación lo elimina. Su límite local es de 500 identificadores.
+El archivo no se comparte entre teléfonos. Se conserva al actualizar la app con una versión compatible y al volver a entrar con la misma cuenta en ese dispositivo. Borrar los datos o desinstalar la aplicación elimina esa organización personal. Puede guardar hasta 500 referencias de avisos.
 
-La bandeja organiza los avisos recientes que entrega el portal, hasta 30. No es una descarga ilimitada de todo el historial institucional. Si necesita revisar un evento que no aparece, consulte al administrador y los registros disponibles.
+La bandeja recibe hasta 30 avisos recientes del aula. No muestra todo el historial desde la instalación. Si necesita buscar un aviso más antiguo que no aparece, consulte al administrador.
 
 <a id="cap_16"></a>
 
@@ -377,14 +377,14 @@ Aceptar la invitación o iniciar sesión no sustituye estos pasos. El teléfono 
 
 <a id="cap_17"></a>
 
-## 16 Administrar aulas y sus datos
+## 16 Crear y editar aulas
 
-Este apartado corresponde a personas con autorización administrativa. Si no aparece en el menú, no intente habilitarlo mediante claves técnicas: solicite revisión del permiso.
+Este apartado requiere permiso de administrador. Si no aparece en el menú y necesita usarlo, solicite que el responsable revise su acceso.
 
 1. Abra **Administración** y seleccione el aula.
 2. En **Resumen**, use **Ver personas** o **Ver PC del aula** para comprobar su preparación.
 3. Para cambiar el nombre o la institución, pulse **Editar datos**, complete **Editar aula** y use **Guardar aula**.
-4. Si su cuenta tiene capacidad institucional, use **Nueva aula**, complete nombre e institución opcional y pulse **Crear aula**. El nombre admite de 2 a 100 caracteres; la institución hasta 120.
+4. Si su cuenta tiene permiso para crear aulas, use **Nueva aula**, complete el nombre y, si lo desea, la institución. Pulse **Crear aula**. El nombre admite de 2 a 100 caracteres; la institución, hasta 120.
 5. Pulse **Actualizar configuración** para revisar el estado y permisos vigentes.
 
 ![Resumen administrativo en un ensayo de interfaz con aulas de ejemplo.](manual-usuario/capturas/12-1440-resumen.png)
@@ -393,7 +393,7 @@ Este apartado corresponde a personas con autorización administrativa. Si no apa
 
 El aula reúne sus lecturas y avisos. Las personas acceden por cuenta y permiso; la PC receptora aporta mediciones; el teléfono se registra desde Android. No son elementos intercambiables.
 
-Crear un aula no crea su montaje físico ni registra teléfonos automáticamente. Para dejarla operativa, revise personas autorizadas, PC vinculada si adquirirá sensores, reglas y registro de cada teléfono. Si falta **Nueva aula**, puede deberse a la capacidad institucional o a una guarda; no se resuelve contratando un plan.
+Después de crear un aula, agregue a las personas que tendrán acceso. Si conectará una maqueta, vincule su PC y revise las reglas. Cada persona debe registrar su teléfono desde Android. Si **Nueva aula** no está disponible, puede faltar el permiso necesario o haberse alcanzado un límite del sistema; consulte al responsable.
 
 <a id="cap_18"></a>
 
@@ -409,11 +409,11 @@ Crear un aula no crea su montaje físico ni registra teléfonos automáticamente
 
 *Personas e invitaciones en una prueba controlada. Los correos de ejemplo no son credenciales para ingresar.*
 
-No publique ni proyecte una invitación: el enlace es una credencial de alta y solo se muestra al generarlo. La persona nueva define su contraseña; una cuenta existente mantiene la suya. También puede usar **Vincular una cuenta existente**, indicar correo y rol y pulsar **Agregar al aula**.
+Comparta la invitación solo con su destinatario: quien tenga el enlace podría intentar activar esa cuenta. El enlace se muestra una sola vez al crearlo. La persona nueva define su contraseña; una cuenta existente mantiene la suya. Para agregar una cuenta ya creada, también puede usar **Vincular una cuenta existente**, indicar correo y permiso y pulsar **Agregar al aula**.
 
-Para cambiar permisos use **Editar acceso** y **Guardar acceso**. **Retirar acceso** retira la membresía de esa aula; conserva la cuenta e historial. La lista protege al propietario y a la cuenta actual frente a ciertas modificaciones. Revise antes el destinatario y el aula.
+Para cambiar permisos use **Editar acceso** y **Guardar acceso**. **Retirar acceso** impide que esa persona siga consultando el aula; conserva su cuenta y los registros anteriores. Algunas acciones no están disponibles sobre el propietario del aula o sobre su propia cuenta. Compruebe el correo y el aula antes de confirmar.
 
-En **Invitaciones**, actualice la lista y use **Revocar invitación** sobre una pendiente si ya no corresponde. Revocar una invitación y retirar una membresía aceptada son acciones distintas. Hay límites preventivos: 10 lugares por aula incluyendo invitaciones vigentes y 10 invitaciones globales por 24 horas. Si se alcanza un límite, revise el uso y comuníquese con el responsable.
+En **Invitaciones**, use **Revocar invitación** si una invitación pendiente ya no debe utilizarse. Si la persona ya aceptó, debe revisar su acceso en la lista de Personas. Se permiten 10 lugares por aula contando las invitaciones pendientes que no vencieron, y 10 invitaciones en todo el proyecto por cada 24 horas. Si se alcanza un límite, revise la lista con el responsable.
 
 <a id="cap_19"></a>
 
@@ -423,7 +423,7 @@ En **Administración → PC del aula** se administran los equipos que envían me
 
 1. Seleccione el aula correcta y abra **PC del aula**.
 2. Revise nombre, vínculo, estado y último contacto de cada PC. **PC vinculada** no demuestra por sí solo que el Arduino esté leyendo en ese instante.
-3. En la PC que tendrá la placa, use **Conectar Arduino en esta PC** y siga la asignación automática del capítulo 19.
+3. Desde la PC conectada al Arduino, use **Conectar Arduino en esta PC** y siga los pasos del capítulo 19 para asignarle un aula.
 4. Para retirar una PC que ya no debe enviar datos, pulse **Retirar PC**, lea el contexto, indique el motivo solicitado y confirme.
 5. Actualice la configuración y compruebe **Acceso retirado**. El historial anterior se conserva; la credencial de ese receptor deja de estar autorizada.
 
@@ -433,39 +433,39 @@ En **Administración → PC del aula** se administran los equipos que envían me
 
 Se permiten hasta dos PC activas por aula. Antes de añadir otra, identifique las existentes; no retire una instalación ajena para liberar un lugar sin saber para qué se usa.
 
-La ruta avanzada **Registrar PC con Arduino → Nombre de la PC → Crear vínculo de PC → Descargar configuración PC** genera configuración privada. Su manejo corresponde al responsable técnico y se utiliza únicamente en la PC prevista. No la envíe por un grupo ni la copie a Android. Para el primer uso común, prefiera la asignación automática y evite manipular archivos de secretos.
+La ruta avanzada **Registrar PC con Arduino → Nombre de la PC → Crear vínculo de PC → Descargar configuración PC** genera un archivo privado para autorizar a esa PC. Pida al responsable técnico que lo configure; no lo comparta en un grupo ni lo copie a Android. Para el primer uso, siga la asignación automática del capítulo 19.
 
 <a id="cap_20"></a>
 
-## 19 Asignar esta PC y conectar Arduino
+## 19 Vincular la PC y conectar Arduino
 
-Debe realizarse desde el portal local abierto por el panel en la PC físicamente conectada a la maqueta. El portal público orienta al panel instalado; no controla su USB directamente.
+Realice estos pasos en la PC conectada a la maqueta. Abra el portal desde **Panel SFA Aire.exe**, no desde la dirección pública de internet, que solo muestra la orientación para usar el panel local.
 
 1. Conecte el Arduino con un cable USB de datos y cierre el Monitor Serie del IDE.
 2. Abra el panel, **Abrir SFA Aire**, ingrese como administrador y seleccione el aula.
 3. Abra **Conexión Arduino**. Si aún no está asignada, pulse **Usar esta PC para esta aula** y espere confirmación.
 4. Pulse **Refrescar puertos**. En **Puerto COM**, elija la placa USB correcta; no copie COM7 del ejemplo, su número puede ser otro.
-5. Pulse **Conectar Arduino**. El receptor usa 115200 baudios y solicita MONITOR al firmware.
-6. Compruebe **Datos recibidos en esta PC**, antigüedad, origen y estado de nube. Confirme después las muestras en Mis aulas y Android.
+5. Pulse **Conectar Arduino**. El receptor se comunica a 115200 baudios y envía el comando MONITOR al programa cargado en Arduino para que empiece a transmitir.
+6. En **Datos recibidos en esta PC**, compruebe que llegan valores y que la hora se actualiza. Revise también si hay envíos pendientes a la nube. Después consulte esas mediciones en Mis aulas y Android.
 
-![Primera asignación en prueba de interfaz. No acredita una placa física conectada.](manual-usuario/capturas/15-1440-primera-asignacion.png)
+![Pantalla de asignación de una PC a un aula. Ejemplo sin Arduino conectado.](manual-usuario/capturas/15-1440-primera-asignacion.png)
 
-*Primera asignación en prueba de interfaz. No acredita una placa física conectada.*
+*Pantalla de asignación de una PC a un aula. Ejemplo sin Arduino conectado.*
 
-**Puerto abierto** no equivale a lectura válida. Use **Comprobar conexión** si necesita verificar. **Detener lectura** envía PARAR y detiene la adquisición. Si solo aparecen puertos Bluetooth, todavía no se detectó la placa USB.
+Un puerto abierto puede no estar recibiendo datos. Use **Comprobar conexión** y revise los valores. **Detener lectura** envía el comando PARAR para dejar de recibir mediciones. Si solo aparecen puertos Bluetooth, la PC todavía no detectó la placa USB.
 
-Cambiar el selector de aula no reasigna la PC automáticamente. El cambio exige administrar origen y destino, detener lectura o prueba y sincronizar los paquetes pendientes. La asignación conserva historial: los avisos anteriores no se trasladan al aula nueva.
+Cambiar el selector de aula no cambia automáticamente el aula de la PC. Para reasignarla necesita administrar ambas aulas, detener la lectura o la prueba y esperar a que no queden envíos pendientes. Los datos y avisos anteriores siguen perteneciendo al aula donde se registraron.
 
 <a id="cap_21"></a>
 
 ## 20 Preparar la maqueta y verificar sus conexiones
 
-Este capítulo permite reconocer el montaje previsto. El responsable técnico debe confirmar la placa, el módulo, la alimentación y el firmware antes de conectar o cambiar cables. Haga modificaciones con el equipo desconectado de la alimentación.
+El responsable técnico debe revisar la placa, los sensores, la alimentación y el programa cargado en Arduino, llamado firmware. Desconecte la alimentación antes de cambiar cables.
 
 | Componente | Conexión de esta versión |
 | --- | --- |
-| DHT DATA | Arduino D2. DHT22 por defecto; DHT11 requiere variante de firmware. |
-| DHT VCC y GND | Alimentación admitida por el módulo y GND común. Un DHT sin placa puede necesitar pull-up. |
+| DHT DATA | Arduino D2. El programa está preparado para DHT22; debe adaptarse si usa DHT11. |
+| DHT VCC y GND | Alimentación admitida por el módulo y GND común. Un DHT sin placa puede necesitar una resistencia adicional; consulte al responsable. |
 | MQ135 AO | Arduino A0. Verifique que su tensión esté dentro del rango admitido. |
 | MQ135 VCC y GND | Alimentación regulada según módulo y GND común. |
 | MQ135 DO | No se utiliza. |
@@ -475,108 +475,108 @@ El calefactor del MQ135 no se alimenta desde un pin digital. Confirme el orden s
 
 Si la placa todavía no tiene firmware, el responsable debe cargar **arduino/SFA_Aire_Aulas/SFA_Aire_Aulas.ino** con el tipo DHT correcto. El portable no carga automáticamente ese programa ni cambia DHT22 a DHT11. Una compilación correcta no verifica el cableado.
 
-La espera inicial de 180 segundos no sustituye el acondicionamiento del MQ135. Respete la ficha del módulo; la documentación del componente citado por el proyecto contempla más de 48 horas en sus condiciones de ensayo. Registre la estabilidad real antes de definir referencia.
+El acondicionamiento del MQ135 es su preparación y estabilización antes de usarlo como referencia. La espera inicial de 180 segundos del programa no lo sustituye. La documentación técnica citada por el proyecto contempla más de 48 horas en sus condiciones de ensayo; el responsable debe consultar la ficha del módulo instalado y comprobar su estabilidad.
 
-Para aprender el recorrido use primero simulación. No genere humo, combustión ni gases peligrosos dentro del aula para probar una alerta. La validación física del montaje permanece separada de las capturas y pruebas de software de este manual.
+Para aprender a usar el sistema, empiece con la simulación. No genere humo, combustión ni gases peligrosos dentro del aula para probar una alerta. Las capturas del manual no reemplazan la revisión del montaje.
 
 <a id="cap_22"></a>
 
 ## 21 Configurar las reglas de la maqueta
 
-Solo el administrador autorizado debe modificar las reglas, desde la PC asignada y con conexión verificada. Registre los valores anteriores y el motivo para poder revisar los cambios.
+Las reglas se modifican con una cuenta administradora, desde la PC asignada al aula y conectada al sistema. Anote los valores anteriores y el motivo del cambio antes de guardar.
 
 1. Entre en **Conexión Arduino** y despliegue **Reglas de aviso de esta maqueta**.
-2. En **Referencia MQ135 (ADC)**, introduzca la referencia medida y documentada del montaje. El valor 300 del simulador no es una referencia universal.
+2. En **Referencia MQ135 (ADC)**, introduzca el valor obtenido al medir el sensor ya estabilizado en el entorno de referencia acordado. El valor 300 que usa el simulador no sirve como referencia para cualquier sensor.
 3. Marque **Sensor MQ135 acondicionado y con referencia experimental** únicamente cuando se haya comprobado realmente.
 4. Revise los niveles relativos y tiempos. Si corresponde, active **Activar avisos por temperatura** y configure sus umbrales.
 5. Pulse **Guardar reglas** y espere confirmación. **Descartar cambios** recupera las reglas guardadas de la PC.
 
 | Parámetro | Qué cambia |
 | --- | --- |
-| Aviso y alerta MQ135 | Comparación del ADC con su referencia; alerta debe representar el nivel superior previsto. |
-| Persistencia | Tiempo de variación válida sostenida antes de confirmar el aviso. |
-| Recuperación | Tiempo necesario para confirmar recuperación de lectura. No atiende el aviso. |
-| Histéresis | Margen que evita alternar continuamente de estado cerca del umbral. |
-| Avisos por temperatura | Habilita comparación de temperatura válida con niveles e histéresis configurados. |
+| Aviso y alerta MQ135 | Niveles de comparación con la referencia. El nivel de alerta debe ser mayor que el de aviso. |
+| Persistencia | Cuánto tiempo debe mantenerse la variación para generar el aviso. |
+| Recuperación | Cuánto tiempo deben mantenerse los valores de recuperación para cambiar el estado de la lectura. El aviso sigue pendiente hasta que alguien lo atienda. |
+| Histéresis | Margen de retorno que evita que el estado cambie continuamente cuando la lectura está cerca del umbral. |
+| Avisos por temperatura | Permite definir los niveles de aviso y alerta por temperatura. |
 
-Los valores de demostración incluyen aviso 1,30 ×, alerta 1,60 ×, persistencia 12 s, recuperación 20 s e histéresis relativa 0,10. No son límites sanitarios. Confirme las reglas efectivas de su instalación; no las reemplace solo por coincidir con una captura.
+Los valores de demostración incluyen aviso 1,30 ×, alerta 1,60 ×, persistencia 12 s, recuperación 20 s e histéresis relativa 0,10. Por ejemplo, con una referencia de 300 ADC, 1,30 × corresponde a 390 ADC y 1,60 × a 480 ADC. Estos números explican el cálculo; no son límites sanitarios ni valores para copiar en cualquier montaje.
 
-Si aparece un conflicto al guardar, descarte o revise los cambios y vuelva a consultar el estado. No declare que el sensor está acondicionado para eliminar un bloqueo. Un fallo DHT, saturación, pérdida de datos o falta de referencia puede impedir una confirmación válida.
+Si el sistema informa que las reglas cambiaron mientras editaba, consulte las reglas guardadas antes de reintentar. No marque el sensor como acondicionado solo para quitar un bloqueo. Un fallo del DHT, una señal fuera de rango, la pérdida de datos o la falta de referencia pueden impedir que se confirme un aviso.
 
 <a id="cap_23"></a>
 
 ## 22 Probar una notificación desde la nube
 
-La prueba rápida comprueba el recorrido de avisos sin Arduino ni receptor PC. Requiere una sesión administradora del aula, un teléfono registrado para esa aula y consentimiento para recibir simulaciones.
+La prueba rápida permite comprobar si un aviso llega al teléfono sin conectar Arduino ni iniciar el receptor de la PC. Necesita una cuenta administradora del aula y un teléfono registrado que tenga habilitada la recepción de simulaciones.
 
 1. En Android, complete Ajustes del capítulo 15 y guarde **Incluir simulaciones**.
 2. En el portal, seleccione esa misma aula y abra **Laboratorio**.
-3. En **Probar la notificación del celular**, revise los teléfonos habilitados y el margen de entregas.
-4. Si lo necesita, abra **Elegir valores de la prueba** y elija Temperatura, MQ135 o Ambos. Los valores son sintéticos.
-5. Pulse una vez **Enviar aviso de prueba**. Observe la traza y compruebe el teléfono.
+3. En **Probar la notificación del celular**, revise los teléfonos habilitados y cuántas notificaciones quedan disponibles.
+4. Si lo necesita, abra **Elegir valores de la prueba** y elija Temperatura, MQ135 o Ambos. Son valores de ejemplo, no lecturas del sensor.
+5. Pulse una vez **Enviar aviso de prueba**. Revise el detalle del envío y compruebe el teléfono.
 6. Abra la notificación y revise el aviso identificado como SIMULACIÓN. No lo confunda con una lectura actual del aula.
 
 ![Laboratorio 0.8.0 en DEMO. La misma vista informa que el ejemplo no envía notificaciones.](manual-usuario/capturas/16-portal-laboratorio.png)
 
 *Laboratorio 0.8.0 en DEMO. La misma vista informa que el ejemplo no envía notificaciones.*
 
-El resultado progresa por **Programadas**, **Aceptadas por FCM**, **Recibidas en app** y **Abiertas**. Aceptación por Firebase no garantiza recepción. Apertura no equivale a atención ni comprensión. La lectura incluida en un aviso es histórica.
+El detalle distingue cuatro etapas: **Programadas** significa que se preparó el envío; **Aceptadas por FCM**, que Firebase lo aceptó; **Recibidas en app**, que la aplicación confirmó su llegada; **Abiertas**, que se abrió la notificación. Cada etapa informa algo diferente. Para atender el aviso debe realizar la acción del capítulo 09 o 13.
 
-Si no llega, consulte el capítulo 24 antes de repetir. Hay separación mínima entre pruebas, espera mientras existan entregas pendientes y guardas de consumo. No use envíos repetidos para intentar forzar la recepción. Este manual no ejecuta por sí mismo pruebas cloud.
+Si no llega, consulte el capítulo 24 antes de repetir. El sistema exige una espera entre pruebas y limita los envíos para cuidar el uso de los servicios gratuitos. Mientras haya envíos pendientes puede impedir una prueba nueva.
 
 <a id="cap_24"></a>
 
 ## 23 Ensayar el recorrido completo con la PC
 
-La **Simulación completa con la PC · Avanzado** prueba adquisición sintética, reglas, persistencia y opcionalmente push. Es diferente de la prueba rápida cloud y de Explorar demostración.
+La **Simulación completa con la PC · Avanzado** genera mediciones de ejemplo en la PC, aplica las reglas y guarda los resultados. También puede enviar avisos al teléfono si usted lo autoriza. Sirve para ensayar más pasos que la prueba rápida desde la nube.
 
 1. Abra Laboratorio como administrador y despliegue la simulación completa.
-2. Seleccione una PC vinculada y con contacto reciente. Compruebe la hora del diagnóstico; una respuesta antigua no acredita disponibilidad actual.
-3. Elija el escenario Temperatura, MQ135 o Ambos y revise temperatura, humedad y ADC sintéticos.
+2. Seleccione una PC vinculada que se haya comunicado recientemente. Revise la hora del diagnóstico para saber cuándo se comprobó su conexión.
+3. Elija el escenario Temperatura, MQ135 o Ambos y revise los valores de ejemplo de temperatura, humedad y ADC.
 4. Seleccione una duración acotada de 60, 90 o 180 segundos.
-5. Si comprobará push, marque **Recorrer la entrega FCM a celulares habilitados para simulación**. Si no, el ensayo no enviará esos avisos.
-6. Solo si corresponde interrumpir una adquisición en curso, autorice **Permitir detener USB para que este receptor ejecute la prueba**. No marque esa opción sin comprobar el uso del equipo.
+5. Si comprobará el envío al teléfono, marque **Recorrer la entrega FCM a celulares habilitados para simulación**. Si deja la casilla desmarcada, el ensayo no enviará esos avisos.
+6. Si necesita interrumpir la lectura del Arduino, autorice **Permitir detener USB para que este receptor ejecute la prueba**. Compruebe antes que esa lectura no deba continuar.
 7. Confirme que verificó Supabase Free y Firebase Spark sin facturación vinculada y pulse **Iniciar prueba acotada**.
-8. Siga la traza: medición guardada, alarma confirmada y etapas de entrega. Use **Actualizar diagnóstico** para revisar bloqueos y **Detener prueba** si necesita finalizar.
+8. Revise si se guardó la medición, se confirmó el aviso y se completaron las etapas de envío. Use **Actualizar diagnóstico** para revisar impedimentos y **Detener prueba** para terminar antes del plazo.
 
-Resultado esperado: el ensayo termina, la fuente deja de simular y sus registros permanecen identificados. Una lectura recuperada no elimina el aviso pendiente; atiéndalo si corresponde y vuelva a comprobar la fuente antes de continuar con Arduino.
+Al terminar, la PC deja de generar mediciones simuladas y conserva los datos de la prueba con su identificación. Revise si quedó un aviso pendiente. Antes de volver al monitoreo real, compruebe que el Arduino esté conectado y recibiendo mediciones.
 
-Si la sección **Para iniciar** informa un impedimento, resuélvalo en su origen. La prueba no debe empezar con una PC sin contacto verificable ni sustituyendo USB silenciosamente. El diagnóstico del código local posterior a 0.8.0 tiene mejoras adicionales; el portable 0.8.0 publicado conserva su versión original.
+Si la sección **Para iniciar** informa un impedimento, lea el motivo y compruebe la conexión de la PC. Si la prueba necesita detener USB, debe autorizarlo expresamente. Algunas mejoras recientes del diagnóstico todavía no están incluidas en el portable 0.8.0; consulte al responsable si necesita actualizarlo.
 
-Las reservas propias son 80 entregas operativas y 20 de simulación por día, sin préstamo entre ambas. Son guardas de la aplicación, no cuotas oficiales. Otras guardas pueden pausar sincronización aunque todavía quede cupo push. No cambie de plan ni desactive protecciones para terminar un ensayo.
+El sistema reserva por día 80 entregas para avisos reales y 20 para simulaciones. Una entrega corresponde a un teléfono destinatario; un aviso dirigido a varios teléfonos puede consumir varias. Los sobrantes de un grupo no pasan al otro. Son límites de SFA Aire, no las cuotas oficiales de los proveedores. También hay límites de almacenamiento y envío de datos. Si bloquean una prueba, consulte al responsable sin cambiar de plan ni desactivar las protecciones.
 
 <a id="cap_25"></a>
 
-## 24 Resolver problemas de acceso lecturas y avisos
+## 24 Solucionar problemas frecuentes
 
 | Problema observado | Comprobaciones y siguiente paso |
 | --- | --- |
 | No puedo ingresar | Revise correo, contraseña y red. Si falta activación, complete la invitación. Sin recuperación disponible, contacte al administrador. |
-| Ingreso pero no hay aulas | Compruebe que la carga terminó. Revise cuenta, aceptación y membresía con el administrador; no cree cuentas duplicadas. |
+| Ingreso pero no hay aulas | Espere a que termine la carga. Si la lista sigue vacía, pida al administrador que revise su cuenta y su acceso al aula. |
 | Invitación vencida o revocada | Solicite una nueva. No comparta el enlace fallido en un grupo ni intente un registro libre. |
 | No aparece Arduino | Cable USB de datos, alimentación y controlador. Refresque puertos. Los COM Bluetooth no son la placa. |
 | Puerto ocupado | Cierre Monitor Serie y otras aplicaciones que usen esa placa. No cierre procesos desconocidos. |
-| Puerto abierto sin lecturas | Compruebe firmware, 115200, DHT correcto y diagnóstico. Abrir el COM no prueba sensores. |
-| Valores antiguos o sin datos recientes | Revise PC encendida, USB, última trama y paquetes pendientes. No interprete la última lectura como actual. |
+| Puerto abierto sin lecturas | Pida al responsable que revise el programa de Arduino, la comunicación a 115200 baudios y el modelo DHT conectado. |
+| Valores antiguos o sin datos recientes | Compruebe que la PC esté encendida, el USB conectado y la hora de recepción se actualice. Revise si hay envíos pendientes. |
 | Falta referencia o revisar sensores | Revise montaje y acondicionamiento con el responsable. No copie un ADC de una captura. |
-| No llega la notificación | Confirme aula registrada, AVISOS ACTIVOS, permiso Android, Google Play, internet y simulaciones guardadas si es ensayo. Consulte traza y cupos. |
-| FCM aceptó pero no hay recibido | Aún no hay evidencia de recepción. Revise teléfono, sesión, restricciones de batería/red y permiso. No repita envíos sin diagnóstico. |
-| No puedo atender | Confirme rol docente/admin, sesión, red y estado vigente. Un observador o DEMO no guarda atención. |
-| Falló el guardado de una nota | Conserve el formulario, recupere red y revise si cambió el aviso. No suponga éxito por haber pulsado el botón. |
+| No llega la notificación | Revise el aula registrada, AVISOS ACTIVOS, permiso Android, servicios Google Play e internet. Si es una prueba, confirme que guardó Incluir simulaciones. |
+| Firebase aceptó el envío pero el teléfono no lo recibió | Revise sesión, conexión, permiso y restricciones de batería del teléfono. Consulte el detalle del envío antes de repetir la prueba. |
+| No puedo atender | Necesita una cuenta docente o administradora, conexión y un aviso pendiente. En demostración no se guardan cambios. |
+| Falló el guardado de una nota | Conserve el formulario, compruebe la conexión y revise si cambió el aviso. Espere la confirmación antes de darlo por guardado. |
 
-Antes de pedir ayuda, anote versión, hora, aula, pantalla, mensaje exacto y si es dato real o simulado. Puede adjuntar una captura revisada sin contraseñas, invitaciones ni información privada. El administrador puede consultar los identificadores de aviso y entrega para relacionar las etapas.
+Para pedir ayuda, indique la versión, el aula, la hora y el mensaje exacto que apareció. Aclare si estaba usando datos reales o una simulación. Si envía una captura, compruebe que no muestre una contraseña, una invitación privada u otros datos personales. El administrador puede consultar el número del aviso y de su envío para localizar el problema.
 
 <a id="cap_26"></a>
 
-## 25 Cerrar actualizar y proteger la instalación
+## 25 Cerrar el sistema y cuidar sus datos
 
-Al terminar una jornada, revise los avisos pendientes y el estado de la fuente. Si necesita adquirir sensores durante la noche, la PC y el receptor deben seguir funcionando y no suspenderse. Cerrar el navegador no detiene la adquisición. Elija conscientemente si conservar o detener el monitoreo al salir del panel.
+Al terminar la jornada, revise los avisos pendientes. Si necesita seguir recibiendo mediciones durante la noche, mantenga la PC encendida, sin suspenderse y con el receptor en funcionamiento. Cerrar el navegador no detiene la lectura; al salir del panel puede elegir si mantiene o detiene el monitoreo.
 
-En Android, vaya a **Ajustes → Más opciones → Cerrar sesión y desvincular teléfono**. Esto separa el registro de la sesión anterior. Si informa un fallo de desvinculación, solicite revisión administrativa antes de reasignar el teléfono; no suponga que el cierre local completó el retiro remoto.
+En Android, vaya a **Ajustes → Más opciones → Cerrar sesión y desvincular teléfono**. Así sale de su cuenta y solicita retirar el registro de avisos de esa sesión. Si aparece un error al desvincular, pida al administrador que revise el registro antes de entregar el teléfono a otra persona.
 
-Para actualizar Android, conserve el APK oficial y use una versión compatible con la firma piloto. Después compruebe versión, acceso, aula, registro de avisos y preferencia de simulación. Borrar datos o desinstalar elimina el archivo personal; no es el primer paso de diagnóstico.
+Para actualizar la app Android, instale el APK compatible que le entregue el responsable sobre la app anterior. Después revise la versión, el aula y el registro de avisos. Recuerde que borrar los datos o desinstalar elimina su archivo personal de avisos.
 
-Para actualizar Windows, detenga el receptor de la carpeta que va a reemplazar y siga las instrucciones de la nueva entrega. Antes de mover una instalación usada, solicite respaldo de configuración y datos al responsable. No superponga archivos de versiones distintas ni elimine carpetas de datos como solución rápida.
+Para actualizar SFA Aire en Windows, detenga el receptor de la carpeta que va a reemplazar y siga las instrucciones de la nueva entrega. Antes de mover una instalación usada, solicite una copia de seguridad de la configuración y los datos al responsable. No mezcle archivos de versiones distintas ni elimine carpetas de datos como solución rápida.
 
 | Carpeta de una instalación usada | Por qué requiere cuidado |
 | --- | --- |
@@ -584,23 +584,23 @@ Para actualizar Windows, detenga el receptor de la carpeta que va a reemplazar y
 | secrets | Contiene vínculos y configuraciones privadas de la PC. |
 | artifacts | Puede contener datos de demostración, temporales o QR. |
 
-Para entregar el programa a otra persona, comparta el ZIP original del release y la APK oficial. No recomprima una carpeta que ya usó. Cierre sesión antes de compartir una PC. No copie una cuenta de servicio Firebase a teléfonos ni al navegador.
+Para entregar el programa a otra persona, comparta el ZIP original de la descarga y el APK oficial. Una carpeta que ya utilizó puede contener datos y accesos privados: no la comprima para distribuirla. Cierre su sesión antes de compartir una PC.
 
-Supabase Free y Firebase Spark se mantienen sin Billing. Las guardas no garantizan disponibilidad ilimitada. Un cambio de plan o eliminación de datos no forma parte de la operación normal ni del procedimiento de reparación de este manual.
+SFA Aire utiliza Supabase Free y Firebase Spark sin facturación vinculada. Son servicios con límites de uso y pueden interrumpirse al agotarlos. Si aparece un problema de cuota, comuníquelo al responsable; no active un plan de pago ni elimine datos para continuar.
 
 <a id="cap_27"></a>
 
-## 26 Comprobación de primera puesta en funcionamiento
+## 26 Comprobar el primer uso
 
-Use esta lista después de instalar. Marque únicamente lo observado; si algo falta, anote el motivo y la persona que debe intervenir.
+Complete esta lista durante la prueba de su instalación. Si un paso no pudo comprobarse, anote qué falta y quién puede ayudar.
 
 Lista de acceso y consulta
 
 - Se identifica Windows/portal 0.8.0 y Android 0.8.2, sin confundir la APK incluida en el portable.
 - La invitación fue aceptada por la persona correspondiente y permite ingresar con cuenta propia.
 - El nombre del aula y el permiso son correctos; una cuenta ajena no debe ver sus datos.
-- La persona reconoce origen real/simulado, antigüedad y valores no disponibles.
-- Puede consultar Avisos e Historial y entiende que atender y normalizar son hechos distintos.
+- La persona distingue datos reales y simulados, y sabe reconocer una lectura antigua o no disponible.
+- Puede consultar Avisos e Historial y sabe que atender un aviso no significa que los valores hayan vuelto a la normalidad.
 
 Lista del teléfono
 
@@ -612,38 +612,38 @@ Lista del teléfono
 
 Lista de adquisición física
 
-- Se confirmó placa, firmware, tipo DHT, pinout, alimentación y cable de datos.
+- Se revisaron la placa, el programa de Arduino, el modelo DHT, las conexiones de los pines, la alimentación y el cable USB.
 - La PC quedó vinculada al aula y el puerto recibe muestras válidas.
 - La referencia MQ135 corresponde al montaje acondicionado y está documentada.
-- Las muestras físicas coinciden por origen y fecha entre PC, nube y Android, considerando el intervalo de sincronización.
-- Al detener o desconectar se ve la pérdida de vigencia, sin declarar aire normal.
+- Se encuentran las mediciones de la maqueta en PC, nube y Android, con su fecha y teniendo en cuenta el tiempo de sincronización.
+- Al detener o desconectar la maqueta, aparece la indicación de que faltan datos recientes.
 
-La existencia de esta lista no acredita su cumplimiento. Las evidencias previas de push real pertenecen a ensayos concretos; no sustituyen la aceptación de una nueva versión o instalación. El alta de otra persona, el montaje físico y Android 0.8.2 en A02 tienen validaciones externas pendientes en las fuentes consultadas.
+Repita estas comprobaciones en su propia instalación. Las pruebas anteriores del proyecto no sustituyen las de una nueva versión o dispositivo. Al preparar esta edición todavía faltaban la prueba de alta con otra persona, la comprobación del montaje físico y el ensayo de Android 0.8.2 en el Samsung A02.
 
-Registro sugerido: fecha y hora, versión, PC/teléfono, aula, responsable, comprobaciones completadas, resultado observado y pendientes. No anote contraseñas ni enlaces privados en ese registro.
+Anote la fecha, la versión, el aula, los equipos utilizados y el resultado de la prueba. Deje también una lista de los pasos pendientes. No incluya contraseñas ni enlaces privados.
 
 <a id="cap_28"></a>
 
-## 27 Glosario alcance y referencias de la guía
+## 27 Glosario y referencias
 
 | Término | Significado práctico |
 | --- | --- |
 | Aula | Contexto al que pertenecen mediciones, personas y avisos. |
-| PC receptora | Equipo que recibe Arduino y sincroniza; no es un celular. |
+| PC receptora | PC que recibe las mediciones de Arduino por USB y las envía a la nube. |
 | ADC | Número de lectura analógica del MQ135; no concentración de un gas. |
 | Referencia | Valor experimental del montaje usado para comparar la señal. |
 | Persistencia | Tiempo de variación sostenida necesario para confirmar un aviso. |
-| Push o FCM | Entrega por internet al teléfono registrado mediante Firebase Cloud Messaging. |
-| Recibido y abierto | Evidencias de llegada a app y apertura; no acreditan comprensión o acción física. |
-| Atendido | Estado compartido de atención humana del aviso. |
+| Notificación push | Aviso que llega al teléfono. SFA Aire utiliza el servicio Firebase Cloud Messaging, conocido como FCM, para enviarlo. |
+| Recibido y abierto | Recibido indica que la app confirmó la llegada. Abierto indica que se abrió la notificación; no que se atendió el aviso. |
+| Atendido | Aviso que una persona autorizada marcó como atendido; ese estado se comparte con el aula. |
 | Archivo personal | Organización local del teléfono; no cambia la atención compartida. |
-| SIMULACIÓN | Datos sintéticos; un ensayo autorizado puede generar una notificación real. |
-| Cola pendiente | Trabajo guardado que todavía necesita sincronización o entrega. |
+| SIMULACIÓN | Datos generados para una prueba; pueden producir una notificación real si el administrador habilita el envío. |
+| Envíos pendientes | Mediciones o notificaciones guardadas que todavía deben enviarse. |
 
-Esta edición describe la operación de la infraestructura SFA Aire ya configurada. No enseña a crear proyectos cloud nuevos, ejecutar SQL, contratar servicios, publicar código o distribuir una app con firma de producción. Esas tareas requieren documentación técnica y una identidad autorizada.
+Esta edición explica cómo usar SFA Aire con los servicios ya configurados. La creación de proyectos en internet, los cambios de base de datos y la publicación de nuevas versiones corresponden al responsable técnico y se documentan por separado.
 
-Fuentes contrastadas: README y código de pantallas del portal; docs/GUIA_PUBLICA.md; PORTAL_PUBLICO_E_INVITACIONES.md; ATENCION_SIMPLE.md; CONEXION_ARDUINO.md; HARDWARE.md; IMPLEMENTACION_UI_080.md; ANDROID_082_AVISOS_Y_BANDEJA.md; Entregas/ANDROID_ACTUAL.json. Se prefirió la versión actual sobre guías históricas que aún describen coordinación obligatoria o APK antiguas.
+Para ampliar la información, los documentos del proyecto explican la instalación y privacidad en GUIA_PUBLICA.md; las invitaciones en PORTAL_PUBLICO_E_INVITACIONES.md; la conexión y sensores en CONEXION_ARDUINO.md y HARDWARE.md; y las funciones Android en ANDROID_082_AVISOS_Y_BANDEJA.md. La versión de la app se identifica en Entregas/ANDROID_ACTUAL.json.
 
-Las capturas web de 0.8.0 y las pantallas de invitación/administración proceden de pruebas controladas conservadas en el proyecto. Las capturas Android son nativas de 0.8.2 en emulador y DEMO. El archivo de trazabilidad adjunto identifica cada imagen. No contienen una invitación utilizable ni datos de acceso reales.
+Las capturas muestran el portal, sus formularios y Android 0.8.2 con datos de ejemplo. Los archivos TRAZABILIDAD.json y CAPTURAS_PUBLICADAS.json identifican sus orígenes. No se incluyen contraseñas ni invitaciones utilizables.
 
-Para consultar: https://sfa-aire-aulas.web.app/remoto. Para archivos publicados: https://github.com/hfreedo/SFA-Aire-Portal/releases. Se verificaron el portal y el ZIP Windows 0.8.0; Android 0.8.2 estaba disponible localmente pero no en releases públicos al cerrar esta edición. Los enlaces temporales Wi-Fi y las invitaciones privadas no se incluyen en este manual.
+Portal: https://sfa-aire-aulas.web.app/remoto. Descargas: https://github.com/hfreedo/SFA-Aire-Portal/releases. Al preparar esta edición, Windows 0.8.0 estaba publicado y Android 0.8.2 debía solicitarse al responsable. No se incluyen enlaces temporales de Wi-Fi ni invitaciones privadas.
