@@ -28,6 +28,7 @@ class AireIcon(context:Context,private val kind:String,color:Int,size:Int=26):Dr
    "share"->{canvas.drawCircle(6f,12f,2.5f,pen);canvas.drawCircle(18f,5f,2.5f,pen);canvas.drawCircle(18f,19f,2.5f,pen);path(8f,11f,16f,6f);path(8f,13f,16f,18f)}
    "note"->{path(14f,3f,4f,3f,4f,21f,20f,21f,20f,11f);path(10f,14f,11f,10f,18f,3f,21f,6f,14f,13f,10f,14f)}
    "refresh"->{canvas.drawArc(4f,4f,20f,20f,45f,290f,false,pen);path(20f,4f,20f,10f,14f,10f)}
+   "archive"->{path(4f,8f,4f,21f,20f,21f,20f,8f);path(3f,3f,21f,3f,21f,8f,3f,8f,3f,3f);path(9f,12f,15f,12f)}
    "logout"->{path(10f,3f,4f,3f,4f,21f,10f,21f);path(10f,12f,21f,12f);path(17f,8f,21f,12f,17f,16f)}
    "settings"->{for((y,x) in listOf(6f to 9f,12f to 16f,18f to 7f)){path(3f,y,x-3f,y);path(x+3f,y,21f,y);canvas.drawCircle(x,y,2.4f,pen)}}
    else->{canvas.drawCircle(12f,12f,9f,pen);path(12f,11f,12f,17f);canvas.drawPoint(12f,7f,pen)}

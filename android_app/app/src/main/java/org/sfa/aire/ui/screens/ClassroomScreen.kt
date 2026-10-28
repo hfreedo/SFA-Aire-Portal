@@ -20,13 +20,13 @@ class ClassroomScreen(private val ui:AireUi){
  }
  private data class SensorViews(val box:LinearLayout,val value:android.widget.TextView,val detail:android.widget.TextView)
  private fun sensorTile(parent:LinearLayout,title:String,kind:String):SensorViews=with(ui){
-  val tile=column().apply{background=shape(Color.WHITE,sageStrong);setPadding(dp(16),dp(16),dp(16),dp(16))}
+  val tile=column().apply{background=shape(Color.WHITE,sageStrong);setPadding(dp(12),dp(12),dp(12),dp(12))}
   parent.addView(tile,if(parent.orientation==LinearLayout.HORIZONTAL)LinearLayout.LayoutParams(0,-1,1f).apply{if(kind=="temperature")marginEnd=dp(12)} else LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(10)})
   val label=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};tile.addView(label)
-  label.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,sensorColor(kind),21));background=shape(sensorSurface(kind),radius=8);setPadding(dp(5),dp(5),dp(5),dp(5));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(30),dp(30)).apply{marginEnd=dp(8)})
+  label.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,kind,sensorColor(kind),21));background=shape(sensorSurface(kind),radius=6);setPadding(dp(3),dp(3),dp(3),dp(3));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(24),dp(24)).apply{marginEnd=dp(8)})
   text(label,title,14f)
-  space(tile,12)
-  SensorViews(tile,text(tile,"—",32f,true),text(tile,"",14f))
+  space(tile,6)
+  SensorViews(tile,text(tile,"—",28f,true),text(tile,"",14f))
  }
  private fun value(view:android.widget.TextView,number:String,unit:String){
   val formatted=android.text.SpannableString("$number $unit")
@@ -80,7 +80,7 @@ class ClassroomScreen(private val ui:AireUi){
    root.addView(metrics,LinearLayout.LayoutParams(-1,-2).apply{bottomMargin=dp(12)})
    val temperature=sensorTile(metrics,"Temperatura","temperature")
    val mq=sensorTile(metrics,"MQ135","air")
-   val humidity=card();val row=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};humidity.addView(row,LinearLayout.LayoutParams(-1,-2))
+   val humidity=card().apply{setPadding(dp(12),dp(10),dp(12),dp(10))};val row=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL};humidity.addView(row,LinearLayout.LayoutParams(-1,-2))
    row.addView(ImageView(activity).apply{setImageDrawable(AireIcon(activity,"humidity",sensorColor("humidity"),22));importantForAccessibility=android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO},LinearLayout.LayoutParams(dp(24),dp(24)).apply{marginEnd=dp(10)})
    text(row,"Humedad",16f,true).layoutParams=LinearLayout.LayoutParams(0,-2,1f)
    val humidityValue=text(row,"—",21f,true)

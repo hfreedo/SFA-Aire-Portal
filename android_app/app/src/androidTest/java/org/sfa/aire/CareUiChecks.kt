@@ -80,6 +80,15 @@ class CareUiChecks(private val instrumentation:Instrumentation){
         fields();write(0,"Ventilar el aula");write(1,"Variación comprobada");write(2,"121");click("Emitir");check(emitted.get()==null)
         write(2,"30");click("Emitir");check(emitted.get()=="stable-fixture")
         instrumentation.runOnMainSync{dialogs!!.dismiss()}
+        stage="personal archive isolation and persistence"
+        val ownerA=java.util.UUID.randomUUID().toString();val ownerB=java.util.UUID.randomUUID().toString();val notice=java.util.UUID.randomUUID().toString()
+        val inbox=org.sfa.aire.data.inbox.NoticeInboxRepository(current)
+        try{
+            inbox.setArchived(ownerA,notice,true)
+            check(notice in org.sfa.aire.data.inbox.NoticeInboxRepository(current).archived(ownerA))
+            check(inbox.archived(ownerB).isEmpty())
+            inbox.setArchived(ownerA,notice,false);check(inbox.archived(ownerA).isEmpty())
+        }finally{inbox.setArchived(ownerA,notice,false)}
         stage="notification registration notice"
         instrumentation.runOnMainSync{
             val root=LinearLayout(current).apply{orientation=LinearLayout.VERTICAL;setPadding(24,24,24,24)}
@@ -105,7 +114,14 @@ class CareUiChecks(private val instrumentation:Instrumentation){
             val item=data.getJSONArray("incidents").getJSONObject(0).put("capabilities",JSONObject().put("can_resolve",true))
             IncidentsScreen(AireUi(current,root,{false},{false}),{attended++},true,{}, {commented++}).render(data,listOf(item))
         }
-        instrumentation.waitForIdleSync();capture("v081-avisos-habilitados-fixture");click("Marcar atendido")
+        instrumentation.waitForIdleSync()
+        check(all().any{it.text?.toString()=="Alerta simulada"})
+        check(all().none{it.text?.toString()=="Datos simulados del aviso"}){"Notice should start collapsed"}
+        capture("v082-aviso-replegado-fixture")
+        click("Detalles y acciones")
+        check(all().any{it.text?.toString()=="Datos simulados del aviso"})
+        check(all().any{it.text?.toString()=="560 ADC"})
+        capture("v082-lectura-aviso-fixture");click("Marcar atendido")
         check(attended==1&&commented==0)
         check(all().none{it.className=="android.widget.EditText"}){"Attendance required a note"}
         click("Atender con nota");check(commented==1&&attended==1)
@@ -118,7 +134,7 @@ class CareUiChecks(private val instrumentation:Instrumentation){
             val item=data.getJSONArray("incidents").getJSONObject(0).put("status","resuelto")
                 .put("closure_kind","administrativo").put("closure_reason","Receptor retirado durante ensayo de demostración")
                 .put("note","ARCHIVO ADMINISTRATIVO · No confirma normalización. Motivo: receptor retirado")
-            IncidentsScreen(ui,{error("Unexpected attention command")},false,{}).render(data,listOf(item))
+            IncidentsScreen(ui,{error("Unexpected attention command")},false,{}).render(data,listOf(item),filter=org.sfa.aire.domain.InboxFilter.ATTENDED)
         }
         instrumentation.waitForIdleSync()
         check(all().any{it.text?.toString()=="Aviso atendido"})

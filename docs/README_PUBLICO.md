@@ -11,7 +11,7 @@ panel de aulas y avisos push en Android.
 [![Uso educativo restringido](https://img.shields.io/badge/Uso-Educativo%20restringido-475569)](LICENCIA_DE_USO_RESTRINGIDO.md)
 
 [Windows portable](https://github.com/hfreedo/SFA-Aire-Portal/releases/latest) ·
-[Android 0.8.1](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.8.1) ·
+[Android 0.8.2](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.8.2) ·
 [Abrir el portal](https://sfa-aire-aulas.web.app/remoto) ·
 [Guía de uso](docs/GUIA_PUBLICA.md)
 
@@ -59,9 +59,9 @@ conservar el monitoreo o detenerlo. Windows 0.8.0 incluye Android piloto 0.8.0. 
 **Conexión Arduino**; la primera vinculación genera una credencial propia de esa PC.
 La demostración sin cuenta utiliza datos ficticios y no envía notificaciones.
 
-**Android 8 o posterior con Google Play Services:** instala la [APK piloto 0.8.1](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.8.1),
+**Android 8 o posterior con Google Play Services:** instala la [APK piloto 0.8.2](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/android-v0.8.2),
 entra con una cuenta invitada y registra las notificaciones desde **Ajustes**.
-La APK 0.8.1 diferencia sensores, acciones y estados con una interfaz IoT calmada. Mantiene la atención directa y la nota opcional. El portable Windows 0.8.0 conserva su APK original; la actualización Android se descarga por separado.
+La APK 0.8.2 incorpora avisos replegables con sus lecturas, vistas de pendientes/atendidos y archivo personal en el teléfono. Mantiene la atención y la nota opcional sin protocolos obligatorios. El portable Windows 0.8.0 conserva su APK original; la actualización Android se descarga por separado.
 El alta de la cuenta no registra automáticamente el teléfono. Las invitaciones
 actuales se comparten mediante enlace privado o QR; no se envían correos automáticos.
 
@@ -74,7 +74,7 @@ Los datos nuevos se guardan en la carpeta de esa instalación. Consulta
 Prototipo escolar integrado. Los builds y las pruebas de lógica, permisos y
 empaquetado se documentan en [la guía](docs/GUIA_PUBLICA.md#validación).
 La comprobación física con sensores, el alta de otra persona y la prueba de
-la APK piloto 0.8.1 en el Samsung se mantienen como verificaciones separadas.
+la APK piloto 0.8.2 en el Samsung se mantienen como verificaciones separadas.
 
 ## Autoría y condiciones
 

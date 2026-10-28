@@ -2,6 +2,7 @@
 export type Job = {
   id: string; lease_id: string; incident_id: string; classroom_id: string;
   token: string; installation_id: string; source: string; severity: string; lab_run_id?: string;
+  classroom_name?:string; sample_at?:string; observation?:{temperature?:number;humidity?:number;mq_raw?:number;dht_ok?:boolean}|null;
   causes?: string[]; event_id?: string; event_kind?: string; notification_test?: boolean;
 };
 export type ServiceAccount = { project_id: string; client_email: string; private_key: string };
@@ -11,14 +12,25 @@ const labels: Record<string,string> = {indicacion:'nueva indicación',confirmada
 export function message(job: Job) {
   if(typeof job.installation_id!=='string'||job.installation_id.length<8||job.installation_id.length>120)
     throw new Error('NotificationBindingMissing');
+  const simulated=job.source==='simulacion';
+  const title=job.event_id?(simulated?'SIMULACIÓN · ':'')+'SFA Aire · Coordinación':
+    simulated?(job.severity==='alerta'?'Alerta simulada':'Aviso simulado'):(job.severity==='alerta'?'Alerta del aula':'Aviso del aula');
+  const o=job.observation;
+  const value=(v:unknown,min:number,max:number,unit:string)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max?`${v} ${unit}`:'';
+  const measurements=[o?.dht_ok===true?value(o.temperature,-40,125,'°C'):'',o?.dht_ok===true?value(o.humidity,0,100,'% HR'):'',value(o?.mq_raw,0,1023,'ADC MQ135')].filter(Boolean).join(' · ');
+  const room=typeof job.classroom_name==='string'?job.classroom_name.replace(/[\r\n\t]/g,' ').slice(0,100):'';
+  const body=job.event_id?'Cambio de coordinación: '+(labels[job.event_kind||'']||'actualización registrada')+'. Abra la app y verifique la indicación vigente.':
+    [room,measurements,job.notification_test?'Datos simulados; no son mediciones físicas.':simulated?'Lectura simulada del aviso.':'Lectura asociada al aviso.',!measurements?'Abra la app para consultar los detalles.':''].filter(Boolean).join(' · ');
   return {message:{token:job.token, android:{priority:'high',ttl:'300s'},data:{
     notification_contract:'2',installation_id:job.installation_id,channel:'cloud',delivery_id:job.id,incident_id:job.incident_id,classroom_id:job.classroom_id,
     source:job.source,severity:job.severity,lab_run_id:job.lab_run_id||'',causes:(job.causes||[]).join(','),
     event_id:job.event_id||'',event_kind:job.event_kind||'',
     test_kind:job.notification_test?'cloud_notification':'',
-    title:(job.source==='simulacion'?'SIMULACIÓN · ':'')+(job.notification_test?'SFA Aire · Prueba de notificación':job.event_id?'SFA Aire · Coordinación':'SFA Aire · Revisar aula'),
-    body:job.notification_test?'Aviso de prueba desde la nube. No representa una medición física.':job.event_id?'Cambio de coordinación: '+(labels[job.event_kind||'']||'actualización registrada')+'. Abra la app y verifique la indicación vigente.':
-      'Variación sostenida registrada. Abra la app para consultar el aula.'
+    title,body,
+    sample_at:typeof job.sample_at==='string'?job.sample_at:'',
+    temperature:o?.dht_ok===true?value(o.temperature,-40,125,'').trim():'',
+    humidity:o?.dht_ok===true?value(o.humidity,0,100,'').trim():'',
+    mq_raw:value(o?.mq_raw,0,1023,'').trim()
   }}};
 }
 const encoder = new TextEncoder();

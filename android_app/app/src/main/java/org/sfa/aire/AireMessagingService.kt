@@ -41,6 +41,7 @@ class AireMessagingService : FirebaseMessagingService() {
         val intent = Intent(this, if(route=="cloud") CloudActivity::class.java else MainActivity::class.java).putExtra("delivery_id", delivery)
             .putExtra("classroom_id",message.data["classroom_id"])
             .putExtra("lab_run_id",message.data["lab_run_id"])
+            .putExtra("incident_id",message.data["incident_id"])
             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         if(session!=null)intent.putExtra("notification_generation",session.generation).putExtra("notification_binding",session.binding)
         if(lanSession!=null)intent.putExtra("lan_generation",lanSession.generation).putExtra("local_receiver_id",lanSession.receiverId).putExtra("local_notification_binding",lanSession.binding)
@@ -50,7 +51,7 @@ class AireMessagingService : FirebaseMessagingService() {
         if (Build.VERSION.SDK_INT < 33 || checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
             val notification=Notification.Builder(this, "aula_alerts")
                 .setSmallIcon(android.R.drawable.ic_dialog_alert)
-                .setContentTitle(message.data["title"] ?: "SFA Aire")
+                .setContentTitle(if(message.data["event_id"].isNullOrBlank())org.sfa.aire.domain.NoticePresentation.title(message.data["source"].orEmpty(),message.data["severity"].orEmpty()) else message.data["title"] ?: "SFA Aire")
                 .setContentText(message.data["body"] ?: "Revise el aula")
                 .setStyle(Notification.BigTextStyle().bigText(message.data["body"]))
                 .setContentIntent(pending).setAutoCancel(true).build()

@@ -50,6 +50,11 @@ class CloudActivity:Activity() {
     private var verified=false
     private var verifiedGeneration:Long?=null
     private var page="aula"
+    private var focusedIncident:String?=null
+    private var appliedFocus:String?=null
+    private var inboxFilter=org.sfa.aire.domain.InboxFilter.PENDING
+    private val demoArchived=mutableSetOf<String>()
+    private val inbox by lazy{org.sfa.aire.data.inbox.NoticeInboxRepository(this)}
     private var overview:JSONObject?=null
     private val freshnessUpdates=mutableListOf<()->Unit>()
     private val dataUpdates=mutableListOf<(JSONObject)->Unit>()
@@ -175,7 +180,22 @@ class CloudActivity:Activity() {
             ClassroomScreen(ui).render(data,roomId,incidents,freshnessUpdates,{goToPage("incidentes")},{refresh()},dataUpdates)
             return
         }
-        IncidentsScreen(ui,::closeNotice,verified&&verifiedGeneration==SessionRepository(this).generation(),::shareNotice,::commentNotice).render(data,incidents)
+        val owner=data.optJSONArray("memberships")?.optJSONObject(0)?.optString("user_id")?.takeIf{it.isNotBlank()}
+        val archived=if(demoMode)demoArchived.toSet() else if(owner!=null)try{inbox.archived(owner)}catch(_:Exception){emptySet()}else emptySet()
+        focusedIncident?.takeIf{it!=appliedFocus}?.let{id->incidents.firstOrNull{it.optString("id")==id}?.let{item->
+            inboxFilter=org.sfa.aire.domain.NoticeInbox.category(id,item.optString("status"),archived)
+            ui.disclosures["notice-"+id]=true;appliedFocus=id
+        }}
+        IncidentsScreen(ui,::closeNotice,verified&&verifiedGeneration==SessionRepository(this).generation(),::shareNotice,::commentNotice).render(
+            data,incidents,focusedIncident,inboxFilter,archived,
+            {filter->inboxFilter=filter;render(data);scroll.post{scroll.scrollTo(0,0)}},
+            {item,archive->
+                if(demoMode){if(archive)demoArchived.add(item.getString("id"))else demoArchived.remove(item.getString("id"));render(data)}
+                else if(verified&&verifiedGeneration==SessionRepository(this).generation()&&owner!=null){
+                    try{inbox.setArchived(owner,item.getString("id"),archive);render(data);status.text=if(archive)"Archivado aquí. Disponible en Archivo." else "Restaurado en la bandeja."}
+                    catch(e:Exception){status.text=e.message?:"No se pudo guardar el archivo personal"}
+                }else status.text="Actualiza el aula para verificar tu cuenta antes de archivar."
+            })
     }
 
     private fun change(command:CareCommand) {
@@ -231,6 +251,7 @@ class CloudActivity:Activity() {
         val accepted=repository.ifCurrentNotification(session){
             invalidateUi()
             intent.getStringExtra("classroom_id")?.let{room->try{java.util.UUID.fromString(room);Api.prefs(this).edit().putString("cloud_room",room).apply()}catch(_:Exception){}}
+            focusedIncident=intent.getStringExtra("incident_id");appliedFocus=null
             page="incidentes"
             renderedKey=null;scrollPositions["incidentes"]=0
         }

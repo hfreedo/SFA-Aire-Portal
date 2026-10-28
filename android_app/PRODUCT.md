@@ -43,7 +43,7 @@ No sustituirlo por estética de controles iOS ni añadir burocracia.
 
 ## Evidence on Hand
 
-../docs/ANDROID_081_IOT_CALMADO.md recoge el refinamiento actual.
+../docs/ANDROID_082_AVISOS_Y_BANDEJA.md recoge el refinamiento actual.
 ../docs/PLAN_MEJORA_UX_SKILLS.md y ../docs/CRITERIOS_DISENO_UI.md contienen la
 línea de base revisada y el plan pendiente. Las capturas en emulador no son
 prueba física en A02 ni recepción real FCM. Verificar la APK ejecutada.

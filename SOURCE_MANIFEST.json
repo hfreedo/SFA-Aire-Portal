@@ -45,7 +45,7 @@
   },
   {
     "path": "android_app/PRODUCT.md",
-    "sha256": "baa493cd8b11a3751ef778d8cb7d811489ec6f0ce25cd86329bf2517caa0bbe7"
+    "sha256": "83f62b38030eb7f48e0acdd6dcaf35850bcff6663ff7b4e8c5d88798307120d8"
   },
   {
     "path": "docs/IMPLEMENTACION_UI_080.md",
@@ -100,8 +100,32 @@
     "sha256": "fa42c92e51de0dc21c609350d9479969a3a16f0cb16a63e2b92ce4868d4b1408"
   },
   {
+    "path": "docs/ANDROID_082_AVISOS_Y_BANDEJA.md",
+    "sha256": "55a23df8443f9c40267214b2b3bb6b565d6b00dd0d932b4e65fe2208d6f2a6ab"
+  },
+  {
+    "path": "docs/ANDROID_PILOTO_082.json",
+    "sha256": "3483029ace778076a68ef68e90cb48c48f1d9b741648aca6d3abedf329b5b512"
+  },
+  {
+    "path": "herramientas/revisar_android_082.py",
+    "sha256": "5571e270a5bc9c55daea4ea783d5d1acfad82ca2e2f45911a9423488dbcda2bb"
+  },
+  {
+    "path": "herramientas/sql-check/notice-evidence.test.mjs",
+    "sha256": "65387361dda2d0ac6f26bc4b390e556cb7187ea2d6db1e0600faff208c4d0139"
+  },
+  {
+    "path": "herramientas/sql-check/quick-notification.test.mjs",
+    "sha256": "752f6861d81a454f9db02fc0b0cb66639a0894aabd05f4e511d101d79d4ab462"
+  },
+  {
+    "path": "herramientas/sql-check/worker.test.mjs",
+    "sha256": "6539c68b2c2e5fdf1af51d92f71236eaa2fa8cb2ea678237c81e4e5db61fc954"
+  },
+  {
     "path": "interfaz_web/src/AdminLab.tsx",
-    "sha256": "d632fe4dac76a52ab2a2a0af360f952063e469d9296bb5c5556397b4296c24ab"
+    "sha256": "f0e4f503486c7efa3b7d92f45f718a2cf84fac968deb0acd75095913ac66957d"
   },
   {
     "path": "interfaz_web/src/AttentionDialog.tsx",
@@ -364,6 +388,14 @@
     "sha256": "812dd3c998fbfde6475312559bdbd1c4b35dc2865efc159679a08ada87935c15"
   },
   {
+    "path": "supabase/migrations/202610280001_notice_reading_evidence.sql",
+    "sha256": "ec21d0897d6df40710014a49fab4ba4df1b38ea7e22cdb8f266d5616a079cbe2"
+  },
+  {
+    "path": "supabase/migrations/202610280002_notice_evidence_transaction.sql",
+    "sha256": "bda4904b57fc4c9bc384bd7a7127b34408dede5bdf9cd0b6a343aa9ed1492211"
+  },
+  {
     "path": "supabase/functions/aire-invitations/core.ts",
     "sha256": "e385f4310008c21f971524b6aaaa764aada8955882e101db88044dfc3a882fc6"
   },
@@ -381,7 +413,7 @@
   },
   {
     "path": "supabase/functions/aire-push/core.ts",
-    "sha256": "eff31ed535b805db28d9d2938bd897f6ff057145d6a36dedf68f04bebad21d77"
+    "sha256": "0675155ff723888b719d734c39d3c6291e530214c0d10aa9dea24624814aa1bd"
   },
   {
     "path": "supabase/functions/aire-push/index.ts",
@@ -516,6 +548,14 @@
     "sha256": "fac29a69374f6eb2bac500bc2d4a5613662d57fd7c2e781877c3dbaec591e683"
   },
   {
+    "path": "android_app/app/src/test/java/org/sfa/aire/NoticeInboxTest.kt",
+    "sha256": "1fce34274b8986602516d983049b51bae4eae20d229558d9751515a47b313fa0"
+  },
+  {
+    "path": "android_app/app/src/test/java/org/sfa/aire/NoticePresentationTest.kt",
+    "sha256": "d90d6bd371bbb06ac8256881896aef8d2110c9b1ae735252dfa98890b1f47183"
+  },
+  {
     "path": "android_app/app/src/test/java/org/sfa/aire/NotificationPolicyTest.kt",
     "sha256": "5fd2486c89d3cd23a8673056a243aa5625b883496e05d7e64d38184a2a6bb1e3"
   },
@@ -557,7 +597,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/AireMessagingService.kt",
-    "sha256": "466d7366a2c054b55e70798b91df49c058a95b8df1cb72f161c02dab8ac7be61"
+    "sha256": "325c1d68470513dfe94f334c684a6ed55c93ce76a7647d9cea897191303878ab"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/Api.kt",
@@ -565,7 +605,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/CloudActivity.kt",
-    "sha256": "2cdde18e0460429cc2ff02122529a99206c41fdd341f69139eb7df1cbcfd6966"
+    "sha256": "29a275de42bfadb0b0d083abfcd6aa8e27a4e63baab4e8c645790b107da62c44"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/CloudApi.kt",
@@ -596,12 +636,20 @@
     "sha256": "4e0ed3d20e71a4f81bf2521fef9991a2806d36e98a45a1f6e208a0b9d1405541"
   },
   {
+    "path": "android_app/app/src/main/java/org/sfa/aire/domain/NoticeInbox.kt",
+    "sha256": "6751fc217da181836edd8ae33b354058e60d859277fd0bac2b0d9d5286d2a67d"
+  },
+  {
+    "path": "android_app/app/src/main/java/org/sfa/aire/domain/NoticePresentation.kt",
+    "sha256": "8176c7f9ae58810aa4a825054f15d5cb295a2a153b1d365811fd33fd2111397b"
+  },
+  {
     "path": "android_app/app/src/main/java/org/sfa/aire/domain/ObservationState.kt",
     "sha256": "ea49bc50e43eb936cbb5529d616727e22cc439e302dd56fb61a07bc61bcbad2f"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/AireIcon.kt",
-    "sha256": "95115708cc401845d7b49d776bf1fc5078e330ce8588ddf7e86f6add25785103"
+    "sha256": "47c16f0680546b37e0eb5856982404f378a5a35d86693d3261c1b286cfa7ebbd"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/AireUi.kt",
@@ -621,7 +669,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/ClassroomScreen.kt",
-    "sha256": "268adc60ebfdd600187cd007ee9cf5ac05a6c219a2ae9d12b0ff1597a1fc2cfe"
+    "sha256": "dded710f7c80e5f74cd793f9be74b99c7edba90e386e691560367f482c37d179"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/CoordinationScreen.kt",
@@ -629,7 +677,7 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/IncidentsScreen.kt",
-    "sha256": "388c9d36fb93c6865b5685fba3b6e1e8bf4a02b47df833d147a545e4ee33d728"
+    "sha256": "adc9c32ce791801ee7e29766ee7d6ca049183dee4e377180e8b8beb0cbb5668e"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/ui/screens/SettingsScreen.kt",
@@ -637,7 +685,11 @@
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/data/demo/DemoWorkspace.kt",
-    "sha256": "6ff98175a0dd88b62cec68b95519608b8b1c9dccc4427add3ca898fe16ccb677"
+    "sha256": "b615151dd3abc60f9be447579c0c7ea293d242b610ed07549f68648a5aa41949"
+  },
+  {
+    "path": "android_app/app/src/main/java/org/sfa/aire/data/inbox/NoticeInboxRepository.kt",
+    "sha256": "3d893fe436254a0c84e748ceb09a4537efc175ac7083d7ff727f537930103a32"
   },
   {
     "path": "android_app/app/src/main/java/org/sfa/aire/data/network/CloudReply.kt",
@@ -677,7 +729,7 @@
   },
   {
     "path": "android_app/app/src/androidTest/java/org/sfa/aire/CareUiChecks.kt",
-    "sha256": "b3143307771b7982b0beb4067a13419e250c429be10c37235c9e7ed834d0d229"
+    "sha256": "f57b4c1ee2b5e75fc1dfb21a84e32152cdea3dad3f692bc0faeff9fc26d3ef16"
   },
   {
     "path": "android_app/app/src/androidTest/java/org/sfa/aire/EntryBoundaryChecks.kt",
@@ -753,7 +805,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "babb288e9a74dc15d18cad509e458d6909501bba02d4637622e034b001d0637e"
+    "sha256": "0df69977e77151ecd4cbddb5a29518774c937bb54ede4a0830a7229e9e0354b7"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
@@ -761,7 +813,7 @@
   },
   {
     "path": "docs/README_PUBLICO.md",
-    "sha256": "bc37602842861791c91421e742c27a8db89391d4f5ca19ce5bdc0b4ce0abf7a2"
+    "sha256": "e3f4d22b35d5cbee7010fbf2d242d5767e8b7aceea55a2790a34643524ea543a"
   },
   {
     "path": "docs/capturas/panel-ejemplo.png",
@@ -769,7 +821,7 @@
   },
   {
     "path": "docs/GUIA_PUBLICA.md",
-    "sha256": "3043d92455cb4427d2e188c85266f1c8df06c8c890a2ff4138483a3aa5584012"
+    "sha256": "eb9b9486d495739a3fc1155ee9a4067bfcbc30f97b4ed3a668d6180be192de15"
   },
   {
     "path": "docs/ANDROID_PILOTO_072.json",
@@ -833,7 +885,7 @@
   },
   {
     "path": "android_app/app/build.gradle.kts",
-    "sha256": "cd81e08f76af5a722e2d8e1f8b7fe247671abbcff482313ffe20210ed304f455"
+    "sha256": "5e4c0e3cc9a44628dbac9239bd8201b89b4963162782b5cfa62baec9197ddfe4"
   },
   {
     "path": "android_app/settings.gradle.kts",
