@@ -3,6 +3,13 @@
 Proyecto escolar de monitoreo ambiental que conecta una maqueta Arduino con un
 panel de aulas y avisos push en Android.
 
+## Guía del stack tecnológico
+
+**[Estudiar las tecnologías y cómo se conectan](docs/GUIA_STACK_TECNOLOGICO.md)**
+
+Arduino, Python, React, Kotlin, Supabase y Firebase explicados con ejemplos del
+código, cuatro diagramas Mermaid, glosario y preguntas para preparar la exposición.
+
 ## Manual de usuario
 
 **[Leer el manual completo e ilustrado](docs/MANUAL_DE_USUARIO.md)**

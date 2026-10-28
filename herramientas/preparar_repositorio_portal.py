@@ -7,6 +7,12 @@ files.extend(ROOT/p for p in ['PRODUCT.md','android_app/PRODUCT.md','docs/IMPLEM
 files.extend(ROOT/p for p in ['android_app/DESIGN.md','docs/ANDROID_081_IOT_CALMADO.md','docs/ANDROID_PILOTO_081.json','herramientas/revisar_android_081.py','herramientas/grabar_android_081.py'])
 files.extend(ROOT/p for p in ['docs/ANDROID_082_AVISOS_Y_BANDEJA.md','docs/ANDROID_PILOTO_082.json','herramientas/revisar_android_082.py','herramientas/sql-check/notice-evidence.test.mjs','herramientas/sql-check/quick-notification.test.mjs','herramientas/sql-check/worker.test.mjs'])
 files.append(ROOT/'docs/MANUAL_DE_USUARIO.md')
+files.extend(ROOT/'docs'/name for name in [
+    'GUIA_STACK_TECNOLOGICO.md', 'ARQUITECTURA.md', 'PROTOCOLO.md',
+    'HARDWARE.md', 'GUIA_RAPIDA.md', 'CONEXION_ARDUINO.md',
+    'ATENCION_SIMPLE.md', 'NOTIFICACIONES_SIMPLES.md', 'VALIDACION.md',
+    'AUDITORIA_ARQUITECTURA.md', 'AUDITORIA_RPC.md',
+])
 files.extend(p for p in (ROOT/'docs/manual-usuario').rglob('*') if p.is_file() and p.suffix.lower() in {'.md','.pdf','.docx','.html','.png','.json','.txt','.mmd','.zip'})
 for directory in ['interfaz_web/src','supabase/migrations','supabase/functions','servidor_pc','arduino','tests','android_app/app/src']:
     files.extend(p for p in (ROOT/directory).rglob('*') if p.is_file() and p.suffix in {'.ts','.tsx','.css','.png','.sql','.json','.py','.ino','.txt','.kt','.xml'} and p.name not in {'sfa-public.json','google-services.json'})

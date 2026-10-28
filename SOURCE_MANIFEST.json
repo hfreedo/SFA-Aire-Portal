@@ -805,7 +805,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "99c63605900a0849218ee80cf1c8d31eb7d734107de8783517a6fbafd4c985f4"
+    "sha256": "167cca55fa13ebb18309a542facd2676ec91af1d5f6aa9ebc862deaab2185c90"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
@@ -813,7 +813,7 @@
   },
   {
     "path": "docs/README_PUBLICO.md",
-    "sha256": "ee853c65171c7c66152c055afda56acc25c79fbdd793ec778469d94419ad564d"
+    "sha256": "ff4ac9d0435c869c89a4c52490f3e8c71f14c2b16a254e2b33ccef41c83a9910"
   },
   {
     "path": "docs/capturas/panel-ejemplo.png",
@@ -1054,5 +1054,49 @@
   {
     "path": "docs/manual-usuario/capturas/16-portal-laboratorio.png",
     "sha256": "c45d1c958f14be521e3ac6503817ce99fcd5ab161f35d7307143c231f7e22822"
+  },
+  {
+    "path": "docs/GUIA_STACK_TECNOLOGICO.md",
+    "sha256": "16a97019fd3485028159ddad63af326c66a449ceea8ee59c17cca0d164ac3f1d"
+  },
+  {
+    "path": "docs/ARQUITECTURA.md",
+    "sha256": "741bfe9589bbdaad03ce5b70a683b4fc7060454e8e2fe21356aad0ea3642fda2"
+  },
+  {
+    "path": "docs/PROTOCOLO.md",
+    "sha256": "5c52e73b642b3302cf2c79e36f12102434c81a7127f2be6c1e48f3ed97608ddb"
+  },
+  {
+    "path": "docs/HARDWARE.md",
+    "sha256": "5c473f77b87ccc1290d0b2ca7990415602bb496331919451ac5040fd78b04e94"
+  },
+  {
+    "path": "docs/GUIA_RAPIDA.md",
+    "sha256": "d6d0aba304f394f35fabf511ea8c66fb116f9bc2dfbe6a0eb43a76551c0a932e"
+  },
+  {
+    "path": "docs/CONEXION_ARDUINO.md",
+    "sha256": "0aa39c7d8c11dd1ec4339713c2d9859432a4d39a3d22ffe52af1df5fda6d1825"
+  },
+  {
+    "path": "docs/ATENCION_SIMPLE.md",
+    "sha256": "be76dd4efc40bdc40d2e319fd53eae0737efda812e6ba9ff2d6956ed65cf64ad"
+  },
+  {
+    "path": "docs/NOTIFICACIONES_SIMPLES.md",
+    "sha256": "add7fd1b0f503e2425951a91a00ab3b1ceae3d18d3984fcc9f4cb7f4bfda9e2b"
+  },
+  {
+    "path": "docs/VALIDACION.md",
+    "sha256": "b89a9977c43038039dd6d6b22f7fbf3ae002347fc9742fa9ef588f9a74f6389e"
+  },
+  {
+    "path": "docs/AUDITORIA_ARQUITECTURA.md",
+    "sha256": "30eec218fed14bfef79f566e5112d32672aa0616ac58d8a3b98b6da3eb2c6b2d"
+  },
+  {
+    "path": "docs/AUDITORIA_RPC.md",
+    "sha256": "1ac47e4362da1bc2a1e5e786a7efcc79b506ec325ab29c80f69e03da5c8c0269"
   }
 ]
