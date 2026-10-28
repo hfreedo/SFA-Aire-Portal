@@ -949,15 +949,15 @@
   },
   {
     "path": "docs/MANUAL_DE_USUARIO.md",
-    "sha256": "78ffe03db3261565d6a8552ade93f5cb75e9b94671126063b21bfc54236ca52e"
+    "sha256": "bf41c696605b929c87a6bcd8f53a6f086a9ba4d7ace1469b10dcec99cd573410"
   },
   {
     "path": "docs/manual-usuario/CAPTURAS_PUBLICADAS.json",
-    "sha256": "f1eda56cbe83f2daae2bdc568c0468caa1263a57b5a0b59a2b3fccb2929a44dd"
+    "sha256": "fb8ce46727e80655b49dfacc2363841bf888acfe2e56b64c08a7066ba13384d0"
   },
   {
     "path": "docs/manual-usuario/LEER_PRIMERO.txt",
-    "sha256": "4ae7cc9683a828857f593fc53dbb0c86806f022d54ab7a543764550202280f71"
+    "sha256": "984a94e4ea2e0ce807d7670dc143ea8b2d3135866d11e95dacbe4fef472a4107"
   },
   {
     "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.docx",
@@ -965,7 +965,7 @@
   },
   {
     "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.html",
-    "sha256": "c9344b7507e4b9a50dcbd086572598be4492bc77f8a9c36e37f0a1b0a408ae17"
+    "sha256": "b74f920c76eb3829c64b378753f3b1223d19bafd4bc8ca13d0971f575a6d3b17"
   },
   {
     "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.pdf",
@@ -973,23 +973,23 @@
   },
   {
     "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire_2026-10-27.zip",
-    "sha256": "453e9ba8dcaacc427fbf4a006b0dd2f1547569a480b5999ac66f11400ff96a0f"
+    "sha256": "735a337d411a31064f2db30824b720b233061fe979c444e66c2c4f3a334b5194"
   },
   {
     "path": "docs/manual-usuario/README.md",
-    "sha256": "ab61816048fdf693e29392c9109ee7768654790b614ffef308c00f332562a704"
+    "sha256": "20c7af140dd01d65c60fdc170a6671ae3a4bfdcc92a8064dee6cf35652323914"
   },
   {
     "path": "docs/manual-usuario/recorrido_del_sistema.mmd",
-    "sha256": "febf6ef20d5e4e68ae4973c15011c195227cab52fb9090b40b560a6fa200549d"
+    "sha256": "8fc8a2db1387e042e6378a0beee57d28f3a091a5b7bb6352f61598b5d85604ca"
   },
   {
     "path": "docs/manual-usuario/SHA256SUMS.txt",
-    "sha256": "26ff1c82f78fa417e8152bbe6b5a2547e5211b5ed24ef28472ab746cc814ad47"
+    "sha256": "bc5a3f89bb789b7f8993efecf84aad1498099f1955062c23d253b946bfe70f02"
   },
   {
     "path": "docs/manual-usuario/TRAZABILIDAD.json",
-    "sha256": "9fe58c779b69a0330e4641230e6bd55e959c24170a477bc72706485f85822d6d"
+    "sha256": "1170038c31c44a8507a2c0707e7da5e662d6dac8311c41a6c1b1e8ada2476192"
   },
   {
     "path": "docs/manual-usuario/capturas/01-sfa-aire-verde-transparente.png",
