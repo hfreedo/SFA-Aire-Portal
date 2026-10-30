@@ -1,11 +1,13 @@
 """Ejecución acotada de comandos firmados por la autorización Supabase del administrador."""
 import time
 from datetime import datetime
+from typing import Literal
 from pydantic import BaseModel, Field
 from .models import Sample, Rules
 
 
 class LabCommand(BaseModel):
+    input_source: Literal['generated','usb'] = 'generated'
     id: str
     temperature: float = Field(ge=-20, le=60, allow_inf_nan=False)
     humidity: float = Field(ge=0, le=100, allow_inf_nan=False)
@@ -38,17 +40,27 @@ class LabRunner:
                 return
             if command.id in self.completed or (self.command and self.command.id==command.id):
                 return
-            if self.rt.source=='arduino' and not command.allow_takeover:
+            if command.input_source=='usb':
+                if self.rt.source!='arduino' or not self.rt.serial or not self.rt.latest or not self.rt.latest.get('usb_simulation') or time.time()-self.rt.last_valid>10:
+                    self.rt.cloud.lab_report={'id':command.id,'status':'error','message':'Conecte el UNO con firmware de simulación USB y datos recientes'}
+                    self.completed.add(command.id)
+                    return
+            elif self.rt.source=='arduino' and not command.allow_takeover:
                 self.rt.cloud.lab_report={'id':command.id,'status':'error','message':'USB activo; no se autorizó reemplazarlo'}
                 self.completed.add(command.id)
                 return
             if self.command:
                 self.stop('cancelado')
-            self.rt.switch('simulacion')
+            if command.input_source=='usb':
+                self.rt.engine.reset()
+                self.rt.last_usb_ingest=0
+                self.rt.serial.write(b'REINICIAR\n')
+            else:
+                self.rt.switch('simulacion')
             self.rt.lab_run_id = command.id
             self.command, self.started, self.last_tick = command, time.time(), 0
             self.rt.cloud.lab_active=True
-            self.rt.cloud.lab_report={'id':command.id,'status':'ejecutando','message':'Receptor ejecutando plan acotado'}
+            self.rt.cloud.lab_report={'id':command.id,'status':'ejecutando','message':'UNO USB → nube y app' if command.input_source=='usb' else 'Receptor ejecutando plan acotado'}
 
     def tick(self, now=None):
         with self.rt.lock:
@@ -59,6 +71,8 @@ class LabRunner:
             age=now-self.started
             if age>=command.duration_s or now>=command.expires_at.timestamp():
                 self.stop('finalizado')
+                return
+            if command.input_source=='usb':
                 return
             if now-self.last_tick<3:
                 return
@@ -77,8 +91,19 @@ class LabRunner:
         self.rt.cloud.lab_report={'id':command.id,'status':status,'message':'Prueba detenida; reconecte USB explícitamente si corresponde'}
         self.command=None
         self.rt.cloud.lab_active=False
-        self.rt.switch('detenido')
+        if command.input_source=='usb':
+            self.rt.latest=None
+            self.rt.last_valid=0
+            self.rt.usb_preview_engine.reset()
+            self.rt.engine.reset()
+        else:
+            self.rt.switch('detenido')
         self.rt.lab_run_id=None
+
+    def usb_active(self,now=None):
+        now=time.time() if now is None else now
+        c=self.command
+        return bool(c and c.input_source=='usb' and self.rt.lab_run_id==c.id and now<self.started+c.duration_s and now<c.expires_at.timestamp())
 
     def rules(self):
         return Rules(baseline=300,conditioned=True,temperature_enabled=True)

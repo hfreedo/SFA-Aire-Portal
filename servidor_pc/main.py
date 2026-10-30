@@ -35,6 +35,7 @@ from pydantic import BaseModel, Field
 
 
 from .engine import Engine
+from .mq_calibration import MQCalibration
 
 from .models import Device, Rules, Sample, SerialConnection, Simulation
 
@@ -69,6 +70,7 @@ class Runtime:
         self.rules = Rules(**self.store.setting('rules', {}))
 
         self.engine = Engine()
+        self.usb_preview_engine = Engine()
 
         self.lock = threading.RLock()
 
@@ -80,6 +82,11 @@ class Runtime:
 
         self.serial = None
 
+        self.serial_target = None
+        self.serial_identity = None
+        self.serial_retry_at = 0.0
+        self.serial_buffer = bytearray()
+
         self.serial_state = 'desconectado'
 
         self.error = None
@@ -87,6 +94,7 @@ class Runtime:
         self.last_valid = 0.0
 
         self.last_monitor = 0.0
+        self.last_usb_ingest = 0.0
 
         self.lab_run_id = None
 
@@ -107,6 +115,7 @@ class Runtime:
             pass
 
         self.lab = LabRunner(self)
+        self.mq_calibration = MQCalibration(self)
 
         self.cloud.on_lab = self.lab.accept
 
@@ -121,6 +130,7 @@ class Runtime:
     def switch(self, source):
 
         with self.lock:
+            self.mq_calibration.cancel('La fuente de lectura se detuvo o cambió.')
 
             if self.serial:
 
@@ -135,12 +145,18 @@ class Runtime:
                     pass
 
             self.serial = None
+            self.serial_target = None
+            self.serial_identity = None
+            self.serial_buffer.clear()
+            self.serial_retry_at = 0.0
+            self.last_monitor = 0.0
 
             self.serial_state = 'desconectado'
 
             self.source, self.latest, self.error, self.last_valid = source, None, None, 0.0
 
             self.engine.reset()
+            self.usb_preview_engine.reset()
 
 
 
@@ -150,9 +166,15 @@ class Runtime:
 
         with self.lock:
 
-            if source != self.source:
+            if sample.simulated:
+                raise ValueError('La simulación USB solo admite vista previa local')
+            usb_cloud=source=='simulacion' and self.source=='arduino' and self.lab.usb_active(now)
+            if source != self.source and not usb_cloud:
 
                 raise ValueError('Fuente inactiva; no se mezclan lecturas reales y simuladas')
+
+            if source=='arduino':
+                self.mq_calibration.observe(sample,now)
 
             rules = self.rules if source == 'arduino' else Rules(baseline=300, conditioned=True,
 
@@ -170,12 +192,14 @@ class Runtime:
 
             decision = self.engine.evaluate(sample, rules, now)
 
-            self.latest = {**sample.model_dump(), 'received': now, 'source': source,
+            self.latest = {**sample.model_dump(exclude={'simulated','serial_contract'}), 'received': now, 'source': source,
 
                            'state': decision.state, 'ratio': decision.ratio,
 
                            'causes':decision.causes,'lab_run_id':self.lab_run_id}
 
+            if usb_cloud:
+                self.latest.update(usb_simulation=True,usb_cloud=True)
             self.last_valid, self.error = now, None
 
             with self.store.transaction() as db:
@@ -226,6 +250,34 @@ class Runtime:
 
 
 
+    def ingest_serial(self, sample):
+        if not sample.simulated:
+            if self.lab.usb_active():
+                self.lab.stop('error')
+            if self.latest and self.latest.get('usb_simulation'):
+                self.engine.reset()
+            return self.ingest(sample,'arduino')
+        # Firmware de ensayo, no laboratorio cloud: sin persistencia, incidentes,
+        # outbox ni push. El laboratorio conserva su autorización RPC de admin.
+        with self.lock:
+            if self.source != 'arduino':
+                raise ValueError('USB no está activo')
+            now = time.time()
+            if self.lab.usb_active(now):
+                if now-self.last_usb_ingest>=3:
+                    self.last_usb_ingest=now
+                    return self.ingest(sample.model_copy(update={'simulated':False,'serial_contract':1}),'simulacion',now)
+                self.latest={**self.latest,**sample.model_dump(exclude={'simulated','serial_contract'}),'received':now,
+                    'source':'simulacion','usb_simulation':True,'usb_cloud':True,'ratio':sample.mq_raw/300,'lab_run_id':self.lab_run_id}
+                self.last_valid,self.error=now,None
+                return self.latest
+            decision = self.usb_preview_engine.evaluate(sample,Rules(baseline=300,conditioned=True),now)
+            self.latest = {**sample.model_dump(exclude={'simulated','serial_contract'}),
+                'received':now,'source':'simulacion','usb_simulation':True,
+                'state':decision.state,'ratio':decision.ratio,'causes':decision.causes,'lab_run_id':None}
+            self.last_valid,self.error = now,None
+            return self.latest
+
     def snapshot(self):
 
         with self.lock:
@@ -236,13 +288,15 @@ class Runtime:
 
                      if age is None or age > 10 else self.latest['state'])
 
-            return {'attention_contract': 2, 'receiver_id': self.store.receiver_id, 'source': self.source, 'state': state, 'age_s': age, 'latest': self.latest,
+            return {'attention_contract': 2, 'receiver_id': self.store.receiver_id, 'source': 'simulacion' if self.latest and self.latest.get('usb_simulation') else self.source, 'state': state, 'age_s': age, 'latest': self.latest,
 
                     'scenario': self.scenario, 'serial': self.serial_state, 'error': self.error,
 
                     'cloud': self.cloud.snapshot(),
 
                     'rules': self.rules.model_dump(), 'push': self.push.state,
+                    'usb_lab': {'active':self.lab.usb_active(),'id':self.lab_run_id if self.lab.usb_active() else None,
+                        'remaining_s':max(0,round(self.lab.started+self.lab.command.duration_s-time.time())) if self.lab.usb_active() else 0},
 
                     'devices': self.store.rows('SELECT id,name,accept_simulations,updated FROM devices'),
 
@@ -253,52 +307,79 @@ class Runtime:
 
 
     def serial_tick(self):
-
         with self.lock:
-
-            if not self.serial or self.source != 'arduino':
-
+            if self.source != 'arduino':
                 return
-
-            try:
-
-                if not self.last_valid and time.time() - self.last_monitor > 2:
-
+            now = time.time()
+            if not self.serial:
+                if not self.serial_target or now < self.serial_retry_at:
+                    return
+                self.serial_retry_at = now + 5
+                try:
+                    import serial
+                    from serial.tools import list_ports
+                    match = next((p for p in list_ports.comports() if p.device == self.serial_target), None)
+                    identity = tuple(getattr(match, k, None) for k in ('vid','pid','serial_number'))
+                    if match is None or identity != self.serial_identity:
+                        self.serial_state = 'reconectando'
+                        self.error = 'Esperando el Arduino del puerto configurado: ' + self.serial_target
+                        return
+                    self.serial = serial.Serial(self.serial_target,115200,timeout=.1,write_timeout=1)
+                    self.serial_buffer.clear()
+                    self.last_monitor = now
                     self.serial.write(b'MONITOR\n')
-
-                    self.last_monitor = time.time()
-
-                # Acotado para que un emisor defectuoso no bloquee el servidor.
-
+                    self.serial_state = 'esperando_arduino'
+                except Exception:
+                    if self.serial:
+                        try: self.serial.close()
+                        except Exception: pass
+                    self.serial = None
+                    self.serial_state = 'reconectando'
+                    self.error = 'No se pudo recuperar el puerto ' + self.serial_target + '. Se reintentará.'
+                    return
+            try:
+                # Abrir USB reinicia UNO; MONITOR puede perderse durante el arranque.
+                # También recuperar un reinicio de placa con el puerto aún abierto.
+                if (not self.last_valid or now-self.last_valid > 8) and now-self.last_monitor >= 2:
+                    self.serial.write(b'MONITOR\n')
+                    self.last_monitor = now
                 for _ in range(8):
-
                     if not self.serial.in_waiting:
-
                         break
-
-                    raw = self.serial.readline(1024).decode('utf-8').strip()
-
+                    part = self.serial.readline(1024)
+                    self.serial_buffer.extend(part)
+                    if len(self.serial_buffer)>1024:
+                        self.serial_buffer.clear()
+                        self.error = 'Trama demasiado larga: revisar firmware'
+                        continue
+                    if not part.endswith(b'\n'):
+                        continue  # Un timeout entre bytes no invalida una trama parcial.
+                    raw = bytes(self.serial_buffer).decode('utf-8').strip()
+                    self.serial_buffer.clear()
+                    if raw.startswith('# SFA Aire SIMULACION USB v2'):
+                        self.serial.write(b'SIMULACION_USB_V2\n')
+                        self.serial.write(b'MONITOR\n')
+                        self.last_monitor = now
                     if raw.startswith('{'):
-
-                        self.ingest(Sample.model_validate_json(raw), 'arduino')
-
-                self.serial_state = 'conectado'
-
-            except (ValueError, UnicodeError):
-
+                        try:
+                            self.ingest_serial(Sample.model_validate_json(raw))
+                        except ValueError:
+                            self.error = 'Trama inválida: revisar firmware y 115200 baudios'
+                if self.last_valid and now-self.last_valid <= 10:
+                    self.serial_state = 'conectado'
+                else:
+                    self.serial_state = 'esperando_arduino'
+            except (ValueError,UnicodeError):
+                self.serial_buffer.clear()
                 self.error = 'Trama inválida: revisar firmware y 115200 baudios'
-
             except Exception:
-
-                self.serial_state, self.error = 'error', 'Conexión serie interrumpida'
-
-                if self.serial:
-
-                    self.serial.close()
-
+                self.serial_state = 'reconectando' if self.serial_target else 'error'
+                self.error = 'Conexión serie interrumpida. Intentando recuperar el Arduino.'
+                try: self.serial.close()
+                except Exception: pass
                 self.serial = None
-
-
+                self.serial_buffer.clear()
+                self.serial_retry_at = time.time()+5
 
 
 

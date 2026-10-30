@@ -39,6 +39,7 @@ def main():
     for name in ['iniciar.py','LICENCIA_DE_USO_RESTRINGIDO.md','AUTORIA.md','docs/GUIA_USO.html','docs/GUIA_PUBLICA.md','docs/capturas/panel-ejemplo.png','herramientas/compartir_apk_wifi.py','herramientas/apk_release.py']:
         copy(name)
     copy('docs/README_PUBLICO.md','README.md')
+    copy('docs/REGISTRO_PC_MULTIPLES_20261030.md')
     for folder in ['servidor_pc','arduino']:
         for p in (ROOT/folder).rglob('*'):
             if p.is_file() and p.suffix in {'.py','.ino','.txt'} and '__pycache__' not in p.parts:copy(p.relative_to(ROOT))

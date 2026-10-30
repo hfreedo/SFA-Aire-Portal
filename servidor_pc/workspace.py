@@ -43,7 +43,8 @@ def connect_serial(rt, port):
 
         raise HTTPException(409, 'Detenga la prueba activa antes de conectar el Arduino.')
 
-    if port not in [p.device for p in list_ports.comports()]:
+    info = next((p for p in list_ports.comports() if p.device == port),None)
+    if info is None:
 
         raise HTTPException(400, 'Puerto no disponible. Refresque la lista.')
 
@@ -55,6 +56,9 @@ def connect_serial(rt, port):
 
             rt.serial = serial.Serial(port, 115200, timeout=.1, write_timeout=1)
 
+            rt.serial_target = port
+            rt.serial_identity = tuple(getattr(info,k,None) for k in ('vid','pid','serial_number'))
+            rt.last_monitor = time.time()
             rt.serial.write(b'MONITOR\n')
 
             rt.serial_state = 'esperando_arduino'
@@ -67,7 +71,7 @@ def connect_serial(rt, port):
 
 
 
-def save_rules(rt, rules, expected=None):
+def save_rules(rt, rules, expected=None, origin='manual', metadata=None):
 
     with rt.lock:
 
@@ -78,6 +82,8 @@ def save_rules(rt, rules, expected=None):
             raise HTTPException(409, 'Las reglas cambiaron en esta PC. Actualice antes de guardar.')
 
         with rt.store.transaction() as db:
+            if rt.rules.baseline!=rules.baseline or rt.rules.conditioned!=rules.conditioned or origin!='manual':
+                rt.mq_calibration.record(db,rules,origin,metadata)
 
             for key,value in [('rules', rules.model_dump()), ('rules_revision', revision+1)]:
 
@@ -93,7 +99,15 @@ class WorkspaceCommand(BaseModel):
 
     classroom_id: UUID
 
-    action: Literal['state','ports','connect','stop','rules','assignment','assign']
+    action: Literal['state','ports','connect','stop','rules','assignment','assign','start_usb_lab','stop_usb_lab','calibration_start','calibration_cancel','calibration_apply','calibration_provisional','calibration_restore']
+
+    duration_s: int = Field(default=180,ge=60,le=600)
+    conditioned: bool = False
+    history_id: str | None = Field(default=None,max_length=40)
+
+    run_id: UUID | None = None
+    allow_push: bool = True
+    free_plan_confirmed: bool = False
 
     port: str | None = Field(default=None, max_length=100)
 
@@ -120,6 +134,11 @@ def install_workspace(app, rt):
     @app.post('/api/workspace/local')
 
     def command(body:WorkspaceCommand, request:Request, credentials:HTTPAuthorizationCredentials|None=Depends(bearer)):
+        # La sincronización mantiene config_lock durante solicitudes de red.
+        # Consultar el puerto/lecturas no debe esperar a esa red; las mutaciones
+        # conservan el bloqueo y el snapshot vuelve a comprobar la asignación.
+        if body.action in ('state','ports','assignment'):
+            return execute(body,request,credentials)
         with rt.cloud.config_lock:
             return execute(body,request,credentials)
 
@@ -201,9 +220,16 @@ def install_workspace(app, rt):
 
         if body.action in ('assignment','assign'):
 
+            enabled=any(g.get('id')==str(cfg.gateway_id) and g.get('enabled') is True for g in caps.get('gateways',[]) if isinstance(g,dict))
+
             if request.client is None or request.client.host not in ('127.0.0.1','::1','testclient'):
 
                 raise HTTPException(403, 'Asigne el aula desde el portal abierto en esta PC: http://127.0.0.1:8767/remoto')
+
+            if body.action=='assign' and room==str(cfg.classroom_id) and not enabled:
+                result=enroll(rt,connection,room,credentials.credentials,replace_revoked=True)
+                with guard:permissions.clear()
+                return result
 
             if body.action=='assign' and room!=str(cfg.classroom_id):
 
@@ -263,9 +289,12 @@ def install_workspace(app, rt):
 
                             message=response.json().get('message','')
 
-                            if message.startswith('CUOTA_'):
+                            if message.startswith('CUOTA_RECEPTORES:'):
 
-                                raise HTTPException(409,'El aula ya alcanzó su límite preventivo. Revise las PC en Administración.')
+                                raise HTTPException(409,'Esta aula tiene 10 PC habilitadas. Retire solo equipos que ya no utilice en Administración → PC del aula.')
+
+                            if message.startswith('CUOTA_BASE:'):
+                                raise HTTPException(409,'El almacenamiento alcanzó la guarda del plan gratuito. Revise el consumo; retirar una PC no libera el historial.')
 
                             if response.status_code in (401,403):
 
@@ -333,6 +362,55 @@ def install_workspace(app, rt):
 
             raise HTTPException(409, 'El acceso de esta PC no está habilitado. Revise PC del aula en Administración.')
 
+        if body.action.startswith('calibration_'):
+            with rt.lock:
+                if rt.lab.command:
+                    raise HTTPException(409,'Finalice el ensayo antes de ajustar la referencia real.')
+                if body.action=='calibration_start':rt.mq_calibration.start(body.duration_s)
+                elif body.action=='calibration_cancel':rt.mq_calibration.cancel()
+                else:
+                    if body.rules_revision is None:raise HTTPException(400,'Falta la revisión de las reglas.')
+                    if body.action=='calibration_apply':
+                        stats=rt.mq_calibration.proposed()
+                        next_rules=Rules(**{**rt.rules.model_dump(),'baseline':stats['baseline'],'conditioned':body.conditioned})
+                        save_rules(rt,next_rules,body.rules_revision,'captura',stats)
+                    elif body.action=='calibration_provisional':
+                        next_rules=Rules(**{**rt.rules.model_dump(),'baseline':85,'conditioned':False})
+                        save_rules(rt,next_rules,body.rules_revision,'provisional',{'observed':rt.mq_calibration.snapshot()['observed']})
+                    elif body.action=='calibration_restore':
+                        previous=rt.mq_calibration.previous(body.history_id)
+                        next_rules=Rules(**{**rt.rules.model_dump(),'baseline':previous['baseline'],'conditioned':previous['conditioned']})
+                        save_rules(rt,next_rules,body.rules_revision,'restauracion',(previous.get('profile') or {}).get('metadata',{}))
+
+        if body.action in ('start_usb_lab','stop_usb_lab'):
+            if body.run_id is None:
+                raise HTTPException(400,'Falta el identificador del ensayo.')
+            if body.action=='start_usb_lab':
+                with rt.lock:
+                    if rt.source!='arduino' or not rt.serial or not rt.latest or not rt.latest.get('usb_simulation') or time.time()-rt.last_valid>10:
+                        raise HTTPException(409,'Conecte el UNO con el firmware de simulación y lecturas recientes.')
+                payload={'p_classroom_id':room,'p_gateway_id':str(cfg.gateway_id),'p_run_id':str(body.run_id),
+                         'p_allow_push':body.allow_push,'p_free_plan_confirmed':body.free_plan_confirmed}
+                rpc='aire_lab_start_usb'
+            else:
+                if not rt.lab.command or rt.lab.command.id!=str(body.run_id) or rt.lab.command.input_source!='usb':
+                    raise HTTPException(409,'Este ensayo USB ya no está activo en esta PC.')
+                payload={'p_run_id':str(body.run_id)}
+                rpc='aire_lab_stop'
+            try:
+                with httpx.Client(transport=rt.workspace_transport,timeout=10,follow_redirects=False) as client:
+                    result=client.post(cfg.url+'/rest/v1/rpc/'+rpc,
+                        headers={'apikey':cfg.publishable_key,'Authorization':'Bearer '+credentials.credentials},json=payload)
+                if result.status_code>=400:
+                    detail=result.json().get('message','No se pudo autorizar el ensayo.')
+                    raise HTTPException(409,detail)
+            except HTTPException:raise
+            except Exception:raise HTTPException(503,'No se pudo confirmar el ensayo en nube. Compruebe conexión y reintente.')
+            if body.action=='stop_usb_lab':
+                with rt.lock:rt.lab.stop('cancelado')
+            rt.cloud.next_sync=0
+            rt.cloud.sync_once(force=True)
+
         if body.action=='connect':
 
             if not body.port:
@@ -367,13 +445,17 @@ def install_workspace(app, rt):
 
         with rt.lock:
 
+            if rt.cloud.config is not cfg:
+                raise HTTPException(409, 'La asignación cambió. Compruebe de nuevo.')
+
             state=rt.snapshot()
 
-            return {k:state[k] for k in ['receiver_id','source','state','age_s','latest','serial','error','rules','cloud']} | {
+            return {k:state[k] for k in ['receiver_id','source','state','age_s','latest','serial','error','rules','cloud','usb_lab']} | {
 
                 'classroom_id':room,'gateway_id':str(cfg.gateway_id),
 
                 'rules_revision':rt.store.setting('rules_revision',0),
+                'calibration':rt.mq_calibration.snapshot(),
 
-                'port':rt.serial.port if rt.serial else None}
+                'port':rt.serial.port if rt.serial else rt.serial_target}
 

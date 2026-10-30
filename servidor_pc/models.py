@@ -5,6 +5,8 @@ from pydantic import BaseModel, Field, model_validator
 
 class Sample(BaseModel):
     device_id: Literal['aula-01'] = 'aula-01'
+    serial_contract: Literal[1,2] = 1
+    simulated: bool = Field(default=False, strict=True)
     mq_raw: int = Field(ge=0, le=1023)
     temperature: float | None = Field(default=None, ge=-40, le=80, allow_inf_nan=False)
     humidity: float | None = Field(default=None, ge=0, le=100, allow_inf_nan=False)
@@ -13,6 +15,8 @@ class Sample(BaseModel):
 
     @model_validator(mode='after')
     def validate_dht(self):
+        if self.simulated and self.serial_contract != 2:
+            raise ValueError('La simulación USB requiere contrato serial 2')
         if self.dht_ok and (self.temperature is None or self.humidity is None):
             raise ValueError('DHT válido requiere temperatura y humedad')
         return self

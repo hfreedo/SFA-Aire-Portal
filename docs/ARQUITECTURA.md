@@ -24,7 +24,7 @@ flowchart LR
 
 ## Adquisición, decisión y persistencia
 
-UNO usa DHT22 por defecto (DHT11 es variante explícita), D2 y MQ135 AO A0.
+La maqueta actual usa UNO con DHT11 en D2 y MQ135 AO en A0. El sketch selecciona DHT11 por defecto; DHT22 se conserva como variante explícita mediante DHT_TYPE.
 Solo comienza transmisión con MONITOR; PARAR la detiene. Serial y JSON no cambian.
 La PC no mezcla fuentes; muestra datos vencidos, conserva detalle SQLite y sincroniza
 normalmente cada minuto, con transiciones y laboratorio inmediatos. Una outbox
@@ -35,7 +35,30 @@ experimental: no se convierte a CO₂, AQI o ppm. Persistencia e histéresis fil
 oscilaciones. Un incidente conserva prioridad y requiere atención explícita.
 Recuperar lectura, recibir aviso, abrirlo, comprender y ejecutar son hechos distintos.
 
+## Firmware temporal de simulación USB — contrato serial v2
+
+`arduino/SFA_Aire_Simulador_USB` funciona en UNO sin sensores. Agrega `serial_contract:2` y `simulated:true` a las tramas existentes. No transmite JSON hasta confirmar `SIMULACION_USB_V2`; el receptor actualizado responde al anuncio del sketch y después envía MONITOR. El firmware físico conserva v1 y sus pines.
+
+Sin ensayo autorizado, la simulación USB es una vista previa en memoria. El botón «Probar en la app y enviar avisos · 3 min» autoriza por RPC un aire_lab_runs con input_source=usb, conserva el puerto y habilita el mismo recorrido de ingestión, reglas, SQLite/outbox, Supabase y FCM, con source=simulacion. Al finalizar vuelve a vista local. La APK existente es compatible. [Guía del ensayo completo](ENSAYO_USB_CLOUD_20261028.md).
+
+Compilación UNO del firmware temporal: 4816 bytes flash, 304 RAM. El firmware se conserva; el receptor local y la función SQL están actualizados. Las pruebas físicas anteriores solo acreditan transmisión de datos ficticios por USB. El ensayo cloud completo con recepción real en celular requiere su propia evidencia. No se publicó un release ni se modificó la APK.
+
+## Vista local en Mis aulas — 28/10/2026
+
+En el portal de la PC, la cuenta administradora puede ver la muestra USB directa del aula asignada, consultada cada segundo sin escribir en nube. La tarjeta indica «En vivo · Esta PC». Se mantiene la fecha original, se vence tras 10 s sin trama y se aísla por aula, sesión, PC y fuente. El portal alojado y Android conservan la copia sincronizada. Ver [MI_AULA_LECTURA_LOCAL_20261028](MI_AULA_LECTURA_LOCAL_20261028.md).
+
+## Referencia MQ135 por aula
+
+El panel local añade captura experimental de muestras de firmware real, propuesta por mediana y aplicación explícita con revisión de reglas. El perfil activo y cinco versiones previas se conservan en SQLite por aula, con fecha y origen; no se generan escrituras cloud adicionales. Las simulaciones mantienen referencia de 300 ADC. [Ajuste y validación](CALIBRACION_MQ135_20261028.md).
+
 ## Acceso y atención sencilla — desarrollo 26/10/2026
+
+Registro multi-PC (30/10/2026): alta inicial, asignación y capacidades comparten
+la guarda de 10 PC habilitadas por aula. Cada instalación conserva identidad
+propia y reintentos idempotentes. Un administrador puede volver a registrar
+una PC retirada con una credencial nueva, sin reactivar la anterior ni mover
+historial. Se conservan las cuotas de consumo globales. Ver
+[REGISTRO_PC_MULTIPLES_20261030](REGISTRO_PC_MULTIPLES_20261030.md).
 
 La prioridad es entregar la notificación y mostrar mediciones. La persona decide
 qué hacer y cómo comunicarse. No se exige asignación de turno, coordinador,

@@ -124,6 +124,354 @@
     "sha256": "6539c68b2c2e5fdf1af51d92f71236eaa2fa8cb2ea678237c81e4e5db61fc954"
   },
   {
+    "path": "docs/MANUAL_DE_USUARIO.md",
+    "sha256": "78ffe03db3261565d6a8552ade93f5cb75e9b94671126063b21bfc54236ca52e"
+  },
+  {
+    "path": "docs/REGISTRO_PC_MULTIPLES_20261030.md",
+    "sha256": "cdf7315d1a5555a7bc1f7e756e6298b5991ee324b5258dd399e4b6826eed87f6"
+  },
+  {
+    "path": "docs/CALIBRACION_MQ135_20261028.md",
+    "sha256": "f105f5bc53d6139cd4d5a646dcf28839840b664ab3ba0a73e34224d87a4dda38"
+  },
+  {
+    "path": "docs/ENSAYO_USB_CLOUD_20261028.md",
+    "sha256": "c361197bca9f8831b28ecb4aee7469ea53835e78c0ba517f6efcb8efbb623a76"
+  },
+  {
+    "path": "docs/RECUPERACION_USB_20261028.md",
+    "sha256": "49e5e834a0a06ce76b0f01890a96a3fe5cd49aca52cbb40acc5d4d6e05112430"
+  },
+  {
+    "path": "docs/MI_AULA_LECTURA_LOCAL_20261028.md",
+    "sha256": "7c04fd8dfa9a1ae15026d2eb67fa2afe3861c6a4701c43dd603a57c54732796d"
+  },
+  {
+    "path": "docs/ARDUINO_DHT11_Y_ACTUALIZACION_LOCAL_20261028.md",
+    "sha256": "dccb7a051221a867561da4068cce383e85eeee1b13040fbc94d70c6aef781235"
+  },
+  {
+    "path": "herramientas/sql-check/archive-incidents.test.mjs",
+    "sha256": "6a0d60f64540039bad8ae165d984dadbd9421bf10c6ee476dcd5d185b5d10f30"
+  },
+  {
+    "path": "herramientas/sql-check/audit-project-goals.mjs",
+    "sha256": "59bf2838a0a7392a024c2abd074493cf909738968bd617feadf4ea874df2b71c"
+  },
+  {
+    "path": "herramientas/sql-check/audit-rpc.mjs",
+    "sha256": "d55078e30347691905aac92b8c719c09fa36c0b44f149b5e62630c0aa57c7767"
+  },
+  {
+    "path": "herramientas/sql-check/classroom-administration.test.mjs",
+    "sha256": "82f7e20fc41593d256e8062c57116f95f770c4d798f5029f40cc56bfbdb8c05f"
+  },
+  {
+    "path": "herramientas/sql-check/cloud-checks.mjs",
+    "sha256": "147d7a1fa943499bc7ae0d5ceb29d2fa459cbbf126c634f0da112d3f86e206f1"
+  },
+  {
+    "path": "herramientas/sql-check/cloud-fixture.mjs",
+    "sha256": "06bedd67cdd958bdaebdb337c6617952dece4b2f7ec3223c463922ad1f80920a"
+  },
+  {
+    "path": "herramientas/sql-check/delivery-independence.test.mjs",
+    "sha256": "974b5ac081714ffa63a45bfec258815f848258682fa4525b790f8a0546990e05"
+  },
+  {
+    "path": "herramientas/sql-check/first-pc.test.mjs",
+    "sha256": "b5bf872892db12b87d573cbca0ce57ee460d513ef526b1b90a2c41b82883ecd3"
+  },
+  {
+    "path": "herramientas/sql-check/fresh-checks.mjs",
+    "sha256": "919ccbea3ec55a4d6fe36654c9bb765eb151b4ed2866b7b467ede7a5e2955321"
+  },
+  {
+    "path": "herramientas/sql-check/fresh-escalation.test.mjs",
+    "sha256": "4af26a8ca4f5357d579964f5c860f9b99dea7b4efda4c3cbfedaad699745e543"
+  },
+  {
+    "path": "herramientas/sql-check/gateway-lifecycle.test.mjs",
+    "sha256": "8206d086c3b5298a67e52355222c6a7bee7f7367ee5f868ae75925d32f57dbb4"
+  },
+  {
+    "path": "herramientas/sql-check/invitations-edge.test.mjs",
+    "sha256": "f013543b333098237825ca70c248178d15d45458b0be0ccb16c287817f4164cc"
+  },
+  {
+    "path": "herramientas/sql-check/invitations.test.mjs",
+    "sha256": "d7185facc46844d1e2aa180609d303ed83326bbb1c3b4589f1417ebddf88f0f8"
+  },
+  {
+    "path": "herramientas/sql-check/members.test.mjs",
+    "sha256": "2fe51a67a0438912e8d56d01176396b2c07a8ad2c8451c1fa13aac50708779bc"
+  },
+  {
+    "path": "herramientas/sql-check/multi-pc-enrollment.test.mjs",
+    "sha256": "86e8bdfe1e4d6c97e3f07674618ac5ecf06729be6e2815266cdd9ad4b3561b4f"
+  },
+  {
+    "path": "herramientas/sql-check/notice-evidence.test.mjs",
+    "sha256": "65387361dda2d0ac6f26bc4b390e556cb7187ea2d6db1e0600faff208c4d0139"
+  },
+  {
+    "path": "herramientas/sql-check/pc-assignment.test.mjs",
+    "sha256": "8937aa5c7859b11485573a372c98c92312ba405c955ecc323096b25a830564fc"
+  },
+  {
+    "path": "herramientas/sql-check/phone-lifecycle.test.mjs",
+    "sha256": "e33f0cfcc6a6c345881a7808ba5a40f8d665b483b7eea3027270bde86c5b8d5b"
+  },
+  {
+    "path": "herramientas/sql-check/quick-notification.test.mjs",
+    "sha256": "752f6861d81a454f9db02fc0b0cb66639a0894aabd05f4e511d101d79d4ab462"
+  },
+  {
+    "path": "herramientas/sql-check/reserve-checks.mjs",
+    "sha256": "41f7f38c7f89ed6a044fa2ce5379f048eb895b13b6f14976f188cae642cb3718"
+  },
+  {
+    "path": "herramientas/sql-check/simple-attention.test.mjs",
+    "sha256": "ca14d028d1f938454b3e93f04897445bb521b0d3dfcb3d3dce132b078ca5374b"
+  },
+  {
+    "path": "herramientas/sql-check/usb-cloud-lab.test.mjs",
+    "sha256": "2d0c07d831d3315cac281440bdf00e41c33ec26de942eb78f89695e8cf85c31a"
+  },
+  {
+    "path": "herramientas/sql-check/verify.mjs",
+    "sha256": "fe6ebba8505fde5273a2b0c12fde5891c2a45c7d312265e90e9923a71f7da04c"
+  },
+  {
+    "path": "herramientas/sql-check/worker.test.mjs",
+    "sha256": "6539c68b2c2e5fdf1af51d92f71236eaa2fa8cb2ea678237c81e4e5db61fc954"
+  },
+  {
+    "path": ".gitattributes",
+    "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
+  },
+  {
+    "path": "docs/GUIA_NAVEGACION_REPOSITORIO.md",
+    "sha256": "9bbca6f4276408b580bcda57c543f6e3338640cd8a021b2382389734c4337594"
+  },
+  {
+    "path": "herramientas/generar_manual_navegacion.py",
+    "sha256": "e4234837ff3d27ae41d1a910a62cc5635723944aff9f4893f1c0af66e0449c08"
+  },
+  {
+    "path": "docs/navegacion-repositorio/FUENTES_Y_CAPTURAS.json",
+    "sha256": "0d03598d5319bf9a61fc4a0e261631831ba4939c18b87e6973d8b03743d1996f"
+  },
+  {
+    "path": "docs/navegacion-repositorio/Manual_de_navegacion_SFA_Aire.pdf",
+    "sha256": "123b067928ba68d7ab54a711a2c5f0679b32ebb5388512aa666812b08f55f1c9"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/03-windows-release.png",
+    "sha256": "4d29a170b9a2542ca8e50f442c5ff0afb9f51fdcab840f8837d9bccaa938e6f8"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/04-windows-assets.png",
+    "sha256": "181eb4121396eca1caa431083696056191605f5fecdf7a3b4203b9097bd01103"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/07-docs-guias.png",
+    "sha256": "21a27330cbecc0adfe05adafa1033a40696e01a3cb5f1aecb45f077e4b1d5329"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/08-android-assets.png",
+    "sha256": "77173dedd1a0015f988c750eacd31d8f76e8bd624911dc762a2a6e85fdc0735f"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/09-markdown.png",
+    "sha256": "a12d8ecdd4677e77a712cd2e399b7b5a6249b0cdae6fe0962995e4ab76085230"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/10-indice-markdown.png",
+    "sha256": "fdbcfbd9494b5c510bf4bba3e2e2db1c409f7d452b5c91402535285481db5cfa"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/11-arduino-carpeta.png",
+    "sha256": "c409ac52a4a3c819252d9e5328c8182ab2ac3c29f91fd599071eff184e483dd9"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/12-arduino-codigo.png",
+    "sha256": "ab0d0d4364593ab5dd38a77e91601ab85bfcb82a2b72e34637746754e98dc711"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/13-lenguajes.png",
+    "sha256": "6b3f8fda0a9fd602483767a5b39587860cba56325c6199a90f2a583653c1eec5"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/14-manual-usuario.png",
+    "sha256": "8268c1c721178f072246556f770d6a4e34b81be6385ae094d7184c70c9420014"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/15-code-zip.png",
+    "sha256": "8765ac4dd0e90a9e1ac02cf0dc262576f530111f53f4511bc34ff211370f9f6e"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/16-portal.png",
+    "sha256": "395b9eabf64194f2cec56d099f0c154df4d6cbc9e6255b71ca6b0f393e7f9270"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/18-portada-amplia.png",
+    "sha256": "f96daf57025927888c35bedfff961bc458884e2602e8d1541e2b9e688579f5e8"
+  },
+  {
+    "path": "docs/navegacion-repositorio/capturas/19-readme-guias.png",
+    "sha256": "c46d7ed94d750934213cdb620cccef073af3b7da77f7ca7ff9bcd74801effeee"
+  },
+  {
+    "path": "docs/GUIA_STACK_TECNOLOGICO.md",
+    "sha256": "16a97019fd3485028159ddad63af326c66a449ceea8ee59c17cca0d164ac3f1d"
+  },
+  {
+    "path": "docs/ARQUITECTURA.md",
+    "sha256": "c49215f6b388ec1bebc661be3e4a37fc7520711119ac0abc7b829f42a4e0c05c"
+  },
+  {
+    "path": "docs/PROTOCOLO.md",
+    "sha256": "5c52e73b642b3302cf2c79e36f12102434c81a7127f2be6c1e48f3ed97608ddb"
+  },
+  {
+    "path": "docs/HARDWARE.md",
+    "sha256": "5c473f77b87ccc1290d0b2ca7990415602bb496331919451ac5040fd78b04e94"
+  },
+  {
+    "path": "docs/GUIA_RAPIDA.md",
+    "sha256": "d6d0aba304f394f35fabf511ea8c66fb116f9bc2dfbe6a0eb43a76551c0a932e"
+  },
+  {
+    "path": "docs/CONEXION_ARDUINO.md",
+    "sha256": "0aa39c7d8c11dd1ec4339713c2d9859432a4d39a3d22ffe52af1df5fda6d1825"
+  },
+  {
+    "path": "docs/ATENCION_SIMPLE.md",
+    "sha256": "be76dd4efc40bdc40d2e319fd53eae0737efda812e6ba9ff2d6956ed65cf64ad"
+  },
+  {
+    "path": "docs/NOTIFICACIONES_SIMPLES.md",
+    "sha256": "add7fd1b0f503e2425951a91a00ab3b1ceae3d18d3984fcc9f4cb7f4bfda9e2b"
+  },
+  {
+    "path": "docs/VALIDACION.md",
+    "sha256": "b89a9977c43038039dd6d6b22f7fbf3ae002347fc9742fa9ef588f9a74f6389e"
+  },
+  {
+    "path": "docs/AUDITORIA_ARQUITECTURA.md",
+    "sha256": "30eec218fed14bfef79f566e5112d32672aa0616ac58d8a3b98b6da3eb2c6b2d"
+  },
+  {
+    "path": "docs/AUDITORIA_RPC.md",
+    "sha256": "1ac47e4362da1bc2a1e5e786a7efcc79b506ec325ab29c80f69e03da5c8c0269"
+  },
+  {
+    "path": "docs/manual-usuario/CAPTURAS_PUBLICADAS.json",
+    "sha256": "f1eda56cbe83f2daae2bdc568c0468caa1263a57b5a0b59a2b3fccb2929a44dd"
+  },
+  {
+    "path": "docs/manual-usuario/LEER_PRIMERO.txt",
+    "sha256": "984a94e4ea2e0ce807d7670dc143ea8b2d3135866d11e95dacbe4fef472a4107"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.docx",
+    "sha256": "683e7aa920864a7374e786c1e24bdca0e155a5af65331b39f8d074360dbb9b91"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.html",
+    "sha256": "b74f920c76eb3829c64b378753f3b1223d19bafd4bc8ca13d0971f575a6d3b17"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.pdf",
+    "sha256": "a8617a86ab606e77cf9af6ba474314f146b3356031801fe5092dcdebfc1f1e5a"
+  },
+  {
+    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire_2026-10-27.zip",
+    "sha256": "735a337d411a31064f2db30824b720b233061fe979c444e66c2c4f3a334b5194"
+  },
+  {
+    "path": "docs/manual-usuario/README.md",
+    "sha256": "ab61816048fdf693e29392c9109ee7768654790b614ffef308c00f332562a704"
+  },
+  {
+    "path": "docs/manual-usuario/recorrido_del_sistema.mmd",
+    "sha256": "8fc8a2db1387e042e6378a0beee57d28f3a091a5b7bb6352f61598b5d85604ca"
+  },
+  {
+    "path": "docs/manual-usuario/SHA256SUMS.txt",
+    "sha256": "bc5a3f89bb789b7f8993efecf84aad1498099f1955062c23d253b946bfe70f02"
+  },
+  {
+    "path": "docs/manual-usuario/TRAZABILIDAD.json",
+    "sha256": "1170038c31c44a8507a2c0707e7da5e662d6dac8311c41a6c1b1e8ada2476192"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/01-sfa-aire-verde-transparente.png",
+    "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/02-recorrido.png",
+    "sha256": "1815d016d534888580cf5c0736a26894edea5730318ab4594062445173e8a5f7"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/03-1440-alta.png",
+    "sha256": "140cea55e2b51dcff92e173df79706e8d360344b54440525a2a598f3254c3cfa"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/04-normal-acceso.png",
+    "sha256": "f36c09f4da0292febdab7b474e1bb7a4b5b9a88118b089257e09d2c924db3c77"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/05-portal-aulas.png",
+    "sha256": "ca2b133a4342abf4a211915557f67b744ef1f826311356dda88bb5fcbd1e4da3"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/06-1440-avisos.png",
+    "sha256": "65f78bf0b3a47f1ad47b2627214afb81b0639015fde92903fbfc8f0832830e80"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/07-1440-historial.png",
+    "sha256": "6d61b0c8855e21534f3e200458cc46143fffbde2c9aada4b74c9260e52dd71db"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/08-normal-aula.png",
+    "sha256": "f5d3a40284dcaddeebecfa439f1fb7fc5f8181fbaafbc7f1d15afb4643c1ebb1"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/09-normal-aviso-expandido.png",
+    "sha256": "68824bc5b76a759490b635f8cc3e8253feb3c37b3c214aa3417f6049b39c0d7e"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/10-normal-archivo-personal.png",
+    "sha256": "0059e0c4a0a8674fde015b23073a4476680f4dca0fb67dfe8fba23afb8fe8f35"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/11-normal-registro-expandido.png",
+    "sha256": "ca5c857caf12e6871889516696416356d95efc3033058b2740b82f71b2fa8449"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/12-1440-resumen.png",
+    "sha256": "ef1172f40e7209529f44a7e0dd8213039a0b17899879d53cc4bfe514cc64e650"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/13-1440-personas.png",
+    "sha256": "a18da9a66986ee3a9d2b7abdb4a1ac94a15a5a753bd9ec2415f7d4b8274b4919"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/14-1440-pc.png",
+    "sha256": "b3b6bb588ab3fe9cc84bbf5755ed1a6760c54cb5e52c2952c943a701d01f2b88"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/15-1440-primera-asignacion.png",
+    "sha256": "17404fdf87deb099b88053997088b3a43d048bdc5b915169b462d1a1d63bcdaf"
+  },
+  {
+    "path": "docs/manual-usuario/capturas/16-portal-laboratorio.png",
+    "sha256": "c45d1c958f14be521e3ac6503817ce99fcd5ab161f35d7307143c231f7e22822"
+  },
+  {
     "path": "interfaz_web/src/AdminLab.tsx",
     "sha256": "f0e4f503486c7efa3b7d92f45f718a2cf84fac968deb0acd75095913ac66957d"
   },
@@ -169,7 +517,7 @@
   },
   {
     "path": "interfaz_web/src/RemoteWorkspace.tsx",
-    "sha256": "c2a55198f486f5047c59a27222a950e84e9c7c557b3a5d4b0f12d67ab070cca4"
+    "sha256": "c38439ca9bf014f33e2cdb52c2ab5500da44de52db32e5c0187de55d69feabd0"
   },
   {
     "path": "interfaz_web/src/scroll-surfaces.css",
@@ -196,8 +544,12 @@
     "sha256": "ddc3c9fa586f0f9516ab67221c762a942855b4ce3eeac4ecf8ac7d0e50b47e21"
   },
   {
+    "path": "interfaz_web/src/domain/localObservation.ts",
+    "sha256": "2d845787e3f46a38119b7c398fbbe739411960a7cfff0f9997729fe0a50bb029"
+  },
+  {
     "path": "interfaz_web/src/domain/models.ts",
-    "sha256": "888fd677a6404ce725f13ddcd9b5446ab04dae495ccee3f3ebe3c7a54803d415"
+    "sha256": "b4ac88637bc8d1c589419b491ba9a996fb7f7b4d747f34efad48ae7c3d352687"
   },
   {
     "path": "interfaz_web/src/domain/monitoring.ts",
@@ -241,7 +593,7 @@
   },
   {
     "path": "interfaz_web/src/features/administration/AdministrationScreen.tsx",
-    "sha256": "54e392bb3fd1a7d90532b4570b9c59f73aca1052cf55587b8390d4283e3e0063"
+    "sha256": "1836a7654559e9f4457079ab327cee4af1f0a9b43b3c9b20ccacabe170c56fdf"
   },
   {
     "path": "interfaz_web/src/features/administration/ClassroomEditor.tsx",
@@ -273,7 +625,15 @@
   },
   {
     "path": "interfaz_web/src/features/arduino/ArduinoScreen.tsx",
-    "sha256": "444346ed51e1ad3abf4fb103734c0988435ef3ed0755fa3792cd2c0864db3d20"
+    "sha256": "c5845408a076b5dc621568d4a56cc1aed0e139427c4ac6301f0899b64aa0bc5c"
+  },
+  {
+    "path": "interfaz_web/src/features/arduino/mq-calibration.css",
+    "sha256": "7d551a642d2d0ce9300b78e3fbca84ed90ef8277f02f8662f357f5d5af292374"
+  },
+  {
+    "path": "interfaz_web/src/features/arduino/MQCalibrationPanel.tsx",
+    "sha256": "b7c9110f7bbe3cf46953febc7b26b80a401818b30356980eef196590d3f6cdfb"
   },
   {
     "path": "interfaz_web/src/features/history/HistoryScreen.tsx",
@@ -289,7 +649,11 @@
   },
   {
     "path": "interfaz_web/src/features/monitoring/ClassroomScreen.tsx",
-    "sha256": "5cc031032d6ca7cefede73fe5caa3ede180c59660874f68be3b6d9e93fb8ac08"
+    "sha256": "54182d30ab9f41f1fa543f193df51a16f18ff66deb295ec5b8cc562982d84a58"
+  },
+  {
+    "path": "interfaz_web/src/features/monitoring/useLocalObservation.ts",
+    "sha256": "92fbe801b253529544beadf2896d980ffa38935615bcb877fc92d1c5948e2ffd"
   },
   {
     "path": "interfaz_web/src/data/cloud/client.ts",
@@ -396,6 +760,18 @@
     "sha256": "bda4904b57fc4c9bc384bd7a7127b34408dede5bdf9cd0b6a343aa9ed1492211"
   },
   {
+    "path": "supabase/migrations/20261028234724_usb_cloud_lab.sql",
+    "sha256": "14d4327602467c9228a32bcf76c5b9d47cda285428ba3d586412aaef015e223b"
+  },
+  {
+    "path": "supabase/migrations/20261029000913_fresh_escalation_delivery.sql",
+    "sha256": "e2f06fa3620d0ca6ab6218fa6a62da7ba6f25c066aa5f250874ce906cbe08541"
+  },
+  {
+    "path": "supabase/migrations/20261030145738_multi_pc_classroom_enrollment.sql",
+    "sha256": "6d208323704f5d6d9eed8b3b241629c747bd7356417ed15e1deb68b89de07e75"
+  },
+  {
     "path": "supabase/functions/aire-invitations/core.ts",
     "sha256": "e385f4310008c21f971524b6aaaa764aada8955882e101db88044dfc3a882fc6"
   },
@@ -410,6 +786,10 @@
   {
     "path": "supabase/functions/aire-members/index.ts",
     "sha256": "49a5aeea35bf887e32cb2f91500bbd71a54b9a916a9e84c982648392335afdec"
+  },
+  {
+    "path": "supabase/functions/aire-members/README.md",
+    "sha256": "7c415ede5c58c4a7becf8a2360010a5b08f41d1ae50ed6693ea067d0049d2ae3"
   },
   {
     "path": "supabase/functions/aire-push/core.ts",
@@ -429,19 +809,23 @@
   },
   {
     "path": "servidor_pc/enrollment.py",
-    "sha256": "44020daa07a75aae1e58d4ac89107e9f83011a109963a1732f8378db9ef026fa"
+    "sha256": "e83b2974be11e7417c50e7e75d099def3a03ceaf776d9a1cdaac11e1f3b3a879"
   },
   {
     "path": "servidor_pc/lab.py",
-    "sha256": "cef7549eceb32685c54dba8dc989f92483e957225862350f2aae3a45a812d714"
+    "sha256": "70adc37f27c8b967afbb76449fc883cd84d47f84f25b469987d3f5230fbeaeda"
   },
   {
     "path": "servidor_pc/main.py",
-    "sha256": "671a6fec63899b0c9dc561ce4c6cf74a44553742b5d476db7ed098b4bbc6dee4"
+    "sha256": "41d7509452b022df6878085af88a4e17f78283c85d43860e6eefd82083c00f90"
   },
   {
     "path": "servidor_pc/models.py",
-    "sha256": "5a55c193936b15e99d8c86b98b255ebd23d1483c7546d18f2c16a2e3ade62a20"
+    "sha256": "4554a8a6d20169922fee73f20657e73a65eeb24911f4e34befb7eb8a10b75fee"
+  },
+  {
+    "path": "servidor_pc/mq_calibration.py",
+    "sha256": "196610c20f964d8822babbcb98b4b8705c9a8efccc62adb0f6429966b92878aa"
   },
   {
     "path": "servidor_pc/push.py",
@@ -461,7 +845,7 @@
   },
   {
     "path": "servidor_pc/workspace.py",
-    "sha256": "689598feef965c5dec594ec30b009fdb9a219972f228524caf5150f1cc9cb7ca"
+    "sha256": "e0dea5250e755ede32d8ae70b61fca4c12005c9cc4fb6d2401309e2144e5d4a8"
   },
   {
     "path": "servidor_pc/__init__.py",
@@ -469,7 +853,15 @@
   },
   {
     "path": "arduino/SFA_Aire_Aulas/SFA_Aire_Aulas.ino",
-    "sha256": "f017e4d7678feff9224fdfd12a8b709ac862533fee63ad5349fe701afee17077"
+    "sha256": "daae2d50781ab00a5779e162bd4d90f5e8076090ccd3bb11e123a0e98411ff76"
+  },
+  {
+    "path": "arduino/SFA_Aire_Simulador_USB/LEEME.md",
+    "sha256": "9873d1775653394c61358047cea4a40e977abf65c872fa923c83fee4accc1af1"
+  },
+  {
+    "path": "arduino/SFA_Aire_Simulador_USB/SFA_Aire_Simulador_USB.ino",
+    "sha256": "c638467f1e829bdbe90a0b61e7171c12f80d2b7131194dfcbe7c4f508f15fef1"
   },
   {
     "path": "tests/test_apk_release.py",
@@ -500,6 +892,10 @@
     "sha256": "53300da71a9aeba045f0acadf6d6fbd9151b14a3c156d99f25ba6458555dd820"
   },
   {
+    "path": "tests/test_mq_calibration.py",
+    "sha256": "4a81c682d4fa4841ef2278ed7619947d9138039ef9f63c9f730a943c80e9d43c"
+  },
+  {
     "path": "tests/test_packaging_policy.py",
     "sha256": "b6e6659da5b5feef81f4b0cb31702452cc5b1c2f91edef55c6d6801621c4c8f5"
   },
@@ -508,12 +904,24 @@
     "sha256": "f98e23eeddcdda9b069f107858ebeaeffbc35cb9742eba715389bbf1d709b526"
   },
   {
+    "path": "tests/test_serial_recovery.py",
+    "sha256": "81cef1374d25d44e535928b2ec6b89d2d3d9fd0a57fbbeea647aa7baef1b00f4"
+  },
+  {
     "path": "tests/test_service_shutdown.py",
     "sha256": "d5fd584d96a185b6bb2b1876eb94f6f392eeaa47023bc70bb19c3912eab801b8"
   },
   {
+    "path": "tests/test_usb_cloud_lab.py",
+    "sha256": "6c7507f5acaed36128e980276c36bcb4cfd9d16689d99d10d9a9815b891de4a2"
+  },
+  {
+    "path": "tests/test_usb_simulation.py",
+    "sha256": "7264d9de0b844ac2808a6e07c03a8389420b5d031ff06036322bae4005e73211"
+  },
+  {
     "path": "tests/test_workspace_controls.py",
-    "sha256": "7974cc28511e19962d62306734287584f36332a34d26773d38b92e9eb05e7398"
+    "sha256": "510684d2e33cb58d1d8dcc6b0130c8762443a0074e28ea3061a5b798e7187642"
   },
   {
     "path": "android_app/app/src/debug/AndroidManifest.xml",
@@ -805,7 +1213,7 @@
   },
   {
     "path": "herramientas/preparar_repositorio_portal.py",
-    "sha256": "44d9da5047547c8cc9957cb0ffdc61ed3b6ace2bdf4df38e212c651e1228cf51"
+    "sha256": "d45c3025c2ca11d436d79628e73cad067ab5be588ff3216b4406bda7a8c5f7af"
   },
   {
     "path": "docs/PORTAL_PUBLICO_E_INVITACIONES.md",
@@ -813,7 +1221,7 @@
   },
   {
     "path": "docs/README_PUBLICO.md",
-    "sha256": "300fc379293bc0bd1c3340d5dee0e98b3be71cb92c057c3c7920ba295a6dea6c"
+    "sha256": "c168e1f3da38e4280cdab7b99d03afae51c221a29b514be52ddf79fe385d81ea"
   },
   {
     "path": "docs/capturas/panel-ejemplo.png",
@@ -861,7 +1269,7 @@
   },
   {
     "path": "herramientas/empaquetar_portable.py",
-    "sha256": "a1b112fcf142787ab50d109c19f1379138a532a3d8db1f88ee234d468ca34d7a"
+    "sha256": "16edbdef82f7d7b26473f9d4091206b5506d6360a8c103150decf1856d521007"
   },
   {
     "path": "herramientas/verificar_portable.py",
@@ -946,233 +1354,5 @@
   {
     "path": "herramientas/sql-check/invitations-edge.test.mjs",
     "sha256": "f013543b333098237825ca70c248178d15d45458b0be0ccb16c287817f4164cc"
-  },
-  {
-    "path": "docs/MANUAL_DE_USUARIO.md",
-    "sha256": "bf41c696605b929c87a6bcd8f53a6f086a9ba4d7ace1469b10dcec99cd573410"
-  },
-  {
-    "path": "docs/manual-usuario/CAPTURAS_PUBLICADAS.json",
-    "sha256": "fb8ce46727e80655b49dfacc2363841bf888acfe2e56b64c08a7066ba13384d0"
-  },
-  {
-    "path": "docs/manual-usuario/LEER_PRIMERO.txt",
-    "sha256": "984a94e4ea2e0ce807d7670dc143ea8b2d3135866d11e95dacbe4fef472a4107"
-  },
-  {
-    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.docx",
-    "sha256": "683e7aa920864a7374e786c1e24bdca0e155a5af65331b39f8d074360dbb9b91"
-  },
-  {
-    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.html",
-    "sha256": "b74f920c76eb3829c64b378753f3b1223d19bafd4bc8ca13d0971f575a6d3b17"
-  },
-  {
-    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire.pdf",
-    "sha256": "a8617a86ab606e77cf9af6ba474314f146b3356031801fe5092dcdebfc1f1e5a"
-  },
-  {
-    "path": "docs/manual-usuario/Manual_de_usuario_SFA_Aire_2026-10-27.zip",
-    "sha256": "735a337d411a31064f2db30824b720b233061fe979c444e66c2c4f3a334b5194"
-  },
-  {
-    "path": "docs/manual-usuario/README.md",
-    "sha256": "20c7af140dd01d65c60fdc170a6671ae3a4bfdcc92a8064dee6cf35652323914"
-  },
-  {
-    "path": "docs/manual-usuario/recorrido_del_sistema.mmd",
-    "sha256": "8fc8a2db1387e042e6378a0beee57d28f3a091a5b7bb6352f61598b5d85604ca"
-  },
-  {
-    "path": "docs/manual-usuario/SHA256SUMS.txt",
-    "sha256": "bc5a3f89bb789b7f8993efecf84aad1498099f1955062c23d253b946bfe70f02"
-  },
-  {
-    "path": "docs/manual-usuario/TRAZABILIDAD.json",
-    "sha256": "1170038c31c44a8507a2c0707e7da5e662d6dac8311c41a6c1b1e8ada2476192"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/01-sfa-aire-verde-transparente.png",
-    "sha256": "b1159212bc76a4085697d45e69878f0dadade16779359d4cf26695fab781fc75"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/02-recorrido.png",
-    "sha256": "1815d016d534888580cf5c0736a26894edea5730318ab4594062445173e8a5f7"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/03-1440-alta.png",
-    "sha256": "140cea55e2b51dcff92e173df79706e8d360344b54440525a2a598f3254c3cfa"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/04-normal-acceso.png",
-    "sha256": "f36c09f4da0292febdab7b474e1bb7a4b5b9a88118b089257e09d2c924db3c77"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/05-portal-aulas.png",
-    "sha256": "ca2b133a4342abf4a211915557f67b744ef1f826311356dda88bb5fcbd1e4da3"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/06-1440-avisos.png",
-    "sha256": "65f78bf0b3a47f1ad47b2627214afb81b0639015fde92903fbfc8f0832830e80"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/07-1440-historial.png",
-    "sha256": "6d61b0c8855e21534f3e200458cc46143fffbde2c9aada4b74c9260e52dd71db"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/08-normal-aula.png",
-    "sha256": "f5d3a40284dcaddeebecfa439f1fb7fc5f8181fbaafbc7f1d15afb4643c1ebb1"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/09-normal-aviso-expandido.png",
-    "sha256": "68824bc5b76a759490b635f8cc3e8253feb3c37b3c214aa3417f6049b39c0d7e"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/10-normal-archivo-personal.png",
-    "sha256": "0059e0c4a0a8674fde015b23073a4476680f4dca0fb67dfe8fba23afb8fe8f35"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/11-normal-registro-expandido.png",
-    "sha256": "ca5c857caf12e6871889516696416356d95efc3033058b2740b82f71b2fa8449"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/12-1440-resumen.png",
-    "sha256": "ef1172f40e7209529f44a7e0dd8213039a0b17899879d53cc4bfe514cc64e650"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/13-1440-personas.png",
-    "sha256": "a18da9a66986ee3a9d2b7abdb4a1ac94a15a5a753bd9ec2415f7d4b8274b4919"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/14-1440-pc.png",
-    "sha256": "b3b6bb588ab3fe9cc84bbf5755ed1a6760c54cb5e52c2952c943a701d01f2b88"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/15-1440-primera-asignacion.png",
-    "sha256": "17404fdf87deb099b88053997088b3a43d048bdc5b915169b462d1a1d63bcdaf"
-  },
-  {
-    "path": "docs/manual-usuario/capturas/16-portal-laboratorio.png",
-    "sha256": "c45d1c958f14be521e3ac6503817ce99fcd5ab161f35d7307143c231f7e22822"
-  },
-  {
-    "path": "docs/GUIA_STACK_TECNOLOGICO.md",
-    "sha256": "16a97019fd3485028159ddad63af326c66a449ceea8ee59c17cca0d164ac3f1d"
-  },
-  {
-    "path": "docs/ARQUITECTURA.md",
-    "sha256": "741bfe9589bbdaad03ce5b70a683b4fc7060454e8e2fe21356aad0ea3642fda2"
-  },
-  {
-    "path": "docs/PROTOCOLO.md",
-    "sha256": "5c52e73b642b3302cf2c79e36f12102434c81a7127f2be6c1e48f3ed97608ddb"
-  },
-  {
-    "path": "docs/HARDWARE.md",
-    "sha256": "5c473f77b87ccc1290d0b2ca7990415602bb496331919451ac5040fd78b04e94"
-  },
-  {
-    "path": "docs/GUIA_RAPIDA.md",
-    "sha256": "d6d0aba304f394f35fabf511ea8c66fb116f9bc2dfbe6a0eb43a76551c0a932e"
-  },
-  {
-    "path": "docs/CONEXION_ARDUINO.md",
-    "sha256": "0aa39c7d8c11dd1ec4339713c2d9859432a4d39a3d22ffe52af1df5fda6d1825"
-  },
-  {
-    "path": "docs/ATENCION_SIMPLE.md",
-    "sha256": "be76dd4efc40bdc40d2e319fd53eae0737efda812e6ba9ff2d6956ed65cf64ad"
-  },
-  {
-    "path": "docs/NOTIFICACIONES_SIMPLES.md",
-    "sha256": "add7fd1b0f503e2425951a91a00ab3b1ceae3d18d3984fcc9f4cb7f4bfda9e2b"
-  },
-  {
-    "path": "docs/VALIDACION.md",
-    "sha256": "b89a9977c43038039dd6d6b22f7fbf3ae002347fc9742fa9ef588f9a74f6389e"
-  },
-  {
-    "path": "docs/AUDITORIA_ARQUITECTURA.md",
-    "sha256": "30eec218fed14bfef79f566e5112d32672aa0616ac58d8a3b98b6da3eb2c6b2d"
-  },
-  {
-    "path": "docs/AUDITORIA_RPC.md",
-    "sha256": "1ac47e4362da1bc2a1e5e786a7efcc79b506ec325ab29c80f69e03da5c8c0269"
-  },
-  {
-    "path": "docs/GUIA_NAVEGACION_REPOSITORIO.md",
-    "sha256": "9bbca6f4276408b580bcda57c543f6e3338640cd8a021b2382389734c4337594"
-  },
-  {
-    "path": "herramientas/generar_manual_navegacion.py",
-    "sha256": "e4234837ff3d27ae41d1a910a62cc5635723944aff9f4893f1c0af66e0449c08"
-  },
-  {
-    "path": "docs/navegacion-repositorio/FUENTES_Y_CAPTURAS.json",
-    "sha256": "0d03598d5319bf9a61fc4a0e261631831ba4939c18b87e6973d8b03743d1996f"
-  },
-  {
-    "path": "docs/navegacion-repositorio/Manual_de_navegacion_SFA_Aire.pdf",
-    "sha256": "123b067928ba68d7ab54a711a2c5f0679b32ebb5388512aa666812b08f55f1c9"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/03-windows-release.png",
-    "sha256": "4d29a170b9a2542ca8e50f442c5ff0afb9f51fdcab840f8837d9bccaa938e6f8"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/04-windows-assets.png",
-    "sha256": "181eb4121396eca1caa431083696056191605f5fecdf7a3b4203b9097bd01103"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/07-docs-guias.png",
-    "sha256": "21a27330cbecc0adfe05adafa1033a40696e01a3cb5f1aecb45f077e4b1d5329"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/08-android-assets.png",
-    "sha256": "77173dedd1a0015f988c750eacd31d8f76e8bd624911dc762a2a6e85fdc0735f"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/09-markdown.png",
-    "sha256": "a12d8ecdd4677e77a712cd2e399b7b5a6249b0cdae6fe0962995e4ab76085230"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/10-indice-markdown.png",
-    "sha256": "fdbcfbd9494b5c510bf4bba3e2e2db1c409f7d452b5c91402535285481db5cfa"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/11-arduino-carpeta.png",
-    "sha256": "c409ac52a4a3c819252d9e5328c8182ab2ac3c29f91fd599071eff184e483dd9"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/12-arduino-codigo.png",
-    "sha256": "ab0d0d4364593ab5dd38a77e91601ab85bfcb82a2b72e34637746754e98dc711"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/13-lenguajes.png",
-    "sha256": "6b3f8fda0a9fd602483767a5b39587860cba56325c6199a90f2a583653c1eec5"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/14-manual-usuario.png",
-    "sha256": "8268c1c721178f072246556f770d6a4e34b81be6385ae094d7184c70c9420014"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/15-code-zip.png",
-    "sha256": "8765ac4dd0e90a9e1ac02cf0dc262576f530111f53f4511bc34ff211370f9f6e"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/16-portal.png",
-    "sha256": "395b9eabf64194f2cec56d099f0c154df4d6cbc9e6255b71ca6b0f393e7f9270"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/18-portada-amplia.png",
-    "sha256": "f96daf57025927888c35bedfff961bc458884e2602e8d1541e2b9e688579f5e8"
-  },
-  {
-    "path": "docs/navegacion-repositorio/capturas/19-readme-guias.png",
-    "sha256": "c46d7ed94d750934213cdb620cccef073af3b7da77f7ca7ff9bcd74801effeee"
-  },
-  {
-    "path": ".gitattributes",
-    "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
   }
 ]

@@ -1,17 +1,18 @@
 /* SFA Aire Aulas v0.1 | UNO/Nano AVR | DHT + módulo MQ135
    DHT DATA D2, MQ135 AO A0, GND común, alimentación regulada 5 V.
-   DHT22 por defecto; cambiar DHT_TYPE a DHT11 si ese es el componente real.
+   DHT11 por defecto para la maqueta actual; DHT_TYPE DHT22 para esa variante.
    MQ135: ADC relativo, sin ppm ni identificación de gas.
    El acondicionamiento inicial del fabricante NO se sustituye por este temporizador.
    Serie 115200, final de línea Nueva línea. Sin transmisión periódica hasta MONITOR.
 */
 #include <DHT.h>
 #ifndef DHT_TYPE
-#define DHT_TYPE DHT22
+#define DHT_TYPE DHT11
 #endif
 const byte PIN_DHT = 2;
 const byte PIN_MQ = A0;
-const unsigned long INTERVALO_MS = 3000;
+// La biblioteca DHT conserva la lectura durante 2 s. No forzar lecturas más rápidas.
+const unsigned long INTERVALO_MS = 2000;
 const unsigned long ESTABILIZACION_MS = 180000UL;
 DHT dht(PIN_DHT, DHT_TYPE);
 bool monitoreando = false;
@@ -44,7 +45,7 @@ void ejecutar() {
   comando[posicion] = '\0';
   if (strcmp(comando, "MONITOR") == 0) {
     monitoreando = true;
-    Serial.println(F("# MONITOR activo cada 3 s. PARAR para detener."));
+    Serial.println(F("# MONITOR activo cada 2 s. PARAR para detener."));
     muestra(); ultima = millis();
   } else if (strcmp(comando, "PARAR") == 0) {
     monitoreando = false;

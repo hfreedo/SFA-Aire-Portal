@@ -3,6 +3,19 @@
 Proyecto escolar de monitoreo ambiental que conecta una maqueta Arduino con un
 panel de aulas y avisos push en Android.
 
+## Windows actualizado · Pruebas en varias PC
+
+[Descargar el portable para Windows x64](https://github.com/hfreedo/SFA-Aire-Portal/releases/tag/windows-multipc-20261030)
+
+Permite registrar hasta **10 PC por aula**, reutiliza el vínculo al volver a
+conectarse y permite recuperar una PC cuyo acceso fue retirado. En cada equipo:
+extraer el ZIP, abrir **Panel SFA Aire.exe**, iniciar sesión como administrador y
+elegir **Conexión Arduino → Usar esta PC para esta aula**.
+
+El paquete empieza sin datos ni credenciales privadas. Se verificó su arranque
+desde una extracción limpia; el ensayo en las otras PC físicas sigue pendiente.
+[Pasos, cambios y validación](docs/REGISTRO_PC_MULTIPLES_20261030.md).
+
 ## ¿Primera vez en GitHub?
 
 **[Descargar el manual de navegación en PDF](docs/navegacion-repositorio/Manual_de_navegacion_SFA_Aire.pdf?raw=1)** ·
@@ -83,7 +96,7 @@ conserva los límites preventivos de Supabase Free y Firebase Spark.
 **Windows 10/11 x64:** descarga el ZIP portable de [Releases](https://github.com/hfreedo/SFA-Aire-Portal/releases/latest),
 extrae la carpeta completa y abre **Panel SFA Aire.exe**. No requiere instalar
 Python ni Node.js. **Abrir SFA Aire** inicia el servidor; al salir se puede
-conservar el monitoreo o detenerlo. Windows 0.8.0 incluye Android piloto 0.8.0. Para medir: inicia sesión, selecciona el aula y abre
+conservar el monitoreo o detenerlo. El portable conserva Android piloto 0.8.0; la APK 0.8.2 se descarga por separado. Para medir: inicia sesión, selecciona el aula y abre
 **Conexión Arduino**; la primera vinculación genera una credencial propia de esa PC.
 La demostración sin cuenta utiliza datos ficticios y no envía notificaciones.
 

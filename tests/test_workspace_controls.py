@@ -22,6 +22,29 @@ class WorkspaceControls(unittest.TestCase):
   r=self.client.post('/api/workspace/local',json={'classroom_id':self.room,'action':'state'});self.assertEqual(r.status_code,401);self.assertEqual(self.calls,[])
  def test_read_state_never_exposes_control_key_or_gateway_secret(self):
   r=self.call('state');self.assertEqual(r.status_code,200);text=r.text;self.assertNotIn(self.rt.token,text);self.assertNotIn(self.rt.cloud.config.gateway_secret,text);self.assertNotIn('token',r.json());self.assertEqual(r.json()['classroom_id'],self.room)
+ def test_local_read_does_not_wait_for_cloud_network_lock(self):
+  import threading
+  self.assertEqual(self.call('state').status_code,200)
+  held=threading.Event();release=threading.Event()
+  def cloud_network():
+   with self.rt.cloud.config_lock:
+    held.set();release.wait(3)
+  thread=threading.Thread(target=cloud_network);thread.start();self.assertTrue(held.wait(1))
+  try:
+   result=[]
+   reader=threading.Thread(target=lambda:result.append(self.call('state')));reader.start();reader.join(1)
+   self.assertFalse(reader.is_alive(),'Las lecturas locales esperan a la red cloud')
+   self.assertEqual(result[0].status_code,200)
+  finally:
+   release.set();thread.join();reader.join()
+ def test_missing_dht_keeps_mq135_reading(self):
+  from servidor_pc.models import Sample
+  self.rt.switch('arduino')
+  self.rt.ingest(Sample(mq_raw=123,dht_ok=False), 'arduino')
+  state=self.call('state').json()
+  self.assertEqual(state['latest']['mq_raw'],123)
+  self.assertIsNone(state['latest']['temperature'])
+  self.assertFalse(state['latest']['dht_ok'])
  def test_observer_cannot_read_or_control_local_admin(self):
   self.allowed=False
   for action in ['state','ports','connect','stop','rules']:self.assertEqual(self.call(action).status_code,403)
@@ -91,6 +114,43 @@ class WorkspaceControls(unittest.TestCase):
    r=client.post('/api/workspace/local',headers={'Authorization':'Bearer actor-session-fixture'},json={'classroom_id':str(uuid.uuid4()),'action':'assign'})
    self.assertEqual(r.status_code,403)
 
+ def test_retired_pc_can_register_again_without_reactivating_old_secret(self):
+  new_gateway=str(uuid.uuid4());old_secret=self.rt.cloud.config.gateway_secret;seen=[]
+  def transport(req):
+   name=req.url.path.split('/')[-1];body=json.loads(req.content)
+   if name=='aire_enroll_pc':
+    seen.append(body);self.assertNotEqual(body['p_secret'],old_secret)
+    return httpx.Response(200,json={'classroom_id':self.room,'gateway_id':new_gateway})
+   return httpx.Response(200,json={'classroom_id':self.room,'can_manage_gateways':True,'gateways':[{'id':self.gateway,'enabled':False},{'id':new_gateway,'enabled':True}]})
+  self.rt.workspace_transport=httpx.MockTransport(transport)
+  self.assertFalse(self.call('assignment').json()['assigned'])
+  response=self.call('assign');self.assertEqual(response.status_code,200,response.text)
+  self.assertEqual(str(self.rt.cloud.config.gateway_id),new_gateway)
+  self.assertNotEqual(self.rt.cloud.config.gateway_secret,old_secret)
+  self.assertNotIn(self.rt.cloud.config.gateway_secret,response.text)
+  self.assertTrue(self.call('assignment').json()['assigned'])
+  self.assertEqual(self.call('assign').status_code,200);self.assertEqual(len(seen),1)
+
+ def test_retired_pc_failed_response_preserves_retry_identity_and_old_config(self):
+  new_gateway=str(uuid.uuid4());secrets=[]
+  def transport(req):
+   if req.url.path.endswith('aire_enroll_pc'):
+    secrets.append(json.loads(req.content)['p_secret'])
+    return httpx.Response(503,json={}) if len(secrets)==1 else httpx.Response(200,json={'classroom_id':self.room,'gateway_id':new_gateway})
+   return httpx.Response(200,json={'classroom_id':self.room,'can_manage_gateways':True,'gateways':[{'id':self.gateway,'enabled':False}]})
+  self.rt.workspace_transport=httpx.MockTransport(transport)
+  self.assertEqual(self.call('assign').status_code,503)
+  self.assertEqual(str(self.rt.cloud.config.gateway_id),self.gateway)
+  self.assertEqual(self.call('assign').status_code,200)
+  self.assertEqual(secrets[0],secrets[1])
+
+ def test_retired_pc_recovery_still_requires_admin_and_stopped_acquisition(self):
+  self.rt.workspace_transport=httpx.MockTransport(lambda req:httpx.Response(200,json={'classroom_id':self.room,'can_manage_gateways':True,'gateways':[{'id':self.gateway,'enabled':False}]}))
+  self.rt.switch('arduino');self.assertEqual(self.call('assign').status_code,409)
+  self.rt.switch('detenido')
+  self.rt.workspace_transport=httpx.MockTransport(lambda req:httpx.Response(200,json={'classroom_id':self.room,'can_manage_gateways':False,'gateways':[]}))
+  self.assertEqual(self.call('assign').status_code,403)
+
  def test_new_aula_alert_never_reuses_or_uploads_old_aula_incident(self):
   from servidor_pc.models import Sample
   target=str(uuid.uuid4());new_gateway=str(uuid.uuid4());self.assignment_transport(target,new_gateway)
@@ -104,3 +164,29 @@ class WorkspaceControls(unittest.TestCase):
   packet=json.loads(rows[0]['payload']);self.assertEqual(rows[0]['gateway_id'],new_gateway)
   self.assertEqual(len(packet['incidents']),1);self.assertNotEqual(packet['incidents'][0]['id'],'old-aula-incident')
   self.assertEqual(len(self.rt.store.rows('select * from incidents')),2)
+
+ def test_usb_cloud_start_requires_admin_and_current_simulation_frames(self):
+  from servidor_pc.models import Sample
+  self.assertEqual(self.call('start_usb_lab',run_id=str(uuid.uuid4()),free_plan_confirmed=True).status_code,409)
+  self.rt.switch('arduino');self.rt.serial=Mock();self.rt.serial.port='COM7';self.rt.ingest_serial(Sample(mq_raw=6,dht_ok=False))
+  self.assertEqual(self.call('start_usb_lab',run_id=str(uuid.uuid4()),free_plan_confirmed=True).status_code,409)
+  self.rt.ingest_serial(Sample(serial_contract=2,simulated=True,mq_raw=300,temperature=23,humidity=52,warmed_up=True))
+  self.allowed=False
+  self.assertEqual(self.call('start_usb_lab',run_id=str(uuid.uuid4()),free_plan_confirmed=True).status_code,403)
+ def test_usb_cloud_button_uses_authenticated_rpc_then_gateway_command(self):
+  from servidor_pc.models import Sample
+  from datetime import datetime,timezone
+  import time
+  self.rt.switch('arduino');self.rt.serial=Mock();self.rt.serial.port='COM7';self.rt.ingest_serial(Sample(serial_contract=2,simulated=True,mq_raw=300,temperature=23,humidity=52,warmed_up=True))
+  run=str(uuid.uuid4());seen=[]
+  command={'id':run,'input_source':'usb','temperature':25,'humidity':55,'mq_raw':700,'duration_s':180,'allow_push':True,'allow_takeover':False,'status':'pendiente','expires_at':datetime.fromtimestamp(time.time()+225,timezone.utc).isoformat()}
+  def transport(req):
+   name=req.url.path.split('/')[-1];seen.append(name)
+   if name=='aire_admin_capabilities':return httpx.Response(200,json={'classroom_id':self.room,'can_manage_gateways':True,'gateways':[{'id':self.gateway,'enabled':True}]})
+   if name=='aire_lab_start_usb':
+    self.assertEqual(req.headers['Authorization'],'Bearer actor-session-fixture');self.assertTrue(json.loads(req.content)['p_free_plan_confirmed']);return httpx.Response(200,json=run)
+   if name=='aire_gateway_poll':return httpx.Response(200,json={'classroom_id':self.room,'lab':command,'push_transport':'cloud'})
+   return httpx.Response(200,json=None)
+  self.rt.workspace_transport=self.rt.cloud.transport=httpx.MockTransport(transport)
+  result=self.call('start_usb_lab',run_id=run,free_plan_confirmed=True)
+  self.assertEqual(result.status_code,200,result.text);self.assertTrue(result.json()['usb_lab']['active']);self.assertIn('aire_lab_start_usb',seen);self.assertEqual(self.rt.source,'arduino')
